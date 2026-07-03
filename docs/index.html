@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MynaDB Documentation - The Voice of Your Machines. Learn how to use the high-performance time series database that listens to your infrastructure.">
+  <title>Documentation - MynaDB</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" type="image/svg+xml" href="../images/favicon.svg">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="../index.html" class="navbar-brand">
+        <img src="../images/logo-icon.svg" alt="MynaDB" class="logo-img">
+        MynaDB
+      </a>
+
+      <ul class="navbar-nav">
+        <li><a href="index.html" class="active">Documentation</a></li>
+        <li><a href="quickstart.html">Quick Start</a></li>
+        <li><a href="architecture.html">Architecture</a></li>
+        <li><a href="api.html">API Reference</a></li>
+        <li><a href="examples.html">Examples</a></li>
+      </ul>
+
+      <div class="navbar-actions">
+        <div class="lang-switcher">
+          <a href="../zh/docs/index.html" class="lang-link">中文</a>
+        </div>
+        <a href="https://github.com/mynadb/mynadb" class="btn btn-secondary" target="_blank">
+          <span class="btn-icon">&#9733;</span> GitHub
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <!-- Sidebar -->
+    <aside class="docs-sidebar">
+      <div class="sidebar-section">
+        <h4>Getting Started</h4>
+        <ul class="sidebar-nav">
+          <li><a href="index.html" class="active">Introduction</a></li>
+          <li><a href="quickstart.html">Quick Start</a></li>
+          <li><a href="installation.html">Installation</a></li>
+          <li><a href="configuration.html">Configuration</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h4>Core Concepts</h4>
+        <ul class="sidebar-nav">
+          <li><a href="architecture.html">Architecture</a></li>
+          <li><a href="data-model.html">Data Model</a></li>
+          <li><a href="storage.html">Storage</a></li>
+          <li><a href="caching.html">Caching</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h4>Ingestion &amp; Protocols</h4>
+        <ul class="sidebar-nav">
+          <li><a href="line-protocol.html">Line Protocol</a></li>
+          <li><a href="otlp.html">OpenTelemetry (OTLP) <span class="badge-new">NEW</span></a></li>
+          <li><a href="flight-api.html">Arrow Flight API</a></li>
+          <li><a href="mysql-protocol.html">MySQL Protocol</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h4>Query &amp; Analytics</h4>
+        <ul class="sidebar-nav">
+          <li><a href="sql-queries.html">SQL Queries</a></li>
+          <li><a href="continuous-aggregates.html">Continuous Aggregates <span class="badge-new">NEW</span></a></li>
+          <li><a href="streaming.html">Streaming Queries <span class="badge-new">NEW</span></a></li>
+          <li><a href="forecasting.html">Forecasting <span class="badge-new">NEW</span></a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h4>Integrations</h4>
+        <ul class="sidebar-nav">
+          <li><a href="grafana.html">Grafana <span class="badge-new">NEW</span></a></li>
+          <li><a href="iceberg.html">Apache Iceberg <span class="badge-new">NEW</span></a></li>
+          <li><a href="object-store.html">Object Store</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h4>Operations</h4>
+        <ul class="sidebar-nav">
+          <li><a href="compaction.html">Compaction</a></li>
+          <li><a href="retention.html">Retention</a></li>
+          <li><a href="monitoring.html">Monitoring <span class="badge-new">NEW</span></a></li>
+          <li><a href="admin-console.html">Admin Console <span class="badge-new">NEW</span></a></li>
+          <li><a href="admin-guide.html">Admin Guide <span class="badge-new">NEW</span></a></li>
+          <li><a href="admin-operations.html">Cluster Operations <span class="badge-new">NEW</span></a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h4>Security</h4>
+        <ul class="sidebar-nav">
+          <li><a href="security.html">Authentication &amp; RBAC <span class="badge-new">NEW</span></a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h4>Deployment</h4>
+        <ul class="sidebar-nav">
+          <li><a href="high-availability.html">High Availability</a></li>
+          <li><a href="cluster.html">Enterprise Cluster</a></li>
+          <li><a href="cluster-getting-started.html">Cluster Getting Started</a></li>
+          <li><a href="cluster-architecture.html">Cluster Architecture</a></li>
+          <li><a href="cluster-scaling.html">Cluster Scaling</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h4>Resources</h4>
+        <ul class="sidebar-nav">
+          <li><a href="guides.html">Guides</a></li>
+          <li><a href="examples.html">Examples</a></li>
+          <li><a href="testing.html">Testing</a></li>
+          <li><a href="troubleshooting.html">Troubleshooting</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="docs-content">
+      <h1>MynaDB Documentation</h1>
+
+      <p class="hero-description" style="font-size: 1.125rem; max-width: none;">
+        <strong>The Voice of Your Machines.</strong> Welcome to the MynaDB documentation.
+        Your infrastructure is talking &mdash; MynaDB listens. A high-performance time series database
+        built with Rust, Apache DataFusion, and Parquet for modern infrastructure monitoring and analytics.
+      </p>
+
+      <div class="callout callout-info">
+        <div class="callout-title">&#128161; New to MynaDB?</div>
+        <p>Start with our <a href="quickstart.html">Quick Start Guide</a> to get up and running in minutes.</p>
+      </div>
+
+      <div class="callout" style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-left: 4px solid #10b981; padding: 1rem 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0;">
+        <div class="callout-title" style="color: #10b981; font-weight: 600;">&#9889; What's New</div>
+        <p style="margin: 0.5rem 0;">
+          <strong>OpenTelemetry (OTLP)</strong> - Native ingestion for metrics, logs, and traces.<br>
+          <strong>Apache Iceberg</strong> - REST Catalog API for multi-engine analytics.<br>
+          <strong>Grafana Integration</strong> - Built-in monitoring dashboard and InfluxDB-compatible endpoints.<br>
+          <strong>Continuous Aggregates</strong> - Materialized views with automatic refresh.<br>
+          <strong>Streaming Queries</strong> - Real-time subscriptions via WebSocket and SSE.<br>
+          <strong>RBAC &amp; Security</strong> - Role-based access control, TLS, and audit logging.<br>
+          <strong>Forecasting &amp; Geospatial</strong> - Built-in UDFs for predictive and spatial analytics.
+        </p>
+        <a href="otlp.html" style="color: #10b981; text-decoration: none; font-weight: 500;">Explore new features &rarr;</a>
+      </div>
+
+      <h2>What is MynaDB?</h2>
+
+      <p>
+        Like the myna bird known for its remarkable ability to listen and perfectly recall sounds,
+        MynaDB captures every signal from your infrastructure with perfect fidelity.
+        It's a time series database designed for high-throughput ingestion and fast analytical queries,
+        combining the best of modern data infrastructure:
+      </p>
+
+      <ul>
+        <li><strong>InfluxDB Line Protocol &amp; OpenTelemetry</strong> - Multi-protocol ingestion for metrics, logs, and traces</li>
+        <li><strong>Apache Parquet &amp; Iceberg</strong> - Columnar storage with multi-engine catalog support</li>
+        <li><strong>Apache DataFusion</strong> - Full SQL with forecasting UDFs and geospatial functions</li>
+        <li><strong>Apache Arrow Flight</strong> - High-performance gRPC streaming for data transfer</li>
+        <li><strong>Grafana &amp; Prometheus</strong> - Native monitoring integration and metrics export</li>
+        <li><strong>Rust</strong> - Memory-safe, zero-cost abstractions for maximum performance</li>
+      </ul>
+
+      <h2>Key Features</h2>
+
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-icon">&#128293;</div>
+          <h3>High Performance</h3>
+          <p>Written in Rust with zero-copy deserialization for maximum throughput and low latency.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">&#128270;</div>
+          <h3>SQL Queries</h3>
+          <p>Full SQL support including JOINs, aggregations, window functions, and CTEs.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">&#128451;</div>
+          <h3>Columnar Storage</h3>
+          <p>Parquet format provides up to 90% compression with excellent query performance.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">&#128268;</div>
+          <h3>InfluxDB Compatible</h3>
+          <p>Drop-in replacement for InfluxDB write API for seamless migration.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">&#9889;</div>
+          <h3>Instant Visibility</h3>
+          <p>Query fresh writes immediately via Memtable - no flush required!</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">&#128200;</div>
+          <h3>Smart Caching</h3>
+          <p>Multi-level caching: metadata, query results, and Parquet files on SSD.</p>
+        </div>
+      </div>
+
+      <h2>Quick Example</h2>
+
+      <div class="code-block">
+        <div class="code-header">
+          <div class="dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <span class="lang">bash</span>
+          <button class="copy-btn" onclick="copyCode(this)">&#128203; Copy</button>
+        </div>
+        <div class="code-content">
+          <pre><code><span class="token-comment"># Write metrics using InfluxDB Line Protocol</span>
+curl -X POST http://localhost:7000/write/mydb -d '
+cpu,host=server01,region=us-west usage=75.5,temp=45
+cpu,host=server02,region=us-east usage=82.3,temp=50
+memory,host=server01 used=16.5,total=32.0
+'
+
+<span class="token-comment"># Query immediately - no flush needed! (Memtable provides instant visibility)</span>
+curl 'http://localhost:7000/query/mydb' \
+  -d 'SELECT host, AVG(usage) as avg_cpu FROM cpu GROUP BY host'
+
+<span class="token-comment"># Time series aggregation with GROUP BY time()</span>
+curl 'http://localhost:7000/query/mydb' \
+  -d 'SELECT AVG(usage) FROM cpu GROUP BY time(5m), host'</code></pre>
+        </div>
+      </div>
+
+      <h2>Architecture Overview</h2>
+
+      <p>MynaDB uses a layered architecture designed for performance and reliability:</p>
+
+      <div class="architecture-diagram">
+        <pre>
+  Client Request
+        |
+        v
+  +------------------+
+  |   HTTP Server    |  Port 7000/7001/7002
+  | (Axum/Flight/MySQL)|
+  +--------+---------+
+           |
+     +-----+-----+
+     |           |
+     v           v
+  +------+   +-------+
+  |Write |   | Query |
+  |  API |   |  API  |
+  +--+---+   +---+---+
+     |           |
+     v           |
+  +------+       |
+  |Cache |&lt;------+ (Memtable: instant query visibility)
+  +--+---+       |
+     |           v
+     |    +----------+
+     |    |DataFusion|
+     |    +----+-----+
+     |         |
+     +----+----+
+          |
+          v
+    +-----+------+
+    |  Metadata  |
+    |  Manager   |
+    +-----+------+
+          |
+          v
+    +-----+------+
+    |  Parquet   |
+    |  Storage   |
+    +-----+------+
+          |
+          v
+    +-----+------+
+    |  Compactor |
+    | (LSM-style)|
+    +------------+
+        </pre>
+      </div>
+
+      <h2>Documentation Sections</h2>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Section</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="quickstart.html">Quick Start</a></td>
+              <td>Get up and running in 5 minutes</td>
+            </tr>
+            <tr>
+              <td><a href="architecture.html">Architecture</a></td>
+              <td>Deep dive into system design and components</td>
+            </tr>
+            <tr>
+              <td><a href="otlp.html">OpenTelemetry (OTLP)</a></td>
+              <td>Native OTLP ingestion for metrics, logs, and traces</td>
+            </tr>
+            <tr>
+              <td><a href="iceberg.html">Apache Iceberg</a></td>
+              <td>REST Catalog API for multi-engine analytics</td>
+            </tr>
+            <tr>
+              <td><a href="grafana.html">Grafana Integration</a></td>
+              <td>InfluxDB-compatible datasource and monitoring dashboard</td>
+            </tr>
+            <tr>
+              <td><a href="continuous-aggregates.html">Continuous Aggregates</a></td>
+              <td>Materialized views with automatic refresh and query rewriting</td>
+            </tr>
+            <tr>
+              <td><a href="streaming.html">Streaming Queries</a></td>
+              <td>Real-time subscriptions via WebSocket and SSE</td>
+            </tr>
+            <tr>
+              <td><a href="forecasting.html">Forecasting &amp; Geospatial</a></td>
+              <td>Built-in forecasting and geospatial UDFs</td>
+            </tr>
+            <tr>
+              <td><a href="security.html">Security &amp; RBAC</a></td>
+              <td>Authentication, roles, TLS, and audit logging</td>
+            </tr>
+            <tr>
+              <td><a href="monitoring.html">Monitoring</a></td>
+              <td>Prometheus metrics, query tracing, and health endpoints</td>
+            </tr>
+            <tr>
+              <td><a href="admin-console.html">Admin Console</a></td>
+              <td>Web-based SQL editor, storage browser, and cluster management</td>
+            </tr>
+            <tr>
+              <td><a href="admin-guide.html">Admin Dashboard Guide</a></td>
+              <td>Getting started tour, navigation reference, and key concepts for the admin UI</td>
+            </tr>
+            <tr>
+              <td><a href="admin-operations.html">Cluster Operations</a></td>
+              <td>Node management, tables, scale-in, events, meta/data ops, and debug tools</td>
+            </tr>
+            <tr>
+              <td><a href="cluster.html">Enterprise Cluster</a></td>
+              <td>Distributed cluster with Meta, Router, Data, and Admin nodes</td>
+            </tr>
+            <tr>
+              <td><a href="cluster-getting-started.html">Cluster Getting Started</a></td>
+              <td>Step-by-step guide to launching a local development cluster</td>
+            </tr>
+            <tr>
+              <td><a href="cluster-architecture.html">Cluster Architecture</a></td>
+              <td>Raft consensus, table-level routing, and node internals</td>
+            </tr>
+            <tr>
+              <td><a href="cluster-scaling.html">Cluster Scaling</a></td>
+              <td>Scale-out, scale-in, failover detection, and cold standby</td>
+            </tr>
+            <tr>
+              <td><a href="api.html">API Reference</a></td>
+              <td>Complete HTTP and Flight API documentation</td>
+            </tr>
+            <tr>
+              <td><a href="configuration.html">Configuration</a></td>
+              <td>All configuration options explained</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Getting Help</h2>
+
+      <p>If you run into issues or have questions:</p>
+
+      <ul>
+        <li>Check the <a href="troubleshooting.html">Troubleshooting Guide</a></li>
+        <li>Browse the <a href="faq.html">FAQ</a></li>
+        <li>Open an issue on <a href="https://github.com/mynadb/mynadb/issues" target="_blank">GitHub</a></li>
+      </ul>
+
+      <div class="callout callout-success">
+        <div class="callout-title">&#128640; Ready to Start?</div>
+        <p>Head to the <a href="quickstart.html">Quick Start Guide</a> to write your first query!</p>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

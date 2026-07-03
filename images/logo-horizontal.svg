@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" fill="none">
+  <!-- Icon -->
+  <g transform="translate(40, 40)">
+    <path d="M-28 -2C-22 -12 -12 -10 0 0c12-10 22-12 28-2" stroke="#5b8def" stroke-width="4.5" stroke-linecap="round"/>
+    <path d="M0 0l-7 22 7-7 7 7-7-22z" fill="#5b8def"/>
+    <path d="M0 0l0 15 7 7-7-22z" fill="#3d6fd1"/>
+  </g>
+
+  <!-- Text: MynaDB -->
+  <text x="88" y="50" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="32" font-weight="700">
+    <tspan fill="#e8eaf0">Myna</tspan><tspan fill="#5b8def">DB</tspan>
+  </text>
+
+  <!-- Tagline -->
+  <text x="88" y="66" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="500" fill="#6b7394" letter-spacing="0.5">
+    The Voice of Your Machines
+  </text>
+</svg>

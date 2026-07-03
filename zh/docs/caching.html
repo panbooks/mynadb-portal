@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MynaDB 缓存 - 元数据、查询和 Parquet 文件的多级缓存">
+  <title>缓存 - MynaDB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="icon" type="image/svg+xml" href="../../images/favicon.svg">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <a href="../index.html" class="navbar-brand">
+        <img src="../../images/logo-icon.svg" alt="MynaDB" class="logo-img">
+        MynaDB
+      </a>
+      <ul class="navbar-nav">
+        <li><a href="index.html">文档</a></li>
+        <li><a href="quickstart.html">快速开始</a></li>
+        <li><a href="architecture.html">架构</a></li>
+        <li><a href="api.html">API 参考</a></li>
+        <li><a href="examples.html">示例</a></li>
+      </ul>
+      <div class="navbar-actions">
+        <div class="lang-switcher">
+          <a href="../../docs/caching.html" class="lang-link">English</a>
+        </div>
+        <a href="https://github.com/mynadb/mynadb" class="btn btn-secondary" target="_blank">
+          <span class="btn-icon">&#9733;</span> GitHub
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="docs-layout">
+    <aside class="docs-sidebar">
+      <div class="sidebar-section">
+        <h4>快速入门</h4>
+        <ul class="sidebar-nav">
+          <li><a href="index.html">简介</a></li>
+          <li><a href="quickstart.html">快速开始</a></li>
+          <li><a href="installation.html">安装</a></li>
+          <li><a href="configuration.html">配置</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <h4>核心概念</h4>
+        <ul class="sidebar-nav">
+          <li><a href="architecture.html">架构</a></li>
+          <li><a href="data-model.html">数据模型</a></li>
+          <li><a href="storage.html">存储</a></li>
+          <li><a href="caching.html" class="active">缓存</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <h4>数据接入与协议</h4>
+        <ul class="sidebar-nav">
+          <li><a href="line-protocol.html">Line Protocol</a></li>
+          <li><a href="otlp.html">OpenTelemetry (OTLP) <span class="badge-new">新</span></a></li>
+          <li><a href="flight-api.html">Arrow Flight API</a></li>
+          <li><a href="mysql-protocol.html">MySQL 协议</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <h4>查询与分析</h4>
+        <ul class="sidebar-nav">
+          <li><a href="sql-queries.html">SQL 查询</a></li>
+          <li><a href="continuous-aggregates.html">持续聚合 <span class="badge-new">新</span></a></li>
+          <li><a href="streaming.html">流式查询 <span class="badge-new">新</span></a></li>
+          <li><a href="forecasting.html">预测分析 <span class="badge-new">新</span></a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <h4>集成</h4>
+        <ul class="sidebar-nav">
+          <li><a href="grafana.html">Grafana <span class="badge-new">新</span></a></li>
+          <li><a href="iceberg.html">Apache Iceberg <span class="badge-new">新</span></a></li>
+          <li><a href="object-store.html">对象存储</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <h4>运维</h4>
+        <ul class="sidebar-nav">
+          <li><a href="compaction.html">压缩合并</a></li>
+          <li><a href="retention.html">数据保留</a></li>
+          <li><a href="monitoring.html">监控 <span class="badge-new">新</span></a></li>
+          <li><a href="admin-console.html">管理控制台 <span class="badge-new">新</span></a></li>
+          <li><a href="admin-guide.html">管理指南 <span class="badge-new">新</span></a></li>
+          <li><a href="admin-operations.html">集群运维 <span class="badge-new">新</span></a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <h4>安全</h4>
+        <ul class="sidebar-nav">
+          <li><a href="security.html">认证与 RBAC <span class="badge-new">新</span></a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <h4>部署</h4>
+        <ul class="sidebar-nav">
+          <li><a href="high-availability.html">高可用</a></li>
+          <li><a href="cluster.html">企业版集群</a></li>
+          <li><a href="cluster-getting-started.html">集群快速入门</a></li>
+          <li><a href="cluster-architecture.html">集群架构</a></li>
+          <li><a href="cluster-scaling.html">集群扩缩容</a></li>
+        </ul>
+      </div>
+      <div class="sidebar-section">
+        <h4>资源</h4>
+        <ul class="sidebar-nav">
+          <li><a href="guides.html">指南</a></li>
+          <li><a href="examples.html">示例</a></li>
+          <li><a href="testing.html">测试</a></li>
+          <li><a href="troubleshooting.html">故障排除</a></li>
+          <li><a href="faq.html">常见问题</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="docs-content">
+      <h1>多级缓存</h1>
+
+      <p>完美的记忆，每次如一。MynaDB 实现了精密的多级缓存架构 &mdash; 如同八哥鸟卓越的记忆力 &mdash; 以最大化查询性能。本指南介绍不同的缓存层级及其配置方法。</p>
+
+      <div class="info-box" style="background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%); border-left: 4px solid #0284c7; padding: 1rem 1.5rem; border-radius: 0.5rem; margin: 1.5rem 0;">
+        <strong>v0.2.8 新功能：</strong>基于内存的元数据管理器（自动持久化）、对象存储的 Parquet 磁盘缓存，以及 Memtable 即时查询最新写入可见性。
+      </div>
+
+      <h2>缓存架构概览</h2>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="lang">text</span>
+        </div>
+        <div class="code-content">
+          <pre><code>┌─────────────────────────────────────────────────────────────────────┐
+│                          Query Engine                                │
+│                                                                      │
+│  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────┐   │
+│  │ Metadata Manager │  │   Query Cache    │  │    Memtable      │   │
+│  │  (Memory + JSON) │  │  (SQL → Results) │  │  (Fresh Writes)  │   │
+│  └────────┬─────────┘  └────────┬─────────┘  └────────┬─────────┘   │
+│           │                     │                     │              │
+│           │     ┌───────────────┴───────────────┐     │              │
+│           │     │                               │     │              │
+│           ▼     ▼                               ▼     ▼              │
+│  ┌───────────────────────────────────────────────────────────────┐  │
+│  │              Parquet Disk Cache (Local SSD)                   │  │
+│  │         Caches Object Store files for fast local access       │  │
+│  └──────────────────────────────┬────────────────────────────────┘  │
+│                                 │                                    │
+└─────────────────────────────────┼────────────────────────────────────┘
+                                  │
+                    ┌─────────────┴─────────────┐
+                    │                           │
+                    ▼                           ▼
+           ┌───────────────┐          ┌────────────────┐
+           │ Local Storage │          │  Object Store  │
+           │   (Parquet)   │          │ (S3/MinIO/OSS) │
+           └───────────────┘          └────────────────┘</code></pre>
+        </div>
+      </div>
+
+      <h2>缓存层级总览</h2>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>缓存层级</th>
+              <th>存储位置</th>
+              <th>用途</th>
+              <th>性能影响</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>元数据管理器</strong></td>
+              <td>内存 + JSON</td>
+              <td>Catalog、Schema、表、分区、文件元数据</td>
+              <td>消除目录扫描（规划速度提升 10-100 倍）</td>
+            </tr>
+            <tr>
+              <td><strong>查询结果缓存</strong></td>
+              <td>内存</td>
+              <td>SQL 查询结果</td>
+              <td>重复查询即时响应</td>
+            </tr>
+            <tr>
+              <td><strong>Memtable</strong></td>
+              <td>内存</td>
+              <td>尚未刷写的最新写入</td>
+              <td>即时查询可见性（无需刷写）</td>
+            </tr>
+            <tr>
+              <td><strong>Parquet 磁盘缓存</strong></td>
+              <td>本地 SSD</td>
+              <td>对象存储文件</td>
+              <td>比网络获取快 10-100 倍</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>1. 元数据管理器</h2>
+
+      <p>元数据管理器在内存中维护所有数据库、Schema、表、分区和文件的完整目录。这消除了查询规划期间昂贵的目录扫描和对象存储列表操作。</p>
+
+      <h3>架构</h3>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="lang">text</span>
+        </div>
+        <div class="code-content">
+          <pre><code>┌─────────────────────────────────────────────────────────────┐
+│                    Metadata Manager                          │
+│                                                              │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │
+│  │  Catalogs   │  │   Schemas   │  │      Tables         │  │
+│  │  HashMap    │  │   HashMap   │  │      HashMap        │  │
+│  └─────────────┘  └─────────────┘  └─────────────────────┘  │
+│                                                              │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │
+│  │ Partitions  │  │    Files    │  │   Partition→Files   │  │
+│  │  HashMap    │  │   HashMap   │  │   Reverse Index     │  │
+│  └─────────────┘  └─────────────┘  └─────────────────────┘  │
+│                                                              │
+│         ↓                ↓                   ↓               │
+│  ┌─────────────────────────────────────────────────────────┐ │
+│  │             JSON Snapshot (Periodic Save)               │ │
+│  │              catalog_snapshot.json                       │ │
+│  └─────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────┘</code></pre>
+        </div>
+      </div>
+
+      <h3>存储内容</h3>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>实体</th>
+              <th>键</th>
+              <th>跟踪信息</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>CatalogInfo</strong></td>
+              <td>catalog_name</td>
+              <td>名称、创建时间、Schema 数量、表数量、总字节数</td>
+            </tr>
+            <tr>
+              <td><strong>SchemaInfo</strong></td>
+              <td>(catalog, schema)</td>
+              <td>名称、Catalog、表数量、总字节数</td>
+            </tr>
+            <tr>
+              <td><strong>TableInfo</strong></td>
+              <td>(catalog, schema, table)</td>
+              <td>名称、总行数、总字节数、分区数、文件数、最小/最大时间戳</td>
+            </tr>
+            <tr>
+              <td><strong>PartitionInfo</strong></td>
+              <td>(catalog, schema, table, date)</td>
+              <td>分区键/值、总行数、总字节数、文件数、最小/最大时间戳</td>
+            </tr>
+            <tr>
+              <td><strong>FileInfo</strong></td>
+              <td>file_path</td>
+              <td>路径、级别、字节大小、行数、行组数、分区键、etag</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>核心特性</h3>
+
+      <ul>
+        <li><strong>零目录扫描</strong>：所有元数据在内存中，查询规划期间无需文件系统调用</li>
+        <li><strong>自动持久化</strong>：定期保存到 <code>catalog_snapshot.json</code> 以支持崩溃恢复</li>
+        <li><strong>延迟注册</strong>：注册文件时自动创建新的 Catalog/Schema/表</li>
+        <li><strong>聚合统计</strong>：行数、字节数、时间戳沿层级自动向上汇总</li>
+        <li><strong>快速分区裁剪</strong>：通过 <code>list_partitions_in_range()</code> 查询支持日期过滤</li>
+      </ul>
+
+      <h3>快照持久化</h3>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="lang">json</span>
+        </div>
+        <div class="code-content">
+          <pre><code>{
+  "version": 1,
+  "snapshot_at": 1705123456789,
+  "catalogs": [
+    {"name": "mydb", "created_at": 1705000000000, "schema_count": 3, "table_count": 15}
+  ],
+  "schemas": [
+    {"name": "default", "catalog": "mydb", "table_count": 10}
+  ],
+  "tables": [
+    {"name": "cpu", "schema": "default", "catalog": "mydb",
+     "total_rows": 1000000, "total_bytes": 52428800, "partition_count": 7}
+  ],
+  "partitions": [
+    {"partition_key": "2024-01-15", "table": "cpu", "file_count": 3}
+  ],
+  "files": [
+    {"path": "/data/mydb/default/cpu/date=2024-01-15/L0_xxx.parquet",
+     "level": 0, "size_bytes": 10485760, "row_count": 100000}
+  ]
+}</code></pre>
+        </div>
+      </div>
+
+      <h3>恢复流程</h3>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="lang">text</span>
+        </div>
+        <div class="code-content">
+          <pre><code>Server Startup
+      │
+      ▼
+┌─────────────────┐
+│ Load Snapshot?  │──────────────────┐
+└────────┬────────┘                  │ No snapshot
+         │ Yes                       ▼
+         ▼                   ┌───────────────┐
+┌─────────────────┐          │ Full Rescan   │
+│ Load from JSON  │          │ (data_dir)    │
+└────────┬────────┘          └───────┬───────┘
+         │                           │
+         ▼                           ▼
+┌─────────────────────────────────────────────┐
+│          Metadata Manager Ready             │
+│     (All queries use in-memory lookups)     │
+└─────────────────────────────────────────────┘</code></pre>
+        </div>
+      </div>
+
+      <h3>API 端点</h3>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="lang">bash</span>
+        </div>
+        <div class="code-content">
+          <pre><code># Get global metadata statistics
+curl http://localhost:7000/cache/stats
+
+# Pre-warm metadata for entire catalog (database)
+curl -X POST http://localhost:7000/cache/prewarm/mydb
+
+# Pre-warm metadata for specific table
+curl -X POST http://localhost:7000/cache/prewarm/mydb/default/cpu
+
+# Clear all caches (triggers rescan on next query)
+curl -X POST http://localhost:7000/cache/clear
+
+# Get detailed Parquet file statistics
+curl http://localhost:7000/cache/parquet/mydb/default/cpu</code></pre>
+        </div>
+      </div>
+
+      <h3>统计信息响应</h3>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="lang">json</span>
+        </div>
+        <div class="code-content">
+          <pre><code>{
+  "metadata_manager": {
+    "catalog_count": 3,
+    "schema_count": 12,
+    "table_count": 156,
+    "partition_count": 2340,
+    "file_count": 8920,
+    "total_rows": 5847293847,
+    "total_bytes": 128849018880
+  },
+  "query_cache": {
+    "entries": 128,
+    "hits": 4521,
+    "misses": 892,
+    "hit_rate": 0.835,
+    "memory_usage_bytes": 134217728
+  }
+}</code></pre>
+        </div>
+      </div>
+
+      <h2>2. 查询结果缓存</h2>
+
+      <p>缓存 SQL 查询结果，避免重复执行昂贵的查询。</p>
+
+      <h3>配置</h3>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="lang">toml</span>
+        </div>
+        <div class="code-content">
+          <pre><code>[query_cache]
+# Enable query result caching
+enabled = true
+
+# Maximum cache size in MB
+max_size_mb = 256
+
+# Maximum number of cached queries
+max_entries = 1000
+
+# Cache TTL in seconds (5 minutes)
+ttl_secs = 300
+
+# Only cache queries that take longer than this (ms)
+min_query_time_ms = 10</code></pre>
+        </div>
+      </div>
+
+      <h3>工作原理</h3>
+
+      <ul>
+        <li>缓存键由数据库名称 + SQL 查询文本计算得出</li>
+        <li>仅当查询执行时间超过 <code>min_query_time_ms</code> 时才缓存结果</li>
+        <li>当数据写入引用的表时，缓存自动失效</li>
+        <li>条目在 <code>ttl_secs</code> 秒后过期</li>
+      </ul>
+
+      <h3>缓存失效</h3>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="lang">bash</span>
+        </div>
+        <div class="code-content">
+          <pre><code># Clear only query result cache
+curl -X POST http://localhost:7000/cache/clear/results
+
+# Cache is automatically invalidated on:
+# - Data writes to a table
+# - Compaction of a table
+# - Manual flush</code></pre>
+        </div>
+      </div>
+
+      <h2>3. Memtable（即时查询可见性）</h2>
+
+      <p>Memtable 为尚未刷写到 Parquet 的最新写入提供即时查询可见性。以前，您需要在查询最近数据之前调用 <code>/flush</code>。现在查询自动包含内存中的数据。</p>
+
+      <h3>工作原理</h3>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="lang">text</span>
+        </div>
+        <div class="code-content">
+          <pre><code>┌─────────────────────────────────────────────────────────────┐
+│                      Query Execution                         │
+│                                                              │
+│  SELECT * FROM cpu WHERE host = 'server01'                   │
+│                                                              │
+│         ┌──────────────┐          ┌──────────────┐           │
+│         │MemtableExec  │          │ParquetExec   │           │
+│         │(Fresh Data)  │          │(Parquet Files)│          │
+│         └──────┬───────┘          └──────┬───────┘           │
+│                │                         │                    │
+│                └──────────┬──────────────┘                    │
+│                           │                                   │
+│                           ▼                                   │
+│                   ┌───────────────┐                           │
+│                   │  UnionExec    │                           │
+│                   │ (Merge Both)  │                           │
+│                   └───────────────┘                           │
+│                           │                                   │
+│                           ▼                                   │
+│                      Query Results                            │
+│              (Includes ALL data, flushed + unflushed)         │
+└─────────────────────────────────────────────────────────────┘</code></pre>
+        </div>
+      </div>
+
+      <h3>核心特性</h3>
+
+      <ul>
+        <li><strong>零拷贝访问</strong>：直接从 DataCache 读取，无需复制（基于 Arc 的批次）</li>
+        <li><strong>Schema 对齐</strong>：自动将 Memtable Schema 与 Parquet 文件 Schema 对齐</li>
+        <li><strong>过滤下推</strong>：支持非精确过滤下推以提升效率</li>
+        <li><strong>流式结果</strong>：使用 RecordBatchStream 避免在内存中收集所有数据</li>
+      </ul>
+
+      <h3>查询行为</h3>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="lang">bash</span>
+        </div>
+        <div class="code-content">
+          <pre><code># Write data (goes to in-memory cache)
+curl -X POST http://localhost:7000/write/mydb \
+  -d 'cpu,host=server01 usage=75.5'
+
+# Query IMMEDIATELY - no flush needed!
+# This returns the fresh data from memtable
+curl 'http://localhost:7000/query/mydb' \
+  -d 'SELECT * FROM cpu WHERE host = '\''server01'\'''
+
+# Data is automatically included from:
+# 1. In-memory cache (memtable) - fresh writes
+# 2. Parquet files - flushed data</code></pre>
+        </div>
+      </div>
+
+      <h2>4. Parquet 磁盘缓存（对象存储）</h2>
+
+      <p>当使用对象存储后端（S3、MinIO、阿里云 OSS）时，MynaDB 将 Parquet 文件缓存在本地 SSD 上，大幅降低网络延迟。这对于使用云存储的生产环境部署至关重要。</p>
+
+      <h3>架构</h3>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="lang">text</span>
+        </div>
+        <div class="code-content">
+          <pre><code>┌─────────────────────────────────────────────────────────────┐
+│                      Disk File Cache                         │
+│                                                              │
+│  ┌─────────────────────────────────────────────────────────┐ │
+│  │                  In-Memory State                        │ │
+│  │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  │ │
+│  │  │   entries    │  │  total_size  │  │    stats     │  │ │
+│  │  │   HashMap    │  │    (u64)     │  │ hits/misses  │  │ │
+│  │  └──────────────┘  └──────────────┘  └──────────────┘  │ │
+│  └─────────────────────────────────────────────────────────┘ │
+│                              │                               │
+│                              ▼                               │
+│  ┌─────────────────────────────────────────────────────────┐ │
+│  │                  Local SSD Storage                      │ │
+│  │  /var/cache/mynadb/parquet/                             │ │
+│  │    ├── abc123def456.parquet  (cached file)              │ │
+│  │    ├── 789ghi012jkl.parquet  (cached file)              │ │
+│  │    └── cache_index.json      (metadata)                 │ │
+│  └─────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────┘</code></pre>
+        </div>
+      </div>
+
+      <h3>配置</h3>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="lang">toml</span>
+        </div>
+        <div class="code-content">
+          <pre><code>[file_cache]
+# Enable file caching (essential for Object Store backends)
+enabled = true
+
+# Cache directory on local SSD (use NVMe for best performance)
+cache_dir = "/var/cache/mynadb/parquet"
+
+# Maximum cache size (100 GB)
+max_size_bytes = 107374182400
+
+# Index save interval in seconds (5 minutes)
+auto_save_interval_secs = 300</code></pre>
+        </div>
+      </div>
+
+      <h3>缓存条目元数据</h3>
+
+      <p>每个缓存文件跟踪全面的元数据以支持智能淘汰：</p>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="lang">json</span>
+        </div>
+        <div class="code-content">
+          <pre><code>{
+  "source_path": "s3://bucket/mydb/default/cpu/date=2024-01-15/L0_xxx.parquet",
+  "cache_path": "/var/cache/mynadb/parquet/abc123.parquet",
+  "size_bytes": 10485760,
+  "etag": "\"d41d8cd98f00b204e9800998ecf8427e\"",
+  "cached_at": 1705123456789,
+  "last_accessed": 1705234567890,
+  "access_count": 42,
+  "partition_date": "2024-01-15"
+}</code></pre>
+        </div>
+      </div>
+
+      <h3>智能淘汰策略</h3>
+
+      <p>缓存使用基于优先级的淘汰算法，综合考虑多个因素：</p>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="lang">text</span>
+        </div>
+        <div class="code-content">
+          <pre><code>Priority Score = Recency × Frequency × Partition_Bonus
+
+Recency Factors:
+  - Accessed in last hour:    100x
+  - Accessed today:           50x
+  - Accessed this week:       10x
+  - Older:                    1x
+
+Partition Date Bonus (time series optimization):
+  - Today's partition:        10x
+  - Yesterday's partition:    8x
+  - This week's partition:    5x
+  - This month's partition:   2x
+  - Older partitions:         1x
+
+Files with LOWER scores are evicted first.</code></pre>
+        </div>
+      </div>
+
+      <h3>缓存流程</h3>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="lang">text</span>
+        </div>
+        <div class="code-content">
+          <pre><code>Query needs file: s3://bucket/mydb/default/cpu/date=2024-01-15/L0.parquet
+     │
+     ▼
+┌─────────────────┐
+│ Check In-Memory │
+│  Entry Index    │
+└────────┬────────┘
+         │
+    ┌────┴────┐
+    │ Exists? │
+    └────┬────┘
+         │
+    Yes  │  No
+    ┌────┘  └────┐
+    │            │
+    ▼            ▼
+┌─────────┐  ┌─────────────────┐
+│ Update  │  │ Fetch from S3   │
+│ Access  │  │ (Network Call)  │
+│ Stats   │  └────────┬────────┘
+└────┬────┘           │
+     │                ▼
+     │        ┌─────────────────┐
+     │        │ Make Room       │
+     │        │ (Evict if full) │
+     │        └────────┬────────┘
+     │                 │
+     │                 ▼
+     │        ┌─────────────────┐
+     │        │ Write to SSD    │
+     │        │ + Update Index  │
+     │        └────────┬────────┘
+     │                 │
+     ▼                 ▼
+┌───────────────────────────────┐
+│ Read from Local SSD           │
+│ (Fast: ~0.1ms vs ~50ms S3)    │
+└───────────────────────────────┘</code></pre>
+        </div>
+      </div>
+
+      <h3>缓存统计</h3>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="lang">bash</span>
+        </div>
+        <div class="code-content">
+          <pre><code># Get disk cache statistics
+curl http://localhost:7000/cache/stats | jq '.disk_cache'
+
+# Response:
+{
+  "file_count": 1523,
+  "total_size_bytes": 85899345920,
+  "max_size_bytes": 107374182400,
+  "hits": 45210,
+  "misses": 892,
+  "hit_rate": 0.981,
+  "evictions": 234,
+  "bytes_read_from_cache": 4521000000000,
+  "bytes_fetched_from_source": 89200000000
+}</code></pre>
+        </div>
+      </div>
+
+      <h3>缓存操作</h3>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="lang">bash</span>
+        </div>
+        <div class="code-content">
+          <pre><code># Prefetch files for expected queries (warm cache before dashboard load)
+curl -X POST http://localhost:7000/cache/prefetch \
+  -H "Content-Type: application/json" \
+  -d '{"paths": ["s3://bucket/mydb/default/cpu/date=2024-01-15/*"]}'
+
+# Invalidate cache for specific path prefix (after compaction)
+curl -X POST http://localhost:7000/cache/invalidate \
+  -H "Content-Type: application/json" \
+  -d '{"prefix": "s3://bucket/mydb/default/cpu/date=2024-01-15/"}'
+
+# Clear entire disk cache
+curl -X POST http://localhost:7000/cache/clear
+
+# Verify cache integrity (check for orphaned entries)
+curl http://localhost:7000/cache/verify</code></pre>
+        </div>
+      </div>
+
+      <h2>最佳实践</h2>
+
+      <h3>高查询性能配置</h3>
+
+      <div class="best-practice-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin: 1.5rem 0;">
+        <div style="background: #f8fafc; border-radius: 0.75rem; padding: 1.5rem; border: 1px solid #e2e8f0;">
+          <h4 style="color: #0284c7; margin-bottom: 0.75rem;">元数据管理器</h4>
+          <ul style="margin: 0; padding-left: 1.25rem;">
+            <li>让系统通过写入自动填充元数据</li>
+            <li>启动时对关键数据库进行预热</li>
+            <li>监控分区数量以了解表增长情况</li>
+          </ul>
+        </div>
+        <div style="background: #f8fafc; border-radius: 0.75rem; padding: 1.5rem; border: 1px solid #e2e8f0;">
+          <h4 style="color: #0284c7; margin-bottom: 0.75rem;">查询结果缓存</h4>
+          <ul style="margin: 0; padding-left: 1.25rem;">
+            <li>为仪表板/报表查询启用缓存</li>
+            <li>根据数据新鲜度需求设置 TTL</li>
+            <li>使用 <code>min_query_time_ms</code> 跳过快速查询</li>
+          </ul>
+        </div>
+        <div style="background: #f8fafc; border-radius: 0.75rem; padding: 1.5rem; border: 1px solid #e2e8f0;">
+          <h4 style="color: #0284c7; margin-bottom: 0.75rem;">Memtable</h4>
+          <ul style="margin: 0; padding-left: 1.25rem;">
+            <li>自动启用，无需配置</li>
+            <li>写入后即可立即查询</li>
+            <li>调整 <code>flush_interval_secs</code> 平衡内存与新鲜度</li>
+          </ul>
+        </div>
+        <div style="background: #f8fafc; border-radius: 0.75rem; padding: 1.5rem; border: 1px solid #e2e8f0;">
+          <h4 style="color: #0284c7; margin-bottom: 0.75rem;">磁盘缓存</h4>
+          <ul style="margin: 0; padding-left: 1.25rem;">
+            <li>使用 NVMe SSD 作为缓存目录</li>
+            <li>容量应能容纳 7 天以上的热数据</li>
+            <li>监控命中率（目标 >90%）</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>内存容量规划指南</h3>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>部署规模</th>
+              <th>表数量</th>
+              <th>查询缓存</th>
+              <th>磁盘缓存</th>
+              <th>建议内存</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>小型</td>
+              <td>&lt;50</td>
+              <td>256 MB</td>
+              <td>10 GB</td>
+              <td>4 GB</td>
+            </tr>
+            <tr>
+              <td>中型</td>
+              <td>50-500</td>
+              <td>1 GB</td>
+              <td>100 GB</td>
+              <td>16 GB</td>
+            </tr>
+            <tr>
+              <td>大型</td>
+              <td>500-5000</td>
+              <td>4 GB</td>
+              <td>500 GB</td>
+              <td>64 GB</td>
+            </tr>
+            <tr>
+              <td>企业级</td>
+              <td>&gt;5000</td>
+              <td>16 GB</td>
+              <td>1+ TB</td>
+              <td>128+ GB</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>对象存储部署</h3>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="lang">toml</span>
+        </div>
+        <div class="code-content">
+          <pre><code># Recommended config for S3/MinIO/OSS deployments
+[file_cache]
+enabled = true
+cache_dir = "/mnt/nvme/mynadb-cache"  # NVMe SSD
+max_size_bytes = 107374182400          # 100 GB
+auto_save_interval_secs = 60           # Frequent saves
+
+[query_cache]
+enabled = true
+max_size_mb = 1024                     # 1 GB
+ttl_secs = 300                         # 5 min TTL
+min_query_time_ms = 50                 # Only cache slow queries</code></pre>
+        </div>
+      </div>
+
+      <h2>监控</h2>
+
+      <p>通过统计端点监控缓存效果：</p>
+
+      <div class="code-block">
+        <div class="code-header">
+          <span class="lang">bash</span>
+        </div>
+        <div class="code-content">
+          <pre><code># Full cache statistics
+curl http://localhost:7000/cache/stats | jq .
+
+# Key metrics to watch:
+# - hit_rate: Should be > 80% for effective caching
+# - memory_usage: Should not exceed configured limits
+# - evictions: High eviction rate may indicate undersized cache</code></pre>
+        </div>
+      </div>
+
+      <div class="doc-nav">
+        <a href="storage.html" class="doc-nav-prev">
+          <span>&#8592;</span> 存储
+        </a>
+        <a href="mysql-protocol.html" class="doc-nav-next">
+          MySQL 协议 <span>&#8594;</span>
+        </a>
+      </div>
+    </main>
+  </div>
+  <script src="../../js/main.js"></script>
+</body>
+</html>

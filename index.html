@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MynaDB - The Voice of Your Machines. Your infrastructure is talking. Start listening. A blazing-fast time series database built with Rust, powered by Apache DataFusion.">
+  <meta name="keywords" content="time series database, TSDB, Rust, DataFusion, Parquet, InfluxDB, metrics, analytics, MynaDB">
+  <title>MynaDB - The Voice of Your Machines</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="navbar-brand">
+        <img src="images/logo-icon.svg" alt="MynaDB" class="logo-img">
+        MynaDB
+      </a>
+
+      <ul class="navbar-nav">
+        <li><a href="docs/index.html">Documentation</a></li>
+        <li><a href="docs/quickstart.html">Quick Start</a></li>
+        <li><a href="docs/architecture.html">Architecture</a></li>
+        <li><a href="docs/api.html">API Reference</a></li>
+        <li><a href="docs/examples.html">Examples</a></li>
+      </ul>
+
+      <div class="navbar-actions">
+        <div class="lang-switcher">
+          <a href="zh/" class="lang-link">中文</a>
+        </div>
+        <a href="https://github.com/mynadb/mynadb" class="btn btn-secondary" target="_blank">
+          <span class="btn-icon">&#9733;</span> GitHub
+        </a>
+        <a href="docs/quickstart.html" class="btn btn-primary">Get Started</a>
+      </div>
+
+      <button class="mobile-menu-btn" aria-label="Toggle menu">&#9776;</button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <!-- Floating Particles -->
+    <div class="hero-particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span>&#9889;</span> The Voice of Your Machines
+        </div>
+
+        <h1>
+          MynaDB<br>
+          <span>Time Series Database</span>
+        </h1>
+
+        <p class="hero-subtitle" style="font-size: 1.5rem; color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 500;">
+          Your infrastructure is talking. Start listening.
+        </p>
+
+        <p class="hero-action" style="font-size: 1.25rem; color: var(--primary); font-weight: 600; letter-spacing: 0.05em; margin-bottom: 1.5rem;">
+          Listen. Store. Monitor.
+        </p>
+
+        <p class="hero-description">
+          A blazing-fast time series database built with Rust. Ingest via InfluxDB Line Protocol or OpenTelemetry,
+          store in columnar Parquet with Apache Iceberg support, and query with SQL powered by Apache DataFusion.
+          Multi-protocol ingestion, streaming queries, and Grafana-native dashboards.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="docs/quickstart.html" class="btn btn-primary btn-lg">
+            <span>&#9654;</span> Get Started
+          </a>
+          <a href="docs/index.html" class="btn btn-secondary btn-lg">
+            <span>&#128214;</span> Read the Docs
+          </a>
+        </div>
+
+        <div class="hero-code">
+          <pre><code><span class="comment"># Write data using InfluxDB Line Protocol</span>
+<span class="command">curl</span> -X POST http://localhost:7000/write/mydb \
+  -d <span class="string">'cpu,host=server01,region=us-west usage=75.5,temp=45'</span>
+
+<span class="comment"># Query with SQL</span>
+<span class="command">curl</span> 'http://localhost:7000/query/mydb' \
+  -d <span class="string">'SELECT host, AVG(usage) FROM cpu GROUP BY host'</span></code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats-section section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <h3>10x</h3>
+          <p>Faster Ingestion</p>
+        </div>
+        <div class="stat-item">
+          <h3>90%</h3>
+          <p>Storage Reduction</p>
+        </div>
+        <div class="stat-item">
+          <h3>&lt;1ms</h3>
+          <p>Query Latency</p>
+        </div>
+        <div class="stat-item">
+          <h3>SQL</h3>
+          <p>Standard Queries</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's New Section -->
+  <section class="section" style="background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0f9ff 100%);">
+    <div class="container">
+      <div class="section-header">
+        <h2>What's New</h2>
+        <p>Major new features expanding MynaDB into a full observability platform.</p>
+      </div>
+
+      <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+        <div class="feature-card" style="background: white; border: 2px solid #0284c7;">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #0284c7, #06b6d4);">&#127899;</div>
+          <h3>OpenTelemetry (OTLP)</h3>
+          <p>Native OTLP ingestion via gRPC and HTTP. Receive metrics, logs, and traces from any OpenTelemetry-instrumented application.</p>
+          <a href="docs/otlp.html" style="color: #0284c7; text-decoration: none; font-weight: 500;">Learn more &rarr;</a>
+        </div>
+
+        <div class="feature-card" style="background: white; border: 2px solid #06b6d4;">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #06b6d4, #22d3ee);">&#129482;</div>
+          <h3>Apache Iceberg</h3>
+          <p>REST Catalog API enables multi-engine analytics. Query MynaDB data from Spark, Trino, DuckDB, and Flink.</p>
+          <a href="docs/iceberg.html" style="color: #06b6d4; text-decoration: none; font-weight: 500;">Learn more &rarr;</a>
+        </div>
+
+        <div class="feature-card" style="background: white; border: 2px solid #10b981;">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #10b981, #34d399);">&#128202;</div>
+          <h3>Grafana Integration</h3>
+          <p>Built-in Grafana-compatible endpoints and a comprehensive monitoring dashboard with system metrics.</p>
+          <a href="docs/grafana.html" style="color: #10b981; text-decoration: none; font-weight: 500;">Learn more &rarr;</a>
+        </div>
+
+        <div class="feature-card" style="background: white; border: 2px solid #8b5cf6;">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa);">&#128200;</div>
+          <h3>Continuous Aggregates</h3>
+          <p>TimescaleDB-style materialized views with automatic refresh. Transparent query rewriting for instant results.</p>
+          <a href="docs/continuous-aggregates.html" style="color: #8b5cf6; text-decoration: none; font-weight: 500;">Learn more &rarr;</a>
+        </div>
+
+        <div class="feature-card" style="background: white; border: 2px solid #f59e0b;">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);">&#128290;</div>
+          <h3>Forecasting &amp; Geospatial</h3>
+          <p>Built-in forecast_linear, forecast_arima, geo_distance, and geo_within UDFs for advanced analytics.</p>
+          <a href="docs/forecasting.html" style="color: #f59e0b; text-decoration: none; font-weight: 500;">Learn more &rarr;</a>
+        </div>
+
+        <div class="feature-card" style="background: white; border: 2px solid #ec4899;">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #ec4899, #f472b6);">&#9889;</div>
+          <h3>Streaming Queries</h3>
+          <p>Real-time query subscriptions via WebSocket and Server-Sent Events for live dashboards and alerting.</p>
+          <a href="docs/streaming.html" style="color: #ec4899; text-decoration: none; font-weight: 500;">Learn more &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enterprise Cluster Section -->
+  <section class="section" style="background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 50%, #ede9fe 100%);">
+    <div class="container">
+      <div class="section-header">
+        <div style="display: inline-block; background: linear-gradient(135deg, #7c3aed, #a78bfa); color: white; padding: 0.35rem 1rem; border-radius: 1rem; font-size: 0.8rem; font-weight: 600; margin-bottom: 1rem;">
+          NEW: ENTERPRISE EDITION
+        </div>
+        <h2>Scale Without Limits</h2>
+        <p>Distributed clustering with compute-storage separation. Add nodes on demand, achieve 11-nines durability.</p>
+      </div>
+
+      <div class="architecture-diagram" style="background: #1e293b; padding: 1.5rem; border-radius: 0.75rem; overflow-x: auto; margin-bottom: 2rem;">
+        <pre style="color: #e2e8f0; margin: 0; font-size: 0.8rem; text-align: center;">
+                         ┌─────────────┐
+                         │Load Balancer│
+                         └──────┬──────┘
+          ┌──────────────────────┼──────────────────────┐
+          ▼                      ▼                      ▼
+   ┌─────────────┐        ┌─────────────┐        ┌─────────────┐
+   │   Node 1    │        │   Node 2    │        │   Node 3    │
+   │  (Compute)  │        │  (Compute)  │        │  (Compute)  │
+   └──────┬──────┘        └──────┬──────┘        └──────┬──────┘
+          └──────────────────────┼──────────────────────┘
+                                 ▼
+   ┌─────────────────────────────────────────────────────────────┐
+   │              SHARED OBJECT STORAGE (S3/MinIO/OSS)           │
+   └─────────────────────────────────────────────────────────────┘
+                                 ▼
+   ┌─────────────────────────────────────────────────────────────┐
+   │         COORDINATION (etcd): Locks • Leader • Pub/Sub       │
+   └─────────────────────────────────────────────────────────────┘
+        </pre>
+      </div>
+
+      <div class="features-grid" style="grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));">
+        <div class="feature-card" style="background: white; border: 2px solid #7c3aed; padding: 1.25rem;">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #7c3aed, #a78bfa);">&#128200;</div>
+          <h3>Auto-Scaling</h3>
+          <p>Add or remove compute nodes without data migration. Stateless design.</p>
+        </div>
+
+        <div class="feature-card" style="background: white; border: 2px solid #8b5cf6; padding: 1.25rem;">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #8b5cf6, #c4b5fd);">&#128274;</div>
+          <h3>11-Nines Durability</h3>
+          <p>S3 object storage provides 99.999999999% durability.</p>
+        </div>
+
+        <div class="feature-card" style="background: white; border: 2px solid #a78bfa; padding: 1.25rem;">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #a78bfa, #ddd6fe);">&#9889;</div>
+          <h3>Instant Failover</h3>
+          <p>Stateless nodes mean instant recovery. No election delays.</p>
+        </div>
+
+        <div class="feature-card" style="background: white; border: 2px solid #c4b5fd; padding: 1.25rem;">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #c4b5fd, #ede9fe);">&#9729;</div>
+          <h3>Cloud-Native</h3>
+          <p>Perfect for Kubernetes with auto-scaling and self-healing.</p>
+        </div>
+      </div>
+
+      <div class="text-center" style="margin-top: 2rem;">
+        <a href="docs/cluster.html" class="btn btn-primary btn-lg" style="background: linear-gradient(135deg, #7c3aed, #a78bfa);">
+          <span>&#128214;</span> Learn About Enterprise Cluster
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Why MynaDB?</h2>
+        <p>Your infrastructure is talking. MynaDB listens. Built for modern monitoring and analytics with a focus on performance and developer experience.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">&#128293;</div>
+          <h3>Blazing Fast</h3>
+          <p>Written in Rust with zero-copy deserialization and efficient memory management for maximum throughput.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">&#128451;</div>
+          <h3>Columnar Storage</h3>
+          <p>Apache Parquet format provides excellent compression ratios and fast analytical query performance.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">&#128270;</div>
+          <h3>SQL Queries</h3>
+          <p>Full SQL support powered by Apache DataFusion. Use familiar syntax for complex analytical queries.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">&#128268;</div>
+          <h3>InfluxDB Compatible</h3>
+          <p>Drop-in replacement for InfluxDB write API. Migrate your existing applications seamlessly.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">&#128218;</div>
+          <h3>LSM Compaction</h3>
+          <p>Multi-level compaction strategy optimizes storage and query performance automatically.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">&#9992;</div>
+          <h3>Arrow Flight</h3>
+          <p>High-performance gRPC streaming for efficient data transfer to analytics tools and dashboards.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">&#128203;</div>
+          <h3>Schema Flexibility</h3>
+          <p>Automatic schema detection and evolution. No need to define schemas upfront.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">&#128200;</div>
+          <h3>Time Partitioning</h3>
+          <p>Automatic date-based partitioning for efficient time-range queries and data retention.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">&#128274;</div>
+          <h3>Retention Policies</h3>
+          <p>Automatic data expiration and cleanup based on configurable retention policies.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">&#128279;</div>
+          <h3>High Availability</h3>
+          <p>Master-slave replication with automatic failover for fault tolerance and read scaling.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">&#128171;</div>
+          <h3>MySQL Protocol</h3>
+          <p>Connect with any MySQL client. Use familiar tools like mysql-cli, DBeaver, or Grafana.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">&#9729;</div>
+          <h3>Object Store</h3>
+          <p>Native support for S3, MinIO, and Aliyun OSS for cloud-native deployments.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">&#128202;</div>
+          <h3>Multi-Level Caching</h3>
+          <p>Metadata cache, query result cache, and Parquet file cache for blazing-fast queries.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">&#128260;</div>
+          <h3>Zero Downtime Failover</h3>
+          <p>Promote slave to master seamlessly. Manual or automatic failover with no data loss.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">&#128272;</div>
+          <h3>WAL Replication</h3>
+          <p>Real-time Write-Ahead Log streaming ensures data durability across nodes.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">&#128736;</div>
+          <h3>GROUP BY time()</h3>
+          <p>InfluxDB-compatible time bucketing with fill options for gap handling.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">&#128737;</div>
+          <h3>Battle-Tested</h3>
+          <p>200+ tests including property-based, fuzz testing, and performance benchmarks.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #0284c7, #06b6d4);">&#127899;</div>
+          <h3>OpenTelemetry Native</h3>
+          <p>Native OTLP ingestion for metrics, logs, and traces via gRPC (port 4317) and HTTP endpoints.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #06b6d4, #22d3ee);">&#129482;</div>
+          <h3>Apache Iceberg</h3>
+          <p>REST Catalog API for multi-engine analytics with Spark, Trino, DuckDB, and Flink.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #10b981, #34d399);">&#128202;</div>
+          <h3>Grafana Dashboards</h3>
+          <p>InfluxDB-compatible datasource endpoints and built-in monitoring dashboard.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa);">&#128200;</div>
+          <h3>Continuous Aggregates</h3>
+          <p>TimescaleDB-style materialized views with automatic refresh and transparent query rewriting.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #ec4899, #f472b6);">&#9889;</div>
+          <h3>Streaming Queries</h3>
+          <p>Real-time subscriptions via WebSocket and SSE for live dashboards and alerting.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #dc2626, #f87171);">&#128274;</div>
+          <h3>RBAC Security</h3>
+          <p>Role-based access control with users, roles, permissions, TLS, and audit logging.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);">&#128290;</div>
+          <h3>Forecasting UDFs</h3>
+          <p>Built-in forecast_linear, forecast_ema, forecast_arima for predictive analytics.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #14b8a6, #5eead4);">&#127758;</div>
+          <h3>Geospatial Functions</h3>
+          <p>geo_distance, geo_hash, geo_within, and geo_bounding_box for location-aware queries.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #7c3aed, #a78bfa);">&#128421;</div>
+          <h3>Admin Console</h3>
+          <p>Web-based SQL editor with Monaco, storage browser, and cluster management.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon" style="background: linear-gradient(135deg, #ea580c, #fb923c);">&#128200;</div>
+          <h3>Prometheus Metrics</h3>
+          <p>Native /metrics endpoint for monitoring ingestion, query performance, and system health.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Architecture Overview -->
+  <section class="section" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Architecture</h2>
+        <p>A modern, layered architecture designed for high-throughput ingestion and fast analytical queries.</p>
+      </div>
+
+      <div class="architecture-diagram">
+        <pre>
+  +----------------+  +----------------+  +----------------+
+  | Line Protocol  |  |  OTLP (gRPC/  |  | Arrow Flight / |
+  | POST /write/:db|  |  HTTP)        |  | MySQL Protocol |
+  +-------+--------+  +-------+--------+  +-------+--------+
+          |                    |                    |
+          +--------------------+--------------------+
+                               |
+                       +-------v-------+          +------------------+
+                       |   DataCache   |          |   QueryEngine    |
+                       |  (In-Memory)  |&lt;---------| (DataFusion SQL) |
+                       +-------+-------+ Memtable +--------+---------+
+                               |                           |
+                       +-------v---------------------------v--------+
+                       |            Parquet Files (Columnar)         |
+                       |         + Metadata Manager (Catalog)        |
+                       +-----+---------------------------+----------+
+                             |                           |
+                    +--------v--------+         +--------v---------+
+                    |    Compactor    |         | Iceberg REST API |
+                    | (LSM L0-L5)    |         | (Multi-Engine)   |
+                    +-----------------+         +------------------+
+                             |
+          +------------------+------------------+
+          |                                     |
+  +-------v--------+  Streaming  +-------v--------+
+  | Object Storage |  Queries   | WebSocket/SSE  |
+  | (S3/MinIO/OSS) |            | (Real-time)    |
+  +----------------+            +----------------+
+        </pre>
+      </div>
+
+      <div class="architecture-cards">
+        <div class="arch-card">
+          <h4>&#128229; Multi-Protocol Ingestion</h4>
+          <p>InfluxDB Line Protocol, OpenTelemetry OTLP, and Arrow Flight for flexible data ingestion.</p>
+        </div>
+        <div class="arch-card">
+          <h4>&#9889; Memtable</h4>
+          <p>Query fresh writes instantly without waiting for flush. Automatic union of memory and Parquet data.</p>
+        </div>
+        <div class="arch-card">
+          <h4>&#128200; Continuous Aggregates</h4>
+          <p>TimescaleDB-style materialized views with automatic refresh and transparent query rewriting.</p>
+        </div>
+        <div class="arch-card">
+          <h4>&#128451; Storage Layer</h4>
+          <p>Columnar Parquet files with date partitioning, LSM compaction, and Iceberg metadata.</p>
+        </div>
+        <div class="arch-card">
+          <h4>&#128270; Query Engine</h4>
+          <p>Apache DataFusion with forecasting UDFs, geospatial functions, and predicate pushdown.</p>
+        </div>
+        <div class="arch-card">
+          <h4>&#128190; Streaming Queries</h4>
+          <p>Real-time query subscriptions via WebSocket and SSE for live dashboards.</p>
+        </div>
+        <div class="arch-card">
+          <h4>&#129482; Apache Iceberg</h4>
+          <p>REST Catalog API for multi-engine analytics with Spark, Trino, DuckDB, and Flink.</p>
+        </div>
+        <div class="arch-card">
+          <h4>&#128274; Security &amp; RBAC</h4>
+          <p>Role-based access control, TLS/SSL mutual auth, and comprehensive audit logging.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Start -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Quick Start</h2>
+        <p>Start listening in 60 seconds.</p>
+      </div>
+
+      <div class="code-block" style="max-width: 800px; margin: 0 auto;">
+        <div class="code-header">
+          <div class="dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <span class="lang">bash</span>
+          <button class="copy-btn" onclick="copyCode(this)">&#128203; Copy</button>
+        </div>
+        <div class="code-content">
+          <pre><code><span class="token-comment"># 1. Build and run</span>
+<span class="token-function">cargo</span> build --release
+<span class="token-function">./target/release/mynadb</span>
+
+<span class="token-comment"># 2. Write some data</span>
+<span class="token-function">curl</span> -X POST http://localhost:7000/write/mydb -d <span class="token-string">'
+cpu,host=server01,region=us-west usage=75.5,temp=45
+cpu,host=server02,region=us-east usage=82.3,temp=50
+memory,host=server01 used=16.5,total=32.0
+'</span>
+
+<span class="token-comment"># 3. Query immediately! (No flush needed - Memtable provides instant visibility)</span>
+<span class="token-function">curl</span> <span class="token-string">'http://localhost:7000/query/mydb'</span> \
+  -d <span class="token-string">'SELECT host, AVG(usage) as avg_cpu FROM cpu GROUP BY host'</span>
+
+<span class="token-comment"># Result:</span>
+<span class="token-comment"># [{"host":"server01","avg_cpu":75.5},{"host":"server02","avg_cpu":82.3}]</span>
+
+<span class="token-comment"># 4. Time series aggregation with GROUP BY time()</span>
+<span class="token-function">curl</span> <span class="token-string">'http://localhost:7000/query/mydb'</span> \
+  -d <span class="token-string">'SELECT host, AVG(usage) FROM cpu GROUP BY time(5m), host'</span></code></pre>
+        </div>
+      </div>
+
+      <div class="text-center mt-2">
+        <a href="docs/quickstart.html" class="btn btn-primary btn-lg">
+          View Full Quick Start Guide <span>&#8594;</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="section" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Use Cases</h2>
+        <p>From whispers to roars, every signal matters. MynaDB captures it all.</p>
+      </div>
+
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-icon">&#128187;</div>
+          <h3>Infrastructure Monitoring</h3>
+          <p>Track CPU, memory, disk, and network metrics from thousands of servers in real-time.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">&#128202;</div>
+          <h3>Application Metrics</h3>
+          <p>Store and analyze application performance data, request latencies, and error rates.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">&#127760;</div>
+          <h3>IoT Data</h3>
+          <p>Collect sensor data from IoT devices with high-frequency ingestion and efficient storage.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">&#128176;</div>
+          <h3>Financial Data</h3>
+          <p>Store tick data, price feeds, and trading metrics with sub-millisecond precision.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">&#128640;</div>
+          <h3>DevOps Analytics</h3>
+          <p>Track deployments, build times, and CI/CD metrics for operational insights.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">&#127919;</div>
+          <h3>Real-time Analytics</h3>
+          <p>Power dashboards and alerting systems with fast analytical queries.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Documentation Cards -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Documentation</h2>
+        <p>Everything you need to get started and become an expert.</p>
+      </div>
+
+      <div class="cards-grid">
+        <a href="docs/quickstart.html" class="card">
+          <div class="card-icon">&#128640;</div>
+          <h3>Quick Start</h3>
+          <p>Get up and running with MynaDB in under 5 minutes.</p>
+          <span class="card-link">Read more <span>&#8594;</span></span>
+        </a>
+
+        <a href="docs/architecture.html" class="card">
+          <div class="card-icon">&#127959;</div>
+          <h3>Architecture</h3>
+          <p>Deep dive into the internal architecture and design decisions.</p>
+          <span class="card-link">Read more <span>&#8594;</span></span>
+        </a>
+
+        <a href="docs/guides.html" class="card">
+          <div class="card-icon">&#128214;</div>
+          <h3>Guides</h3>
+          <p>Step-by-step tutorials for common tasks and workflows.</p>
+          <span class="card-link">Read more <span>&#8594;</span></span>
+        </a>
+
+        <a href="docs/api.html" class="card">
+          <div class="card-icon">&#128279;</div>
+          <h3>API Reference</h3>
+          <p>Complete reference for all HTTP and Arrow Flight APIs.</p>
+          <span class="card-link">Read more <span>&#8594;</span></span>
+        </a>
+
+        <a href="docs/examples.html" class="card">
+          <div class="card-icon">&#128221;</div>
+          <h3>Examples</h3>
+          <p>Ready-to-use examples for common query patterns.</p>
+          <span class="card-link">Read more <span>&#8594;</span></span>
+        </a>
+
+        <a href="docs/configuration.html" class="card">
+          <div class="card-icon">&#9881;</div>
+          <h3>Configuration</h3>
+          <p>All configuration options explained with examples.</p>
+          <span class="card-link">Read more <span>&#8594;</span></span>
+        </a>
+
+        <a href="docs/high-availability.html" class="card">
+          <div class="card-icon">&#128279;</div>
+          <h3>High Availability</h3>
+          <p>Master-slave replication, failover, and HA configuration.</p>
+          <span class="card-link">Read more <span>&#8594;</span></span>
+        </a>
+
+        <a href="docs/cluster.html" class="card" style="border: 2px solid #7c3aed;">
+          <div class="card-icon" style="background: linear-gradient(135deg, #7c3aed, #a78bfa);">&#127760;</div>
+          <h3>Enterprise Cluster</h3>
+          <p>Distributed clustering with shared-storage architecture and auto-scaling.</p>
+          <span class="card-link" style="color: #7c3aed;">Read more <span>&#8594;</span></span>
+        </a>
+
+        <a href="docs/caching.html" class="card">
+          <div class="card-icon">&#128202;</div>
+          <h3>Caching</h3>
+          <p>Multi-level caching for metadata, queries, and Parquet files.</p>
+          <span class="card-link">Read more <span>&#8594;</span></span>
+        </a>
+
+        <a href="docs/mysql-protocol.html" class="card">
+          <div class="card-icon">&#128171;</div>
+          <h3>MySQL Protocol</h3>
+          <p>Connect using MySQL clients, DBeaver, or Grafana.</p>
+          <span class="card-link">Read more <span>&#8594;</span></span>
+        </a>
+
+        <a href="docs/object-store.html" class="card">
+          <div class="card-icon">&#9729;</div>
+          <h3>Object Store</h3>
+          <p>S3, MinIO, and Aliyun OSS configuration for cloud storage.</p>
+          <span class="card-link">Read more <span>&#8594;</span></span>
+        </a>
+
+        <a href="docs/testing.html" class="card">
+          <div class="card-icon">&#128737;</div>
+          <h3>Testing</h3>
+          <p>200+ tests: unit, correctness, property-based, fuzz, and benchmarks.</p>
+          <span class="card-link">Read more <span>&#8594;</span></span>
+        </a>
+
+        <a href="docs/otlp.html" class="card" style="border: 2px solid #0284c7;">
+          <div class="card-icon" style="background: linear-gradient(135deg, #0284c7, #06b6d4);">&#127899;</div>
+          <h3>OpenTelemetry (OTLP)</h3>
+          <p>Native OTLP ingestion for metrics, logs, and traces via gRPC and HTTP.</p>
+          <span class="card-link" style="color: #0284c7;">Read more <span>&#8594;</span></span>
+        </a>
+
+        <a href="docs/iceberg.html" class="card" style="border: 2px solid #06b6d4;">
+          <div class="card-icon" style="background: linear-gradient(135deg, #06b6d4, #22d3ee);">&#129482;</div>
+          <h3>Apache Iceberg</h3>
+          <p>REST Catalog API for multi-engine analytics with Spark, Trino, and DuckDB.</p>
+          <span class="card-link" style="color: #06b6d4;">Read more <span>&#8594;</span></span>
+        </a>
+
+        <a href="docs/grafana.html" class="card" style="border: 2px solid #10b981;">
+          <div class="card-icon" style="background: linear-gradient(135deg, #10b981, #34d399);">&#128202;</div>
+          <h3>Grafana Integration</h3>
+          <p>InfluxDB-compatible datasource and built-in monitoring dashboard.</p>
+          <span class="card-link" style="color: #10b981;">Read more <span>&#8594;</span></span>
+        </a>
+
+        <a href="docs/continuous-aggregates.html" class="card" style="border: 2px solid #8b5cf6;">
+          <div class="card-icon" style="background: linear-gradient(135deg, #8b5cf6, #a78bfa);">&#128200;</div>
+          <h3>Continuous Aggregates</h3>
+          <p>Materialized views with automatic refresh and query rewriting.</p>
+          <span class="card-link" style="color: #8b5cf6;">Read more <span>&#8594;</span></span>
+        </a>
+
+        <a href="docs/streaming.html" class="card" style="border: 2px solid #ec4899;">
+          <div class="card-icon" style="background: linear-gradient(135deg, #ec4899, #f472b6);">&#9889;</div>
+          <h3>Streaming Queries</h3>
+          <p>Real-time subscriptions via WebSocket and Server-Sent Events.</p>
+          <span class="card-link" style="color: #ec4899;">Read more <span>&#8594;</span></span>
+        </a>
+
+        <a href="docs/security.html" class="card" style="border: 2px solid #dc2626;">
+          <div class="card-icon" style="background: linear-gradient(135deg, #dc2626, #f87171);">&#128274;</div>
+          <h3>Security &amp; RBAC</h3>
+          <p>Authentication, role-based access control, TLS, and audit logging.</p>
+          <span class="card-link" style="color: #dc2626;">Read more <span>&#8594;</span></span>
+        </a>
+
+        <a href="docs/forecasting.html" class="card" style="border: 2px solid #f59e0b;">
+          <div class="card-icon" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);">&#128290;</div>
+          <h3>Forecasting &amp; Geospatial</h3>
+          <p>Built-in forecasting and geospatial UDFs for advanced analytics.</p>
+          <span class="card-link" style="color: #f59e0b;">Read more <span>&#8594;</span></span>
+        </a>
+
+        <a href="docs/admin-console.html" class="card" style="border: 2px solid #7c3aed;">
+          <div class="card-icon" style="background: linear-gradient(135deg, #7c3aed, #a78bfa);">&#128421;</div>
+          <h3>Admin Console</h3>
+          <p>Web-based SQL editor, storage browser, and cluster management.</p>
+          <span class="card-link" style="color: #7c3aed;">Read more <span>&#8594;</span></span>
+        </a>
+
+        <a href="docs/monitoring.html" class="card" style="border: 2px solid #ea580c;">
+          <div class="card-icon" style="background: linear-gradient(135deg, #ea580c, #fb923c);">&#128200;</div>
+          <h3>Monitoring</h3>
+          <p>Prometheus metrics, query tracing, and system health endpoints.</p>
+          <span class="card-link" style="color: #ea580c;">Read more <span>&#8594;</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="navbar-brand">
+            <img src="images/logo-icon.svg" alt="MynaDB" class="logo-img">
+            MynaDB
+          </a>
+          <p>The Voice of Your Machines. A high-performance time series database built with Rust, Apache DataFusion, and Parquet.</p>
+        </div>
+
+        <div class="footer-column">
+          <h4>Documentation</h4>
+          <ul>
+            <li><a href="docs/quickstart.html">Quick Start</a></li>
+            <li><a href="docs/architecture.html">Architecture</a></li>
+            <li><a href="docs/guides.html">Guides</a></li>
+            <li><a href="docs/api.html">API Reference</a></li>
+            <li><a href="docs/high-availability.html">High Availability</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Features</h4>
+          <ul>
+            <li><a href="docs/otlp.html">OpenTelemetry</a></li>
+            <li><a href="docs/iceberg.html">Apache Iceberg</a></li>
+            <li><a href="docs/grafana.html">Grafana</a></li>
+            <li><a href="docs/continuous-aggregates.html">Continuous Aggregates</a></li>
+            <li><a href="docs/streaming.html">Streaming Queries</a></li>
+            <li><a href="docs/cluster.html">Enterprise Cluster</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="docs/security.html">Security &amp; RBAC</a></li>
+            <li><a href="docs/monitoring.html">Monitoring</a></li>
+            <li><a href="docs/admin-console.html">Admin Console</a></li>
+            <li><a href="docs/configuration.html">Configuration</a></li>
+            <li><a href="docs/troubleshooting.html">Troubleshooting</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Community</h4>
+          <ul>
+            <li><a href="https://github.com/mynadb/mynadb" target="_blank">GitHub</a></li>
+            <li><a href="#">Discord</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Contributing</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 MynaDB. The Voice of Your Machines. Listen. Store. Monitor.</p>
+        <div class="footer-social">
+          <a href="https://github.com/mynadb/mynadb" target="_blank" aria-label="GitHub">&#128736;</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
