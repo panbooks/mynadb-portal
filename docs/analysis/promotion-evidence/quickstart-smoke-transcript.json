@@ -1,0 +1,57 @@
+[
+  {
+    "command": [
+      "/tmp/mynadb-promotion-20261109/target/fast-release/mynadb",
+      "-c",
+      "/tmp/mynadb-quickstart-q52ah_73/quickstart.toml",
+      "standalone"
+    ],
+    "wal_enabled": false,
+    "automatic_flush_seconds": 3600
+  },
+  {
+    "step": "health",
+    "status": "passed"
+  },
+  {
+    "path": "/write/quickstart",
+    "request": "cpu,host=server01 usage=23.5 1794235204480711316\ncpu,host=server02 usage=45.0 1794235204480711317\n",
+    "status": 204,
+    "response": ""
+  },
+  {
+    "path": "/query/quickstart",
+    "request": "SELECT host, usage FROM default.cpu ORDER BY host",
+    "status": 200,
+    "response": "[\n  {\n    \"host\": \"server01\",\n    \"usage\": 23.5\n  },\n  {\n    \"host\": \"server02\",\n    \"usage\": 45.0\n  }\n]"
+  },
+  {
+    "step": "query-before-flush",
+    "status": "passed"
+  },
+  {
+    "path": "/flush",
+    "request": "",
+    "status": 200,
+    "response": "Flushed 1 file(s) to disk"
+  },
+  {
+    "step": "flush",
+    "parquet_files": 1,
+    "status": "passed"
+  },
+  {
+    "step": "health",
+    "status": "passed"
+  },
+  {
+    "path": "/query/quickstart",
+    "request": "SELECT host, usage FROM default.cpu ORDER BY host",
+    "status": 200,
+    "response": "[\n  {\n    \"host\": \"server01\",\n    \"usage\": 23.5\n  },\n  {\n    \"host\": \"server02\",\n    \"usage\": 45.0\n  }\n]"
+  },
+  {
+    "step": "query-after-restart",
+    "status": "passed"
+  }
+]

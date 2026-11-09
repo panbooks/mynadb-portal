@@ -1,0 +1,62 @@
+[
+  {
+    "group": "parser",
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "fast-release",
+      "--jobs",
+      "4",
+      "--config",
+      "profile.fast-release.package.mynadb.opt-level=0",
+      "--lib",
+      "storage::line_protocol::tests",
+      "--",
+      "--test-threads=2"
+    ],
+    "exit_code": 0,
+    "seconds": 557.79
+  },
+  {
+    "group": "wal",
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "fast-release",
+      "--jobs",
+      "4",
+      "--config",
+      "profile.fast-release.package.mynadb.opt-level=0",
+      "--lib",
+      "storage::wal::tests",
+      "--",
+      "--test-threads=2"
+    ],
+    "exit_code": 0,
+    "seconds": 1.23
+  },
+  {
+    "group": "influxql",
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "--profile",
+      "fast-release",
+      "--jobs",
+      "4",
+      "--config",
+      "profile.fast-release.package.mynadb.opt-level=0",
+      "--lib",
+      "query::influxql::",
+      "--",
+      "--test-threads=2"
+    ],
+    "exit_code": 0,
+    "seconds": 0.87
+  }
+]

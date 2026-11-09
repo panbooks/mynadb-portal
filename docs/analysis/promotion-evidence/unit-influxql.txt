@@ -1,0 +1,759 @@
+warning: unused import: `WatermarkInfo`
+  --> src/aggregates/job.rs:12:51
+   |
+12 | use super::types::{AggregateState, RefreshResult, WatermarkInfo};
+   |                                                   ^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `crate::aggregates::definition::AggregateFunction`
+   --> src/aggregates/job.rs:322:9
+    |
+322 |     use crate::aggregates::definition::AggregateFunction;
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `super::types::TimeBucketGranularity`
+  --> src/aggregates/query_rewriter.rs:46:5
+   |
+46 | use super::types::TimeBucketGranularity;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `std::collections::HashMap`
+  --> src/aggregates/query_rewriter.rs:47:5
+   |
+47 | use std::collections::HashMap;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `error`
+  --> src/aggregates/storage.rs:15:22
+   |
+15 | use tracing::{debug, error, info, warn};
+   |                      ^^^^^
+
+warning: unused import: `crate::aggregates::definition::AggregateFunction`
+   --> src/aggregates/storage.rs:345:9
+    |
+345 |     use crate::aggregates::definition::AggregateFunction;
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `warn`
+ --> src/auth/store.rs:8:28
+  |
+8 | use tracing::{debug, info, warn};
+  |                            ^^^^
+
+warning: unused import: `QueryScope`
+  --> src/data/server/flight.rs:11:23
+   |
+11 |     BatchWriteTicket, QueryScope, QueryTicket, ReplicationTicket, WriteTicket,
+   |                       ^^^^^^^^^^
+
+warning: unused imports: `NodeRole` and `NodeState`
+  --> src/data/server/flight.rs:14:26
+   |
+14 | use crate::meta::types::{NodeRole, NodeState};
+   |                          ^^^^^^^^  ^^^^^^^^^
+
+warning: unused import: `std::path::PathBuf`
+  --> src/iceberg/catalog/mynadb_catalog.rs:11:5
+   |
+11 | use std::path::PathBuf;
+   |     ^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `std::sync::Arc`
+  --> src/iceberg/catalog/mynadb_catalog.rs:12:5
+   |
+12 | use std::sync::Arc;
+   |     ^^^^^^^^^^^^^^
+
+warning: unused import: `debug`
+  --> src/iceberg/catalog/mynadb_catalog.rs:13:15
+   |
+13 | use tracing::{debug, warn};
+   |               ^^^^^
+
+warning: unused import: `Deserialize`
+  --> src/iceberg/catalog/rest_catalog.rs:16:13
+   |
+16 | use serde::{Deserialize, Serialize};
+   |             ^^^^^^^^^^^
+
+warning: unused import: `std::sync::Arc`
+ --> src/iceberg/metadata/schema.rs:6:5
+  |
+6 | use std::sync::Arc;
+  |     ^^^^^^^^^^^^^^
+
+warning: unused import: `PathBuf`
+  --> src/iceberg/sync/snapshot_builder.rs:14:23
+   |
+14 | use std::path::{Path, PathBuf};
+   |                       ^^^^^^^
+
+warning: unused import: `warn`
+  --> src/iceberg/sync/snapshot_builder.rs:15:28
+   |
+15 | use tracing::{debug, info, warn};
+   |                            ^^^^
+
+warning: unused import: `warn`
+  --> src/jobs/compactor/parquet_io.rs:11:22
+   |
+11 | use tracing::{debug, warn};
+   |                      ^^^^
+
+warning: unused import: `std::collections::HashSet`
+ --> src/jobs/compactor/partition.rs:8:5
+  |
+8 | use std::collections::HashSet;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `catalog::*`
+  --> src/jobs/compactor/mod.rs:30:9
+   |
+30 | pub use catalog::*;
+   |         ^^^^^^^^^^
+
+warning: unused import: `full::*`
+  --> src/jobs/compactor/mod.rs:31:9
+   |
+31 | pub use full::*;
+   |         ^^^^^^^
+
+warning: unused import: `partition::*`
+  --> src/jobs/compactor/mod.rs:32:9
+   |
+32 | pub use partition::*;
+   |         ^^^^^^^^^^^^
+
+warning: unused import: `error`
+  --> src/jobs/downsampling/storage.rs:11:22
+   |
+11 | use tracing::{debug, error, info, warn};
+   |                      ^^^^^
+
+warning: unused import: `super::*`
+   --> src/meta/meta_node/mod.rs:166:9
+    |
+166 |     use super::*;
+    |         ^^^^^^^^
+
+warning: unused import: `warn`
+  --> src/meta/raft/state_machine/mod.rs:16:35
+   |
+16 | use tracing::{debug, error, info, warn};
+   |                                   ^^^^
+
+warning: unused import: `current_timestamp_ms`
+ --> src/meta/raft/state_machine/distribution.rs:6:5
+  |
+6 |     current_timestamp_ms, DistributionConfig, DistributionScope, Event, EventType, MetaResponse,
+  |     ^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `crate::meta::types::*`
+ --> src/meta/raft/state_machine/tests.rs:4:5
+  |
+4 | use crate::meta::types::*;
+  |     ^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `current_timestamp_ms`
+ --> src/meta/raft/state_machine/scale_in.rs:7:5
+  |
+7 |     current_timestamp_ms, keys, DataNodeMode, EventType, MetaResponse, NodeInfo, NodeRole,
+  |     ^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `debug` and `warn`
+  --> src/meta/raft/state_machine/scale_in.rs:10:15
+   |
+10 | use tracing::{debug, info, warn};
+   |               ^^^^^        ^^^^
+
+warning: unused import: `TableOwnerEntry`
+  --> src/meta/raft/state_machine/table.rs:15:65
+   |
+15 |     keys, Event, EventType, MetaResponse, NodeState, TableMeta, TableOwnerEntry, TableStatsDelta,
+   |                                                                 ^^^^^^^^^^^^^^^
+
+warning: unused import: `std::collections::HashMap`
+  --> src/meta/recovery/mod.rs:33:5
+   |
+33 | use std::collections::HashMap;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `super::*`
+   --> src/meta/scale_in/executor.rs:614:9
+    |
+614 |     use super::*;
+    |         ^^^^^^^^
+
+warning: unused imports: `DataNodeMode` and `NodeInfo`
+  --> src/meta/scale_in/planner.rs:13:26
+   |
+13 | use crate::meta::types::{DataNodeMode, NodeInfo};
+   |                          ^^^^^^^^^^^^  ^^^^^^^^
+
+warning: unused import: `HashSet`
+  --> src/meta/scale_in/planner.rs:14:33
+   |
+14 | use std::collections::{HashMap, HashSet};
+   |                                 ^^^^^^^
+
+warning: unused import: `NodeState`
+   --> src/meta/scale_in/planner.rs:682:64
+    |
+682 |     use crate::meta::types::{DataNodeMode, NodeInfo, NodeRole, NodeState};
+    |                                                                ^^^^^^^^^
+
+warning: unused import: `std::time::SystemTime`
+  --> src/meta/scale_in/types.rs:14:5
+   |
+14 | use std::time::SystemTime;
+   |     ^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `NodeInfo`
+  --> src/meta/scale_in/mod.rs:56:40
+   |
+56 | use crate::meta::types::{DataNodeMode, NodeInfo, NodeRole, NodeState, ScaleInRecommendation};
+   |                                        ^^^^^^^^
+
+warning: unused import: `debug`
+  --> src/meta/scale_in/mod.rs:58:15
+   |
+58 | use tracing::{debug, error, info, warn};
+   |               ^^^^^
+
+warning: unused imports: `ScaleInPlan` and `ScaleInResult`
+  --> src/meta/service/http.rs:27:36
+   |
+27 |     ScaleInConfig, ScaleInManager, ScaleInPlan, ScaleInPlanRequest, ScaleInResult, ScaleInStrategy,
+   |                                    ^^^^^^^^^^^                      ^^^^^^^^^^^^^
+
+warning: unused import: `Duration`
+ --> src/metrics/collector.rs:3:17
+  |
+3 | use std::time::{Duration, Instant};
+  |                 ^^^^^^^^
+
+warning: unused import: `std::path::Path`
+  --> src/node/common.rs:13:5
+   |
+13 | use std::path::Path;
+   |     ^^^^^^^^^^^^^^^
+
+warning: unused import: `std::path::PathBuf`
+  --> src/node/data.rs:23:5
+   |
+23 | use std::path::PathBuf;
+   |     ^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `crate::meta::config::MetaConfig`
+ --> src/node/meta.rs:9:5
+  |
+9 | use crate::meta::config::MetaConfig;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `crate::router::config::RouterConfig`
+  --> src/node/router.rs:11:5
+   |
+11 | use crate::router::config::RouterConfig;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `crate::storage::cache`
+  --> src/node/standalone.rs:15:5
+   |
+15 | use crate::storage::cache;
+   |     ^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `DictionaryArray` and `StringArray`
+ --> src/query/cache/dictionary_encoding.rs:7:31
+  |
+7 |     Array, ArrayRef, AsArray, DictionaryArray, RecordBatch, StringArray,
+  |                               ^^^^^^^^^^^^^^^               ^^^^^^^^^^^
+
+warning: unused import: `SchemaRef`
+ --> src/query/cache/dictionary_encoding.rs:9:72
+  |
+9 | use datafusion::arrow::datatypes::{DataType, Field, Int32Type, Schema, SchemaRef};
+  |                                                                        ^^^^^^^^^
+
+warning: unused import: `warn`
+  --> src/query/cache/partition_files_cache.rs:36:28
+   |
+36 | use tracing::{debug, info, warn};
+   |                            ^^^^
+
+warning: unused import: `datafusion::physical_expr::expressions::lit`
+   --> src/query/cache/predicate_eval.rs:111:9
+    |
+111 |     use datafusion::physical_expr::expressions::lit;
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `datafusion::prelude::Expr`
+   --> src/query/cache/predicate_eval.rs:112:9
+    |
+112 |     use datafusion::prelude::Expr;
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `datafusion::logical_expr::Operator`
+   --> src/query/cache/predicate_eval.rs:114:9
+    |
+114 |     use datafusion::logical_expr::Operator;
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `crate::meta::current_timestamp_ms`
+ --> src/query/catalog/memory_manager.rs:7:5
+  |
+7 | use crate::meta::current_timestamp_ms;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `crate::storage::storage::Storage`
+   --> src/query/providers/memtable_provider.rs:503:9
+    |
+503 |     use crate::storage::storage::Storage;
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `datafusion::prelude::SessionContext`
+   --> src/query/providers/memtable_provider.rs:506:9
+    |
+506 |     use datafusion::prelude::SessionContext;
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `RecordBatchOptions`
+ --> src/query/providers/parquet/reader.rs:5:68
+  |
+5 | use datafusion::arrow::array::{new_null_array, Array, RecordBatch, RecordBatchOptions, StringArray};
+  |                                                                    ^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `debug`
+  --> src/query/query_engine/discovery.rs:10:15
+   |
+10 | use tracing::{debug, info, warn};
+   |               ^^^^^
+
+warning: unused import: `tracing::debug`
+ --> src/query/query_engine/listing.rs:6:5
+  |
+6 | use tracing::debug;
+  |     ^^^^^^^^^^^^^^
+
+warning: unused import: `datafusion::prelude::*`
+  --> src/query/query_engine/registration.rs:13:5
+   |
+13 | use datafusion::prelude::*;
+   |     ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `warn`
+  --> src/query/query_engine/registration.rs:16:28
+   |
+16 | use tracing::{debug, info, warn};
+   |                            ^^^^
+
+warning: unused import: `info`
+  --> src/query/streaming.rs:15:22
+   |
+15 | use tracing::{debug, info, warn};
+   |                      ^^^^
+
+warning: unused import: `ShardCache`
+  --> src/router/query_coordinator/routing.rs:39:58
+   |
+39 | use super::super::shard_cache::{DataNodeInfo, NodeState, ShardCache, TableKey};
+   |                                                          ^^^^^^^^^^
+
+warning: unused import: `DataNodeInfo`
+  --> src/router/query_coordinator/mod.rs:39:26
+   |
+39 | use super::shard_cache::{DataNodeInfo, ShardCache};
+   |                          ^^^^^^^^^^^^
+
+warning: unused import: `warn`
+  --> src/router/shard_cache/node_mgmt.rs:13:28
+   |
+13 | use tracing::{debug, info, warn};
+   |                            ^^^^
+
+warning: unused imports: `debug` and `warn`
+  --> src/services/flight_service.rs:19:15
+   |
+19 | use tracing::{debug, info, warn};
+   |               ^^^^^        ^^^^
+
+warning: unused import: `std::sync::Arc`
+  --> src/services/grafana.rs:21:5
+   |
+21 | use std::sync::Arc;
+   |     ^^^^^^^^^^^^^^
+
+warning: unused import: `info`
+  --> src/services/grafana.rs:22:29
+   |
+22 | use tracing::{debug, error, info};
+   |                             ^^^^
+
+warning: unused import: `crate::query::query_engine::QueryEngine`
+  --> src/services/grafana.rs:24:5
+   |
+24 | use crate::query::query_engine::QueryEngine;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `User`
+ --> src/services/mysql_service.rs:3:44
+  |
+3 | use crate::auth::{AuthContext, Permission, User, UserStore};
+  |                                            ^^^^
+
+warning: unused import: `Json`
+  --> src/services/otlp/http_handlers.rs:14:5
+   |
+14 |     Json,
+   |     ^^^^
+
+warning: unused import: `serde_json::Value`
+  --> src/services/otlp/http_handlers.rs:20:5
+   |
+20 | use serde_json::Value;
+   |     ^^^^^^^^^^^^^^^^^
+
+warning: unused import: `warn`
+  --> src/services/otlp/http_handlers.rs:22:29
+   |
+22 | use tracing::{debug, error, warn};
+   |                             ^^^^
+
+warning: unused imports: `bytes_to_hex` and `sanitize_tag_name`
+ --> src/services/otlp/metrics_converter.rs:7:25
+  |
+7 |     attributes_to_tags, bytes_to_hex, resource_attrs_to_tags, sanitize_tag_name,
+  |                         ^^^^^^^^^^^^                          ^^^^^^^^^^^^^^^^^
+
+warning: unused import: `any_value_to_string`
+ --> src/services/otlp/traces_converter.rs:9:5
+  |
+9 |     any_value_to_string, attributes_to_tags, bytes_to_hex, resource_attrs_to_tags,
+  |     ^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `std::io::Write`
+   --> src/services/tls.rs:125:9
+    |
+125 |     use std::io::Write;
+    |         ^^^^^^^^^^^^^^
+
+warning: unused imports: `Compression` and `ZstdLevel`
+  --> src/storage/parquet_writer.rs:10:22
+   |
+10 | use parquet::basic::{Compression, ZstdLevel};
+   |                      ^^^^^^^^^^^  ^^^^^^^^^
+
+warning: unused import: `datafusion::catalog::TableProvider`
+  --> src/query/query_engine/registration.rs:10:5
+   |
+10 | use datafusion::catalog::TableProvider;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `StreamExt`
+  --> src/router/flight.rs:12:42
+   |
+12 | use futures::{stream, stream::BoxStream, StreamExt, TryStreamExt};
+   |                                          ^^^^^^^^^
+
+warning: unused import: `FileCache`
+  --> src/services/api.rs:39:34
+   |
+39 | use crate::storage::file_cache::{FileCache, SharedFileCache};
+   |                                  ^^^^^^^^^
+
+warning: unused import: `MetadataManager`
+  --> src/services/api.rs:36:29
+   |
+36 | use crate::query::catalog::{MetadataManager, SharedMetadataManager};
+   |                             ^^^^^^^^^^^^^^^
+
+warning: field `scope` is never read
+    --> src/admin/api.rs:1256:5
+     |
+1255 | struct SetDistributionRequest {
+     |        ---------------------- field in this struct
+1256 |     scope: String,
+     |     ^^^^^
+     |
+     = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: field `format` is never read
+  --> src/admin/query_api.rs:51:5
+   |
+47 | struct QueryRequest {
+   |        ------------ field in this struct
+...
+51 |     format: Option<String>,
+   |     ^^^^^^
+
+warning: method `broadcast_event` is never used
+   --> src/admin/state.rs:277:12
+    |
+ 99 | impl AdminState {
+    | --------------- method in this implementation
+...
+277 |     pub fn broadcast_event(&self, event: AdminEvent) {
+    |            ^^^^^^^^^^^^^^^
+
+warning: fields `group_by_columns` and `time_range` are never read
+   --> src/aggregates/query_rewriter.rs:450:5
+    |
+442 | struct QueryInfo {
+    |        --------- fields in this struct
+...
+450 |     group_by_columns: Vec<String>,
+    |     ^^^^^^^^^^^^^^^^
+451 |     /// Time range (start, end) in nanoseconds
+452 |     time_range: Option<(i64, i64)>,
+    |     ^^^^^^^^^^
+    |
+    = note: `QueryInfo` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
+
+warning: field `meta_client` is never read
+   --> src/data/server/flight.rs:101:5
+    |
+ 93 | pub struct DataNodeFlightService {
+    |            --------------------- field in this struct
+...
+101 |     meta_client: Option<Arc<MetaClient>>,
+    |     ^^^^^^^^^^^
+
+warning: struct `ErrorResponse` is never constructed
+  --> src/iceberg/catalog/rest_catalog.rs:67:8
+   |
+67 | struct ErrorResponse {
+   |        ^^^^^^^^^^^^^
+
+warning: struct `ErrorBody` is never constructed
+  --> src/iceberg/catalog/rest_catalog.rs:72:8
+   |
+72 | struct ErrorBody {
+   |        ^^^^^^^^^
+
+warning: constant `BLOOM_FILTER_FPP` is never used
+  --> src/jobs/compactor/mod.rs:48:18
+   |
+48 | pub(crate) const BLOOM_FILTER_FPP: f64 = 0.01; // 1% false positive rate
+   |                  ^^^^^^^^^^^^^^^^
+
+warning: constant `BLOOM_FILTER_NDV` is never used
+  --> src/jobs/compactor/mod.rs:49:18
+   |
+49 | pub(crate) const BLOOM_FILTER_NDV: u64 = 10_000; // Expected distinct values
+   |                  ^^^^^^^^^^^^^^^^
+
+warning: field `node_id` is never read
+  --> src/jobs/database_manager.rs:28:5
+   |
+23 | pub struct DatabaseManager {
+   |            --------------- field in this struct
+...
+28 |     node_id: Option<String>,
+   |     ^^^^^^^
+
+warning: field `db_manager` is never read
+  --> src/jobs/recompression.rs:38:5
+   |
+36 | pub struct RecompressionJob {
+   |            ---------------- field in this struct
+37 |     storage: Arc<Storage>,
+38 |     db_manager: Arc<DatabaseManager>,
+   |     ^^^^^^^^^^
+
+warning: type alias `EventHandler` is never used
+  --> src/meta/client/event_subscriber.rs:39:10
+   |
+39 | pub type EventHandler = Box<dyn Fn(MetaEvent) + Send + Sync>;
+   |          ^^^^^^^^^^^^
+
+warning: field `validator` is never read
+  --> src/meta/scale_in/executor.rs:53:5
+   |
+50 | pub struct ScaleInExecutor {
+   |            --------------- field in this struct
+...
+53 |     validator: ScaleInValidator,
+   |     ^^^^^^^^^
+
+warning: method `wait_for_drain` is never used
+   --> src/meta/scale_in/executor.rs:534:14
+    |
+ 56 | impl ScaleInExecutor {
+    | -------------------- method in this implementation
+...
+534 |     async fn wait_for_drain(&self, node_id: &str, timeout_secs: u64) -> Result<(), ScaleInError> {
+    |              ^^^^^^^^^^^^^^
+
+warning: field `idx` is never read
+   --> src/query/influxql/transpiler.rs:364:5
+    |
+362 | struct DerivativeField {
+    |        --------------- field in this struct
+363 |     /// Index in the fields list
+364 |     idx: usize,
+    |     ^^^
+
+warning: function `discover_all_files` is never used
+   --> src/query/providers/parquet/discovery.rs:298:14
+    |
+298 | pub async fn discover_all_files(
+    |              ^^^^^^^^^^^^^^^^^^
+
+warning: function `filter_files_by_partition` is never used
+   --> src/query/providers/parquet/filters.rs:105:8
+    |
+105 | pub fn filter_files_by_partition(
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: constant `DEFAULT_FLUSH_INTERVAL_SECS` is never used
+  --> src/router/shard_cache/mod.rs:58:7
+   |
+58 | const DEFAULT_FLUSH_INTERVAL_SECS: u64 = 300;
+   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: constant `MAX_WRITE_RETRIES` is never used
+  --> src/router/write_router.rs:32:7
+   |
+32 | const MAX_WRITE_RETRIES: u32 = 2;
+   |       ^^^^^^^^^^^^^^^^^
+
+warning: method `set_current_db` is never used
+   --> src/services/flight_service.rs:161:14
+    |
+ 73 | impl StatsFlightService {
+    | ----------------------- method in this implementation
+...
+161 |     async fn set_current_db<T>(&self, request: &Request<T>, db: String) {
+    |              ^^^^^^^^^^^^^^
+
+warning: method `authenticate` is never used
+   --> src/services/mysql_service.rs:160:8
+    |
+127 | impl MysqlSession {
+    | ----------------- method in this implementation
+...
+160 |     fn authenticate(&mut self, username: &str, password: &str) -> bool {
+    |        ^^^^^^^^^^^^
+
+warning: function `create_test_tls_config` is never used
+   --> src/services/tls.rs:127:8
+    |
+127 |     fn create_test_tls_config(dir: &tempfile::TempDir) -> TlsConfig {
+    |        ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: constant `DATA_PAGE_SIZE` is never used
+  --> src/storage/parquet_writer.rs:51:7
+   |
+51 | const DATA_PAGE_SIZE: usize = 1024 * 1024;
+   |       ^^^^^^^^^^^^^^
+
+warning: constant `DICTIONARY_PAGE_SIZE` is never used
+  --> src/storage/parquet_writer.rs:53:7
+   |
+53 | const DICTIONARY_PAGE_SIZE: usize = 1024 * 1024;
+   |       ^^^^^^^^^^^^^^^^^^^^
+
+warning: constant `BLOOM_FILTER_FPP` is never used
+  --> src/storage/parquet_writer.rs:55:7
+   |
+55 | const BLOOM_FILTER_FPP: f64 = 0.01;
+   |       ^^^^^^^^^^^^^^^^
+
+warning: constant `BLOOM_FILTER_NDV` is never used
+  --> src/storage/parquet_writer.rs:57:7
+   |
+57 | const BLOOM_FILTER_NDV: u64 = 10_000;
+   |       ^^^^^^^^^^^^^^^^
+
+warning: associated function `sort_batch_by_time` is never used
+   --> src/storage/parquet_writer.rs:135:8
+    |
+ 64 | impl ParquetWriter {
+    | ------------------ associated function in this implementation
+...
+135 |     fn sort_batch_by_time(batch: &RecordBatch) -> Result<RecordBatch, String> {
+    |        ^^^^^^^^^^^^^^^^^^
+
+warning: method `size` is never used
+   --> src/storage/wal.rs:246:8
+    |
+198 | impl WalSegment {
+    | --------------- method in this implementation
+...
+246 |     fn size(&self) -> u64 {
+    |        ^^^^
+
+warning: `mynadb` (lib test) generated 106 warnings (run `cargo fix --lib -p mynadb --tests` to apply 74 suggestions)
+    Finished `fast-release` profile [optimized] target(s) in 0.75s
+     Running unittests src/lib.rs (target/fast-release/deps/mynadb-eba6d08bfcd75efc)
+
+running 66 tests
+test query::influxql::lexer::tests::test_double_quoted_identifiers ... ok
+test query::influxql::lexer::tests::test_double_quoted_measurement ... ok
+test query::influxql::lexer::tests::test_duration ... ok
+test query::influxql::lexer::tests::test_numbers ... ok
+test query::influxql::lexer::tests::test_operators ... ok
+test query::influxql::lexer::tests::test_select_with_where ... ok
+test query::influxql::lexer::tests::test_simple_select ... ok
+test query::influxql::lexer::tests::test_token_positions ... ok
+test query::influxql::parser::tests::test_alias_parsing ... ok
+test query::influxql::parser::tests::test_derivative_with_arithmetic ... ok
+test query::influxql::parser::tests::test_double_quoted_identifiers ... ok
+test query::influxql::parser::tests::test_nested_derivative ... ok
+test query::influxql::parser::tests::test_order_by_asc_without_time ... ok
+test query::influxql::parser::tests::test_order_by_desc_without_time ... ok
+test query::influxql::parser::tests::test_qualified_measurement ... ok
+test query::influxql::parser::tests::test_regex_not_match ... ok
+test query::influxql::parser::tests::test_regex_pattern_simple ... ok
+test query::influxql::parser::tests::test_regex_pattern_with_anchors ... ok
+test query::influxql::parser::tests::test_select_with_fields ... ok
+test query::influxql::parser::tests::test_select_with_fill ... ok
+test query::influxql::parser::tests::test_select_with_function ... ok
+test query::influxql::parser::tests::test_select_with_group_by_tag ... ok
+test query::influxql::parser::tests::test_select_with_group_by_time ... ok
+test query::influxql::parser::tests::test_select_with_limit ... ok
+test query::influxql::parser::tests::test_select_with_time_condition ... ok
+test query::influxql::parser::tests::test_select_with_where ... ok
+test query::influxql::parser::tests::test_show_databases ... ok
+test query::influxql::parser::tests::test_show_measurements ... ok
+test query::influxql::parser::tests::test_show_tag_keys ... ok
+test query::influxql::parser::tests::test_simple_select ... ok
+test query::influxql::response::tests::test_empty_response ... ok
+test query::influxql::response::tests::test_error_response ... ok
+test query::influxql::tests::test_get_measurement_name ... ok
+test query::influxql::response::tests::test_simple_response ... ok
+test query::influxql::tests::test_has_tag_grouping ... ok
+test query::influxql::tests::test_influxql_to_sql ... ok
+test query::influxql::tests::test_influxql_to_sql_with_aggregation ... ok
+test query::influxql::tests::test_parse_errors ... ok
+test query::influxql::transpiler::tests::test_alias_quoting ... ok
+test query::influxql::transpiler::tests::test_alias_with_reserved_word ... ok
+test query::influxql::transpiler::tests::test_derivative_with_group_by_tags ... ok
+test query::influxql::transpiler::tests::test_double_quoted_identifiers ... ok
+test query::influxql::transpiler::tests::test_group_by_star_excludes_time_from_group ... ok
+test query::influxql::transpiler::tests::test_group_by_star_extracts_where_columns ... ok
+test query::influxql::transpiler::tests::test_group_by_star_includes_tags_in_select ... ok
+test query::influxql::transpiler::tests::test_group_by_star_without_where ... ok
+test query::influxql::transpiler::tests::test_lastpoint_basic ... ok
+test query::influxql::transpiler::tests::test_lastpoint_detection ... ok
+test query::influxql::transpiler::tests::test_lastpoint_limit_5 ... ok
+test query::influxql::transpiler::tests::test_lastpoint_with_where ... ok
+test query::influxql::transpiler::tests::test_non_negative_derivative_mean ... ok
+test query::influxql::transpiler::tests::test_non_negative_derivative_with_arithmetic ... ok
+test query::influxql::transpiler::tests::test_not_lastpoint_with_aggregates ... ok
+test query::influxql::transpiler::tests::test_plain_derivative ... ok
+test query::influxql::transpiler::tests::test_qualified_table ... ok
+test query::influxql::transpiler::tests::test_regex_where_clause ... ok
+test query::influxql::transpiler::tests::test_select_column_order_time_first_then_fields_then_tags ... ok
+test query::influxql::transpiler::tests::test_select_with_function ... ok
+test query::influxql::transpiler::tests::test_select_with_group_by_time ... ok
+test query::influxql::transpiler::tests::test_select_with_limit ... ok
+test query::influxql::transpiler::tests::test_select_with_where ... ok
+test query::influxql::transpiler::tests::test_show_measurements ... ok
+test query::influxql::transpiler::tests::test_show_tag_values_with_where ... ok
+test query::influxql::transpiler::tests::test_simple_select ... ok
+test query::influxql::transpiler::tests::test_time_bucket_1h ... ok
+test query::influxql::transpiler::tests::test_time_bucket_uses_nanoseconds ... ok
+
+test result: ok. 66 passed; 0 failed; 0 ignored; 0 measured; 692 filtered out; finished in 0.01s

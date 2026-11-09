@@ -1,0 +1,61 @@
+{
+  "configuration": "/tmp/mynadb-promotion-20261109/dev/configs/standalone/local.toml",
+  "scope": "README commands and unchanged developer local config in a temporary working directory",
+  "wal_enabled": false,
+  "events": [
+    {
+      "path": "/health",
+      "status": 200,
+      "response": "OK"
+    },
+    {
+      "path": "/write/demo",
+      "status": 204,
+      "response": ""
+    },
+    {
+      "path": "/flush",
+      "status": 200,
+      "response": "Flushed 1 file(s) to disk"
+    },
+    {
+      "path": "/query/demo",
+      "sql": "SELECT * FROM cpu",
+      "status": 200,
+      "response": "[\n  {\n    \"date\": \"2026-11-09\",\n    \"host\": \"server01\",\n    \"measurement\": \"cpu\",\n    \"node_id\": \"standalone\",\n    \"time\": 1794235240271311051,\n    \"usage\": 23.5\n  }\n]"
+    },
+    {
+      "step": "CLI stop",
+      "status": "passed"
+    },
+    {
+      "path": "/health",
+      "status": 200,
+      "response": "OK"
+    },
+    {
+      "path": "/query/demo",
+      "sql": "SELECT * FROM cpu",
+      "status": 200,
+      "response": "[\n  {\n    \"date\": \"2026-11-09\",\n    \"host\": \"server01\",\n    \"measurement\": \"cpu\",\n    \"node_id\": \"standalone\",\n    \"time\": 1794235240271311051,\n    \"usage\": 23.5\n  }\n]"
+    },
+    {
+      "step": "restart query and CLI stop",
+      "status": "passed"
+    }
+  ],
+  "start_command": [
+    "/tmp/mynadb-promotion-20261109/target/fast-release/mynadb",
+    "-c",
+    "/tmp/mynadb-promotion-20261109/dev/configs/standalone/local.toml",
+    "standalone"
+  ],
+  "stop_command": [
+    "/tmp/mynadb-promotion-20261109/target/fast-release/mynadb",
+    "-c",
+    "/tmp/mynadb-promotion-20261109/dev/configs/standalone/local.toml",
+    "stop"
+  ],
+  "temporary_data_cleaned": true,
+  "status": "passed"
+}

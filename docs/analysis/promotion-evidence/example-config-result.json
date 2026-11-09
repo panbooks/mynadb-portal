@@ -1,0 +1,46 @@
+{
+  "config": "/root/source/mynadb/examples/quickstart.toml",
+  "config_sha256": "2e095d6d24e7bb753fbeee9eeb48043b3675ed165c95a11094052e441ac02b6f",
+  "binary": "/tmp/mynadb-promotion-20261109/target/fast-release/mynadb",
+  "events": [
+    {
+      "path": "/write/quickstart",
+      "status": 204
+    },
+    {
+      "path": "/query/quickstart",
+      "status": 200,
+      "rows": [
+        {
+          "host": "server01",
+          "usage": 23.5
+        },
+        {
+          "host": "server02",
+          "usage": 45.0
+        }
+      ]
+    },
+    {
+      "path": "/flush",
+      "status": 200,
+      "response": "Flushed 1 file(s) to disk"
+    },
+    {
+      "path": "/query/quickstart",
+      "status": 200,
+      "rows": [
+        {
+          "host": "server01",
+          "usage": 23.5
+        },
+        {
+          "host": "server02",
+          "usage": 45.0
+        }
+      ]
+    }
+  ],
+  "temporary_data_cleaned": true,
+  "status": "passed"
+}

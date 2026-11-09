@@ -1,0 +1,16 @@
+{
+  "os_release": "NAME=\"Oracle Linux Server\"\nVERSION=\"9.5\"\nID=\"ol\"\nID_LIKE=\"fedora\"\nVARIANT=\"Server\"\nVARIANT_ID=\"server\"\nVERSION_ID=\"9.5\"\nPLATFORM_ID=\"platform:el9\"\nPRETTY_NAME=\"Oracle Linux Server 9.5\"\nANSI_COLOR=\"0;31\"\nCPE_NAME=\"cpe:/o:oracle:linux:9:5:server\"\nHOME_URL=\"https://linux.oracle.com/\"\nBUG_REPORT_URL=\"https://github.com/oracle/oracle-linux\"\n\nORACLE_BUGZILLA_PRODUCT=\"Oracle Linux 9\"\nORACLE_BUGZILLA_PRODUCT_VERSION=9.5\nORACLE_SUPPORT_PRODUCT=\"Oracle Linux\"\nORACLE_SUPPORT_PRODUCT_VERSION=9.5\n",
+  "kernel": "5.15.167.4-microsoft-standard-WSL2",
+  "architecture": "x86_64",
+  "logical_cpus": 16,
+  "memory_kib": "MemTotal:       30595396 kB",
+  "rustc": "rustc 1.92.0 (ded5c06cf 2025-12-08)",
+  "cargo": "cargo 1.92.0 (344c4567c 2025-10-21)",
+  "protoc": "libprotoc 29.3",
+  "cc": "cc (GCC) 11.5.0 20240719 (Red Hat 11.5.0-14.0.1)",
+  "openssl_pkg_config": "3.5.8",
+  "source_commit": "d603624eb3b635734945f4f773d25ad7e10fe86f",
+  "cargo_lock_sha256": "6d91d609868e4f2ac9056fd7524d308019835aed7818b1fe19481bb674c0fa9b",
+  "scope": "Separate clean Git checkout on the existing host, not a fresh OS/container. Dependencies cached from an interrupted first build.",
+  "cmake_path": null
+}

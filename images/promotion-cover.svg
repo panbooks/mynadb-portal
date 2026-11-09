@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">MynaDB — a time-series database project in Rust</title>
+  <desc id="desc">Arrow, Parquet and DataFusion. SQL queries and line protocol ingestion. Under development. github.com/panbooks/mynadb.</desc>
+  <rect width="1200" height="630" fill="#0f172a"/>
+  <rect x="64" y="64" width="1072" height="502" rx="24" fill="#17233a" stroke="#334155"/>
+  <g transform="translate(850 100) scale(.45)" fill="none">
+    <path d="M32 208C80 96 176 128 256 224c80-96 176-128 240-16" stroke="#5b8def" stroke-width="40" stroke-linecap="round"/>
+    <path d="M256 224l-64 208 64-64 64 64-64-208z" fill="#5b8def"/>
+    <path d="M256 224l0 144 64 64-64-208z" fill="#3d6fd1"/>
+  </g>
+  <g font-family="system-ui, sans-serif">
+    <text x="112" y="210" fill="#f8fafc" font-size="80" font-weight="700">MynaDB</text>
+    <text x="116" y="274" fill="#cbd5e1" font-size="30">A time-series database project in Rust</text>
+    <text x="116" y="344" fill="#93c5fd" font-size="28">Arrow · Parquet · DataFusion</text>
+    <text x="116" y="395" fill="#cbd5e1" font-size="24">SQL queries · Line protocol ingestion</text>
+    <text x="116" y="464" fill="#fbbf24" font-size="22">Under development — feedback welcome</text>
+    <text x="116" y="520" fill="#94a3b8" font-size="24">github.com/panbooks/mynadb</text>
+  </g>
+</svg>

@@ -1,0 +1,7 @@
+{
+  "source_commit": "d603624eb3b635734945f4f773d25ad7e10fe86f",
+  "path": "/tmp/mynadb-promotion-20261109/target/fast-release/mynadb",
+  "sha256": "a20f4ee2210a13d3e37579fcbb33471c4963a208387e4ec1a4e4db054985bdcb",
+  "version_output": "MynaDB - The Voice of Your Machines\n  Version:       d603624\n  Git Hash:      d603624\n  Commit Date:   2026-11-09\n  Build Time:    2026-11-09 14:30:39 UTC\n  Cargo Version: 0.1.0\n  Rust Version:  rustc 1.92.0 (ded5c06cf 2025-12-08)\n",
+  "scope": "Local validation artifact only, not a released binary. Smoke checker and example config are local readiness additions."
+}

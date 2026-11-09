@@ -1,0 +1,10 @@
+{
+  "passed": 90,
+  "failed": 0,
+  "groups": {
+    "parser": 22,
+    "wal": 2,
+    "influxql": 66
+  },
+  "scope": "Selected library unit tests only, not the full suite. WAL tests cover entry encoding/decoding and corrupted checksums, not crash recovery. Test package used opt-level=0; exact commands are in core-test-results.json."
+}

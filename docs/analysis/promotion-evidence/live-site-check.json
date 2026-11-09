@@ -1,0 +1,24 @@
+{
+  "observed_at_utc": "2026-11-09T14:44:19.822734+00:00",
+  "pages": [
+    {
+      "url": "https://panbooks.github.io/mynadb-portal/",
+      "status": 200,
+      "title": "MynaDB - The Voice of Your Machines",
+      "final_url": "https://panbooks.github.io/mynadb-portal/"
+    },
+    {
+      "url": "https://panbooks.github.io/mynadb-portal/zh/index.html",
+      "status": 200,
+      "title": "MynaDB - 让机器数据一目了然",
+      "final_url": "https://panbooks.github.io/mynadb-portal/zh/index.html"
+    },
+    {
+      "url": "https://panbooks.github.io/mynadb-portal/docs/quickstart.html",
+      "status": 200,
+      "title": "Quick Start - MynaDB",
+      "final_url": "https://panbooks.github.io/mynadb-portal/docs/quickstart.html"
+    }
+  ],
+  "scope": "HTTP reachability and titles only; local readiness edits have not been deployed."
+}

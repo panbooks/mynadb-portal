@@ -3,6 +3,8 @@
 > 制定日期：2026-11-09
 > 项目：[GitHub](https://github.com/panbooks/mynadb) · [中文官网](https://panbooks.github.io/mynadb-portal/zh/index.html)
 
+执行进度：[逐项检查记录](2026-11-09-open-source-promotion-checklist.md) · [首发素材草稿](2026-11-09-launch-kit.md) · [周报与阶段安排](2026-11-09-promotion-weekly-log.md)
+
 ## 1. 目标与原则
 
 推广的首要目标是让第一批对时序数据库、Rust 和可观测性感兴趣的开发者，能够理解、运行和评价 MynaDB，进而积累真实用户、贡献者和持续关注。Star 是一个结果指标，应与试用、反馈和贡献一起观察。

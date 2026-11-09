@@ -1,0 +1,4601 @@
+   Compiling parquet v53.4.1
+   Compiling sqlparser v0.51.0
+   Compiling regex-automata v0.4.14
+   Compiling strum v0.26.3
+   Compiling itertools v0.14.0
+   Compiling regex v1.12.3
+   Compiling memchr v2.8.0
+   Compiling prost-derive v0.13.5
+   Compiling arrayvec v0.7.6
+   Compiling bytes v1.11.1
+   Compiling sha1 v0.10.6
+   Compiling rustix v1.1.3
+   Compiling fastrand v2.3.0
+   Compiling hashbrown v0.16.1
+   Compiling linux-raw-sys v0.11.0
+   Compiling equivalent v1.0.2
+   Compiling indexmap v2.13.0
+   Compiling uuid v1.20.0
+   Compiling getrandom v0.3.4
+   Compiling autocfg v0.1.8
+   Compiling rand_core v0.4.2
+   Compiling bitflags v2.10.0
+   Compiling fixedbitset v0.4.2
+   Compiling prettyplease v0.2.37
+   Compiling petgraph v0.6.5
+   Compiling datafusion-common v43.0.0
+   Compiling datafusion-expr-common v43.0.0
+   Compiling datafusion-physical-expr-common v43.0.0
+   Compiling datafusion-functions-aggregate-common v43.0.0
+   Compiling datafusion-functions-window-common v43.0.0
+   Compiling datafusion-expr v43.0.0
+   Compiling tempfile v3.24.0
+   Compiling typenum v1.19.0
+   Compiling glob v0.3.3
+   Compiling crunchy v0.2.4
+   Compiling clang-sys v1.8.1
+   Compiling datafusion-physical-expr v43.0.0
+   Compiling dashmap v6.1.0
+   Compiling itertools v0.12.1
+   Compiling lexical-util v0.8.5
+   Compiling generic-array v0.14.7
+   Compiling pin-project-internal v1.1.10
+   Compiling multimap v0.10.1
+   Compiling utf-8 v0.7.6
+   Compiling tiny-keccak v2.0.2
+   Compiling data-encoding v2.10.0
+   Compiling log v0.4.29
+   Compiling tungstenite v0.24.0
+   Compiling pin-project v1.1.10
+   Compiling prost-derive v0.12.6
+   Compiling datafusion-execution v43.0.0
+   Compiling bzip2-sys v0.1.13+1.0.8
+   Compiling num-traits v0.2.19
+   Compiling indexmap v1.9.3
+   Compiling minimal-lexical v0.2.1
+   Compiling nom v7.1.3
+   Compiling tokio-tungstenite v0.24.0
+   Compiling rand_core v0.3.1
+   Compiling libloading v0.8.9
+   Compiling getrandom v0.2.17
+   Compiling axum-core v0.4.5
+   Compiling tokio-stream v0.1.18
+   Compiling lzma-sys v0.1.20
+   Compiling serde_path_to_error v0.1.20
+   Compiling axum-macros v0.4.2
+   Compiling bindgen v0.59.2
+   Compiling heapless v0.8.0
+   Compiling hashbrown v0.12.3
+   Compiling ucd-trie v0.1.7
+   Compiling rust_decimal v1.40.0
+   Compiling matchit v0.7.3
+   Compiling frunk_core v0.4.4
+   Compiling axum v0.7.9
+   Compiling frunk_proc_macro_helpers v0.1.4
+   Compiling pest v2.8.6
+   Compiling const-random-macro v0.1.16
+   Compiling cexpr v0.6.0
+   Compiling prost v0.12.6
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.7
+   Compiling lexical-write-integer v0.8.5
+   Compiling lexical-parse-integer v0.8.6
+   Compiling prost v0.13.5
+   Compiling sha2 v0.10.9
+   Compiling rustls-pemfile v2.2.0
+   Compiling hash32 v0.3.1
+   Compiling blake3 v1.8.3
+   Compiling ring v0.16.20
+   Compiling async-stream-impl v0.3.6
+   Compiling num-bigint v0.2.6
+   Compiling rustc-hash v1.1.0
+   Compiling hex v0.4.3
+   Compiling fixedbitset v0.5.7
+   Compiling lazy_static v1.5.0
+   Compiling lazycell v1.3.0
+   Compiling bitflags v1.3.2
+   Compiling peeking_take_while v0.1.2
+   Compiling utf8parse v0.2.2
+   Compiling powerfmt v0.2.0
+   Compiling radium v0.7.0
+   Compiling iana-time-zone v0.1.65
+   Compiling chrono v0.4.39
+   Compiling deranged v0.5.5
+   Compiling anstyle-parse v0.2.7
+   Compiling petgraph v0.7.1
+   Compiling async-stream v0.3.6
+   Compiling prost-types v0.13.5
+   Compiling lexical-parse-float v0.8.5
+   Compiling lexical-write-float v0.8.5
+   Compiling digest v0.10.7
+   Compiling prost-types v0.12.6
+   Compiling const-random v0.1.18
+   Compiling tower v0.4.13
+   Compiling pest_meta v2.8.6
+   Compiling rand_chacha v0.1.1
+   Compiling rand_pcg v0.1.2
+   Compiling crossbeam-epoch v0.9.18
+   Compiling opentelemetry v0.25.0
+   Compiling hyper-timeout v0.5.2
+   Compiling blake2 v0.10.6
+   Compiling datafusion-common-runtime v43.0.0
+   Compiling subprocess v0.2.15
+   Compiling num-complex v0.2.4
+   Compiling num-rational v0.2.4
+   Compiling object v0.37.3
+   Compiling cpp_demangle v0.5.1
+   Compiling anstyle-query v1.1.5
+   Compiling unicase v2.9.0
+   Compiling colorchoice v1.0.4
+   Compiling parking_lot_core v0.8.6
+   Compiling is_terminal_polyfill v1.70.2
+   Compiling anstyle v1.0.13
+   Compiling cpufeatures v0.2.17
+   Compiling time-core v0.1.8
+   Compiling arrayref v0.3.9
+   Compiling tap v1.0.1
+   Compiling constant_time_eq v0.4.2
+   Compiling num-conv v0.2.0
+   Compiling wyz v0.5.1
+   Compiling time v0.3.47
+   Compiling anstream v0.6.21
+   Compiling mime_guess v2.0.5
+   Compiling mysql_common v0.29.2
+   Compiling opentelemetry_sdk v0.25.0
+   Compiling datafusion-physical-plan v43.0.0
+   Compiling tonic v0.12.3
+   Compiling pest_generator v2.8.6
+   Compiling prost-build v0.12.6
+   Compiling dlv-list v0.5.2
+   Compiling prost-build v0.13.5
+   Compiling lexical-core v0.8.5
+   Compiling rstar v0.12.2
+   Compiling xz2 v0.1.7
+   Compiling bzip2 v0.5.2
+   Compiling frunk_proc_macros v0.1.4
+   Compiling frunk_derives v0.4.4
+   Compiling rand v0.6.5
+   Compiling debugid v0.8.0
+   Compiling sharded-slab v0.1.7
+   Compiling matchers v0.2.0
+   Compiling tracing-log v0.2.0
+   Compiling tracing-serde v0.2.0
+   Compiling approx v0.5.1
+   Compiling toml_datetime v0.6.11
+   Compiling serde_spanned v0.6.9
+   Compiling core2 v0.4.0
+   Compiling findshlibs v0.10.2
+   Compiling multer v3.1.0
+   Compiling equator-macro v0.4.2
+   Compiling bigdecimal v0.4.10
+   Compiling memmap2 v0.9.9
+   Compiling rand v0.4.6
+   Compiling fs-err v3.2.2
+   Compiling thread_local v1.1.9
+   Compiling instant v0.1.13
+   Compiling symbolic-demangle v12.17.2
+   Compiling spin v0.5.2
+   Compiling toml_write v0.1.2
+   Compiling protobuf v2.28.0
+   Compiling funty v2.0.0
+   Compiling rustc-demangle v0.1.27
+   Compiling nu-ansi-term v0.50.3
+   Compiling rustls v0.20.9
+   Compiling strsim v0.11.1
+   Compiling unicode-xid v0.2.6
+   Compiling clap_lex v0.7.7
+   Compiling gimli v0.32.3
+   Compiling rayon-core v1.13.0
+   Compiling untrusted v0.7.1
+   Compiling bytemuck v1.25.0
+   Compiling rle-decode-fast v1.0.3
+   Compiling winnow v0.7.14
+   Compiling thiserror v2.0.18
+   Compiling toml_edit v0.22.27
+   Compiling addr2line v0.25.1
+   Compiling frunk v0.4.4
+   Compiling libflate_lz77 v2.2.0
+   Compiling rgb v0.8.52
+   Compiling clap_builder v4.5.57
+   Compiling derive_more-impl v1.0.0
+   Compiling bitvec v1.0.1
+   Compiling tracing-subscriber v0.3.22
+   Compiling rand v0.3.23
+   Compiling equator v0.4.2
+   Compiling symbolic-common v12.17.2
+   Compiling geo-types v0.7.18
+   Compiling async-compression v0.4.19
+   Compiling lexical v6.1.1
+   Compiling tonic-build v0.12.3
+   Compiling ordered-multimap v0.7.3
+   Compiling pprof v0.14.1
+   Compiling pest_derive v2.8.6
+   Compiling datafusion-functions v43.0.0
+   Compiling crossbeam-deque v0.8.6
+   Compiling rand_hc v0.1.0
+   Compiling rand_xorshift v0.1.1
+   Compiling rand_isaac v0.1.1
+   Compiling datafusion-functions-aggregate v43.0.0
+   Compiling rand_jitter v0.1.4
+   Compiling rand_os v0.1.3
+   Compiling num-format v0.4.4
+   Compiling hashlink v0.8.4
+   Compiling itertools v0.11.0
+   Compiling sct v0.7.1
+   Compiling webpki v0.22.4
+   Compiling clap_derive v4.5.55
+   Compiling bigdecimal v0.3.1
+   Compiling headers-core v0.3.0
+   Compiling log v0.3.9
+   Compiling anyerror v0.1.13
+   Compiling quick-xml v0.26.0
+   Compiling typed-builder-macro v0.19.1
+   Compiling thiserror-impl v2.0.18
+   Compiling is-terminal v0.4.17
+   Compiling base64 v0.13.1
+   Compiling spin v0.9.8
+   Compiling dary_heap v0.3.8
+   Compiling base64ct v1.8.3
+   Compiling robust v1.2.0
+   Compiling prometheus v0.13.4
+   Compiling utf8-width v0.1.8
+   Compiling saturating v0.1.0
+   Compiling base64 v0.21.7
+   Compiling adler32 v1.2.0
+   Compiling arraydeque v0.5.1
+   Compiling str_stack v0.1.0
+   Compiling inferno v0.11.21
+   Compiling yaml-rust2 v0.8.1
+   Compiling libflate v2.2.1
+   Compiling ron v0.8.1
+   Compiling byte-unit v5.2.0
+   Compiling spade v2.15.0
+   Compiling password-hash v0.5.0
+   Compiling typed-builder v0.19.1
+   Compiling validit v0.2.5
+   Compiling optimization v0.1.0
+   Compiling headers v0.4.1
+   Compiling clap v4.5.57
+   Compiling earcutr v0.4.3
+   Compiling datafusion-functions-nested v43.0.0
+   Compiling backtrace v0.3.76
+   Compiling num v0.2.1
+   Compiling json5 v0.4.1
+   Compiling mynadb v0.1.0 (/tmp/mynadb-promotion-20261109)
+   Compiling rust-ini v0.20.0
+   Compiling aligned-vec v0.6.4
+   Compiling parking_lot v0.11.2
+   Compiling derive_more v1.0.0
+   Compiling toml v0.8.23
+   Compiling datafusion-physical-optimizer v43.0.0
+   Compiling datafusion-catalog v43.0.0
+   Compiling opentelemetry-proto v0.25.0
+   Compiling openraft-macros v0.9.21
+   Compiling bzip2 v0.4.4
+   Compiling tracing-futures v0.2.5
+   Compiling datafusion-optimizer v43.0.0
+   Compiling datafusion-functions-window v43.0.0
+   Compiling datafusion-sql v43.0.0
+   Compiling crossbeam-channel v0.5.15
+   Compiling arc-swap v1.8.1
+   Compiling nix v0.26.4
+   Compiling convert_case v0.6.0
+   Compiling fxhash v0.2.1
+   Compiling spin v0.10.0
+   Compiling lbfgs v0.2.2
+   Compiling geographiclib-rs v0.2.6
+   Compiling serde_bytes v0.11.19
+   Compiling fs2 v0.4.3
+   Compiling bit-vec v0.7.0
+   Compiling regex-lite v0.1.9
+   Compiling http-range-header v0.4.2
+   Compiling maplit v1.0.2
+   Compiling more-asserts v0.2.2
+   Compiling float_next_after v1.0.0
+   Compiling pathdiff v0.2.3
+   Compiling config v0.14.1
+   Compiling geo v0.28.0
+   Compiling arima v0.2.0
+   Compiling openraft v0.9.21
+   Compiling tower-http v0.5.2
+   Compiling apache-avro v0.17.0
+   Compiling bloomfilter v1.0.16
+   Compiling sled v0.34.7
+   Compiling axum-server v0.7.3
+   Compiling tracing-appender v0.2.4
+   Compiling datafusion v43.0.0
+   Compiling opentelemetry-otlp v0.25.0
+   Compiling arrow-flight v53.4.1
+   Compiling rayon v1.11.0
+   Compiling msql-srv v0.10.0
+   Compiling axum-extra v0.9.6
+   Compiling argon2 v0.5.3
+   Compiling geohash v0.13.1
+   Compiling tracing-opentelemetry v0.26.0
+   Compiling lru v0.12.5
+   Compiling bincode v1.3.3
+   Compiling sysinfo v0.38.1
+   Compiling hostname v0.4.2
+   Compiling wildmatch v2.6.1
+   Compiling urlencoding v2.1.3
+warning: unused import: `WatermarkInfo`
+  --> src/aggregates/job.rs:12:51
+   |
+12 | use super::types::{AggregateState, RefreshResult, WatermarkInfo};
+   |                                                   ^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `super::types::TimeBucketGranularity`
+  --> src/aggregates/query_rewriter.rs:46:5
+   |
+46 | use super::types::TimeBucketGranularity;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `std::collections::HashMap`
+  --> src/aggregates/query_rewriter.rs:47:5
+   |
+47 | use std::collections::HashMap;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `error`
+  --> src/aggregates/storage.rs:15:22
+   |
+15 | use tracing::{debug, error, info, warn};
+   |                      ^^^^^
+
+warning: unused import: `warn`
+ --> src/auth/store.rs:8:28
+  |
+8 | use tracing::{debug, info, warn};
+  |                            ^^^^
+
+warning: unused import: `QueryScope`
+  --> src/data/server/flight.rs:11:23
+   |
+11 |     BatchWriteTicket, QueryScope, QueryTicket, ReplicationTicket, WriteTicket,
+   |                       ^^^^^^^^^^
+
+warning: unused imports: `NodeRole` and `NodeState`
+  --> src/data/server/flight.rs:14:26
+   |
+14 | use crate::meta::types::{NodeRole, NodeState};
+   |                          ^^^^^^^^  ^^^^^^^^^
+
+warning: unused import: `std::path::PathBuf`
+  --> src/iceberg/catalog/mynadb_catalog.rs:11:5
+   |
+11 | use std::path::PathBuf;
+   |     ^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `std::sync::Arc`
+  --> src/iceberg/catalog/mynadb_catalog.rs:12:5
+   |
+12 | use std::sync::Arc;
+   |     ^^^^^^^^^^^^^^
+
+warning: unused import: `debug`
+  --> src/iceberg/catalog/mynadb_catalog.rs:13:15
+   |
+13 | use tracing::{debug, warn};
+   |               ^^^^^
+
+warning: unused import: `Deserialize`
+  --> src/iceberg/catalog/rest_catalog.rs:16:13
+   |
+16 | use serde::{Deserialize, Serialize};
+   |             ^^^^^^^^^^^
+
+warning: unused import: `std::sync::Arc`
+ --> src/iceberg/metadata/schema.rs:6:5
+  |
+6 | use std::sync::Arc;
+  |     ^^^^^^^^^^^^^^
+
+warning: unused import: `PathBuf`
+  --> src/iceberg/sync/snapshot_builder.rs:14:23
+   |
+14 | use std::path::{Path, PathBuf};
+   |                       ^^^^^^^
+
+warning: unused import: `warn`
+  --> src/iceberg/sync/snapshot_builder.rs:15:28
+   |
+15 | use tracing::{debug, info, warn};
+   |                            ^^^^
+
+warning: unused import: `warn`
+  --> src/jobs/compactor/parquet_io.rs:11:22
+   |
+11 | use tracing::{debug, warn};
+   |                      ^^^^
+
+warning: unused import: `std::collections::HashSet`
+ --> src/jobs/compactor/partition.rs:8:5
+  |
+8 | use std::collections::HashSet;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `catalog::*`
+  --> src/jobs/compactor/mod.rs:30:9
+   |
+30 | pub use catalog::*;
+   |         ^^^^^^^^^^
+
+warning: unused import: `full::*`
+  --> src/jobs/compactor/mod.rs:31:9
+   |
+31 | pub use full::*;
+   |         ^^^^^^^
+
+warning: unused import: `partition::*`
+  --> src/jobs/compactor/mod.rs:32:9
+   |
+32 | pub use partition::*;
+   |         ^^^^^^^^^^^^
+
+warning: unused import: `error`
+  --> src/jobs/downsampling/storage.rs:11:22
+   |
+11 | use tracing::{debug, error, info, warn};
+   |                      ^^^^^
+
+warning: unused import: `warn`
+  --> src/meta/raft/state_machine/mod.rs:16:35
+   |
+16 | use tracing::{debug, error, info, warn};
+   |                                   ^^^^
+
+warning: unused import: `current_timestamp_ms`
+ --> src/meta/raft/state_machine/distribution.rs:6:5
+  |
+6 |     current_timestamp_ms, DistributionConfig, DistributionScope, Event, EventType, MetaResponse,
+  |     ^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `current_timestamp_ms`
+ --> src/meta/raft/state_machine/scale_in.rs:7:5
+  |
+7 |     current_timestamp_ms, keys, DataNodeMode, EventType, MetaResponse, NodeInfo, NodeRole,
+  |     ^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `debug` and `warn`
+  --> src/meta/raft/state_machine/scale_in.rs:10:15
+   |
+10 | use tracing::{debug, info, warn};
+   |               ^^^^^        ^^^^
+
+warning: unused import: `TableOwnerEntry`
+  --> src/meta/raft/state_machine/table.rs:15:65
+   |
+15 |     keys, Event, EventType, MetaResponse, NodeState, TableMeta, TableOwnerEntry, TableStatsDelta,
+   |                                                                 ^^^^^^^^^^^^^^^
+
+warning: unused import: `std::collections::HashMap`
+  --> src/meta/recovery/mod.rs:33:5
+   |
+33 | use std::collections::HashMap;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `DataNodeMode` and `NodeInfo`
+  --> src/meta/scale_in/planner.rs:13:26
+   |
+13 | use crate::meta::types::{DataNodeMode, NodeInfo};
+   |                          ^^^^^^^^^^^^  ^^^^^^^^
+
+warning: unused import: `HashSet`
+  --> src/meta/scale_in/planner.rs:14:33
+   |
+14 | use std::collections::{HashMap, HashSet};
+   |                                 ^^^^^^^
+
+warning: unused import: `std::time::SystemTime`
+  --> src/meta/scale_in/types.rs:14:5
+   |
+14 | use std::time::SystemTime;
+   |     ^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `NodeInfo`
+  --> src/meta/scale_in/mod.rs:56:40
+   |
+56 | use crate::meta::types::{DataNodeMode, NodeInfo, NodeRole, NodeState, ScaleInRecommendation};
+   |                                        ^^^^^^^^
+
+warning: unused import: `debug`
+  --> src/meta/scale_in/mod.rs:58:15
+   |
+58 | use tracing::{debug, error, info, warn};
+   |               ^^^^^
+
+warning: unused imports: `ScaleInPlan` and `ScaleInResult`
+  --> src/meta/service/http.rs:27:36
+   |
+27 |     ScaleInConfig, ScaleInManager, ScaleInPlan, ScaleInPlanRequest, ScaleInResult, ScaleInStrategy,
+   |                                    ^^^^^^^^^^^                      ^^^^^^^^^^^^^
+
+warning: unused import: `Duration`
+ --> src/metrics/collector.rs:3:17
+  |
+3 | use std::time::{Duration, Instant};
+  |                 ^^^^^^^^
+
+warning: unused import: `std::path::Path`
+  --> src/node/common.rs:13:5
+   |
+13 | use std::path::Path;
+   |     ^^^^^^^^^^^^^^^
+
+warning: unused import: `std::path::PathBuf`
+  --> src/node/data.rs:23:5
+   |
+23 | use std::path::PathBuf;
+   |     ^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `crate::meta::config::MetaConfig`
+ --> src/node/meta.rs:9:5
+  |
+9 | use crate::meta::config::MetaConfig;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `crate::router::config::RouterConfig`
+  --> src/node/router.rs:11:5
+   |
+11 | use crate::router::config::RouterConfig;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `crate::storage::cache`
+  --> src/node/standalone.rs:15:5
+   |
+15 | use crate::storage::cache;
+   |     ^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `DictionaryArray` and `StringArray`
+ --> src/query/cache/dictionary_encoding.rs:7:31
+  |
+7 |     Array, ArrayRef, AsArray, DictionaryArray, RecordBatch, StringArray,
+  |                               ^^^^^^^^^^^^^^^               ^^^^^^^^^^^
+
+warning: unused import: `SchemaRef`
+ --> src/query/cache/dictionary_encoding.rs:9:72
+  |
+9 | use datafusion::arrow::datatypes::{DataType, Field, Int32Type, Schema, SchemaRef};
+  |                                                                        ^^^^^^^^^
+
+warning: unused import: `warn`
+  --> src/query/cache/partition_files_cache.rs:36:28
+   |
+36 | use tracing::{debug, info, warn};
+   |                            ^^^^
+
+warning: unused import: `crate::meta::current_timestamp_ms`
+ --> src/query/catalog/memory_manager.rs:7:5
+  |
+7 | use crate::meta::current_timestamp_ms;
+  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `RecordBatchOptions`
+ --> src/query/providers/parquet/reader.rs:5:68
+  |
+5 | use datafusion::arrow::array::{new_null_array, Array, RecordBatch, RecordBatchOptions, StringArray};
+  |                                                                    ^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `debug`
+  --> src/query/query_engine/discovery.rs:10:15
+   |
+10 | use tracing::{debug, info, warn};
+   |               ^^^^^
+
+warning: unused import: `tracing::debug`
+ --> src/query/query_engine/listing.rs:6:5
+  |
+6 | use tracing::debug;
+  |     ^^^^^^^^^^^^^^
+
+warning: unused import: `datafusion::prelude::*`
+  --> src/query/query_engine/registration.rs:13:5
+   |
+13 | use datafusion::prelude::*;
+   |     ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `warn`
+  --> src/query/query_engine/registration.rs:16:28
+   |
+16 | use tracing::{debug, info, warn};
+   |                            ^^^^
+
+warning: unused import: `info`
+  --> src/query/streaming.rs:15:22
+   |
+15 | use tracing::{debug, info, warn};
+   |                      ^^^^
+
+warning: unused import: `ShardCache`
+  --> src/router/query_coordinator/routing.rs:39:58
+   |
+39 | use super::super::shard_cache::{DataNodeInfo, NodeState, ShardCache, TableKey};
+   |                                                          ^^^^^^^^^^
+
+warning: unused import: `DataNodeInfo`
+  --> src/router/query_coordinator/mod.rs:39:26
+   |
+39 | use super::shard_cache::{DataNodeInfo, ShardCache};
+   |                          ^^^^^^^^^^^^
+
+warning: unused import: `warn`
+  --> src/router/shard_cache/node_mgmt.rs:13:28
+   |
+13 | use tracing::{debug, info, warn};
+   |                            ^^^^
+
+warning: unused import: `Permission`
+ --> src/services/auth.rs:9:60
+  |
+9 | use crate::auth::{AuditLogger, AuthContext, FileUserStore, Permission, Policy, RoleStore, UserStore};
+  |                                                            ^^^^^^^^^^
+
+warning: unused imports: `debug` and `warn`
+  --> src/services/flight_service.rs:19:15
+   |
+19 | use tracing::{debug, info, warn};
+   |               ^^^^^        ^^^^
+
+warning: unused import: `std::sync::Arc`
+  --> src/services/grafana.rs:21:5
+   |
+21 | use std::sync::Arc;
+   |     ^^^^^^^^^^^^^^
+
+warning: unused import: `info`
+  --> src/services/grafana.rs:22:29
+   |
+22 | use tracing::{debug, error, info};
+   |                             ^^^^
+
+warning: unused import: `crate::query::query_engine::QueryEngine`
+  --> src/services/grafana.rs:24:5
+   |
+24 | use crate::query::query_engine::QueryEngine;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `User`
+ --> src/services/mysql_service.rs:3:44
+  |
+3 | use crate::auth::{AuthContext, Permission, User, UserStore};
+  |                                            ^^^^
+
+warning: unused import: `Json`
+  --> src/services/otlp/http_handlers.rs:14:5
+   |
+14 |     Json,
+   |     ^^^^
+
+warning: unused import: `serde_json::Value`
+  --> src/services/otlp/http_handlers.rs:20:5
+   |
+20 | use serde_json::Value;
+   |     ^^^^^^^^^^^^^^^^^
+
+warning: unused import: `warn`
+  --> src/services/otlp/http_handlers.rs:22:29
+   |
+22 | use tracing::{debug, error, warn};
+   |                             ^^^^
+
+warning: unused imports: `bytes_to_hex` and `sanitize_tag_name`
+ --> src/services/otlp/metrics_converter.rs:7:25
+  |
+7 |     attributes_to_tags, bytes_to_hex, resource_attrs_to_tags, sanitize_tag_name,
+  |                         ^^^^^^^^^^^^                          ^^^^^^^^^^^^^^^^^
+
+warning: unused import: `any_value_to_string`
+ --> src/services/otlp/traces_converter.rs:9:5
+  |
+9 |     any_value_to_string, attributes_to_tags, bytes_to_hex, resource_attrs_to_tags,
+  |     ^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `LabelMatcher`
+  --> src/services/prometheus/remote_read.rs:12:12
+   |
+12 |     Label, LabelMatcher, MatchType, Query, QueryResult, ReadRequest, ReadResponse, Sample,
+   |            ^^^^^^^^^^^^
+
+warning: unused import: `METRIC_NAME_LABEL`
+  --> src/services/prometheus/remote_write.rs:10:34
+   |
+10 | use super::types::{WriteRequest, METRIC_NAME_LABEL};
+   |                                  ^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `Compression` and `ZstdLevel`
+  --> src/storage/parquet_writer.rs:10:22
+   |
+10 | use parquet::basic::{Compression, ZstdLevel};
+   |                      ^^^^^^^^^^^  ^^^^^^^^^
+
+warning: unused import: `datafusion::catalog::TableProvider`
+  --> src/query/query_engine/registration.rs:10:5
+   |
+10 | use datafusion::catalog::TableProvider;
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `StreamExt`
+  --> src/router/flight.rs:12:42
+   |
+12 | use futures::{stream, stream::BoxStream, StreamExt, TryStreamExt};
+   |                                          ^^^^^^^^^
+
+warning: unused import: `FileCache`
+  --> src/services/api.rs:39:34
+   |
+39 | use crate::storage::file_cache::{FileCache, SharedFileCache};
+   |                                  ^^^^^^^^^
+
+warning: unused import: `MetadataManager`
+  --> src/services/api.rs:36:29
+   |
+36 | use crate::query::catalog::{MetadataManager, SharedMetadataManager};
+   |                             ^^^^^^^^^^^^^^^
+
+warning: field `scope` is never read
+    --> src/admin/api.rs:1256:5
+     |
+1255 | struct SetDistributionRequest {
+     |        ---------------------- field in this struct
+1256 |     scope: String,
+     |     ^^^^^
+     |
+     = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: field `format` is never read
+  --> src/admin/query_api.rs:51:5
+   |
+47 | struct QueryRequest {
+   |        ------------ field in this struct
+...
+51 |     format: Option<String>,
+   |     ^^^^^^
+
+warning: method `broadcast_event` is never used
+   --> src/admin/state.rs:277:12
+    |
+ 99 | impl AdminState {
+    | --------------- method in this implementation
+...
+277 |     pub fn broadcast_event(&self, event: AdminEvent) {
+    |            ^^^^^^^^^^^^^^^
+
+warning: fields `group_by_columns` and `time_range` are never read
+   --> src/aggregates/query_rewriter.rs:450:5
+    |
+442 | struct QueryInfo {
+    |        --------- fields in this struct
+...
+450 |     group_by_columns: Vec<String>,
+    |     ^^^^^^^^^^^^^^^^
+451 |     /// Time range (start, end) in nanoseconds
+452 |     time_range: Option<(i64, i64)>,
+    |     ^^^^^^^^^^
+    |
+    = note: `QueryInfo` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
+
+warning: enum `Resource` is never used
+  --> src/auth/permission.rs:47:10
+   |
+47 | pub enum Resource {
+   |          ^^^^^^^^
+
+warning: method `is_contained_in` is never used
+  --> src/auth/permission.rs:66:12
+   |
+60 | impl Resource {
+   | ------------- method in this implementation
+...
+66 |     pub fn is_contained_in(&self, other: &Resource) -> bool {
+   |            ^^^^^^^^^^^^^^^
+
+warning: field `meta_client` is never read
+   --> src/data/server/flight.rs:101:5
+    |
+ 93 | pub struct DataNodeFlightService {
+    |            --------------------- field in this struct
+...
+101 |     meta_client: Option<Arc<MetaClient>>,
+    |     ^^^^^^^^^^^
+
+warning: struct `ErrorResponse` is never constructed
+  --> src/iceberg/catalog/rest_catalog.rs:67:8
+   |
+67 | struct ErrorResponse {
+   |        ^^^^^^^^^^^^^
+
+warning: struct `ErrorBody` is never constructed
+  --> src/iceberg/catalog/rest_catalog.rs:72:8
+   |
+72 | struct ErrorBody {
+   |        ^^^^^^^^^
+
+warning: constant `BLOOM_FILTER_FPP` is never used
+  --> src/jobs/compactor/mod.rs:48:18
+   |
+48 | pub(crate) const BLOOM_FILTER_FPP: f64 = 0.01; // 1% false positive rate
+   |                  ^^^^^^^^^^^^^^^^
+
+warning: constant `BLOOM_FILTER_NDV` is never used
+  --> src/jobs/compactor/mod.rs:49:18
+   |
+49 | pub(crate) const BLOOM_FILTER_NDV: u64 = 10_000; // Expected distinct values
+   |                  ^^^^^^^^^^^^^^^^
+
+warning: field `node_id` is never read
+  --> src/jobs/database_manager.rs:28:5
+   |
+23 | pub struct DatabaseManager {
+   |            --------------- field in this struct
+...
+28 |     node_id: Option<String>,
+   |     ^^^^^^^
+
+warning: field `db_manager` is never read
+  --> src/jobs/recompression.rs:38:5
+   |
+36 | pub struct RecompressionJob {
+   |            ---------------- field in this struct
+37 |     storage: Arc<Storage>,
+38 |     db_manager: Arc<DatabaseManager>,
+   |     ^^^^^^^^^^
+
+warning: function `extract_size_mb` is never used
+   --> src/jobs/retention_manager.rs:371:4
+    |
+371 | fn extract_size_mb(msg: &str) -> Option<f64> {
+    |    ^^^^^^^^^^^^^^^
+
+warning: type alias `EventHandler` is never used
+  --> src/meta/client/event_subscriber.rs:39:10
+   |
+39 | pub type EventHandler = Box<dyn Fn(MetaEvent) + Send + Sync>;
+   |          ^^^^^^^^^^^^
+
+warning: field `validator` is never read
+  --> src/meta/scale_in/executor.rs:53:5
+   |
+50 | pub struct ScaleInExecutor {
+   |            --------------- field in this struct
+...
+53 |     validator: ScaleInValidator,
+   |     ^^^^^^^^^
+
+warning: method `wait_for_drain` is never used
+   --> src/meta/scale_in/executor.rs:534:14
+    |
+ 56 | impl ScaleInExecutor {
+    | -------------------- method in this implementation
+...
+534 |     async fn wait_for_drain(&self, node_id: &str, timeout_secs: u64) -> Result<(), ScaleInError> {
+    |              ^^^^^^^^^^^^^^
+
+warning: field `idx` is never read
+   --> src/query/influxql/transpiler.rs:364:5
+    |
+362 | struct DerivativeField {
+    |        --------------- field in this struct
+363 |     /// Index in the fields list
+364 |     idx: usize,
+    |     ^^^
+
+warning: function `discover_all_files` is never used
+   --> src/query/providers/parquet/discovery.rs:298:14
+    |
+298 | pub async fn discover_all_files(
+    |              ^^^^^^^^^^^^^^^^^^
+
+warning: function `filter_files_by_partition` is never used
+   --> src/query/providers/parquet/filters.rs:105:8
+    |
+105 | pub fn filter_files_by_partition(
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: constant `DEFAULT_FLUSH_INTERVAL_SECS` is never used
+  --> src/router/shard_cache/mod.rs:58:7
+   |
+58 | const DEFAULT_FLUSH_INTERVAL_SECS: u64 = 300;
+   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: constant `MAX_WRITE_RETRIES` is never used
+  --> src/router/write_router.rs:32:7
+   |
+32 | const MAX_WRITE_RETRIES: u32 = 2;
+   |       ^^^^^^^^^^^^^^^^^
+
+warning: method `set_current_db` is never used
+   --> src/services/flight_service.rs:161:14
+    |
+ 73 | impl StatsFlightService {
+    | ----------------------- method in this implementation
+...
+161 |     async fn set_current_db<T>(&self, request: &Request<T>, db: String) {
+    |              ^^^^^^^^^^^^^^
+
+warning: method `authenticate` is never used
+   --> src/services/mysql_service.rs:160:8
+    |
+127 | impl MysqlSession {
+    | ----------------- method in this implementation
+...
+160 |     fn authenticate(&mut self, username: &str, password: &str) -> bool {
+    |        ^^^^^^^^^^^^
+
+warning: associated function `new` is never used
+  --> src/storage/cache/cardinality.rs:20:12
+   |
+19 | impl TableCardinalityTracker {
+   | ---------------------------- associated function in this implementation
+20 |     pub fn new() -> Self {
+   |            ^^^
+
+warning: method `is_empty` is never used
+  --> src/storage/cache/shard.rs:84:12
+   |
+23 | impl CacheShard {
+   | --------------- method in this implementation
+...
+84 |     pub fn is_empty(&self) -> bool {
+   |            ^^^^^^^^
+
+warning: constant `DATA_PAGE_SIZE` is never used
+  --> src/storage/parquet_writer.rs:51:7
+   |
+51 | const DATA_PAGE_SIZE: usize = 1024 * 1024;
+   |       ^^^^^^^^^^^^^^
+
+warning: constant `DICTIONARY_PAGE_SIZE` is never used
+  --> src/storage/parquet_writer.rs:53:7
+   |
+53 | const DICTIONARY_PAGE_SIZE: usize = 1024 * 1024;
+   |       ^^^^^^^^^^^^^^^^^^^^
+
+warning: constant `BLOOM_FILTER_FPP` is never used
+  --> src/storage/parquet_writer.rs:55:7
+   |
+55 | const BLOOM_FILTER_FPP: f64 = 0.01;
+   |       ^^^^^^^^^^^^^^^^
+
+warning: constant `BLOOM_FILTER_NDV` is never used
+  --> src/storage/parquet_writer.rs:57:7
+   |
+57 | const BLOOM_FILTER_NDV: u64 = 10_000;
+   |       ^^^^^^^^^^^^^^^^
+
+warning: associated function `sort_batch_by_time` is never used
+   --> src/storage/parquet_writer.rs:135:8
+    |
+ 64 | impl ParquetWriter {
+    | ------------------ associated function in this implementation
+...
+135 |     fn sort_batch_by_time(batch: &RecordBatch) -> Result<RecordBatch, String> {
+    |        ^^^^^^^^^^^^^^^^^^
+
+warning: method `size` is never used
+   --> src/storage/wal.rs:246:8
+    |
+198 | impl WalSegment {
+    | --------------- method in this implementation
+...
+246 |     fn size(&self) -> u64 {
+    |        ^^^^
+
+warning: `mynadb` (lib) generated 101 warnings (run `cargo fix --lib -p mynadb` to apply 65 suggestions)
+warning: unused imports: `AggregateColumn`, `AggregateFunction`, `GroupByColumn`, and `RefreshPolicy`
+  --> src/aggregates/mod.rs:67:5
+   |
+67 |     AggregateColumn, AggregateDefinition, AggregateFunction, GroupByColumn, RefreshPolicy,
+   |     ^^^^^^^^^^^^^^^                       ^^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^  ^^^^^^^^^^^^^
+
+warning: unused imports: `AggregateState` and `WatermarkInfo`
+  --> src/aggregates/mod.rs:72:17
+   |
+72 | pub use types::{AggregateState, RefreshResult, WatermarkInfo};
+   |                 ^^^^^^^^^^^^^^                 ^^^^^^^^^^^^^
+
+warning: unused import: `receiver::StandbyReceiver`
+  --> src/data/replication/mod.rs:55:9
+   |
+55 | pub use receiver::StandbyReceiver;
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `ReplicateRequest`, `ReplicateResponse`, and `ReplicationMode`
+  --> src/data/replication/mod.rs:57:17
+   |
+57 | pub use types::{ReplicateRequest, ReplicateResponse, ReplicationConfig, ReplicationMode};
+   |                 ^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^^                     ^^^^^^^^^^^^^^^
+
+warning: unused import: `CycleStats`
+  --> src/jobs/downsampling/mod.rs:19:15
+   |
+19 | pub use job::{CycleStats, DownsamplingJob};
+   |               ^^^^^^^^^^
+
+warning: unused imports: `AggregateSpec`, `PolicyStatus`, and `TierStatus`
+  --> src/jobs/downsampling/mod.rs:22:18
+   |
+22 |     AggregateFn, AggregateSpec, DownsamplingPolicy, DownsamplingTier, PolicyStatus, TierStatus,
+   |                  ^^^^^^^^^^^^^                                        ^^^^^^^^^^^^  ^^^^^^^^^^
+
+warning: unused imports: `MetaMetrics` and `MetaNode`
+ --> src/meta/service/mod.rs:6:34
+  |
+6 | pub use crate::meta::meta_node::{MetaMetrics, MetaNode};
+  |                                  ^^^^^^^^^^^  ^^^^^^^^
+
+warning: unused import: `node_labels`
+  --> src/meta/types/mod.rs:18:16
+   |
+18 | pub use node::{node_labels, DataNodeMode, NodeInfo, NodeRole, NodeState};
+   |                ^^^^^^^^^^^
+
+warning: unused import: `ScaleInRequest`
+  --> src/meta/types/mod.rs:19:57
+   |
+19 | pub use scale_in::{RetireStatus, ScaleInRecommendation, ScaleInRequest};
+   |                                                         ^^^^^^^^^^^^^^
+
+warning: unused imports: `MetricsCollector` and `QueryHandle`
+ --> src/metrics/mod.rs:7:21
+  |
+7 | pub use collector::{MetricsCollector, QueryHandle, METRICS};
+  |                     ^^^^^^^^^^^^^^^^  ^^^^^^^^^^^
+
+warning: unused imports: `CacheMetrics`, `LatencyMeasurement`, `MemoryMetrics`, `MetricsSnapshot`, `PercentileStats`, `QueryMetrics`, `StorageMetrics`, and `WriteMetrics`
+  --> src/metrics/mod.rs:10:5
+   |
+10 |     CacheMetrics, LatencyMeasurement, MemoryMetrics, MetricsSnapshot, PercentileStats,
+   |     ^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^
+11 |     QueryMetrics, StorageMetrics, WriteMetrics,
+   |     ^^^^^^^^^^^^  ^^^^^^^^^^^^^^  ^^^^^^^^^^^^
+
+warning: unused imports: `QueryTimeline` and `TimelineEvent`
+  --> src/observability/mod.rs:10:20
+   |
+10 | pub use timeline::{QueryTimeline, TimelineEvent};
+   |                    ^^^^^^^^^^^^^  ^^^^^^^^^^^^^
+
+warning: unused import: `init::init_tracing`
+  --> src/observability/mod.rs:11:9
+   |
+11 | pub use init::init_tracing;
+   |         ^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `PartitionFilesCache` and `SharedPartitionFilesCache`
+  --> src/query/cache/mod.rs:35:33
+   |
+35 | pub use partition_files_cache::{PartitionFilesCache, SharedPartitionFilesCache};
+   |                                 ^^^^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `ErrorResponse`, `batches_to_grouped_response`, and `batches_to_response`
+  --> src/query/influxql/mod.rs:72:5
+   |
+72 |     batches_to_grouped_response, batches_to_grouped_response_with_epoch, batches_to_response,
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^                                          ^^^^^^^^^^^^^^^^^^^
+73 |     batches_to_response_with_epoch, ErrorResponse, InfluxResponse, Series, StatementResult,
+   |                                     ^^^^^^^^^^^^^
+
+warning: unused import: `is_lastpoint_query`
+  --> src/query/influxql/mod.rs:75:46
+   |
+75 | pub use transpiler::{extract_filter_columns, is_lastpoint_query, transpile, TranspileContext, TranspileError};
+   |                                              ^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `multi_union_provider::MultiUnionTableProvider`
+  --> src/query/providers/mod.rs:15:9
+   |
+15 | pub use multi_union_provider::MultiUnionTableProvider;
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `ParquetExecPlan` and `ParquetFileInfo`
+  --> src/query/providers/mod.rs:16:19
+   |
+16 | pub use parquet::{ParquetExecPlan, ParquetFileInfo, ParquetTableConfig, ParquetTableProvider};
+   |                   ^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^
+
+warning: unused import: `crate::query::cache::hot_partition_cache::HotPartitionCacheStats`
+  --> src/query/query_engine/mod.rs:42:9
+   |
+42 | pub use crate::query::cache::hot_partition_cache::HotPartitionCacheStats;
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `CacheStatistics` and `TableParquetStats`
+  --> src/query/query_engine/mod.rs:43:47
+   |
+43 | pub use crate::query::cache::metadata_cache::{CacheStatistics, TableParquetStats};
+   |                                               ^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^^
+
+warning: unused import: `crate::query::cache::query_cache::QueryCacheStats`
+  --> src/query/query_engine/mod.rs:44:9
+   |
+44 | pub use crate::query::cache::query_cache::QueryCacheStats;
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `QueryAnalysis` and `QueryExplainResult`
+  --> src/query/query_engine/mod.rs:45:31
+   |
+45 | pub use crate::query::types::{QueryAnalysis, QueryExplainResult};
+   |                               ^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `crate::flight_protocol::QueryScope`
+  --> src/query/query_engine/mod.rs:46:9
+   |
+46 | pub use crate::flight_protocol::QueryScope;
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `PartitionRoutingResult`
+  --> src/router/query_coordinator/mod.rs:37:39
+   |
+37 | pub use types::{DistributedQueryPlan, PartitionRoutingResult, QueryResult, TableRef, TimeRange};
+   |                                       ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `crate::flight_protocol::QueryScope`
+  --> src/router/shard_cache/types.rs:12:9
+   |
+12 | pub use crate::flight_protocol::QueryScope;
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused imports: `DistributedQueryPlan`, `QueryResult`, `TableRef`, and `TimeRange`
+  --> src/router/mod.rs:23:29
+   |
+23 | pub use query_coordinator::{DistributedQueryPlan, QueryCoordinator, QueryResult, TableRef, TimeRange};
+   |                             ^^^^^^^^^^^^^^^^^^^^                    ^^^^^^^^^^^  ^^^^^^^^  ^^^^^^^^^
+
+warning: unused import: `types::*`
+  --> src/services/prometheus/mod.rs:22:9
+   |
+22 | pub use types::*;
+   |         ^^^^^^^^
+
+warning: function `start_event_bridge` is never used
+   --> src/admin/events.rs:216:14
+    |
+216 | pub async fn start_event_bridge(
+    |              ^^^^^^^^^^^^^^^^^^
+
+warning: function `is_enabled` is never used
+  --> src/aggregates/mod.rs:79:8
+   |
+79 | pub fn is_enabled(config: &ContinuousAggregateConfig) -> bool {
+   |        ^^^^^^^^^^
+
+warning: struct `ContinuousAggregateManager` is never constructed
+  --> src/aggregates/mod.rs:87:12
+   |
+87 | pub struct ContinuousAggregateManager {
+   |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: multiple associated items are never used
+   --> src/aggregates/mod.rs:98:12
+    |
+ 96 | impl ContinuousAggregateManager {
+    | ------------------------------- associated items in this implementation
+ 97 |     /// Create a new manager with the given configuration
+ 98 |     pub fn new(config: ContinuousAggregateConfig, data_dir: &str) -> Self {
+    |            ^^^
+...
+112 |     pub fn is_enabled(&self) -> bool {
+    |            ^^^^^^^^^^
+...
+117 |     pub fn rewriter(&self) -> &Arc<ContinuousAggregateRewriter> {
+    |            ^^^^^^^^
+...
+122 |     pub fn storage(&self) -> &Arc<AggregateStorage> {
+    |            ^^^^^^^
+...
+127 |     pub async fn start(&mut self) -> Result<(), String> {
+    |                  ^^^^^
+...
+162 |     pub async fn stop(&mut self) {
+    |                  ^^^^
+...
+169 |     pub async fn create_aggregate(&self, definition: AggregateDefinition) -> Result<(), String> {
+    |                  ^^^^^^^^^^^^^^^^
+...
+177 |     pub async fn drop_aggregate(&self, name: &str) -> Result<(), String> {
+    |                  ^^^^^^^^^^^^^^
+...
+182 |     pub async fn list_aggregates(&self) -> Result<Vec<AggregateDefinition>, String> {
+    |                  ^^^^^^^^^^^^^^^
+...
+187 |     pub async fn get_aggregate(&self, name: &str) -> Result<Option<AggregateDefinition>, String> {
+    |                  ^^^^^^^^^^^^^
+...
+192 |     pub async fn refresh_aggregate(&self, name: &str) -> Result<RefreshResult, String> {
+    |                  ^^^^^^^^^^^^^^^^^
+
+warning: associated items `enabled`, `with_refresh_interval`, `with_max_concurrent`, `without_query_rewriting`, and `without_realtime_union` are never used
+   --> src/aggregates/config.rs:127:12
+    |
+125 | impl ContinuousAggregateConfig {
+    | ------------------------------ associated items in this implementation
+126 |     /// Create a config with the feature enabled
+127 |     pub fn enabled() -> Self {
+    |            ^^^^^^^
+...
+135 |     pub fn with_refresh_interval(mut self, secs: u64) -> Self {
+    |            ^^^^^^^^^^^^^^^^^^^^^
+...
+141 |     pub fn with_max_concurrent(mut self, n: usize) -> Self {
+    |            ^^^^^^^^^^^^^^^^^^^
+...
+147 |     pub fn without_query_rewriting(mut self) -> Self {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^
+...
+153 |     pub fn without_realtime_union(mut self) -> Self {
+    |            ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: method `validate` is never used
+   --> src/aggregates/config.rs:161:12
+    |
+160 | impl ContinuousAggregateConfig {
+    | ------------------------------ method in this implementation
+161 |     pub fn validate(&self) -> Result<(), String> {
+    |            ^^^^^^^^
+
+warning: enum `AggregateFunction` is never used
+  --> src/aggregates/definition.rs:16:10
+   |
+16 | pub enum AggregateFunction {
+   |          ^^^^^^^^^^^^^^^^^
+
+warning: associated items `sql_name`, `from_sql`, and `is_reaggregatable` are never used
+  --> src/aggregates/definition.rs:43:12
+   |
+41 | impl AggregateFunction {
+   | ---------------------- associated items in this implementation
+42 |     /// Get the SQL function name
+43 |     pub fn sql_name(&self) -> String {
+   |            ^^^^^^^^
+...
+60 |     pub fn from_sql(name: &str) -> Option<Self> {
+   |            ^^^^^^^^
+...
+81 |     pub fn is_reaggregatable(&self) -> bool {
+   |            ^^^^^^^^^^^^^^^^^
+
+warning: struct `AggregateColumn` is never constructed
+  --> src/aggregates/definition.rs:97:12
+   |
+97 | pub struct AggregateColumn {
+   |            ^^^^^^^^^^^^^^^
+
+warning: associated items `new`, `to_sql`, and `to_sql_with_helpers` are never used
+   --> src/aggregates/definition.rs:113:12
+    |
+112 | impl AggregateColumn {
+    | -------------------- associated items in this implementation
+113 |     pub fn new(source: &str, function: AggregateFunction, alias: &str) -> Self {
+    |            ^^^
+...
+130 |     pub fn to_sql(&self) -> String {
+    |            ^^^^^^
+...
+140 |     pub fn to_sql_with_helpers(&self) -> Vec<String> {
+    |            ^^^^^^^^^^^^^^^^^^^
+
+warning: enum `GroupByColumn` is never used
+   --> src/aggregates/definition.rs:166:10
+    |
+166 | pub enum GroupByColumn {
+    |          ^^^^^^^^^^^^^
+
+warning: associated items `time_bucket`, `column`, `column_with_alias`, `output_name`, `to_select_sql`, and `to_group_by_sql` are never used
+   --> src/aggregates/definition.rs:187:12
+    |
+185 | impl GroupByColumn {
+    | ------------------ associated items in this implementation
+186 |     /// Create a time bucket group by
+187 |     pub fn time_bucket(source: &str, granularity: TimeBucketGranularity, alias: &str) -> Self {
+    |            ^^^^^^^^^^^
+...
+196 |     pub fn column(name: &str) -> Self {
+    |            ^^^^^^
+...
+204 |     pub fn column_with_alias(name: &str, alias: &str) -> Self {
+    |            ^^^^^^^^^^^^^^^^^
+...
+212 |     pub fn output_name(&self) -> &str {
+    |            ^^^^^^^^^^^
+...
+220 |     pub fn to_select_sql(&self) -> String {
+    |            ^^^^^^^^^^^^^
+...
+245 |     pub fn to_group_by_sql(&self) -> String {
+    |            ^^^^^^^^^^^^^^^
+
+warning: struct `RefreshPolicy` is never constructed
+   --> src/aggregates/definition.rs:265:12
+    |
+265 | pub struct RefreshPolicy {
+    |            ^^^^^^^^^^^^^
+
+warning: struct `AggregateDefinition` is never constructed
+   --> src/aggregates/definition.rs:301:12
+    |
+301 | pub struct AggregateDefinition {
+    |            ^^^^^^^^^^^^^^^^^^^
+
+warning: associated items `builder`, `time_bucket_granularity`, `to_create_sql`, `to_incremental_refresh_sql`, and `can_answer_query` are never used
+   --> src/aggregates/definition.rs:349:12
+    |
+347 | impl AggregateDefinition {
+    | ------------------------ associated items in this implementation
+348 |     /// Create a new aggregate definition builder
+349 |     pub fn builder(name: &str, source_table: &str) -> AggregateDefinitionBuilder {
+    |            ^^^^^^^
+...
+354 |     pub fn time_bucket_granularity(&self) -> Option<TimeBucketGranularity> {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^
+...
+364 |     pub fn to_create_sql(&self) -> String {
+    |            ^^^^^^^^^^^^^
+...
+396 |     pub fn to_incremental_refresh_sql(&self, from_watermark: i64, to_watermark: i64) -> String {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+428 |     pub fn can_answer_query(&self, query_bucket_nanos: i64) -> bool {
+    |            ^^^^^^^^^^^^^^^^
+
+warning: struct `AggregateDefinitionBuilder` is never constructed
+   --> src/aggregates/definition.rs:439:12
+    |
+439 | pub struct AggregateDefinitionBuilder {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: multiple associated items are never used
+   --> src/aggregates/definition.rs:452:12
+    |
+451 | impl AggregateDefinitionBuilder {
+    | ------------------------------- associated items in this implementation
+452 |     pub fn new(name: &str, source_table: &str) -> Self {
+    |            ^^^
+...
+467 |     pub fn target_table(mut self, table: &str) -> Self {
+    |            ^^^^^^^^^^^^
+...
+473 |     pub fn aggregate(mut self, source: &str, function: AggregateFunction, alias: &str) -> Self {
+    |            ^^^^^^^^^
+...
+480 |     pub fn avg(self, source: &str, alias: &str) -> Self {
+    |            ^^^
+...
+485 |     pub fn sum(self, source: &str, alias: &str) -> Self {
+    |            ^^^
+...
+490 |     pub fn count(self, alias: &str) -> Self {
+    |            ^^^^^
+...
+495 |     pub fn min(self, source: &str, alias: &str) -> Self {
+    |            ^^^
+...
+500 |     pub fn max(self, source: &str, alias: &str) -> Self {
+    |            ^^^
+...
+505 |     pub fn time_bucket(
+    |            ^^^^^^^^^^^
+...
+518 |     pub fn group_by(mut self, column: &str) -> Self {
+    |            ^^^^^^^^
+...
+524 |     pub fn filter(mut self, filter: &str) -> Self {
+    |            ^^^^^^
+...
+530 |     pub fn refresh_interval(mut self, secs: u64) -> Self {
+    |            ^^^^^^^^^^^^^^^^
+...
+536 |     pub fn retention(mut self, days: u32) -> Self {
+    |            ^^^^^^^^^
+...
+542 |     pub fn description(mut self, desc: &str) -> Self {
+    |            ^^^^^^^^^^^
+...
+548 |     pub fn build(self) -> Result<AggregateDefinition, String> {
+    |            ^^^^^
+
+warning: struct `ContinuousAggregateJob` is never constructed
+  --> src/aggregates/job.rs:19:12
+   |
+19 | pub struct ContinuousAggregateJob {
+   |            ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: struct `JobStats` is never constructed
+  --> src/aggregates/job.rs:30:12
+   |
+30 | pub struct JobStats {
+   |            ^^^^^^^^
+
+warning: associated items `new`, `run`, `run_cycle`, `refresh_aggregate`, `refresh_single`, and `stats` are never used
+   --> src/aggregates/job.rs:49:12
+    |
+ 47 | impl ContinuousAggregateJob {
+    | --------------------------- associated items in this implementation
+ 48 |     /// Create a new refresh job
+ 49 |     pub fn new(config: ContinuousAggregateConfig, storage: Arc<AggregateStorage>) -> Self {
+    |            ^^^
+...
+ 63 |     pub async fn run(&self, running: Arc<RwLock<bool>>) {
+    |                  ^^^
+...
+115 |     async fn run_cycle(&self) -> Result<(), String> {
+    |              ^^^^^^^^^
+...
+191 |     async fn refresh_aggregate(
+    |              ^^^^^^^^^^^^^^^^^
+...
+263 |     pub async fn refresh_single(&self, name: &str) -> Result<RefreshResult, String> {
+    |                  ^^^^^^^^^^^^^^
+...
+274 |     pub async fn stats(&self) -> JobStats {
+    |                  ^^^^^
+
+warning: trait `RefreshExecutor` is never used
+   --> src/aggregates/job.rs:284:11
+    |
+284 | pub trait RefreshExecutor: Send + Sync {
+    |           ^^^^^^^^^^^^^^^
+
+warning: struct `DataFusionRefreshExecutor` is never constructed
+   --> src/aggregates/job.rs:297:12
+    |
+297 | pub struct DataFusionRefreshExecutor {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: struct `ContinuousAggregateRewriter` is never constructed
+  --> src/aggregates/query_rewriter.rs:52:12
+   |
+52 | pub struct ContinuousAggregateRewriter {
+   |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: multiple associated items are never used
+   --> src/aggregates/query_rewriter.rs:58:12
+    |
+ 56 | impl ContinuousAggregateRewriter {
+    | -------------------------------- associated items in this implementation
+ 57 |     /// Create a new rewriter with the given storage backend
+ 58 |     pub fn new(storage: Arc<AggregateStorage>) -> Self {
+    |            ^^^
+...
+ 65 |     pub async fn try_rewrite(&self, sql: &str) -> Option<RewriteResult> {
+    |                  ^^^^^^^^^^^
+...
+107 |     fn parse_query(&self, sql: &str) -> Option<QueryInfo> {
+    |        ^^^^^^^^^^^
+...
+141 |     fn extract_source_table(&self, sql: &str) -> Option<String> {
+    |        ^^^^^^^^^^^^^^^^^^^^
+...
+170 |     fn extract_time_bucket(&self, sql: &str) -> Option<i64> {
+    |        ^^^^^^^^^^^^^^^^^^^
+...
+193 |     fn extract_aggregates(&self, sql: &str) -> Vec<(AggregateFunction, String)> {
+    |        ^^^^^^^^^^^^^^^^^^
+...
+229 |     fn extract_group_by(&self, sql: &str) -> Vec<String> {
+    |        ^^^^^^^^^^^^^^^^
+...
+256 |     fn extract_time_range(&self, sql: &str) -> Option<(i64, i64)> {
+    |        ^^^^^^^^^^^^^^^^^^
+...
+307 |     fn extract_timestamp_value(&self, s: &str) -> Option<i64> {
+    |        ^^^^^^^^^^^^^^^^^^^^^^^
+...
+325 |     fn select_best_aggregate<'a>(
+    |        ^^^^^^^^^^^^^^^^^^^^^
+...
+380 |     fn rewrite_query(
+    |        ^^^^^^^^^^^^^
+
+warning: struct `QueryInfo` is never constructed
+   --> src/aggregates/query_rewriter.rs:442:8
+    |
+442 | struct QueryInfo {
+    |        ^^^^^^^^^
+
+warning: struct `RewriteResult` is never constructed
+   --> src/aggregates/query_rewriter.rs:459:12
+    |
+459 | pub struct RewriteResult {
+    |            ^^^^^^^^^^^^^
+
+warning: method `needs_realtime_union` is never used
+   --> src/aggregates/query_rewriter.rs:476:12
+    |
+472 | impl RewriteResult {
+    | ------------------ method in this implementation
+...
+476 |     pub fn needs_realtime_union(&self, query_end_time: Option<i64>) -> bool {
+    |            ^^^^^^^^^^^^^^^^^^^^
+
+warning: constant `DEFINITION_EXT` is never used
+  --> src/aggregates/storage.rs:18:7
+   |
+18 | const DEFINITION_EXT: &str = ".json";
+   |       ^^^^^^^^^^^^^^
+
+warning: constant `WATERMARKS_DIR` is never used
+  --> src/aggregates/storage.rs:21:7
+   |
+21 | const WATERMARKS_DIR: &str = "watermarks";
+   |       ^^^^^^^^^^^^^^
+
+warning: struct `AggregateStorage` is never constructed
+  --> src/aggregates/storage.rs:24:12
+   |
+24 | pub struct AggregateStorage {
+   |            ^^^^^^^^^^^^^^^^
+
+warning: multiple associated items are never used
+   --> src/aggregates/storage.rs:37:12
+    |
+ 35 | impl AggregateStorage {
+    | --------------------- associated items in this implementation
+ 36 |     /// Create a new storage backend
+ 37 |     pub fn new(data_dir: &str) -> Self {
+    |            ^^^
+...
+ 48 |     pub fn with_dir(dir: PathBuf) -> Self {
+    |            ^^^^^^^^
+...
+ 57 |     fn ensure_dirs(&self) -> Result<(), String> {
+    |        ^^^^^^^^^^^
+...
+ 79 |     fn definition_path(&self, name: &str) -> PathBuf {
+    |        ^^^^^^^^^^^^^^^
+...
+ 84 |     fn watermark_path(&self, name: &str) -> PathBuf {
+    |        ^^^^^^^^^^^^^^
+...
+ 91 |     pub async fn initialize(&self) -> Result<(), String> {
+    |                  ^^^^^^^^^^
+...
+105 |     async fn load_all_definitions(&self) -> Result<(), String> {
+    |              ^^^^^^^^^^^^^^^^^^^^
+...
+147 |     fn load_definition_from_file(&self, path: &Path) -> Result<AggregateDefinition, String> {
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+156 |     fn load_watermark_from_file(&self, name: &str) -> Result<WatermarkInfo, String> {
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+166 |     pub async fn save_definition(&self, definition: &AggregateDefinition) -> Result<(), String> {
+    |                  ^^^^^^^^^^^^^^^
+...
+185 |     pub async fn save_watermark(&self, watermark: &WatermarkInfo) -> Result<(), String> {
+    |                  ^^^^^^^^^^^^^^
+...
+209 |     pub async fn delete_definition(&self, name: &str) -> Result<(), String> {
+    |                  ^^^^^^^^^^^^^^^^^
+...
+231 |     pub async fn get_definition(&self, name: &str) -> Result<Option<AggregateDefinition>, String> {
+    |                  ^^^^^^^^^^^^^^
+...
+244 |     pub async fn list_definitions(&self) -> Result<Vec<AggregateDefinition>, String> {
+    |                  ^^^^^^^^^^^^^^^^
+...
+257 |     pub async fn get_pending_refreshes(&self) -> Result<Vec<AggregateDefinition>, String> {
+    |                  ^^^^^^^^^^^^^^^^^^^^^
+...
+284 |     pub async fn update_state(&self, name: &str, state: AggregateState) -> Result<(), String> {
+    |                  ^^^^^^^^^^^^
+...
+307 |     pub async fn find_matching_aggregates(
+    |                  ^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: enum `AggregateState` is never used
+  --> src/aggregates/types.rs:12:10
+   |
+12 | pub enum AggregateState {
+   |          ^^^^^^^^^^^^^^
+
+warning: struct `WatermarkInfo` is never constructed
+  --> src/aggregates/types.rs:49:12
+   |
+49 | pub struct WatermarkInfo {
+   |            ^^^^^^^^^^^^^
+
+warning: associated items `new` and `update` are never used
+  --> src/aggregates/types.rs:75:12
+   |
+74 | impl WatermarkInfo {
+   | ------------------ associated items in this implementation
+75 |     pub fn new(aggregate_name: &str) -> Self {
+   |            ^^^
+...
+88 |     pub fn update(&mut self, new_high_watermark: i64, rows_added: u64, bytes_added: u64) {
+   |            ^^^^^^
+
+warning: struct `RefreshResult` is never constructed
+  --> src/aggregates/types.rs:98:12
+   |
+98 | pub struct RefreshResult {
+   |            ^^^^^^^^^^^^^
+
+warning: associated functions `success`, `failure`, and `skipped` are never used
+   --> src/aggregates/types.rs:128:12
+    |
+127 | impl RefreshResult {
+    | ------------------ associated functions in this implementation
+128 |     pub fn success(
+    |            ^^^^^^^
+...
+150 |     pub fn failure(name: &str, error: String) -> Self {
+    |            ^^^^^^^
+...
+164 |     pub fn skipped(name: &str, reason: &str) -> Self {
+    |            ^^^^^^^
+
+warning: struct `AggregateStats` is never constructed
+   --> src/aggregates/types.rs:181:12
+    |
+181 | pub struct AggregateStats {
+    |            ^^^^^^^^^^^^^^
+
+warning: enum `TimeBucketGranularity` is never used
+   --> src/aggregates/types.rs:209:10
+    |
+209 | pub enum TimeBucketGranularity {
+    |          ^^^^^^^^^^^^^^^^^^^^^
+
+warning: method `to_nanos` is never used
+   --> src/aggregates/types.rs:228:12
+    |
+226 | impl TimeBucketGranularity {
+    | -------------------------- method in this implementation
+227 |     /// Convert to nanoseconds
+228 |     pub fn to_nanos(self) -> i64 {
+    |            ^^^^^^^^
+
+warning: function `current_timestamp_ns` is never used
+   --> src/aggregates/types.rs:318:4
+    |
+318 | fn current_timestamp_ns() -> i64 {
+    |    ^^^^^^^^^^^^^^^^^^^^
+
+warning: variant `QueryDenied` is never constructed
+  --> src/auth/audit.rs:24:5
+   |
+17 | pub enum AuditEventType {
+   |          -------------- variant in this enum
+...
+24 |     QueryDenied,
+   |     ^^^^^^^^^^^
+   |
+   = note: `AuditEventType` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: associated items `disabled` and `log_query_denied` are never used
+   --> src/auth/audit.rs:108:12
+    |
+ 55 | impl AuditLogger {
+    | ---------------- associated items in this implementation
+...
+108 |     pub fn disabled() -> Self {
+    |            ^^^^^^^^
+...
+197 |     pub fn log_query_denied(&self, username: &str, database: &str, detail: &str) {
+    |            ^^^^^^^^^^^^^^^^
+
+warning: methods `can_write`, `can_admin`, and `is_global_admin` are never used
+   --> src/auth/context.rs:124:12
+    |
+ 24 | impl AuthContext {
+    | ---------------- methods in this implementation
+...
+124 |     pub fn can_write(&self, database: &str) -> bool {
+    |            ^^^^^^^^^
+...
+129 |     pub fn can_admin(&self, database: &str) -> bool {
+    |            ^^^^^^^^^
+...
+134 |     pub fn is_global_admin(&self) -> bool {
+    |            ^^^^^^^^^^^^^^^
+
+warning: associated items `has_permission` and `builtin_names` are never used
+  --> src/auth/role.rs:26:12
+   |
+16 | impl Role {
+   | --------- associated items in this implementation
+...
+26 |     pub fn has_permission(&self, permission: Permission) -> bool {
+   |            ^^^^^^^^^^^^^^
+...
+56 |     pub fn builtin_names() -> Vec<&'static str> {
+   |            ^^^^^^^^^^^^^
+
+warning: associated items `empty`, `upsert_role`, `remove_role`, and `list_roles` are never used
+  --> src/auth/role_store.rs:42:12
+   |
+23 | impl RoleStore {
+   | -------------- associated items in this implementation
+...
+42 |     pub fn empty() -> Self {
+   |            ^^^^^
+...
+60 |     pub fn upsert_role(&self, name: &str, permissions: Vec<Permission>) {
+   |            ^^^^^^^^^^^
+...
+67 |     pub fn remove_role(&self, name: &str) -> bool {
+   |            ^^^^^^^^^^^
+...
+76 |     pub fn list_roles(&self) -> Vec<String> {
+   |            ^^^^^^^^^^
+
+warning: method `has_users` is never used
+  --> src/auth/store.rs:29:8
+   |
+11 | pub trait UserStore: Send + Sync {
+   |           --------- method in this trait
+...
+29 |     fn has_users(&self) -> bool {
+   |        ^^^^^^^^^
+
+warning: method `is_admin` is never used
+   --> src/auth/user.rs:132:12
+    |
+ 33 | impl User {
+    | --------- method in this implementation
+...
+132 |     pub fn is_admin(&self) -> bool {
+    |            ^^^^^^^^
+
+warning: function `resolve_env_vars` is never used
+    --> src/config.rs:1410:8
+     |
+1410 | pub fn resolve_env_vars(content: &str) -> Result<String, String> {
+     |        ^^^^^^^^^^^^^^^^
+
+warning: function `resolve_env_var` is never used
+    --> src/config.rs:1456:8
+     |
+1456 | pub fn resolve_env_var(var_name: &str, default: Option<&str>) -> Result<String, String> {
+     |        ^^^^^^^^^^^^^^^
+
+warning: associated items `from_file_with_env`, `load_with_env`, and `apply_env_overrides` are never used
+    --> src/config.rs:1509:12
+     |
+1485 | impl Config {
+     | ----------- associated items in this implementation
+...
+1509 |     pub fn from_file_with_env<P: AsRef<Path>>(path: P) -> Result<Self, String> {
+     |            ^^^^^^^^^^^^^^^^^^
+...
+1528 |     pub fn load_with_env(path: &str) -> Self {
+     |            ^^^^^^^^^^^^^
+...
+1574 |     fn apply_env_overrides(&mut self) {
+     |        ^^^^^^^^^^^^^^^^^^^
+
+warning: method `invalidate` is never used
+   --> src/data/cache/parquet_cache.rs:258:18
+    |
+ 47 | impl ParquetLocalCache {
+    | ---------------------- method in this implementation
+...
+258 |     pub async fn invalidate(&self, path: &str) -> Result<(), String> {
+    |                  ^^^^^^^^^^
+
+warning: field `node_id` is never read
+   --> src/data/cache/parquet_cache.rs:319:9
+    |
+315 | pub struct CacheStats {
+    |            ---------- field in this struct
+...
+319 |     pub node_id: String,
+    |         ^^^^^^^
+    |
+    = note: `CacheStats` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: associated items `derive_k8s_advertise_addr`, `zone`, `region`, `rack`, and `is_different_zone` are never used
+   --> src/data/config.rs:205:12
+    |
+148 | impl DataNodeConfig {
+    | ------------------- associated items in this implementation
+...
+205 |     pub fn derive_k8s_advertise_addr(port: u16) -> String {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+245 |     pub fn zone(&self) -> Option<&str> {
+    |            ^^^^
+...
+252 |     pub fn region(&self) -> Option<&str> {
+    |            ^^^^^^
+...
+259 |     pub fn rack(&self) -> Option<&str> {
+    |            ^^^^
+...
+264 |     pub fn is_different_zone(
+    |            ^^^^^^^^^^^^^^^^^
+
+warning: struct `PartitionReceiveState` is never constructed
+  --> src/data/replication/receiver.rs:22:12
+   |
+22 | pub struct PartitionReceiveState {
+   |            ^^^^^^^^^^^^^^^^^^^^^
+
+warning: associated items `new` and `has_sequence_gap` are never used
+  --> src/data/replication/receiver.rs:38:12
+   |
+37 | impl PartitionReceiveState {
+   | -------------------------- associated items in this implementation
+38 |     pub fn new(partition_key: String) -> Self {
+   |            ^^^
+...
+50 |     pub fn has_sequence_gap(&self, incoming_seq: u64) -> bool {
+   |            ^^^^^^^^^^^^^^^^
+
+warning: struct `StandbyReceiver` is never constructed
+  --> src/data/replication/receiver.rs:57:12
+   |
+57 | pub struct StandbyReceiver {
+   |            ^^^^^^^^^^^^^^^
+
+warning: multiple associated items are never used
+   --> src/data/replication/receiver.rs:69:12
+    |
+ 68 | impl StandbyReceiver {
+    | -------------------- associated items in this implementation
+ 69 |     pub fn new(node_id: String, cache: Arc<DataCache>) -> Self {
+    |            ^^^
+...
+ 79 |     pub fn enable_standby_mode(&self) {
+    |            ^^^^^^^^^^^^^^^^^^^
+...
+ 86 |     pub fn disable_standby_mode(&self) {
+    |            ^^^^^^^^^^^^^^^^^^^^
+...
+ 92 |     pub fn is_standby(&self) -> bool {
+    |            ^^^^^^^^^^
+...
+ 97 |     pub fn register_partition(
+    |            ^^^^^^^^^^^^^^^^^^
+...
+123 |     pub fn unregister_partition(&self, partition_key: &str) {
+    |            ^^^^^^^^^^^^^^^^^^^^
+...
+135 |     pub fn verify_batch_checksum(
+    |            ^^^^^^^^^^^^^^^^^^^^^
+...
+166 |     pub async fn receive_batch_with_checksum(
+    |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+225 |     pub async fn receive_batch(
+    |                  ^^^^^^^^^^^^^
+...
+251 |     async fn receive_batch_internal(
+    |              ^^^^^^^^^^^^^^^^^^^^^^
+...
+331 |     pub fn get_last_applied_seq(&self, partition_key: &str) -> Option<u64> {
+    |            ^^^^^^^^^^^^^^^^^^^^
+...
+339 |     pub fn stats(&self) -> StandbyStats {
+    |            ^^^^^
+...
+358 |     pub fn get_standby_partitions(&self) -> Vec<String> {
+    |            ^^^^^^^^^^^^^^^^^^^^^^
+...
+367 |     pub fn handle_flush_checkpoint(&self, checkpoint: &FlushCheckpoint) -> FlushCheckpointResponse {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: struct `StandbyStats` is never constructed
+   --> src/data/replication/receiver.rs:397:12
+    |
+397 | pub struct StandbyStats {
+    |            ^^^^^^^^^^^^
+
+warning: methods `stop`, `last_acked_seq`, `lag_ms`, and `is_in_sync` are never used
+   --> src/data/replication/stream.rs:102:12
+    |
+ 59 | impl ReplicationStream {
+    | ---------------------- methods in this implementation
+...
+102 |     pub fn stop(&self) {
+    |            ^^^^
+...
+122 |     pub fn last_acked_seq(&self) -> u64 {
+    |            ^^^^^^^^^^^^^^
+...
+127 |     pub fn lag_ms(&self) -> u64 {
+    |            ^^^^^^
+...
+132 |     pub fn is_in_sync(&self, threshold_ms: u64) -> bool {
+    |            ^^^^^^^^^^
+
+warning: methods `last_flushed_seq`, `stop_all`, `remove_partition_streams`, `stats`, and `partition_stats` are never used
+   --> src/data/replication/stream.rs:400:12
+    |
+371 | impl ReplicationManager {
+    | ----------------------- methods in this implementation
+...
+400 |     pub fn last_flushed_seq(&self) -> u64 {
+    |            ^^^^^^^^^^^^^^^^
+...
+460 |     pub fn stop_all(&self) {
+    |            ^^^^^^^^
+...
+467 |     pub fn remove_partition_streams(&self, partition_key: &str) {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+485 |     pub fn stats(&self) -> ReplicationStats {
+    |            ^^^^^
+...
+578 |     pub fn partition_stats(&self) -> Vec<PartitionReplicationStats> {
+    |            ^^^^^^^^^^^^^^^
+
+warning: struct `ReplicationStats` is never constructed
+   --> src/data/replication/stream.rs:612:12
+    |
+612 | pub struct ReplicationStats {
+    |            ^^^^^^^^^^^^^^^^
+
+warning: struct `PartitionReplicationStats` is never constructed
+   --> src/data/replication/stream.rs:621:12
+    |
+621 | pub struct PartitionReplicationStats {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: fields `created_at` and `checksum` are never read
+  --> src/data/replication/types.rs:30:9
+   |
+16 | pub struct ReplicationEntry {
+   |            ---------------- fields in this struct
+...
+30 |     pub created_at: i64,
+   |         ^^^^^^^^^^
+...
+33 |     pub checksum: Option<u32>,
+   |         ^^^^^^^^
+   |
+   = note: `ReplicationEntry` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: associated items `new_with_checksum`, `partition_key`, `verify_checksum`, and `has_checksum` are never used
+   --> src/data/replication/types.rs:58:12
+    |
+ 36 | impl ReplicationEntry {
+    | --------------------- associated items in this implementation
+...
+ 58 |     pub fn new_with_checksum(
+    |            ^^^^^^^^^^^^^^^^^
+...
+ 81 |     pub fn partition_key(&self) -> String {
+    |            ^^^^^^^^^^^^^
+...
+ 95 |     pub fn verify_checksum(&self, batch_bytes: &[u8]) -> Result<(), ChecksumError> {
+    |            ^^^^^^^^^^^^^^^
+...
+115 |     pub fn has_checksum(&self) -> bool {
+    |            ^^^^^^^^^^^^
+
+warning: enum `ChecksumError` is never used
+   --> src/data/replication/types.rs:122:10
+    |
+122 | pub enum ChecksumError {
+    |          ^^^^^^^^^^^^^
+
+warning: function `verify_checksum` is never used
+   --> src/data/replication/types.rs:161:8
+    |
+161 | pub fn verify_checksum(data: &[u8], expected: u32) -> bool {
+    |        ^^^^^^^^^^^^^^^
+
+warning: struct `ReplicateRequest` is never constructed
+   --> src/data/replication/types.rs:167:12
+    |
+167 | pub struct ReplicateRequest {
+    |            ^^^^^^^^^^^^^^^^
+
+warning: struct `PartitionReplicationState` is never constructed
+   --> src/data/replication/types.rs:199:12
+    |
+199 | pub struct PartitionReplicationState {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: associated items `new`, `get_lag`, and `is_in_sync` are never used
+   --> src/data/replication/types.rs:211:12
+    |
+210 | impl PartitionReplicationState {
+    | ------------------------------ associated items in this implementation
+211 |     pub fn new(partition_key: String) -> Self {
+    |            ^^^
+...
+221 |     pub fn get_lag(&self, standby_id: &str) -> u64 {
+    |            ^^^^^^^
+...
+226 |     pub fn is_in_sync(&self, threshold_ms: u64) -> bool {
+    |            ^^^^^^^^^^
+
+warning: associated functions `new` and `for_partition` are never used
+   --> src/data/replication/types.rs:298:12
+    |
+297 | impl FlushCheckpoint {
+    | -------------------- associated functions in this implementation
+298 |     pub fn new(source_node_id: String, flushed_seq: u64) -> Self {
+    |            ^^^
+...
+325 |     pub fn for_partition(source_node_id: String, partition_key: String, flushed_seq: u64) -> Self {
+    |            ^^^^^^^^^^^^^
+
+warning: methods `in_flight_query_count`, `in_flight_queries`, `is_ready_for_shutdown`, `invalidate_backing_standby_cache`, and `set_status` are never used
+   --> src/data/server/flight.rs:198:12
+    |
+144 | impl DataNodeFlightService {
+    | -------------------------- methods in this implementation
+...
+198 |     pub fn in_flight_query_count(&self) -> u64 {
+    |            ^^^^^^^^^^^^^^^^^^^^^
+...
+204 |     pub fn in_flight_queries(&self) -> Arc<std::sync::atomic::AtomicU64> {
+    |            ^^^^^^^^^^^^^^^^^
+...
+209 |     pub fn is_ready_for_shutdown(&self) -> bool {
+    |            ^^^^^^^^^^^^^^^^^^^^^
+...
+268 |     pub async fn invalidate_backing_standby_cache(&self) {
+    |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+280 |     pub async fn set_status(&self, status: &str) {
+    |                  ^^^^^^^^^^
+
+warning: methods `invalidate` and `layout` are never used
+   --> src/iceberg/catalog/mynadb_catalog.rs:146:12
+    |
+ 25 | impl MynaDbIcebergCatalog {
+    | ------------------------- methods in this implementation
+...
+146 |     pub fn invalidate(&self, catalog: &str, namespace: &str, table: &str) {
+    |            ^^^^^^^^^^
+...
+157 |     pub fn layout(&self) -> &DataLayout {
+    |            ^^^^^^
+
+warning: struct `IcebergRestState` is never constructed
+  --> src/iceberg/catalog/rest_catalog.rs:21:12
+   |
+21 | pub struct IcebergRestState {
+   |            ^^^^^^^^^^^^^^^^
+
+warning: struct `ConfigResponse` is never constructed
+  --> src/iceberg/catalog/rest_catalog.rs:32:8
+   |
+32 | struct ConfigResponse {
+   |        ^^^^^^^^^^^^^^
+
+warning: struct `ListNamespacesResponse` is never constructed
+  --> src/iceberg/catalog/rest_catalog.rs:38:8
+   |
+38 | struct ListNamespacesResponse {
+   |        ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: struct `NamespaceResponse` is never constructed
+  --> src/iceberg/catalog/rest_catalog.rs:43:8
+   |
+43 | struct NamespaceResponse {
+   |        ^^^^^^^^^^^^^^^^^
+
+warning: struct `ListTablesResponse` is never constructed
+  --> src/iceberg/catalog/rest_catalog.rs:49:8
+   |
+49 | struct ListTablesResponse {
+   |        ^^^^^^^^^^^^^^^^^^
+
+warning: struct `TableIdentifier` is never constructed
+  --> src/iceberg/catalog/rest_catalog.rs:54:8
+   |
+54 | struct TableIdentifier {
+   |        ^^^^^^^^^^^^^^^
+
+warning: struct `LoadTableResponse` is never constructed
+  --> src/iceberg/catalog/rest_catalog.rs:60:8
+   |
+60 | struct LoadTableResponse {
+   |        ^^^^^^^^^^^^^^^^^
+
+warning: function `config_handler` is never used
+  --> src/iceberg/catalog/rest_catalog.rs:84:14
+   |
+84 | pub async fn config_handler(
+   |              ^^^^^^^^^^^^^^
+
+warning: function `list_namespaces_handler` is never used
+  --> src/iceberg/catalog/rest_catalog.rs:97:14
+   |
+97 | pub async fn list_namespaces_handler(
+   |              ^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `get_namespace_handler` is never used
+   --> src/iceberg/catalog/rest_catalog.rs:111:14
+    |
+111 | pub async fn get_namespace_handler(
+    |              ^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `list_tables_handler` is never used
+   --> src/iceberg/catalog/rest_catalog.rs:141:14
+    |
+141 | pub async fn list_tables_handler(
+    |              ^^^^^^^^^^^^^^^^^^^
+
+warning: function `load_table_handler` is never used
+   --> src/iceberg/catalog/rest_catalog.rs:161:14
+    |
+161 | pub async fn load_table_handler(
+    |              ^^^^^^^^^^^^^^^^^^
+
+warning: function `table_exists_handler` is never used
+   --> src/iceberg/catalog/rest_catalog.rs:222:14
+    |
+222 | pub async fn table_exists_handler(
+    |              ^^^^^^^^^^^^^^^^^^^^
+
+warning: function `build_iceberg_router` is never used
+   --> src/iceberg/catalog/rest_catalog.rs:237:8
+    |
+237 | pub fn build_iceberg_router(state: Arc<IcebergRestState>) -> axum::Router<()> {
+    |        ^^^^^^^^^^^^^^^^^^^^
+
+warning: method `add_existing_file` is never used
+   --> src/iceberg/metadata/manifest.rs:129:12
+    |
+ 85 | impl ManifestFile {
+    | ----------------- method in this implementation
+...
+129 |     pub fn add_existing_file(
+    |            ^^^^^^^^^^^^^^^^^
+
+warning: method `total_data_files` is never used
+  --> src/iceberg/metadata/manifest_list.rs:97:12
+   |
+46 | impl ManifestList {
+   | ----------------- method in this implementation
+...
+97 |     pub fn total_data_files(&self) -> i32 {
+   |            ^^^^^^^^^^^^^^^^
+
+warning: associated function `new_overwrite` is never used
+  --> src/iceberg/metadata/snapshot.rs:67:12
+   |
+26 | impl Snapshot {
+   | ------------- associated function in this implementation
+...
+67 |     pub fn new_overwrite(
+   |            ^^^^^^^^^^^^^
+
+warning: methods `current_schema`, `current_snapshot`, and `snapshot_count` are never used
+   --> src/iceberg/metadata/table_metadata.rs:156:12
+    |
+ 70 | impl TableMetadata {
+    | ------------------ methods in this implementation
+...
+156 |     pub fn current_schema(&self) -> Option<&IcebergSchema> {
+    |            ^^^^^^^^^^^^^^
+...
+163 |     pub fn current_snapshot(&self) -> Option<&Snapshot> {
+    |            ^^^^^^^^^^^^^^^^
+...
+172 |     pub fn snapshot_count(&self) -> usize {
+    |            ^^^^^^^^^^^^^^
+
+warning: method `sync_table` is never used
+  --> src/iceberg/sync/metadata_sync.rs:83:18
+   |
+22 | impl MetadataSyncJob {
+   | -------------------- method in this implementation
+...
+83 |     pub async fn sync_table(
+   |                  ^^^^^^^^^^
+
+warning: associated functions `new` and `with_metadata` are never used
+   --> src/jobs/compactor/mod.rs:282:12
+    |
+280 | impl Compactor {
+    | -------------- associated functions in this implementation
+281 |     /// Create a new Compactor with storage backend and configuration
+282 |     pub fn new(storage: Arc<Storage>, config: &CompactionConfig) -> Self {
+    |            ^^^
+...
+287 |     pub fn with_metadata(
+    |            ^^^^^^^^^^^^^
+
+warning: methods `start_background_lsm_compaction` and `start_background_full_compaction` are never used
+  --> src/jobs/compactor/background.rs:22:12
+   |
+17 | impl Compactor {
+   | -------------- methods in this implementation
+...
+22 |     pub fn start_background_lsm_compaction(
+   |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+84 |     pub fn start_background_full_compaction(
+   |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: associated function `new` is never used
+  --> src/jobs/database_manager.rs:32:12
+   |
+31 | impl DatabaseManager {
+   | -------------------- associated function in this implementation
+32 |     pub fn new(data_dir: &str) -> Self {
+   |            ^^^
+
+warning: associated items `new` and `run_policy` are never used
+   --> src/jobs/downsampling/job.rs:40:12
+    |
+ 38 | impl DownsamplingJob {
+    | -------------------- associated items in this implementation
+ 39 |     /// Create a new downsampling job
+ 40 |     pub fn new(
+    |            ^^^
+...
+388 |     pub async fn run_policy(&self, policy_name: &str) -> Result<CycleStats, String> {
+    |                  ^^^^^^^^^^
+
+warning: function `build_tag_discovery_query` is never used
+  --> src/jobs/downsampling/query_builder.rs:57:8
+   |
+57 | pub fn build_tag_discovery_query(source_table: &str) -> String {
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: associated items `with_dir`, `save_status`, and `find_policies_for_table` are never used
+   --> src/jobs/downsampling/storage.rs:45:12
+    |
+ 31 | impl DownsamplingStorage {
+    | ------------------------ associated items in this implementation
+...
+ 45 |     pub fn with_dir(dir: PathBuf) -> Self {
+    |            ^^^^^^^^
+...
+184 |     pub async fn save_status(&self, status: &PolicyStatus) -> Result<(), String> {
+    |                  ^^^^^^^^^^^
+...
+254 |     pub async fn find_policies_for_table(
+    |                  ^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: method `tier_table_name` is never used
+   --> src/jobs/downsampling/types.rs:137:12
+    |
+118 | impl DownsamplingPolicy {
+    | ----------------------- method in this implementation
+...
+137 |     pub fn tier_table_name(&self, tier: &DownsamplingTier) -> Result<String, String> {
+    |            ^^^^^^^^^^^^^^^
+
+warning: associated function `with_meta_client` is never used
+  --> src/jobs/retention_manager.rs:43:12
+   |
+27 | impl RetentionManager {
+   | --------------------- associated function in this implementation
+...
+43 |     pub fn with_meta_client(
+   |            ^^^^^^^^^^^^^^^^
+
+warning: method `last_sequence` is never used
+   --> src/meta/client/event_subscriber.rs:235:12
+    |
+ 75 | impl EventSubscriber {
+    | -------------------- method in this implementation
+...
+235 |     pub fn last_sequence(&self) -> u64 {
+    |            ^^^^^^^^^^^^^
+
+warning: field `last_sequence` is never read
+   --> src/meta/client/event_subscriber.rs:251:5
+    |
+250 | pub struct EventSubscriberHandle {
+    |            --------------------- field in this struct
+251 |     last_sequence: Arc<AtomicU64>,
+    |     ^^^^^^^^^^^^^
+
+warning: method `last_sequence` is never used
+   --> src/meta/client/event_subscriber.rs:256:12
+    |
+254 | impl EventSubscriberHandle {
+    | -------------------------- method in this implementation
+255 |     /// Get the last seen sequence number
+256 |     pub fn last_sequence(&self) -> u64 {
+    |            ^^^^^^^^^^^^^
+
+warning: multiple methods are never used
+    --> src/meta/client/meta_client.rs:649:18
+     |
+ 188 | impl MetaClient {
+     | --------------- methods in this implementation
+...
+ 649 |     pub async fn refresh_owner_ttl(
+     |                  ^^^^^^^^^^^^^^^^^
+...
+ 683 |     pub async fn cleanup_expired_owners(&self) -> Result<(u32, Vec<String>), String> {
+     |                  ^^^^^^^^^^^^^^^^^^^^^^
+...
+ 709 |     pub async fn remove_table_owner(
+     |                  ^^^^^^^^^^^^^^^^^^
+...
+ 921 |     pub async fn delete_distribution_config(
+     |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+ 953 |     pub async fn get_distribution_config(
+     |                  ^^^^^^^^^^^^^^^^^^^^^^^
+...
+ 992 |     pub async fn get_effective_distribution_config(
+     |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1108 |     pub async fn renew_lock(
+     |                  ^^^^^^^^^^
+...
+1136 |     pub async fn get_lock(&self, key: &str) -> Result<Option<LockInfo>, String> {
+     |                  ^^^^^^^^
+...
+1279 |     pub async fn publish(
+     |                  ^^^^^^^
+...
+1357 |     pub async fn complete_retire(&self, node_id: &str) -> Result<(), String> {
+     |                  ^^^^^^^^^^^^^^^
+...
+1397 |     pub async fn get_retire_status(&self, node_id: &str) -> Result<RetireStatus, String> {
+     |                  ^^^^^^^^^^^^^^^^^
+...
+1425 |     pub async fn reassign_table_for_retire(
+     |                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1457 |     pub async fn remove_standby_from_tables(&self, standby_node_id: &str) -> Result<usize, String> {
+     |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: fields `meta_nodes`, `router_nodes`, `data_nodes`, and `compactor_nodes` are never read
+    --> src/meta/client/meta_client.rs:1535:9
+     |
+1533 | pub struct ClusterStatus {
+     |            ------------- fields in this struct
+1534 |     pub meta_leader: String,
+1535 |     pub meta_nodes: u32,
+     |         ^^^^^^^^^^
+1536 |     pub router_nodes: u32,
+     |         ^^^^^^^^^^^^
+1537 |     pub data_nodes: u32,
+     |         ^^^^^^^^^^
+1538 |     pub compactor_nodes: u32,
+     |         ^^^^^^^^^^^^^^^
+     |
+     = note: `ClusterStatus` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: methods `effective_replication_factor` and `lease_ttl` are never used
+   --> src/meta/config.rs:211:12
+    |
+209 | impl ReplicationAssignmentConfig {
+    | -------------------------------- methods in this implementation
+210 |     /// Get the effective replication factor based on available nodes
+211 |     pub fn effective_replication_factor(&self, available_nodes: usize) -> u8 {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+221 |     pub fn lease_ttl(&self) -> Duration {
+    |            ^^^^^^^^^
+
+warning: enum `UnprotectedWritePolicy` is never used
+   --> src/meta/config.rs:302:10
+    |
+302 | pub enum UnprotectedWritePolicy {
+    |          ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: method `get_unprotected_write_policy` is never used
+   --> src/meta/config.rs:310:12
+    |
+308 | impl FailoverConfig {
+    | ------------------- method in this implementation
+309 |     /// Parse unprotected_write_policy string to enum
+310 |     pub fn get_unprotected_write_policy(&self) -> UnprotectedWritePolicy {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: methods `ttl_ms` and `check_interval` are never used
+   --> src/meta/config.rs:495:12
+    |
+493 | impl OwnershipConfig {
+    | -------------------- methods in this implementation
+494 |     /// Get TTL in milliseconds
+495 |     pub fn ttl_ms(&self) -> u64 {
+    |            ^^^^^^
+...
+500 |     pub fn check_interval(&self) -> Duration {
+    |            ^^^^^^^^^^^^^^
+
+warning: methods `required_primaries_for_total` and `target_standby_count` are never used
+   --> src/meta/config.rs:689:12
+    |
+664 | impl StandbyConfig {
+    | ------------------ methods in this implementation
+...
+689 |     pub fn required_primaries_for_total(&self, total_nodes: usize) -> usize {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+703 |     pub fn target_standby_count(&self, primary_count: usize) -> usize {
+    |            ^^^^^^^^^^^^^^^^^^^^
+
+warning: methods `heartbeat_interval` and `election_timeout_range` are never used
+   --> src/meta/config.rs:870:12
+    |
+868 | impl MetaConfig {
+    | --------------- methods in this implementation
+869 |     /// Get heartbeat interval as Duration
+870 |     pub fn heartbeat_interval(&self) -> Duration {
+    |            ^^^^^^^^^^^^^^^^^^
+...
+875 |     pub fn election_timeout_range(&self) -> (Duration, Duration) {
+    |            ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: method `node_id` is never used
+   --> src/meta/meta_node/mod.rs:122:12
+    |
+ 45 | impl MetaNode {
+    | ------------- method in this implementation
+...
+122 |     pub fn node_id(&self) -> NodeId {
+    |            ^^^^^^^
+
+warning: method `shutdown` is never used
+   --> src/meta/meta_node/lifecycle.rs:337:18
+    |
+  9 | impl MetaNode {
+    | ------------- method in this implementation
+...
+337 |     pub async fn shutdown(&self) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
+    |                  ^^^^^^^^
+
+warning: method `current_sequence` is never used
+  --> src/meta/meta_node/reads.rs:90:18
+   |
+ 9 | impl MetaNode {
+   | ------------- method in this implementation
+...
+90 |     pub async fn current_sequence(&self) -> u64 {
+   |                  ^^^^^^^^^^^^^^^^
+
+warning: methods `add_table_owner`, `get_table_owner`, `get_table_all_owners`, and `count_tables_per_node` are never used
+   --> src/meta/meta_node/tables.rs:96:18
+    |
+  6 | impl MetaNode {
+    | ------------- methods in this implementation
+...
+ 96 |     pub async fn add_table_owner(
+    |                  ^^^^^^^^^^^^^^^
+...
+180 |     pub async fn get_table_owner(
+    |                  ^^^^^^^^^^^^^^^
+...
+190 |     pub async fn get_table_all_owners(
+    |                  ^^^^^^^^^^^^^^^^^^^^
+...
+231 |     pub async fn count_tables_per_node(&self) -> std::collections::HashMap<String, usize> {
+    |                  ^^^^^^^^^^^^^^^^^^^^^
+
+warning: struct `NodeConfig` is never constructed
+  --> src/meta/raft/mod.rs:31:12
+   |
+31 | pub struct NodeConfig {
+   |            ^^^^^^^^^^
+
+warning: associated function `open` is never used
+   --> src/meta/raft/log_store.rs:124:12
+    |
+ 48 | impl SledLogStore {
+    | ----------------- associated function in this implementation
+...
+124 |     pub fn open(path: &std::path::Path) -> Result<Self, sled::Error> {
+    |            ^^^^
+
+warning: methods `remove_peer` and `get_peers` are never used
+  --> src/meta/raft/network.rs:46:12
+   |
+31 | impl MetaNetworkFactory {
+   | ----------------------- methods in this implementation
+...
+46 |     pub fn remove_peer(&self, node_id: NodeId) {
+   |            ^^^^^^^^^^^
+...
+53 |     pub fn get_peers(&self) -> Vec<(NodeId, String)> {
+   |            ^^^^^^^^^
+
+warning: associated function `open` is never used
+   --> src/meta/raft/state_machine/mod.rs:153:12
+    |
+ 98 | impl MetaStateMachine {
+    | --------------------- associated function in this implementation
+...
+153 |     pub fn open(path: &std::path::Path) -> Result<Self, sled::Error> {
+    |            ^^^^
+
+warning: method `list_distribution_configs_for_catalog` is never used
+   --> src/meta/raft/state_machine/distribution.rs:205:12
+    |
+ 12 | impl MetaStateMachine {
+    | --------------------- method in this implementation
+...
+205 |     pub fn list_distribution_configs_for_catalog(&self, catalog: &str) -> Vec<DistributionConfig> {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: method `current_sequence` is never used
+   --> src/meta/raft/state_machine/query.rs:117:12
+    |
+ 10 | impl MetaStateMachine {
+    | --------------------- method in this implementation
+...
+117 |     pub fn current_sequence(&self) -> u64 {
+    |            ^^^^^^^^^^^^^^^^
+
+warning: multiple methods are never used
+   --> src/meta/raft/state_machine/table.rs:787:12
+    |
+ 22 | impl MetaStateMachine {
+    | --------------------- methods in this implementation
+...
+787 |     pub fn get_table_owner(&self, catalog: &str, schema: &str, table: &str) -> Option<String> {
+    |            ^^^^^^^^^^^^^^^
+...
+821 |     pub fn get_table_all_owners(&self, catalog: &str, schema: &str, table: &str) -> Vec<String> {
+    |            ^^^^^^^^^^^^^^^^^^^^
+...
+886 |     pub fn list_tables_for_primary_node(&self, node_id: &str) -> Vec<TableMeta> {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+947 |     pub fn count_tables_per_node(&self) -> std::collections::HashMap<String, usize> {
+    |            ^^^^^^^^^^^^^^^^^^^^^
+...
+967 |     pub fn count_all_table_owners(&self) -> std::collections::HashMap<String, usize> {
+    |            ^^^^^^^^^^^^^^^^^^^^^^
+...
+983 |     pub fn list_multi_owner_tables(&self) -> Vec<TableMeta> {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^
+...
+999 |     pub fn get_total_table_stats(&self) -> (usize, u64, u64) {
+    |            ^^^^^^^^^^^^^^^^^^^^^
+
+warning: methods `get_protection_status` and `count_spare_standbys` are never used
+   --> src/meta/recovery/mod.rs:830:12
+    |
+ 47 | impl RecoveryManager {
+    | -------------------- methods in this implementation
+...
+830 |     pub fn get_protection_status(&self) -> ClusterProtectionStatus {
+    |            ^^^^^^^^^^^^^^^^^^^^^
+...
+884 |     fn count_spare_standbys(&self) -> usize {
+    |        ^^^^^^^^^^^^^^^^^^^^
+
+warning: enum `RecoveryStatus` is never used
+  --> src/meta/recovery/types.rs:31:10
+   |
+31 | pub enum RecoveryStatus {
+   |          ^^^^^^^^^^^^^^
+
+warning: enum `RecoveryStep` is never used
+  --> src/meta/recovery/types.rs:56:10
+   |
+56 | pub enum RecoveryStep {
+   |          ^^^^^^^^^^^^
+
+warning: variants `NoSpareAvailable`, `MetaError`, and `Aborted` are never constructed
+   --> src/meta/recovery/types.rs:123:5
+    |
+ 99 | pub enum RecoveryError {
+    |          ------------- variants in this enum
+...
+123 |     NoSpareAvailable { affected_primaries: Vec<String> },
+    |     ^^^^^^^^^^^^^^^^
+...
+133 |     MetaError(String),
+    |     ^^^^^^^^^
+...
+136 |     Aborted { reason: String },
+    |     ^^^^^^^
+    |
+    = note: `RecoveryError` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: associated function `standby_recovery_flexible` is never used
+   --> src/meta/recovery/types.rs:306:12
+    |
+229 | impl RecoveryResult {
+    | ------------------- associated function in this implementation
+...
+306 |     pub fn standby_recovery_flexible(
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: struct `UnprotectedPrimary` is never constructed
+   --> src/meta/recovery/types.rs:343:12
+    |
+343 | pub struct UnprotectedPrimary {
+    |            ^^^^^^^^^^^^^^^^^^
+
+warning: struct `ClusterProtectionStatus` is never constructed
+   --> src/meta/recovery/types.rs:351:12
+    |
+351 | pub struct ClusterProtectionStatus {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: enum `ClusterHealthStatus` is never used
+   --> src/meta/recovery/types.rs:373:10
+    |
+373 | pub enum ClusterHealthStatus {
+    |          ^^^^^^^^^^^^^^^^^^^
+
+warning: methods `recommend` and `get_status` are never used
+   --> src/meta/scale_in/mod.rs:300:18
+    |
+ 70 | impl ScaleInManager {
+    | ------------------- methods in this implementation
+...
+300 |     pub async fn recommend(
+    |                  ^^^^^^^^^
+...
+312 |     pub async fn get_status(&self, plan_id: &str) -> Result<ScaleInStatus, ScaleInError> {
+    |                  ^^^^^^^^^^
+
+warning: fields `flush_timeout_secs` and `strategy` are never read
+  --> src/meta/scale_in/types.rs:32:9
+   |
+18 | pub struct ScaleInConfig {
+   |            ------------- fields in this struct
+...
+32 |     pub flush_timeout_secs: u64,
+   |         ^^^^^^^^^^^^^^^^^^
+...
+38 |     pub strategy: ScaleInStrategy,
+   |         ^^^^^^^^
+   |
+   = note: `ScaleInConfig` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: method `node_has_tables` is never used
+   --> src/meta/scale_in/types.rs:388:12
+    |
+381 | impl ClusterState {
+    | ----------------- method in this implementation
+...
+388 |     pub fn node_has_tables(&self, node_id: &str) -> bool {
+    |            ^^^^^^^^^^^^^^^
+
+warning: struct `ScaleInStatus` is never constructed
+   --> src/meta/scale_in/types.rs:441:12
+    |
+441 | pub struct ScaleInStatus {
+    |            ^^^^^^^^^^^^^
+
+warning: variants `InvalidRequest` and `MetaError` are never constructed
+   --> src/meta/scale_in/types.rs:465:5
+    |
+463 | pub enum ScaleInError {
+    |          ------------ variants in this enum
+464 |     /// Invalid request parameters
+465 |     InvalidRequest(String),
+    |     ^^^^^^^^^^^^^^
+...
+493 |     MetaError(String),
+    |     ^^^^^^^^^
+    |
+    = note: `ScaleInError` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: method `is_complete` is never used
+   --> src/meta/scale_in/types.rs:625:12
+    |
+623 | impl HAUnit {
+    | ----------- method in this implementation
+624 |     /// Check if this unit is complete (has the expected number of primaries and standby)
+625 |     pub fn is_complete(&self, expected_primaries: usize) -> bool {
+    |            ^^^^^^^^^^^
+
+warning: method `validate_operation` is never used
+   --> src/meta/scale_in/validator.rs:404:12
+    |
+ 34 | impl ScaleInValidator {
+    | --------------------- method in this implementation
+...
+404 |     pub fn validate_operation(
+    |            ^^^^^^^^^^^^^^^^^^
+
+warning: field `start_time` is never read
+  --> src/meta/service/http.rs:35:9
+   |
+33 | pub struct MetaHttpState {
+   |            ------------- field in this struct
+34 |     pub node_id: u64,
+35 |     pub start_time: Instant,
+   |         ^^^^^^^^^^
+   |
+   = note: `MetaHttpState` has a derived impl for the trait `Clone`, but this is intentionally ignored during dead code analysis
+
+warning: field `force_flush` is never read
+   --> src/meta/service/http.rs:284:9
+    |
+281 | pub struct RetireRequest {
+    |            ------------- field in this struct
+...
+284 |     pub force_flush: bool,
+    |         ^^^^^^^^^^^
+
+warning: field `force_flush` is never read
+   --> src/meta/service/http.rs:524:9
+    |
+519 | pub struct ExecuteScaleInRequest {
+    |            --------------------- field in this struct
+...
+524 |     pub force_flush: bool,
+    |         ^^^^^^^^^^^
+
+warning: methods `is_more_specific_than`, `applies_to`, and `nodes_to_use` are never used
+   --> src/meta/types/distribution.rs:117:12
+    |
+ 66 | impl DistributionConfig {
+    | ----------------------- methods in this implementation
+...
+117 |     pub fn is_more_specific_than(&self, other: &Self) -> bool {
+    |            ^^^^^^^^^^^^^^^^^^^^^
+...
+122 |     pub fn applies_to(&self, catalog: &str, schema: &str, table: &str) -> bool {
+    |            ^^^^^^^^^^
+...
+134 |     pub fn nodes_to_use(&self, total_primary_nodes: usize) -> usize {
+    |            ^^^^^^^^^^^^
+
+warning: method `storage_key` is never used
+  --> src/meta/types/lock.rs:33:12
+   |
+17 | impl LockInfo {
+   | ------------- method in this implementation
+...
+33 |     pub fn storage_key(&self) -> String {
+   |            ^^^^^^^^^^^
+
+warning: method `storage_key` is never used
+  --> src/meta/types/lock.rs:64:12
+   |
+48 | impl LeaderInfo {
+   | --------------- method in this implementation
+...
+64 |     pub fn storage_key(&self) -> String {
+   |            ^^^^^^^^^^^
+
+warning: method `is_expired` is never used
+  --> src/meta/types/lock.rs:96:12
+   |
+79 | impl LeaseInfo {
+   | -------------- method in this implementation
+...
+96 |     pub fn is_expired(&self) -> bool {
+   |            ^^^^^^^^^^
+
+warning: multiple associated items are never used
+   --> src/meta/types/node.rs:190:12
+    |
+189 | impl NodeInfo {
+    | ------------- associated items in this implementation
+190 |     pub fn new(node_id: String, role: NodeRole, advertise_addr: String) -> Self {
+    |            ^^^
+...
+209 |     pub fn with_http(mut self, addr: String) -> Self {
+    |            ^^^^^^^^^
+...
+214 |     pub fn with_flight(mut self, addr: String) -> Self {
+    |            ^^^^^^^^^^^
+...
+219 |     pub fn with_labels(mut self, labels: HashMap<String, String>) -> Self {
+    |            ^^^^^^^^^^^
+...
+228 |     pub fn with_mode(mut self, mode: DataNodeMode) -> Self {
+    |            ^^^^^^^^^
+...
+234 |     pub fn is_primary(&self) -> bool {
+    |            ^^^^^^^^^^
+...
+239 |     pub fn is_standby(&self) -> bool {
+    |            ^^^^^^^^^^
+...
+249 |     pub fn region(&self) -> Option<&str> {
+    |            ^^^^^^
+...
+254 |     pub fn rack(&self) -> Option<&str> {
+    |            ^^^^
+...
+259 |     pub fn pool(&self) -> Option<&str> {
+    |            ^^^^
+...
+267 |     pub fn is_different_zone(&self, other: &NodeInfo) -> bool {
+    |            ^^^^^^^^^^^^^^^^^
+...
+275 |     pub fn is_different_rack(&self, other: &NodeInfo) -> bool {
+    |            ^^^^^^^^^^^^^^^^^
+...
+283 |     pub fn is_different_region(&self, other: &NodeInfo) -> bool {
+    |            ^^^^^^^^^^^^^^^^^^^
+...
+294 |     pub fn is_different_failure_domain(&self, other: &NodeInfo) -> bool {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: constant `REGION` is never used
+  --> src/meta/types/node.rs:19:15
+   |
+19 |     pub const REGION: &str = "topology.kubernetes.io/region";
+   |               ^^^^^^
+
+warning: constant `RACK` is never used
+  --> src/meta/types/node.rs:23:15
+   |
+23 |     pub const RACK: &str = "mynadb.io/rack";
+   |               ^^^^
+
+warning: constant `POOL` is never used
+  --> src/meta/types/node.rs:27:15
+   |
+27 |     pub const POOL: &str = "mynadb.io/pool";
+   |               ^^^^
+
+warning: associated items `new` and `is_complete` are never used
+  --> src/meta/types/scale_in.rs:31:12
+   |
+30 | impl RetireStatus {
+   | ----------------- associated items in this implementation
+31 |     pub fn new(node_id: String, tables_total: usize) -> Self {
+   |            ^^^
+...
+44 |     pub fn is_complete(&self) -> bool {
+   |            ^^^^^^^^^^^
+
+warning: struct `ScaleInRequest` is never constructed
+  --> src/meta/types/scale_in.rs:64:12
+   |
+64 | pub struct ScaleInRequest {
+   |            ^^^^^^^^^^^^^^
+
+warning: associated items `with_nodes`, `with_counts`, and `is_explicit` are never used
+  --> src/meta/types/scale_in.rs:78:12
+   |
+76 | impl ScaleInRequest {
+   | ------------------- associated items in this implementation
+77 |     /// Create a request to retire specific nodes
+78 |     pub fn with_nodes(nodes: Vec<String>) -> Self {
+   |            ^^^^^^^^^^
+...
+87 |     pub fn with_counts(reduce_primaries: u32, reduce_standbys: u32) -> Self {
+   |            ^^^^^^^^^^^
+...
+96 |     pub fn is_explicit(&self) -> bool {
+   |            ^^^^^^^^^^^
+
+warning: method `total_nodes` is never used
+   --> src/meta/types/scale_in.rs:145:12
+    |
+117 | impl ScaleInRecommendation {
+    | -------------------------- method in this implementation
+...
+145 |     pub fn total_nodes(&self) -> usize {
+    |            ^^^^^^^^^^^
+
+warning: associated items `with_default_ttl` and `remaining_ttl_ms` are never used
+  --> src/meta/types/table.rs:42:12
+   |
+28 | impl TableOwnerEntry {
+   | -------------------- associated items in this implementation
+...
+42 |     pub fn with_default_ttl(node_id: String) -> Self {
+   |            ^^^^^^^^^^^^^^^^
+...
+67 |     pub fn remaining_ttl_ms(&self) -> u64 {
+   |            ^^^^^^^^^^^^^^^^
+
+warning: multiple associated items are never used
+   --> src/meta/types/table.rs:140:12
+    |
+138 | impl TableMeta {
+    | -------------- associated items in this implementation
+139 |     /// Create a new TableMeta for a newly discovered table
+140 |     pub fn new(catalog: String, schema: String, table: String, owner_node_id: String) -> Self {
+    |            ^^^
+...
+172 |     pub fn active_owners(&self) -> impl Iterator<Item = &TableOwnerEntry> {
+    |            ^^^^^^^^^^^^^
+...
+194 |     pub fn primary_owner_entry(&self) -> Option<&TableOwnerEntry> {
+    |            ^^^^^^^^^^^^^^^^^^^
+...
+222 |     pub fn add_owner(&mut self, node_id: String) -> bool {
+    |            ^^^^^^^^^
+...
+335 |     pub fn is_multi_owner(&self) -> bool {
+    |            ^^^^^^^^^^^^^^
+...
+341 |     pub fn owner_node_id(&self) -> &str {
+    |            ^^^^^^^^^^^^^
+...
+346 |     pub fn storage_key(&self) -> String {
+    |            ^^^^^^^^^^^
+
+warning: associated functions `new` and `from_flush` are never used
+   --> src/meta/types/table.rs:425:12
+    |
+424 | impl TableStatsDelta {
+    | -------------------- associated functions in this implementation
+425 |     pub fn new() -> Self {
+    |            ^^^
+...
+438 |     pub fn from_flush(
+    |            ^^^^^^^^^^
+
+warning: constant `PREFIX_SCHEMA` is never used
+  --> src/meta/types/mod.rs:25:15
+   |
+25 |     pub const PREFIX_SCHEMA: &str = "/schemas/";
+   |               ^^^^^^^^^^^^^
+
+warning: methods `record_compaction_start` and `record_compaction_end` are never used
+  --> src/metrics/collector.rs:92:12
+   |
+16 | impl MetricsCollector {
+   | --------------------- methods in this implementation
+...
+92 |     pub fn record_compaction_start(&self) {
+   |            ^^^^^^^^^^^^^^^^^^^^^^^
+...
+96 |     pub fn record_compaction_end(&self) {
+   |            ^^^^^^^^^^^^^^^^^^^^^
+
+warning: methods `record_compaction_start` and `record_compaction_end` are never used
+   --> src/metrics/collector.rs:374:8
+    |
+338 | impl StorageMetricsCollector {
+    | ---------------------------- methods in this implementation
+...
+374 |     fn record_compaction_start(&mut self) {
+    |        ^^^^^^^^^^^^^^^^^^^^^^^
+...
+379 |     fn record_compaction_end(&mut self) {
+    |        ^^^^^^^^^^^^^^^^^^^^^
+
+warning: struct `LatencyMeasurement` is never constructed
+   --> src/metrics/types.rs:191:12
+    |
+191 | pub struct LatencyMeasurement {
+    |            ^^^^^^^^^^^^^^^^^^
+
+warning: associated items `start`, `elapsed_ms`, and `elapsed` are never used
+   --> src/metrics/types.rs:196:12
+    |
+195 | impl LatencyMeasurement {
+    | ----------------------- associated items in this implementation
+196 |     pub fn start() -> Self {
+    |            ^^^^^
+...
+202 |     pub fn elapsed_ms(&self) -> f64 {
+    |            ^^^^^^^^^^
+...
+206 |     pub fn elapsed(&self) -> Duration {
+    |            ^^^^^^^
+
+warning: function `start_flight_server` is never used
+   --> src/node/common.rs:432:14
+    |
+432 | pub async fn start_flight_server(
+    |              ^^^^^^^^^^^^^^^^^^^
+
+warning: function `start_mysql_server` is never used
+   --> src/node/common.rs:480:8
+    |
+480 | pub fn start_mysql_server(
+    |        ^^^^^^^^^^^^^^^^^^
+
+warning: function `start_http_server` is never used
+   --> src/node/common.rs:523:14
+    |
+523 | pub async fn start_http_server(addr: &str, app: axum::Router) -> tokio::task::JoinHandle<()> {
+    |              ^^^^^^^^^^^^^^^^^
+
+warning: function `is_node_running` is never used
+   --> src/node/common.rs:717:8
+    |
+717 | pub fn is_node_running(data_dir: &str, node_type: &str) -> bool {
+    |        ^^^^^^^^^^^^^^^
+
+warning: associated items `disabled`, `is_enabled`, and `start_query` are never used
+  --> src/observability/query_tracer.rs:27:12
+   |
+14 | impl QueryTracer {
+   | ---------------- associated items in this implementation
+...
+27 |     pub fn disabled() -> Self {
+   |            ^^^^^^^^
+...
+35 |     pub fn is_enabled(&self) -> bool {
+   |            ^^^^^^^^^^
+...
+40 |     pub fn start_query(&self, query: String, database: String) -> QueryTrace {
+   |            ^^^^^^^^^^^
+
+warning: struct `QueryTrace` is never constructed
+   --> src/observability/query_tracer.rs:113:12
+    |
+113 | pub struct QueryTrace {
+    |            ^^^^^^^^^^
+
+warning: methods `query_id`, `start_phase`, `add_phase`, `add_metadata`, `complete`, and `complete_with_error` are never used
+   --> src/observability/query_tracer.rs:124:12
+    |
+122 | impl QueryTrace {
+    | --------------- methods in this implementation
+123 |     /// Get the query ID for this trace
+124 |     pub fn query_id(&self) -> Option<String> {
+    |            ^^^^^^^^
+...
+129 |     pub fn start_phase(&mut self, phase: &str) {
+    |            ^^^^^^^^^^^
+...
+140 |     pub fn add_phase(&mut self, phase: &str, duration: std::time::Duration) {
+    |            ^^^^^^^^^
+...
+149 |     pub fn add_metadata(&mut self, key: &str, value: impl Into<serde_json::Value>) {
+    |            ^^^^^^^^^^^^
+...
+156 |     pub fn complete(
+    |            ^^^^^^^^
+...
+206 |     pub fn complete_with_error(self, error: String) {
+    |            ^^^^^^^^^^^^^^^^^^^
+
+warning: fields `threshold_ms`, `enabled`, and `max_logs` are never read
+  --> src/observability/slow_query_logger.rs:44:5
+   |
+43 | pub struct SlowQueryLogger {
+   |            --------------- fields in this struct
+44 |     threshold_ms: u64,
+   |     ^^^^^^^^^^^^
+45 |     enabled: bool,
+   |     ^^^^^^^
+46 |     recent_logs: Arc<RwLock<Vec<SlowQueryLog>>>,
+47 |     max_logs: usize,
+   |     ^^^^^^^^
+
+warning: multiple methods are never used
+   --> src/observability/slow_query_logger.rs:60:12
+    |
+ 50 | impl SlowQueryLogger {
+    | -------------------- methods in this implementation
+...
+ 60 |     pub fn with_max_logs(mut self, max_logs: usize) -> Self {
+    |            ^^^^^^^^^^^^^
+...
+ 66 |     pub fn log_if_slow(
+    |            ^^^^^^^^^^^
+...
+136 |     pub fn get_since(&self, since: DateTime<Utc>) -> Vec<SlowQueryLog> {
+    |            ^^^^^^^^^
+...
+151 |     pub fn threshold_ms(&self) -> u64 {
+    |            ^^^^^^^^^^^^
+...
+156 |     pub fn set_threshold(&mut self, threshold_ms: u64) {
+    |            ^^^^^^^^^^^^^
+...
+161 |     pub fn is_enabled(&self) -> bool {
+    |            ^^^^^^^^^^
+...
+166 |     pub fn set_enabled(&mut self, enabled: bool) {
+    |            ^^^^^^^^^^^
+
+warning: struct `TimelineBuilder` is never constructed
+  --> src/observability/timeline.rs:70:12
+   |
+70 | pub struct TimelineBuilder {
+   |            ^^^^^^^^^^^^^^^
+
+warning: associated items `new`, `query_id`, `start_event`, `add_event`, `add_event_with_metadata`, and `build` are never used
+   --> src/observability/timeline.rs:81:12
+    |
+ 80 | impl TimelineBuilder {
+    | -------------------- associated items in this implementation
+ 81 |     pub fn new(query: String, database: String) -> Self {
+    |            ^^^
+...
+ 93 |     pub fn query_id(&self) -> &str {
+    |            ^^^^^^^^
+...
+ 98 |     pub fn start_event(&mut self, name: impl Into<String>) {
+    |            ^^^^^^^^^^^
+...
+114 |     pub fn add_event(&mut self, name: impl Into<String>, duration: Duration) {
+    |            ^^^^^^^^^
+...
+124 |     pub fn add_event_with_metadata(
+    |            ^^^^^^^^^^^^^^^^^^^^^^^
+...
+139 |     pub fn build(mut self, result_metadata: Option<QueryResultMetadata>, error: Option<String>) -> QueryTimeline {
+    |            ^^^^^
+
+warning: method `insert` is never used
+   --> src/observability/timeline.rs:178:12
+    |
+169 | impl TimelineStore {
+    | ------------------ method in this implementation
+...
+178 |     pub fn insert(&self, timeline: QueryTimeline) {
+    |            ^^^^^^
+
+warning: function `init_tracing` is never used
+  --> src/observability/init.rs:14:8
+   |
+14 | pub fn init_tracing(config: &TracingConfig) -> Result<Option<Tracer>, Box<dyn Error + Send + Sync>> {
+   |        ^^^^^^^^^^^^
+
+warning: function `shutdown_tracing` is never used
+  --> src/observability/init.rs:80:8
+   |
+80 | pub fn shutdown_tracing() {
+   |        ^^^^^^^^^^^^^^^^
+
+warning: function `analyzer_rules_with_downsampling` is never used
+  --> src/query/analyzers/mod.rs:21:8
+   |
+21 | pub fn analyzer_rules_with_downsampling(
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: struct `DownsamplingRewriter` is never constructed
+  --> src/query/analyzers/downsampling_rewriter.rs:22:12
+   |
+22 | pub struct DownsamplingRewriter {
+   |            ^^^^^^^^^^^^^^^^^^^^
+
+warning: multiple associated functions are never used
+   --> src/query/analyzers/downsampling_rewriter.rs:33:12
+    |
+ 32 | impl DownsamplingRewriter {
+    | ------------------------- associated functions in this implementation
+ 33 |     pub fn new(storage: Arc<DownsamplingStorage>) -> Self {
+    |            ^^^
+...
+ 39 |     fn extract_date_range(filters: &[Expr]) -> Option<(Option<String>, Option<String>)> {
+    |        ^^^^^^^^^^^^^^^^^^
+...
+ 55 |     fn visit_expr_for_dates(
+    |        ^^^^^^^^^^^^^^^^^^^^
+...
+135 |     fn extract_column_string_lit(
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+155 |     fn extract_column_timestamp(
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+178 |     fn nanos_to_date_str(nanos: i64) -> String {
+    |        ^^^^^^^^^^^^^^^^^
+...
+187 |     fn date32_to_str(date32: i32) -> String {
+    |        ^^^^^^^^^^^^^
+...
+194 |     fn find_best_tier<'a>(
+    |        ^^^^^^^^^^^^^^
+...
+222 |     fn rewrite_table_name(table_name: &str, tier_name: &str) -> String {
+    |        ^^^^^^^^^^^^^^^^^^
+
+warning: associated function `with_columns` is never used
+  --> src/query/analyzers/timestamp_to_date.rs:35:12
+   |
+27 | impl TimestampToDateAnalyzer {
+   | ---------------------------- associated function in this implementation
+...
+35 |     pub fn with_columns(time_column: &str, date_column: &str) -> Self {
+   |            ^^^^^^^^^^^^
+
+warning: function `decode_batch` is never used
+   --> src/query/cache/dictionary_encoding.rs:123:8
+    |
+123 | pub fn decode_batch(batch: &RecordBatch) -> Result<RecordBatch, datafusion::arrow::error::ArrowError> {
+    |        ^^^^^^^^^^^^
+
+warning: function `estimate_savings` is never used
+   --> src/query/cache/dictionary_encoding.rs:166:8
+    |
+166 | pub fn estimate_savings(batch: &RecordBatch) -> (usize, usize, f64) {
+    |        ^^^^^^^^^^^^^^^^
+
+warning: associated function `from_date_str` is never used
+  --> src/query/cache/hot_partition_cache.rs:48:12
+   |
+37 | impl PartitionKey {
+   | ----------------- associated function in this implementation
+...
+48 |     pub fn from_date_str(catalog: &str, schema: &str, table: &str, date_str: &str) -> Option<Self> {
+   |            ^^^^^^^^^^^^^
+
+warning: struct `HotPartitionCacheStats` is never constructed
+   --> src/query/cache/hot_partition_cache.rs:151:12
+    |
+151 | pub struct HotPartitionCacheStats {
+    |            ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: methods `hit_rate` and `usage_percent` are never used
+   --> src/query/cache/hot_partition_cache.rs:164:12
+    |
+163 | impl HotPartitionCacheStats {
+    | --------------------------- methods in this implementation
+164 |     pub fn hit_rate(&self) -> f64 {
+    |            ^^^^^^^^
+...
+173 |     pub fn usage_percent(&self) -> f64 {
+    |            ^^^^^^^^^^^^^
+
+warning: methods `invalidate_partition` and `stats` are never used
+   --> src/query/cache/hot_partition_cache.rs:454:12
+    |
+196 | impl HotPartitionCache {
+    | ---------------------- methods in this implementation
+...
+454 |     pub fn invalidate_partition(&self, key: &PartitionKey) {
+    |            ^^^^^^^^^^^^^^^^^^^^
+...
+525 |     pub fn stats(&self) -> HotPartitionCacheStats {
+    |            ^^^^^
+
+warning: fields `version` and `has_partitions` are never read
+  --> src/query/cache/metadata_cache.rs:31:9
+   |
+27 | pub struct CachedTableInfo {
+   |            --------------- fields in this struct
+...
+31 |     pub version: u64,
+   |         ^^^^^^^
+32 |     /// Whether the table has partitions
+33 |     pub has_partitions: bool,
+   |         ^^^^^^^^^^^^^^
+   |
+   = note: `CachedTableInfo` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: field `file_count` is never read
+  --> src/query/cache/metadata_cache.rs:46:9
+   |
+40 | pub struct CachedFileListing {
+   |            ----------------- field in this struct
+...
+46 |     pub file_count: usize,
+   |         ^^^^^^^^^^
+   |
+   = note: `CachedFileListing` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: method `invalidate_file_listing` is never used
+   --> src/query/cache/metadata_cache.rs:260:12
+    |
+ 85 | impl TableMetadataCache {
+    | ----------------------- method in this implementation
+...
+260 |     pub fn invalidate_file_listing(&self, dir: &PathBuf) {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: struct `CachedFileInfo` is never constructed
+  --> src/query/cache/partition_files_cache.rs:42:12
+   |
+42 | pub struct CachedFileInfo {
+   |            ^^^^^^^^^^^^^^
+
+warning: associated functions `extract_level` and `from_path` are never used
+  --> src/query/cache/partition_files_cache.rs:54:8
+   |
+51 | impl CachedFileInfo {
+   | ------------------- associated functions in this implementation
+...
+54 |     fn extract_level(path: &str) -> u8 {
+   |        ^^^^^^^^^^^^^
+...
+68 |     pub fn from_path(path: String, size_bytes: Option<u64>) -> Self {
+   |            ^^^^^^^^^
+
+warning: struct `CachedPartitionFiles` is never constructed
+  --> src/query/cache/partition_files_cache.rs:80:8
+   |
+80 | struct CachedPartitionFiles {
+   |        ^^^^^^^^^^^^^^^^^^^^
+
+warning: associated items `new` and `is_expired` are never used
+  --> src/query/cache/partition_files_cache.rs:90:8
+   |
+89 | impl CachedPartitionFiles {
+   | ------------------------- associated items in this implementation
+90 |     fn new(files: Vec<CachedFileInfo>, ttl: Duration) -> Self {
+   |        ^^^
+...
+98 |     fn is_expired(&self) -> bool {
+   |        ^^^^^^^^^^
+
+warning: struct `PartitionFilesCacheStats` is never constructed
+   --> src/query/cache/partition_files_cache.rs:105:12
+    |
+105 | pub struct PartitionFilesCacheStats {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: struct `PartitionFilesCache` is never constructed
+   --> src/query/cache/partition_files_cache.rs:118:12
+    |
+118 | pub struct PartitionFilesCache {
+    |            ^^^^^^^^^^^^^^^^^^^
+
+warning: multiple associated items are never used
+   --> src/query/cache/partition_files_cache.rs:140:12
+    |
+133 | impl PartitionFilesCache {
+    | ------------------------ associated items in this implementation
+...
+140 |     pub fn new(storage: Arc<Storage>, ttl_secs: u64, max_entries: usize) -> Self {
+    |            ^^^
+...
+157 |     fn partition_key(catalog: &str, schema: &str, table: &str, partition: &str) -> String {
+    |        ^^^^^^^^^^^^^
+...
+162 |     fn partition_prefix(catalog: &str, schema: &str, table: &str, partition: &str) -> String {
+    |        ^^^^^^^^^^^^^^^^
+...
+170 |     pub async fn list_files(
+    |                  ^^^^^^^^^^
+...
+220 |     pub async fn list_files_for_table(
+    |                  ^^^^^^^^^^^^^^^^^^^^
+...
+247 |     fn cache_files(&self, key: &str, files: Vec<CachedFileInfo>) {
+    |        ^^^^^^^^^^^
+...
+258 |     fn evict_oldest(&self) {
+    |        ^^^^^^^^^^^^
+...
+284 |     pub fn invalidate(&self, catalog: &str, schema: &str, table: &str, partition: &str) {
+    |            ^^^^^^^^^^
+...
+294 |     pub fn invalidate_table(&self, catalog: &str, schema: &str, table: &str) {
+    |            ^^^^^^^^^^^^^^^^
+...
+317 |     pub fn clear(&self) {
+    |            ^^^^^
+...
+324 |     pub fn stats(&self) -> PartitionFilesCacheStats {
+    |            ^^^^^
+...
+339 |     pub async fn prewarm_recent_partitions(
+    |                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: type alias `SharedPartitionFilesCache` is never used
+   --> src/query/cache/partition_files_cache.rs:381:10
+    |
+381 | pub type SharedPartitionFilesCache = Arc<PartitionFilesCache>;
+    |          ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `filter_batches` is never used
+  --> src/query/cache/predicate_eval.rs:68:8
+   |
+68 | pub fn filter_batches(
+   |        ^^^^^^^^^^^^^^
+
+warning: method `config` is never used
+   --> src/query/cache/query_cache.rs:504:12
+    |
+191 | impl QueryResultCache {
+    | --------------------- method in this implementation
+...
+504 |     pub fn config(&self) -> &QueryCacheConfig {
+    |            ^^^^^^
+
+warning: variants `CatalogNotFound`, `SchemaNotFound`, `TableNotFound`, `PartitionNotFound`, `AlreadyExists`, and `Internal` are never constructed
+  --> src/query/catalog/manager.rs:17:5
+   |
+15 | pub enum MetadataError {
+   |          ------------- variants in this enum
+16 |     /// Catalog not found
+17 |     CatalogNotFound(String),
+   |     ^^^^^^^^^^^^^^^
+18 |     /// Schema not found
+19 |     SchemaNotFound(String, String),
+   |     ^^^^^^^^^^^^^^
+20 |     /// Table not found
+21 |     TableNotFound(String, String, String),
+   |     ^^^^^^^^^^^^^
+22 |     /// Partition not found
+23 |     PartitionNotFound(String, String, String, String),
+   |     ^^^^^^^^^^^^^^^^^
+...
+31 |     AlreadyExists(String),
+   |     ^^^^^^^^^^^^^
+32 |     /// Internal error
+33 |     Internal(String),
+   |     ^^^^^^^^
+   |
+   = note: `MetadataError` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: multiple methods are never used
+   --> src/query/catalog/manager.rs:78:14
+    |
+ 68 | pub trait MetadataManager: Send + Sync {
+    |           --------------- methods in this trait
+...
+ 78 |     async fn rescan(&self, data_dir: &str) -> MetadataResult<()>;
+    |              ^^^^^^
+...
+ 88 |     async fn list_catalogs(&self) -> MetadataResult<Vec<CatalogInfo>>;
+    |              ^^^^^^^^^^^^^
+...
+ 91 |     async fn get_catalog(&self, catalog: &str) -> MetadataResult<CatalogInfo>;
+    |              ^^^^^^^^^^^
+...
+ 94 |     async fn register_catalog(&self, info: CatalogInfo) -> MetadataResult<()>;
+    |              ^^^^^^^^^^^^^^^^
+...
+ 97 |     async fn remove_catalog(&self, catalog: &str) -> MetadataResult<()>;
+    |              ^^^^^^^^^^^^^^
+...
+102 |     async fn list_schemas(&self, catalog: &str) -> MetadataResult<Vec<SchemaInfo>>;
+    |              ^^^^^^^^^^^^
+...
+105 |     async fn get_schema(&self, catalog: &str, schema: &str) -> MetadataResult<SchemaInfo>;
+    |              ^^^^^^^^^^
+...
+108 |     async fn register_schema(&self, info: SchemaInfo) -> MetadataResult<()>;
+    |              ^^^^^^^^^^^^^^^
+...
+111 |     async fn remove_schema(&self, catalog: &str, schema: &str) -> MetadataResult<()>;
+    |              ^^^^^^^^^^^^^
+...
+116 |     async fn list_tables(&self, catalog: &str, schema: &str) -> MetadataResult<Vec<TableInfo>>;
+    |              ^^^^^^^^^^^
+...
+119 |     async fn get_table(
+    |              ^^^^^^^^^
+...
+127 |     async fn get_table_stats(
+    |              ^^^^^^^^^^^^^^^
+...
+135 |     async fn register_table(&self, info: TableInfo) -> MetadataResult<()>;
+    |              ^^^^^^^^^^^^^^
+...
+138 |     async fn remove_table(&self, catalog: &str, schema: &str, table: &str) -> MetadataResult<()>;
+    |              ^^^^^^^^^^^^
+...
+143 |     async fn list_partitions(
+    |              ^^^^^^^^^^^^^^^
+...
+151 |     async fn list_partitions_in_range(
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+161 |     async fn get_partition(
+    |              ^^^^^^^^^^^^^
+...
+170 |     async fn register_partition(&self, info: PartitionInfo) -> MetadataResult<()>;
+    |              ^^^^^^^^^^^^^^^^^^
+...
+173 |     async fn remove_partition(
+    |              ^^^^^^^^^^^^^^^^
+...
+184 |     async fn list_files(
+    |              ^^^^^^^^^^
+...
+193 |     async fn list_table_files(
+    |              ^^^^^^^^^^^^^^^^
+...
+201 |     async fn list_files_by_level(
+    |              ^^^^^^^^^^^^^^^^^^^
+...
+211 |     async fn get_file(&self, path: &str) -> MetadataResult<FileInfo>;
+    |              ^^^^^^^^
+...
+217 |     async fn register_files(&self, files: Vec<FileInfo>) -> MetadataResult<()>;
+    |              ^^^^^^^^^^^^^^
+...
+228 |     async fn catalog_exists(&self, catalog: &str) -> bool;
+    |              ^^^^^^^^^^^^^^
+...
+231 |     async fn schema_exists(&self, catalog: &str, schema: &str) -> bool;
+    |              ^^^^^^^^^^^^^
+...
+234 |     async fn table_exists(&self, catalog: &str, schema: &str, table: &str) -> bool;
+    |              ^^^^^^^^^^^^
+...
+237 |     async fn partition_exists(
+    |              ^^^^^^^^^^^^^^^^
+...
+246 |     async fn get_global_stats(&self) -> MetadataResult<GlobalStats>;
+    |              ^^^^^^^^^^^^^^^^
+
+warning: struct `GlobalStats` is never constructed
+   --> src/query/catalog/manager.rs:251:12
+    |
+251 | pub struct GlobalStats {
+    |            ^^^^^^^^^^^
+
+warning: method `version` is never used
+   --> src/query/catalog/memory_manager.rs:156:12
+    |
+127 | impl MemoryMetadataManager {
+    | -------------------------- method in this implementation
+...
+156 |     pub fn version(&self) -> u64 {
+    |            ^^^^^^^
+
+warning: struct `TableStats` is never constructed
+   --> src/query/catalog/types.rs:161:12
+    |
+161 | pub struct TableStats {
+    |            ^^^^^^^^^^
+
+warning: struct `CustomQueryExecutor` is never constructed
+  --> src/query/executor.rs:53:12
+   |
+53 | pub struct CustomQueryExecutor {
+   |            ^^^^^^^^^^^^^^^^^^^
+
+warning: multiple associated items are never used
+   --> src/query/executor.rs:60:12
+    |
+ 58 | impl CustomQueryExecutor {
+    | ------------------------ associated items in this implementation
+ 59 |     /// Create a new executor with custom rules integrated into SessionContext
+ 60 |     pub fn new(base_ctx: SessionContext) -> Self {
+    |            ^^^
+...
+ 70 |     pub fn new_with_tracer(base_ctx: SessionContext, tracer: Arc<QueryTracer>) -> Self {
+    |            ^^^^^^^^^^^^^^^
+...
+ 77 |     pub fn from_context(ctx: SessionContext) -> Self {
+    |            ^^^^^^^^^^^^
+...
+ 85 |     pub fn context(&self) -> &SessionContext {
+    |            ^^^^^^^
+...
+ 98 |     pub async fn execute_sql(&self, sql: &str) -> Result<Vec<RecordBatch>> {
+    |                  ^^^^^^^^^^^
+...
+110 |     pub async fn execute_sql_stream(
+    |                  ^^^^^^^^^^^^^^^^^^
+...
+119 |     pub async fn explain(&self, sql: &str, verbose: bool) -> Result<String> {
+    |                  ^^^^^^^
+...
+139 |     pub async fn execute_with_state(&self, sql: &str, database: &str) -> Result<Vec<RecordBatch>> {
+    |                  ^^^^^^^^^^^^^^^^^^
+
+warning: enum `InfluxQLError` is never used
+  --> src/query/influxql/mod.rs:79:10
+   |
+79 | pub enum InfluxQLError {
+   |          ^^^^^^^^^^^^^
+
+warning: function `influxql_to_sql` is never used
+   --> src/query/influxql/mod.rs:118:8
+    |
+118 | pub fn influxql_to_sql(query: &str, ctx: &TranspileContext) -> Result<String, InfluxQLError> {
+    |        ^^^^^^^^^^^^^^^
+
+warning: function `prepare_query` is never used
+   --> src/query/influxql/mod.rs:144:8
+    |
+144 | pub fn prepare_query(
+    |        ^^^^^^^^^^^^^
+
+warning: variant `Not` is never constructed
+   --> src/query/influxql/ast.rs:116:5
+    |
+114 | pub enum UnaryOperator {
+    |          ------------- variant in this enum
+115 |     Minus,
+116 |     Not,
+    |     ^^^
+    |
+    = note: `UnaryOperator` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: variant `Regex` is never constructed
+   --> src/query/influxql/ast.rs:189:5
+    |
+187 | pub enum MeasurementName {
+    |          --------------- variant in this enum
+188 |     Name(String),
+189 |     Regex(String),
+    |     ^^^^^
+    |
+    = note: `MeasurementName` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: struct `ErrorResponse` is never constructed
+  --> src/query/influxql/response.rs:40:12
+   |
+40 | pub struct ErrorResponse {
+   |            ^^^^^^^^^^^^^
+
+warning: function `batches_to_response` is never used
+  --> src/query/influxql/response.rs:73:8
+   |
+73 | pub fn batches_to_response(
+   |        ^^^^^^^^^^^^^^^^^^^
+
+warning: function `batches_to_grouped_response` is never used
+   --> src/query/influxql/response.rs:134:8
+    |
+134 | pub fn batches_to_grouped_response(
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: associated function `with_columns` is never used
+  --> src/query/logical_optimizers/partition_filter_pushdown.rs:28:12
+   |
+21 | impl PartitionFilterPushdown {
+   | ---------------------------- associated function in this implementation
+...
+28 |     pub fn with_columns(columns: Vec<String>) -> Self {
+   |            ^^^^^^^^^^^^
+
+warning: associated function `with_logging` is never used
+  --> src/query/physical_optimizers/scan_config.rs:23:12
+   |
+18 | impl ScanConfigOptimizer {
+   | ------------------------ associated function in this implementation
+...
+23 |     pub fn with_logging(log_scans: bool) -> Self {
+   |            ^^^^^^^^^^^^
+
+warning: associated items `new_with_schema`, `has_data`, and `cached_row_count` are never used
+   --> src/query/providers/memtable_provider.rs:108:12
+    |
+ 79 | impl MemtableProvider {
+    | --------------------- associated items in this implementation
+...
+108 |     pub fn new_with_schema(
+    |            ^^^^^^^^^^^^^^^
+...
+132 |     pub fn has_data(&self) -> bool {
+    |            ^^^^^^^^
+...
+138 |     pub fn cached_row_count(&self) -> usize {
+    |            ^^^^^^^^^^^^^^^^
+
+warning: struct `MultiUnionTableProvider` is never constructed
+  --> src/query/providers/multi_union_provider.rs:49:12
+   |
+49 | pub struct MultiUnionTableProvider {
+   |            ^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: associated items `try_new`, `new_with_schema`, `provider_count`, and `prefixes` are never used
+   --> src/query/providers/multi_union_provider.rs:81:12
+    |
+ 71 | impl MultiUnionTableProvider {
+    | ---------------------------- associated items in this implementation
+...
+ 81 |     pub fn try_new(
+    |            ^^^^^^^
+...
+104 |     pub fn new_with_schema(
+    |            ^^^^^^^^^^^^^^^
+...
+119 |     pub fn provider_count(&self) -> usize {
+    |            ^^^^^^^^^^^^^^
+...
+124 |     pub fn prefixes(&self) -> &[String] {
+    |            ^^^^^^^^
+
+warning: function `merge_schemas_from_providers` is never used
+   --> src/query/providers/multi_union_provider.rs:134:4
+    |
+134 | fn merge_schemas_from_providers(providers: &[Arc<dyn TableProvider>]) -> Result<Schema> {
+    |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: struct `MultiUnionExec` is never constructed
+   --> src/query/providers/multi_union_provider.rs:246:12
+    |
+246 | pub struct MultiUnionExec {
+    |            ^^^^^^^^^^^^^^
+
+warning: associated items `new` and `child_count` are never used
+   --> src/query/providers/multi_union_provider.rs:260:12
+    |
+259 | impl MultiUnionExec {
+    | ------------------- associated items in this implementation
+260 |     pub fn new(
+    |            ^^^
+...
+282 |     pub fn child_count(&self) -> usize {
+    |            ^^^^^^^^^^^
+
+warning: associated items `new_with_schema`, `base_path`, `config`, and `object_store` are never used
+   --> src/query/providers/parquet/mod.rs:116:12
+    |
+ 76 | impl ParquetTableProvider {
+    | ------------------------- associated items in this implementation
+...
+116 |     pub fn new_with_schema(
+    |            ^^^^^^^^^^^^^^^
+...
+155 |     pub fn base_path(&self) -> &str {
+    |            ^^^^^^^^^
+...
+160 |     pub fn config(&self) -> &ParquetTableConfig {
+    |            ^^^^^^
+...
+165 |     pub fn object_store(&self) -> &Arc<dyn ObjectStore> {
+    |            ^^^^^^^^^^^^
+
+warning: fields `filter_pushdown` and `projection_pushdown` are never read
+  --> src/query/providers/parquet/config.rs:16:9
+   |
+14 | pub struct ParquetTableConfig {
+   |            ------------------ fields in this struct
+15 |     /// Enable filter pushdown to Parquet reader
+16 |     pub filter_pushdown: bool,
+   |         ^^^^^^^^^^^^^^^
+17 |     /// Enable projection pushdown for column pruning
+18 |     pub projection_pushdown: bool,
+   |         ^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `ParquetTableConfig` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: field `file_size` is never read
+  --> src/query/providers/parquet/config.rs:65:9
+   |
+59 | pub struct ParquetFileInfo {
+   |            --------------- field in this struct
+...
+65 |     pub file_size: u64,
+   |         ^^^^^^^^^
+   |
+   = note: `ParquetFileInfo` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: method `as_path` is never used
+  --> src/query/providers/parquet/config.rs:70:12
+   |
+68 | impl ParquetFileInfo {
+   | -------------------- method in this implementation
+69 |     /// Get path as PathBuf for local file operations
+70 |     pub fn as_path(&self) -> PathBuf {
+   |            ^^^^^^^
+
+warning: method `file_count` is never used
+   --> src/query/providers/parquet/exec_plan.rs:123:12
+    |
+ 75 | impl ParquetExecPlan {
+    | -------------------- method in this implementation
+...
+123 |     pub fn file_count(&self) -> usize {
+    |            ^^^^^^^^^^
+
+warning: associated function `new_with_schema` is never used
+  --> src/query/providers/union_provider.rs:89:12
+   |
+65 | impl UnionTableProvider {
+   | ----------------------- associated function in this implementation
+...
+89 |     pub fn new_with_schema(
+   |            ^^^^^^^^^^^^^^^
+
+warning: associated function `new` is never used
+   --> src/query/query_engine/mod.rs:179:12
+    |
+ 66 | impl QueryEngine {
+    | ---------------- associated function in this implementation
+...
+179 |     pub fn new(data_dir: &str) -> Self {
+    |            ^^^
+
+warning: methods `metadata_cache`, `parquet_cache`, `query_cache`, `get_hot_partition_cache_stats`, and `hot_partition_cache` are never used
+  --> src/query/query_engine/cache.rs:15:12
+   |
+13 | impl QueryEngine {
+   | ---------------- methods in this implementation
+14 |     /// Get reference to the metadata cache
+15 |     pub fn metadata_cache(&self) -> &Arc<TableMetadataCache> {
+   |            ^^^^^^^^^^^^^^
+...
+26 |     pub fn parquet_cache(&self) -> Option<&Arc<crate::data::cache::ParquetLocalCache>> {
+   |            ^^^^^^^^^^^^^
+...
+41 |     pub fn query_cache(&self) -> &SharedQueryResultCache {
+   |            ^^^^^^^^^^^
+...
+46 |     pub fn get_hot_partition_cache_stats(&self) -> HotPartitionCacheStats {
+   |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+51 |     pub fn hot_partition_cache(&self) -> &SharedHotPartitionCache {
+   |            ^^^^^^^^^^^^^^^^^^^
+
+warning: method `list_tables` is never used
+  --> src/query/query_engine/listing.rs:52:18
+   |
+10 | impl QueryEngine {
+   | ---------------- method in this implementation
+...
+52 |     pub async fn list_tables(&self) -> Vec<String> {
+   |                  ^^^^^^^^^^^
+
+warning: method `cleanup_closed` is never used
+   --> src/query/streaming.rs:259:12
+    |
+ 84 | impl StreamingQueryManager {
+    | -------------------------- method in this implementation
+...
+259 |     pub fn cleanup_closed(&self) {
+    |            ^^^^^^^^^^^^^^
+
+warning: fields `offset_nanos` and `time_column` are never read
+  --> src/query/timeseries/group_by_time.rs:39:9
+   |
+31 | pub struct TransformedQuery {
+   |            ---------------- fields in this struct
+...
+39 |     pub offset_nanos: i64,
+   |         ^^^^^^^^^^^^
+...
+43 |     pub time_column: String,
+   |         ^^^^^^^^^^^
+   |
+   = note: `TransformedQuery` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: method `with_time_column` is never used
+   --> src/query/timeseries/group_by_time.rs:102:12
+    |
+ 93 | impl GroupByTimeTransformer {
+    | --------------------------- method in this implementation
+...
+102 |     pub fn with_time_column(mut self, column: &str) -> Self {
+    |            ^^^^^^^^^^^^^^^^
+
+warning: multiple associated items are never used
+  --> src/query/timeseries/time_interval.rs:27:12
+   |
+25 | impl TimeInterval {
+   | ----------------- associated items in this implementation
+26 |     /// Create a new TimeInterval from nanoseconds
+27 |     pub fn from_nanos(nanos: i64) -> Self {
+   |            ^^^^^^^^^^
+...
+32 |     pub fn from_secs(secs: i64) -> Self {
+   |            ^^^^^^^^^
+...
+39 |     pub fn from_mins(mins: i64) -> Self {
+   |            ^^^^^^^^^
+...
+46 |     pub fn from_hours(hours: i64) -> Self {
+   |            ^^^^^^^^^^
+...
+53 |     pub fn from_days(days: i64) -> Self {
+   |            ^^^^^^^^^
+...
+60 |     pub fn as_nanos(&self) -> i64 {
+   |            ^^^^^^^^
+...
+65 |     pub fn as_millis(&self) -> i64 {
+   |            ^^^^^^^^^
+...
+70 |     pub fn as_secs(&self) -> i64 {
+   |            ^^^^^^^
+...
+75 |     pub fn as_mins(&self) -> i64 {
+   |            ^^^^^^^
+
+warning: struct `GroupByTimeClause` is never constructed
+   --> src/query/timeseries/time_interval.rs:267:12
+    |
+267 | pub struct GroupByTimeClause {
+    |            ^^^^^^^^^^^^^^^^^
+
+warning: associated items `new`, `with_offset`, and `with_fill` are never used
+   --> src/query/timeseries/time_interval.rs:278:12
+    |
+276 | impl GroupByTimeClause {
+    | ---------------------- associated items in this implementation
+277 |     /// Create a new GROUP BY time() clause with defaults
+278 |     pub fn new(interval: TimeInterval) -> Self {
+    |            ^^^
+...
+287 |     pub fn with_offset(mut self, offset: TimeInterval) -> Self {
+    |            ^^^^^^^^^^^
+...
+293 |     pub fn with_fill(mut self, fill: FillOption) -> Self {
+    |            ^^^^^^^^^
+
+warning: field `format` is never read
+  --> src/router/api.rs:35:9
+   |
+29 | pub struct QueryParams {
+   |            ----------- field in this struct
+...
+35 |     pub format: Option<String>,
+   |         ^^^^^^
+   |
+   = note: `QueryParams` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
+
+warning: methods `state`, `failure_count`, and `config` are never used
+   --> src/router/client/circuit_breaker.rs:222:12
+    |
+103 | impl CircuitBreaker {
+    | ------------------- methods in this implementation
+...
+222 |     pub fn state(&self) -> CircuitState {
+    |            ^^^^^
+...
+232 |     pub fn failure_count(&self) -> u32 {
+    |            ^^^^^^^^^^^^^
+...
+237 |     pub fn config(&self) -> &CircuitBreakerConfig {
+    |            ^^^^^^
+
+warning: field `max_connections` is never read
+  --> src/router/client/data_node_pool.rs:23:9
+   |
+21 | pub struct PoolConfig {
+   |            ---------- field in this struct
+22 |     /// Max connections per Data node
+23 |     pub max_connections: usize,
+   |         ^^^^^^^^^^^^^^^
+   |
+   = note: `PoolConfig` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: struct `DataNodeAddr` is never constructed
+  --> src/router/client/data_node_pool.rs:42:12
+   |
+42 | pub struct DataNodeAddr {
+   |            ^^^^^^^^^^^^
+
+warning: multiple methods are never used
+   --> src/router/client/data_node_pool.rs:100:12
+    |
+ 62 | impl DataNodePool {
+    | ----------------- methods in this implementation
+...
+100 |     pub fn is_node_reachable(&self, node_id: &str) -> bool {
+    |            ^^^^^^^^^^^^^^^^^
+...
+114 |     pub fn get_circuit_breaker(&self, node_id: &str) -> Option<Arc<CircuitBreaker>> {
+    |            ^^^^^^^^^^^^^^^^^^^
+...
+340 |     pub async fn query_with_files(
+    |                  ^^^^^^^^^^^^^^^^
+...
+354 |     pub async fn query_with_files_and_scope(
+    |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+428 |     pub fn has_node(&self, node_id: &str) -> bool {
+    |            ^^^^^^^^
+...
+433 |     pub fn get_node_ids(&self) -> Vec<String> {
+    |            ^^^^^^^^^^^^
+...
+438 |     pub fn node_count(&self) -> usize {
+    |            ^^^^^^^^^^
+...
+443 |     pub fn stats(&self) -> PoolStats {
+    |            ^^^^^
+
+warning: struct `PoolStats` is never constructed
+   --> src/router/client/data_node_pool.rs:539:12
+    |
+539 | pub struct PoolStats {
+    |            ^^^^^^^^^
+
+warning: struct `HealthCheckConfig` is never constructed
+  --> src/router/health_checker.rs:17:12
+   |
+17 | pub struct HealthCheckConfig {
+   |            ^^^^^^^^^^^^^^^^^
+
+warning: struct `HealthChecker` is never constructed
+  --> src/router/health_checker.rs:37:12
+   |
+37 | pub struct HealthChecker {
+   |            ^^^^^^^^^^^^^
+
+warning: associated items `new`, `start`, `stop`, `health_check_loop`, and `check_node_health` are never used
+   --> src/router/health_checker.rs:46:12
+    |
+ 45 | impl HealthChecker {
+    | ------------------ associated items in this implementation
+ 46 |     pub fn new(
+    |            ^^^
+...
+ 61 |     pub fn start(&mut self) {
+    |            ^^^^^
+...
+ 80 |     pub async fn stop(&mut self) {
+    |                  ^^^^
+...
+ 90 |     async fn health_check_loop(
+    |              ^^^^^^^^^^^^^^^^^
+...
+146 |     async fn check_node_health(pool: &DataNodePool, node_id: &str, timeout: Duration) -> bool {
+    |              ^^^^^^^^^^^^^^^^^
+
+warning: methods `set_meta_client` and `set_storage` are never used
+   --> src/router/query_coordinator/mod.rs:131:12
+    |
+ 66 | impl QueryCoordinator {
+    | --------------------- methods in this implementation
+...
+131 |     pub fn set_meta_client(&mut self, meta_client: Arc<MetaClient>) {
+    |            ^^^^^^^^^^^^^^^
+...
+136 |     pub fn set_storage(&mut self, storage: Storage) {
+    |            ^^^^^^^^^^^
+
+warning: fields `bytes_scanned` and `nodes_queried` are never read
+  --> src/router/query_coordinator/types.rs:15:9
+   |
+11 | pub struct QueryResult {
+   |            ----------- fields in this struct
+...
+15 |     pub bytes_scanned: u64,
+   |         ^^^^^^^^^^^^^
+16 |     pub nodes_queried: usize,
+   |         ^^^^^^^^^^^^^
+   |
+   = note: `QueryResult` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
+
+warning: fields `tables`, `time_range`, and `table_owners` are never read
+  --> src/router/query_coordinator/types.rs:29:9
+   |
+23 | pub struct DistributedQueryPlan {
+   |            -------------------- fields in this struct
+...
+29 |     pub tables: Vec<TableRef>,
+   |         ^^^^^^
+30 |     /// Time range filter (if present)
+31 |     pub time_range: Option<TimeRange>,
+   |         ^^^^^^^^^^
+...
+38 |     pub table_owners: Option<HashMap<String, String>>,
+   |         ^^^^^^^^^^^^
+   |
+   = note: `DistributedQueryPlan` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
+
+warning: methods `stats`, `cold_cache`, and `remove_node_from_all_caches` are never used
+   --> src/router/shard_cache/mod.rs:131:12
+    |
+112 | impl ShardCache {
+    | --------------- methods in this implementation
+...
+131 |     pub fn stats(&self) -> ShardCacheStats {
+    |            ^^^^^
+...
+153 |     pub fn cold_cache(&self) -> &Arc<ColdPartitionCache> {
+    |            ^^^^^^^^^^
+...
+179 |     pub fn remove_node_from_all_caches(&self, node_id: &str) -> (usize, usize) {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: field `discovered_at` is never read
+  --> src/router/shard_cache/cold_partition_cache.rs:40:9
+   |
+34 | pub struct ColdPartitionInfo {
+   |            ----------------- field in this struct
+...
+40 |     pub discovered_at: i64,
+   |         ^^^^^^^^^^^^^
+   |
+   = note: `ColdPartitionInfo` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: multiple methods are never used
+   --> src/router/shard_cache/cold_partition_cache.rs:98:12
+    |
+ 43 | impl ColdPartitionCache {
+    | ----------------------- methods in this implementation
+...
+ 98 |     pub fn get(
+    |            ^^^
+...
+114 |     pub fn peek(
+    |            ^^^^
+...
+170 |     pub fn mark_node_departed(&self, node_id: &str) -> usize {
+    |            ^^^^^^^^^^^^^^^^^^
+...
+197 |     pub fn remove(&self, catalog: &str, schema: &str, table: &str, date: &str) {
+    |            ^^^^^^
+...
+206 |     pub fn remove_table(&self, catalog: &str, schema: &str, table: &str) {
+    |            ^^^^^^^^^^^^
+...
+223 |     pub fn stats(&self) -> ColdCacheStats {
+    |            ^^^^^
+...
+244 |     pub fn clear(&self) {
+    |            ^^^^^
+...
+250 |     pub fn resize(&self, new_max_entries: usize) {
+    |            ^^^^^^
+...
+261 |     pub fn preload(&self, entries: Vec<(String, String, String, String, Vec<String>)>) {
+    |            ^^^^^^^
+
+warning: struct `ColdCacheStats` is never constructed
+   --> src/router/shard_cache/cold_partition_cache.rs:284:12
+    |
+284 | pub struct ColdCacheStats {
+    |            ^^^^^^^^^^^^^^
+
+warning: methods `is_distributed`, `invalidate_distribution_configs_for_catalog`, `clear_distribution_configs`, and `list_distribution_configs` are never used
+   --> src/router/shard_cache/distribution.rs:50:12
+    |
+ 13 | impl ShardCache {
+    | --------------- methods in this implementation
+...
+ 50 |     pub fn is_distributed(&self, catalog: &str, schema: &str, table: &str) -> bool {
+    |            ^^^^^^^^^^^^^^
+...
+102 |     pub fn invalidate_distribution_configs_for_catalog(&self, catalog: &str) {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+118 |     pub fn clear_distribution_configs(&self) {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+124 |     pub fn list_distribution_configs(&self) -> Vec<(String, u8, u64)> {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: methods `get_all_registered_nodes`, `get_any_active_node`, `get_queryable_data_nodes`, `get_active_standby_nodes`, and `select_node_for_read` are never used
+   --> src/router/shard_cache/node_mgmt.rs:43:12
+    |
+ 15 | impl ShardCache {
+    | --------------- methods in this implementation
+...
+ 43 |     pub fn get_all_registered_nodes(&self) -> Vec<DataNodeInfo> {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+ 59 |     pub fn get_any_active_node(&self) -> Option<DataNodeInfo> {
+    |            ^^^^^^^^^^^^^^^^^^^
+...
+ 73 |     pub fn get_queryable_data_nodes(&self) -> Vec<DataNodeInfo> {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+133 |     pub fn get_active_standby_nodes(&self) -> Vec<DataNodeInfo> {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+207 |     pub fn select_node_for_read(&self) -> Option<DataNodeInfo> {
+    |            ^^^^^^^^^^^^^^^^^^^^
+
+warning: methods `set_table_owner`, `add_table_owner`, `get_table_primary_owner`, `get_tables_for_node`, `get_tables_for_primary_node`, and `select_node_for_table_excluding` are never used
+   --> src/router/shard_cache/table_routing.rs:33:12
+    |
+ 15 | impl ShardCache {
+    | --------------- methods in this implementation
+...
+ 33 |     pub fn set_table_owner(&self, key: &TableKey, node_id: String, version: u64) {
+    |            ^^^^^^^^^^^^^^^
+...
+ 56 |     pub fn add_table_owner(&self, key: &TableKey, node_id: String, version: u64) {
+    |            ^^^^^^^^^^^^^^^
+...
+ 87 |     pub fn get_table_primary_owner(&self, key: &TableKey) -> Option<String> {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^
+...
+207 |     pub fn get_tables_for_node(&self, node_id: &str) -> Vec<TableKey> {
+    |            ^^^^^^^^^^^^^^^^^^^
+...
+227 |     pub fn get_tables_for_primary_node(&self, node_id: &str) -> Vec<TableKey> {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+250 |     pub fn select_node_for_table_excluding(
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: associated functions `new` and `from_path` are never used
+  --> src/router/shard_cache/types.rs:62:12
+   |
+61 | impl PartitionKey {
+   | ----------------- associated functions in this implementation
+62 |     pub fn new(catalog: &str, schema: &str, table: &str, date: &str) -> Self {
+   |            ^^^
+...
+72 |     pub fn from_path(path: &str) -> Option<Self> {
+   |            ^^^^^^^^^
+
+warning: fields `version` and `cached_at` are never read
+   --> src/router/shard_cache/types.rs:138:9
+    |
+135 | pub struct CachedTableMeta {
+    |            --------------- fields in this struct
+...
+138 |     pub version: u64,
+    |         ^^^^^^^
+139 |     pub cached_at: i64,
+    |         ^^^^^^^^^
+    |
+    = note: `CachedTableMeta` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: fields `version` and `cached_at` are never read
+   --> src/router/shard_cache/types.rs:166:9
+    |
+161 | pub struct CachedDistributionConfig {
+    |            ------------------------ fields in this struct
+...
+166 |     pub version: u64,
+    |         ^^^^^^^
+167 |     /// When the config was cached
+168 |     pub cached_at: i64,
+    |         ^^^^^^^^^
+    |
+    = note: `CachedDistributionConfig` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: struct `ShardCacheStats` is never constructed
+   --> src/router/shard_cache/types.rs:173:12
+    |
+173 | pub struct ShardCacheStats {
+    |            ^^^^^^^^^^^^^^^
+
+warning: fields `bytes_written` and `retries` are never read
+  --> src/router/write_router.rs:39:9
+   |
+36 | pub struct WriteResult {
+   |            ----------- fields in this struct
+...
+39 |     pub bytes_written: u64,
+   |         ^^^^^^^^^^^^^
+...
+43 |     pub retries: u32,
+   |         ^^^^^^^
+   |
+   = note: `WriteResult` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
+
+warning: associated function `with_meta_client` is never used
+  --> src/router/write_router.rs:76:12
+   |
+61 | impl WriteRouter {
+   | ---------------- associated function in this implementation
+...
+76 |     pub fn with_meta_client(
+   |            ^^^^^^^^^^^^^^^^
+
+warning: field `role_store` is never read
+  --> src/services/api.rs:61:9
+   |
+45 | pub struct AppState {
+   |            -------- field in this struct
+...
+61 |     pub role_store: Option<Arc<crate::auth::RoleStore>>,
+   |         ^^^^^^^^^^
+   |
+   = note: `AppState` has a derived impl for the trait `Clone`, but this is intentionally ignored during dead code analysis
+
+warning: field `format` is never read
+  --> src/services/api.rs:88:9
+   |
+79 | pub struct InfluxQueryParams {
+   |            ----------------- field in this struct
+...
+88 |     pub format: Option<String>,
+   |         ^^^^^^
+
+warning: associated functions `new` and `with_role_store` are never used
+  --> src/services/auth.rs:35:12
+   |
+33 | impl AuthMiddleware {
+   | ------------------- associated functions in this implementation
+34 |     /// Create new auth middleware from config
+35 |     pub fn new(config: &AuthConfig) -> Self {
+   |            ^^^
+...
+40 |     pub fn with_role_store(config: &AuthConfig, role_store: Arc<RoleStore>) -> Self {
+   |            ^^^^^^^^^^^^^^^
+
+warning: fields `max_data_points` and `interval_ms` are never read
+  --> src/services/grafana.rs:50:9
+   |
+46 | pub struct GrafanaQueryRequest {
+   |            ------------------- fields in this struct
+...
+50 |     pub max_data_points: Option<i32>,
+   |         ^^^^^^^^^^^^^^^
+...
+53 |     pub interval_ms: Option<i64>,
+   |         ^^^^^^^^^^^
+   |
+   = note: `GrafanaQueryRequest` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
+
+warning: associated items `with_max_size_and_wal` and `set_hot_partition_cache` are never used
+   --> src/storage/cache/mod.rs:118:12
+    |
+ 76 | impl DataCache {
+    | -------------- associated items in this implementation
+...
+118 |     pub fn with_max_size_and_wal(data_dir: &str, max_size_mb: u64, wal: Option<Arc<Wal>>) -> Self {
+    |            ^^^^^^^^^^^^^^^^^^^^^
+...
+134 |     pub fn set_hot_partition_cache(&mut self, cache: Arc<crate::query::cache::hot_partition_cache::HotPartitionCache>) {
+    |            ^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: methods `get_table_batches_in_range` and `get_cached_partitions` are never used
+   --> src/storage/cache/mod.rs:856:12
+    |
+786 | impl DataCache {
+    | -------------- methods in this implementation
+...
+856 |     pub fn get_table_batches_in_range(
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+927 |     pub fn get_cached_partitions(&self, catalog: &str, schema: &str, table: &str) -> Vec<i32> {
+    |            ^^^^^^^^^^^^^^^^^^^^^
+
+warning: fields `total_size_bytes` and `partition_count` are never read
+  --> src/storage/cache/stats.rs:64:9
+   |
+61 | pub struct TableCacheStats {
+   |            --------------- fields in this struct
+...
+64 |     pub total_size_bytes: usize,
+   |         ^^^^^^^^^^^^^^^^
+65 |     pub partition_count: usize,
+   |         ^^^^^^^^^^^^^^^
+   |
+   = note: `TableCacheStats` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: function `compression_name` is never used
+   --> src/storage/compression.rs:201:8
+    |
+201 | pub fn compression_name(codec: &Compression) -> &'static str {
+    |        ^^^^^^^^^^^^^^^^
+
+warning: multiple methods are never used
+  --> src/storage/file_cache/cache.rs:19:14
+   |
+13 | pub trait FileCache: Send + Sync {
+   |           --------- methods in this trait
+...
+19 |     async fn get(&self, source_path: &str, storage: &Arc<Storage>) -> CacheResult<Bytes>;
+   |              ^^^
+...
+24 |     async fn get_if_cached(&self, source_path: &str) -> CacheResult<Option<Bytes>>;
+   |              ^^^^^^^^^^^^^
+...
+29 |     async fn put(
+   |              ^^^
+...
+38 |     async fn contains(&self, source_path: &str) -> bool;
+   |              ^^^^^^^^
+...
+41 |     async fn invalidate(&self, source_path: &str) -> CacheResult<()>;
+   |              ^^^^^^^^^^
+...
+44 |     async fn invalidate_prefix(&self, prefix: &str) -> CacheResult<usize>;
+   |              ^^^^^^^^^^^^^^^^^
+...
+47 |     async fn clear(&self) -> CacheResult<()>;
+   |              ^^^^^
+...
+52 |     async fn get_many(
+   |              ^^^^^^^^
+...
+59 |     async fn prefetch(&self, source_paths: Vec<String>, storage: Arc<Storage>);
+   |              ^^^^^^^^
+...
+67 |     async fn get_entry_meta(&self, source_path: &str) -> CacheResult<CacheEntryMeta>;
+   |              ^^^^^^^^^^^^^^
+...
+70 |     async fn list_entries(&self) -> CacheResult<Vec<CacheEntryMeta>>;
+   |              ^^^^^^^^^^^^
+...
+77 |     async fn evict(&self, target_bytes: u64) -> CacheResult<(usize, u64)>;
+   |              ^^^^^
+...
+80 |     async fn save_index(&self) -> CacheResult<()>;
+   |              ^^^^^^^^^^
+...
+86 |     async fn verify(&self) -> CacheResult<Vec<String>>;
+   |              ^^^^^^
+
+warning: field `auto_save_interval_secs` is never read
+  --> src/storage/file_cache/disk_cache.rs:27:9
+   |
+19 | pub struct DiskCacheConfig {
+   |            --------------- field in this struct
+...
+27 |     pub auto_save_interval_secs: u64,
+   |         ^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `DiskCacheConfig` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: methods `cache_path_for`, `read_cached_file`, `write_cached_file`, `delete_cached_file`, `fetch_from_source`, and `make_room` are never used
+   --> src/storage/file_cache/disk_cache.rs:104:8
+    |
+ 72 | impl DiskFileCache {
+    | ------------------ methods in this implementation
+...
+104 |     fn cache_path_for(&self, source_path: &str) -> PathBuf {
+    |        ^^^^^^^^^^^^^^
+...
+115 |     async fn read_cached_file(&self, cache_path: &Path) -> CacheResult<Bytes> {
+    |              ^^^^^^^^^^^^^^^^
+...
+123 |     async fn write_cached_file(&self, cache_path: &Path, data: &Bytes) -> CacheResult<()> {
+    |              ^^^^^^^^^^^^^^^^^
+...
+130 |     async fn delete_cached_file(&self, cache_path: &Path) -> CacheResult<()> {
+    |              ^^^^^^^^^^^^^^^^^^
+...
+140 |     async fn fetch_from_source(
+    |              ^^^^^^^^^^^^^^^^^
+...
+152 |     async fn make_room(&self, needed_bytes: u64) -> CacheResult<()> {
+    |              ^^^^^^^^^
+
+warning: fields `max_size_bytes`, `evictions`, `bytes_read_from_cache`, and `bytes_fetched_from_source` are never read
+  --> src/storage/file_cache/types.rs:34:9
+   |
+30 | pub struct CacheStats {
+   |            ---------- fields in this struct
+...
+34 |     pub max_size_bytes: u64,
+   |         ^^^^^^^^^^^^^^
+...
+42 |     pub evictions: u64,
+   |         ^^^^^^^^^
+43 |     /// Bytes read from cache
+44 |     pub bytes_read_from_cache: u64,
+   |         ^^^^^^^^^^^^^^^^^^^^^
+45 |     /// Bytes fetched from source
+46 |     pub bytes_fetched_from_source: u64,
+   |         ^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `CacheStats` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: methods `hit_rate` and `fill_percentage` are never used
+  --> src/storage/file_cache/types.rs:51:12
+   |
+49 | impl CacheStats {
+   | --------------- methods in this implementation
+50 |     /// Calculate hit rate
+51 |     pub fn hit_rate(&self) -> f64 {
+   |            ^^^^^^^^
+...
+61 |     pub fn fill_percentage(&self) -> f64 {
+   |            ^^^^^^^^^^^^^^^
+
+warning: fields `meta` and `last_access` are never read
+  --> src/storage/file_cache/types.rs:74:9
+   |
+72 | pub struct CacheEntry {
+   |            ---------- fields in this struct
+73 |     /// Entry metadata
+74 |     pub meta: CacheEntryMeta,
+   |         ^^^^
+75 |     /// In-memory last access (for LRU)
+76 |     pub last_access: Instant,
+   |         ^^^^^^^^^^^
+   |
+   = note: `CacheEntry` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
+
+warning: methods `touch` and `priority_score` are never used
+  --> src/storage/file_cache/types.rs:89:12
+   |
+79 | impl CacheEntry {
+   | --------------- methods in this implementation
+...
+89 |     pub fn touch(&mut self) {
+   |            ^^^^^
+...
+96 |     pub fn priority_score(&self) -> f64 {
+   |            ^^^^^^^^^^^^^^
+
+warning: variants `NotFound`, `CacheFull`, and `FetchError` are never constructed
+   --> src/storage/file_cache/types.rs:139:5
+    |
+135 | pub enum CacheError {
+    |          ---------- variants in this enum
+...
+139 |     NotFound(String),
+    |     ^^^^^^^^
+140 |     /// Cache is full
+141 |     CacheFull,
+    |     ^^^^^^^^^
+...
+145 |     FetchError(String),
+    |     ^^^^^^^^^^
+    |
+    = note: `CacheError` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: struct `CacheKey` is never constructed
+   --> src/storage/file_cache/types.rs:164:12
+    |
+164 | pub struct CacheKey {
+    |            ^^^^^^^^
+
+warning: associated items `file`, `row_group`, and `to_cache_filename` are never used
+   --> src/storage/file_cache/types.rs:173:12
+    |
+171 | impl CacheKey {
+    | ------------- associated items in this implementation
+172 |     /// Create a key for a whole file
+173 |     pub fn file(path: impl Into<String>) -> Self {
+    |            ^^^^
+...
+181 |     pub fn row_group(path: impl Into<String>, row_group: usize) -> Self {
+    |            ^^^^^^^^^
+...
+189 |     pub fn to_cache_filename(&self) -> String {
+    |            ^^^^^^^^^^^^^^^^^
+
+warning: constant `INDEX_DIR` is never used
+  --> src/storage/layout.rs:38:11
+   |
+38 | pub const INDEX_DIR: &str = "index";
+   |           ^^^^^^^^^
+
+warning: constant `CATALOG_SNAPSHOT_FILE` is never used
+  --> src/storage/layout.rs:49:11
+   |
+49 | pub const CATALOG_SNAPSHOT_FILE: &str = "catalog_snapshot.json";
+   |           ^^^^^^^^^^^^^^^^^^^^^
+
+warning: methods `index_dir`, `partition_dir`, `catalog_snapshot_path`, `aggregates_dir`, `store_prefix`, and `table_prefix` are never used
+   --> src/storage/layout.rs:100:12
+    |
+ 57 | impl DataLayout {
+    | --------------- methods in this implementation
+...
+100 |     pub fn index_dir(&self) -> PathBuf {
+    |            ^^^^^^^^^
+...
+143 |     pub fn partition_dir(
+    |            ^^^^^^^^^^^^^
+...
+159 |     pub fn catalog_snapshot_path(&self) -> PathBuf {
+    |            ^^^^^^^^^^^^^^^^^^^^^
+...
+164 |     pub fn aggregates_dir(&self) -> PathBuf {
+    |            ^^^^^^^^^^^^^^
+...
+196 |     pub fn store_prefix(&self) -> &str {
+    |            ^^^^^^^^^^^^
+...
+201 |     pub fn table_prefix(&self, catalog: &str, schema: &str, table: &str) -> String {
+    |            ^^^^^^^^^^^^
+
+warning: function `parse_multiple_lines_force_parallel` is never used
+   --> src/storage/line_protocol.rs:340:8
+    |
+340 | pub fn parse_multiple_lines_force_parallel(data: &str, schema_config: &SchemaConfig) -> Vec<Point> {
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: field `node_id` is never read
+  --> src/storage/parquet_writer.rs:26:9
+   |
+22 | pub struct FileWriteResult {
+   |            --------------- field in this struct
+...
+26 |     pub node_id: String,
+   |         ^^^^^^^
+   |
+   = note: `FileWriteResult` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: associated items `new_local`, `sort_batch_by_time`, and `write_batches_partitioned_sync` are never used
+   --> src/storage/parquet_writer.rs:81:12
+    |
+ 64 | impl ParquetWriter {
+    | ------------------ associated items in this implementation
+...
+ 81 |     pub fn new_local(data_dir: &str) -> Result<Self, String> {
+    |            ^^^^^^^^^
+...
+135 |     fn sort_batch_by_time(batch: &RecordBatch) -> Result<RecordBatch, String> {
+    |        ^^^^^^^^^^^^^^^^^^
+...
+365 |     pub fn write_batches_partitioned_sync(
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: methods `exists`, `local_path`, and `table_url_with_node` are never used
+   --> src/storage/storage.rs:266:18
+    |
+ 31 | impl Storage {
+    | ------------ methods in this implementation
+...
+266 |     pub async fn exists(&self, path: &str) -> bool {
+    |                  ^^^^^^
+...
+352 |     pub fn local_path(&self, relative_path: &str) -> Option<std::path::PathBuf> {
+    |            ^^^^^^^^^^
+...
+371 |     pub fn table_url_with_node(
+    |            ^^^^^^^^^^^^^^^^^^^
+
+warning: method `flush` is never used
+   --> src/storage/wal.rs:595:18
+    |
+297 | impl Wal {
+    | -------- method in this implementation
+...
+595 |     pub async fn flush(&self) -> Result<(), String> {
+    |                  ^^^^^
+
+warning: function `hash_select` is never used
+  --> src/utils/hash.rs:56:8
+   |
+56 | pub fn hash_select<'a, T: Hash, V>(key: &T, items: &'a [V]) -> Option<&'a V> {
+   |        ^^^^^^^^^^^
+
+warning: function `hash_select_clone` is never used
+  --> src/utils/hash.rs:68:8
+   |
+68 | pub fn hash_select_clone<T: Hash, V: Clone>(key: &T, items: &[V]) -> Option<V> {
+   |        ^^^^^^^^^^^^^^^^^
+
+warning: `mynadb` (bin "mynadb") generated 413 warnings (99 duplicates) (run `cargo fix --bin "mynadb" -p mynadb` to apply 27 suggestions)
+    Finished `fast-release` profile [optimized] target(s) in 14m 49s

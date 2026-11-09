@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="MynaDB 快速入门指南 - 60 秒内开始监听您的基础设施">
+  <meta name="description" content="MynaDB 快速入门指南 - 从源码构建并在本地试用 MynaDB">
   <title>快速开始 - MynaDB</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -125,12 +125,13 @@
     <main class="docs-content">
       <h1>快速入门指南</h1>
 
-      <p>60 秒内开始监听您的基础设施。本指南涵盖 MynaDB 的构建、运行、写入数据和查询。</p>
+      <p>从源码构建并在本地试用 MynaDB。本指南涵盖 MynaDB 的构建、运行、写入数据和查询。</p>
 
       <h2>前置条件</h2>
 
       <ul>
-        <li>Rust 1.70+（通过 <a href="https://rustup.rs" target="_blank">rustup</a> 安装）</li>
+        <li>近期稳定版 Rust（本次验证工具链为 1.92.0）（通过 <a href="https://rustup.rs" target="_blank">rustup</a> 安装）</li>
+        <li>C/C++ 编译器、pkg-config、OpenSSL 开发文件及 protoc（部分平台的原生依赖还需要 CMake）</li>
         <li>curl（用于测试 API）</li>
       </ul>
 
@@ -152,23 +153,22 @@ git clone https://github.com/panbooks/mynadb.git
 cd mynadb
 
 <span class="token-comment"># 以 release 模式构建</span>
-cargo build --release
+cargo build --locked --profile fast-release
 
 <span class="token-comment"># 运行服务器</span>
-./target/release/mynadb</code></pre>
+./target/fast-release/mynadb -c examples/quickstart.toml standalone</code></pre>
         </div>
       </div>
 
-      <p>您应该会看到如下输出：</p>
+      <p>保持服务器运行，在另一个终端检查健康接口（应返回 HTTP 200 和 OK）：</p>
 
       <div class="code-block">
         <div class="code-content">
-          <pre><code>MynaDB starting...
-HTTP server listening on 0.0.0.0:7000
-Arrow Flight listening on 0.0.0.0:7001
-Ready to accept connections</code></pre>
+          <pre><code>curl --fail http://127.0.0.1:7000/health</code></pre>
         </div>
       </div>
+
+<p><strong>开发状态：</strong>请先使用本地测试数据评估。示例仅绑定回环地址，关闭 WAL 和认证；重启前需成功执行 <code>POST /flush</code>。这不等于已验证 WAL 崩溃恢复。<a href="https://github.com/panbooks/mynadb/blob/main/docs/project-status.md">功能验证范围</a></p>
 
       <h2>第 2 步：写入数据</h2>
 
@@ -347,6 +347,13 @@ JOIN memory m ON c.host = m.host
 }</code></pre>
         </div>
       </div>
+
+      <h2>第 5 步：Flush、重启与停止</h2>
+      <p>此示例关闭 WAL。先成功 flush，再停止和重启；随后重复上面的 SQL 查询，检查已落盘数据。此流程不验证未落盘写入的崩溃恢复。</p>
+      <div class="code-block"><div class="code-content"><pre><code>curl --fail -X POST http://127.0.0.1:7000/flush
+./target/fast-release/mynadb -c examples/quickstart.toml stop
+./target/fast-release/mynadb -c examples/quickstart.toml standalone</code></pre></div></div>
+      <p>结束试用时，用同样的 stop 命令或 Ctrl+C 停止进程。示例数据和日志分别位于 <code>data/quickstart</code> 和 <code>logs/quickstart</code>；停止后再清理自己创建的测试文件。</p>
 
       <h2>总结</h2>
 

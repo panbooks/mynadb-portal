@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="MynaDB Quick Start Guide - Start listening to your infrastructure in 60 seconds">
+  <meta name="description" content="MynaDB Quick Start Guide - Build and evaluate MynaDB locally">
   <title>Quick Start - MynaDB</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -138,12 +138,13 @@
     <main class="docs-content">
       <h1>Quick Start Guide</h1>
 
-      <p>Start listening to your infrastructure in 60 seconds. This guide covers building, running, writing data, and querying with MynaDB.</p>
+      <p>Build and evaluate MynaDB locally; the initial build can take several minutes. This guide covers building, running, writing data, and querying with MynaDB.</p>
 
       <h2>Prerequisites</h2>
 
       <ul>
-        <li>Rust 1.70+ (install via <a href="https://rustup.rs" target="_blank">rustup</a>)</li>
+        <li>A recent stable Rust toolchain (this review uses 1.92.0) (install via <a href="https://rustup.rs" target="_blank">rustup</a>)</li>
+        <li>C/C++ compiler, pkg-config, OpenSSL development files, and protoc (plus CMake if required by native dependencies)</li>
         <li>curl (for testing the API)</li>
       </ul>
 
@@ -165,23 +166,22 @@ git clone https://github.com/panbooks/mynadb.git
 cd mynadb
 
 <span class="token-comment"># Build in release mode</span>
-cargo build --release
+cargo build --locked --profile fast-release
 
 <span class="token-comment"># Run the server</span>
-./target/release/mynadb</code></pre>
+./target/fast-release/mynadb -c examples/quickstart.toml standalone</code></pre>
         </div>
       </div>
 
-      <p>You should see output like:</p>
+      <p>Keep the server running and check health in another terminal (expect HTTP 200 and OK):</p>
 
       <div class="code-block">
         <div class="code-content">
-          <pre><code>MynaDB starting...
-HTTP server listening on 0.0.0.0:7000
-Arrow Flight listening on 0.0.0.0:7001
-Ready to accept connections</code></pre>
+          <pre><code>curl --fail http://127.0.0.1:7000/health</code></pre>
         </div>
       </div>
+
+<p><strong>Development status:</strong> Evaluate with disposable local data. The example binds to loopback and disables WAL and authentication; successfully call <code>POST /flush</code> before testing restart persistence. This does not establish WAL crash recovery. <a href="https://github.com/panbooks/mynadb/blob/main/docs/project-status.md">Validation scope</a></p>
 
       <h2>Step 2: Write Data</h2>
 
@@ -360,6 +360,13 @@ JOIN memory m ON c.host = m.host
 }</code></pre>
         </div>
       </div>
+
+      <h2>Step 5: Flush, Restart and Stop</h2>
+      <p>This example disables WAL. Successfully flush before stopping and restarting, then repeat the SQL query above to check persisted data. This does not test recovery of unflushed writes after a crash.</p>
+      <div class="code-block"><div class="code-content"><pre><code>curl --fail -X POST http://127.0.0.1:7000/flush
+./target/fast-release/mynadb -c examples/quickstart.toml stop
+./target/fast-release/mynadb -c examples/quickstart.toml standalone</code></pre></div></div>
+      <p>Stop with the same stop command or Ctrl+C when finished. Disposable example data and logs are under <code>data/quickstart</code> and <code>logs/quickstart</code>; clean up only your test files after the process exits.</p>
 
       <h2>Summary</h2>
 

@@ -125,12 +125,13 @@
       <h1>安装</h1>
 
       <p class="lead">
-        本指南介绍安装 MynaDB 的多种方式：预编译二进制文件、从源码构建、Docker 容器，以及设置为系统服务。
+        本指南以源码构建为当前试用路径。二进制和 Docker 的验证状态见下文；系统服务部分是需要单独验证的部署模板。
       </p>
 
       <h2 id="requirements">系统要求</h2>
 
-      <h3>硬件</h3>
+      <h3>硬件规划参考</h3>
+      <p>下表为规划建议，并非经过测试的最低要求。编译可能比运行需要更多内存和磁盘；本次环境为 Linux x86_64，其他平台未验证。</p>
 
       <div class="table-wrapper">
         <table>
@@ -171,67 +172,18 @@
       <ul>
         <li><strong>操作系统：</strong>Linux（Ubuntu 20.04+、Debian 11+、RHEL 8+ 等）</li>
         <li><strong>架构：</strong>x86_64 (AMD64) 或 ARM64</li>
-        <li><strong>Rust：</strong>1.75+（从源码构建时需要）</li>
+        <li><strong>Rust：</strong>近期稳定版（本次验证工具链为 1.92.0，最低支持版本未确定）</li>
       </ul>
 
-      <h2 id="binary">二进制发行版</h2>
-
-      <p>安装 MynaDB 最简单的方式是使用预编译的二进制文件。</p>
-
-      <h3>下载最新版本</h3>
-
-      <div class="code-block">
-        <div class="code-header">
-          <div class="dots">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-          </div>
-          <span class="lang">bash</span>
-          <button class="copy-btn" onclick="copyCode(this)">复制</button>
-        </div>
-        <div class="code-content">
-          <pre><code><span class="token-comment"># 下载最新版本</span>
-curl -LO https://github.com/panbooks/mynadb/releases/latest/download/mynadb-linux-amd64.tar.gz
-
-<span class="token-comment"># 解压归档文件</span>
-tar -xzf mynadb-linux-amd64.tar.gz
-
-<span class="token-comment"># 移动二进制文件到 /usr/local/bin</span>
-sudo mv mynadb /usr/local/bin/
-
-<span class="token-comment"># 验证安装</span>
-mynadb --version</code></pre>
-        </div>
-      </div>
-
-      <h3>ARM64（Apple Silicon、AWS Graviton）</h3>
-
-      <div class="code-block">
-        <div class="code-header">
-          <div class="dots">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-          </div>
-          <span class="lang">bash</span>
-          <button class="copy-btn" onclick="copyCode(this)">复制</button>
-        </div>
-        <div class="code-content">
-          <pre><code><span class="token-comment"># 下载 ARM64 版本</span>
-curl -LO https://github.com/panbooks/mynadb/releases/latest/download/mynadb-linux-arm64.tar.gz
-
-<span class="token-comment"># 解压并安装</span>
-tar -xzf mynadb-linux-arm64.tar.gz
-sudo mv mynadb /usr/local/bin/</code></pre>
-        </div>
-      </div>
+      <h2 id="binary">二进制发行版状态</h2>
+      <p>截至 2026-11-09，GitHub 的 v0.0.1 Release 没有二进制附件。请使用下方源码构建方法；尚无经过本次验证的 x86_64 或 ARM64 下载包。</p>
 
       <h2 id="source">从源码构建</h2>
 
       <p>从源码构建可以获取最新功能并支持自定义。</p>
 
       <h3>前置条件</h3>
+      <p>除 Rust 外，需要 C/C++ 编译器、pkg-config、OpenSSL 开发文件及 Protocol Buffers 编译器 protoc。部分平台的原生依赖还需要 CMake。</p>
 
       <div class="code-block">
         <div class="code-header">
@@ -251,7 +203,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source $HOME/.cargo/env
 
 <span class="token-comment"># 验证 Rust 安装</span>
-rustc --version  <span class="token-comment"># 应为 1.75+</span></code></pre>
+rustc --version  <span class="token-comment"># 记录实际版本；本次验证使用 1.92.0</span></code></pre>
         </div>
       </div>
 
@@ -273,7 +225,7 @@ git clone https://github.com/panbooks/mynadb.git
 cd mynadb
 
 <span class="token-comment"># 构建 release 二进制文件</span>
-cargo build --release
+cargo build --release --locked
 
 <span class="token-comment"># 二进制文件位于 target/release/mynadb</span>
 ./target/release/mynadb --version
@@ -285,7 +237,7 @@ sudo cp target/release/mynadb /usr/local/bin/</code></pre>
 
       <h3>构建脚本</h3>
 
-      <p>使用提供的构建脚本创建可分发的归档文件：</p>
+      <p>下列构建脚本需单独验证其输出；它不表示已有可下载的发行包：</p>
 
       <div class="code-block">
         <div class="code-header">
@@ -305,147 +257,8 @@ sudo cp target/release/mynadb /usr/local/bin/</code></pre>
         </div>
       </div>
 
-      <h2 id="docker">Docker</h2>
-
-      <p>在 Docker 容器中运行 MynaDB，便于部署和隔离。</p>
-
-      <h3>拉取官方镜像</h3>
-
-      <div class="code-block">
-        <div class="code-header">
-          <div class="dots">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-          </div>
-          <span class="lang">bash</span>
-          <button class="copy-btn" onclick="copyCode(this)">复制</button>
-        </div>
-        <div class="code-content">
-          <pre><code><span class="token-comment"># 拉取最新镜像</span>
-docker pull ghcr.io/mynadb/mynadb:latest
-
-<span class="token-comment"># 使用默认设置运行</span>
-docker run -d \
-  --name mynadb \
-  -p 7000:7000 \
-  -p 7001:7001 \
-  -v stats-data:/data \
-  ghcr.io/mynadb/mynadb:latest</code></pre>
-        </div>
-      </div>
-
-      <h3>Docker Compose</h3>
-
-      <p>生产环境部署建议使用 Docker Compose：</p>
-
-      <div class="code-block">
-        <div class="code-header">
-          <div class="dots">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-          </div>
-          <span class="lang">yaml</span>
-          <button class="copy-btn" onclick="copyCode(this)">复制</button>
-        </div>
-        <div class="code-content">
-          <pre><code><span class="token-comment"># docker-compose.yml</span>
-version: '3.8'
-
-services:
-  mynadb:
-    image: ghcr.io/mynadb/mynadb:latest
-    container_name: mynadb
-    restart: unless-stopped
-    ports:
-      - "7000:7000"   <span class="token-comment"># HTTP API</span>
-      - "7001:7001"   <span class="token-comment"># Arrow Flight</span>
-    volumes:
-      - ./data:/data
-      - ./config.toml:/etc/mynadb/config.toml:ro
-    environment:
-      - RUST_LOG=info
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:7000/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3</code></pre>
-        </div>
-      </div>
-
-      <div class="code-block">
-        <div class="code-header">
-          <div class="dots">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-          </div>
-          <span class="lang">bash</span>
-          <button class="copy-btn" onclick="copyCode(this)">复制</button>
-        </div>
-        <div class="code-content">
-          <pre><code><span class="token-comment"># 使用 Docker Compose 启动</span>
-docker-compose up -d
-
-<span class="token-comment"># 查看日志</span>
-docker-compose logs -f mynadb
-
-<span class="token-comment"># 停止</span>
-docker-compose down</code></pre>
-        </div>
-      </div>
-
-      <h3>本地构建 Docker 镜像</h3>
-
-      <div class="code-block">
-        <div class="code-header">
-          <div class="dots">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-          </div>
-          <span class="lang">dockerfile</span>
-          <button class="copy-btn" onclick="copyCode(this)">复制</button>
-        </div>
-        <div class="code-content">
-          <pre><code><span class="token-comment"># Dockerfile</span>
-FROM rust:1.75-slim as builder
-
-WORKDIR /app
-COPY . .
-RUN cargo build --release
-
-FROM debian:bookworm-slim
-RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/*
-
-COPY --from=builder /app/target/release/mynadb /usr/local/bin/
-
-EXPOSE 7000 7001
-VOLUME ["/data"]
-
-CMD ["mynadb"]</code></pre>
-        </div>
-      </div>
-
-      <div class="code-block">
-        <div class="code-header">
-          <div class="dots">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-          </div>
-          <span class="lang">bash</span>
-          <button class="copy-btn" onclick="copyCode(this)">复制</button>
-        </div>
-        <div class="code-content">
-          <pre><code><span class="token-comment"># 构建镜像</span>
-docker build -t mynadb:local .
-
-<span class="token-comment"># 运行本地构建的镜像</span>
-docker run -d -p 7000:7000 -p 7001:7001 mynadb:local</code></pre>
-        </div>
-      </div>
+      <h2 id="docker">Docker 验证状态</h2>
+      <p>本次审查未验证容器构建或镜像发布，因此不提供未经确认的官方镜像拉取命令。仓库中的 <a href="https://github.com/panbooks/mynadb/blob/main/deploy/docker/Dockerfile">Dockerfile</a> 可供后续验证；不要将现有模板当作已测试的生产部署方案。</p>
 
       <h2 id="systemd">Systemd 服务</h2>
 

@@ -1,0 +1,12 @@
+{
+  "command": [
+    "python3",
+    "/root/source/mynadb/scripts/validation/quickstart_smoke.py",
+    "--binary",
+    "/tmp/mynadb-promotion-20261109/target/fast-release/mynadb",
+    "--transcript",
+    "/root/source/mynadb-portal/docs/analysis/promotion-evidence/quickstart-smoke-transcript.json"
+  ],
+  "exit_code": 0,
+  "seconds": 0.78
+}

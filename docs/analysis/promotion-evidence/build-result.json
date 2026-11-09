@@ -1,0 +1,7 @@
+{
+  "command": "cargo build --locked --profile fast-release --jobs 4",
+  "source_commit": "d603624eb3b635734945f4f773d25ad7e10fe86f",
+  "exit_code": 0,
+  "seconds": 890.13,
+  "notes": "Clean source checkout; uses dependency cache from interrupted first attempt."
+}

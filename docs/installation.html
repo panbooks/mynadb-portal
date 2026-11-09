@@ -135,13 +135,13 @@
       <h1>Installation</h1>
 
       <p class="lead">
-        This guide covers multiple ways to install MynaDB: pre-built binaries,
-        building from source, Docker containers, and setting up as a system service.
+        Build from source for the current evaluation path. Binary and Docker validation status is documented below; system-service examples are deployment templates requiring separate verification.
       </p>
 
       <h2 id="requirements">System Requirements</h2>
 
-      <h3>Hardware</h3>
+      <h3>Hardware planning</h3>
+      <p>These are planning estimates, not tested minimum requirements. Compilation may need more memory and disk than runtime. This review uses Linux x86_64; other platforms are unverified.</p>
 
       <div class="table-wrapper">
         <table>
@@ -182,67 +182,18 @@
       <ul>
         <li><strong>Operating System:</strong> Linux (Ubuntu 20.04+, Debian 11+, RHEL 8+, etc.)</li>
         <li><strong>Architecture:</strong> x86_64 (AMD64) or ARM64</li>
-        <li><strong>Rust:</strong> 1.75+ (for building from source)</li>
+        <li><strong>Rust:</strong> Recent stable (review toolchain: 1.92.0; MSRV not established)</li>
       </ul>
 
-      <h2 id="binary">Binary Release</h2>
-
-      <p>The easiest way to install MynaDB is using pre-built binaries.</p>
-
-      <h3>Download Latest Release</h3>
-
-      <div class="code-block">
-        <div class="code-header">
-          <div class="dots">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-          </div>
-          <span class="lang">bash</span>
-          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-        </div>
-        <div class="code-content">
-          <pre><code><span class="token-comment"># Download the latest release</span>
-curl -LO https://github.com/panbooks/mynadb/releases/latest/download/mynadb-linux-amd64.tar.gz
-
-<span class="token-comment"># Extract the archive</span>
-tar -xzf mynadb-linux-amd64.tar.gz
-
-<span class="token-comment"># Move binary to /usr/local/bin</span>
-sudo mv mynadb /usr/local/bin/
-
-<span class="token-comment"># Verify installation</span>
-mynadb --version</code></pre>
-        </div>
-      </div>
-
-      <h3>ARM64 (Apple Silicon, AWS Graviton)</h3>
-
-      <div class="code-block">
-        <div class="code-header">
-          <div class="dots">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-          </div>
-          <span class="lang">bash</span>
-          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-        </div>
-        <div class="code-content">
-          <pre><code><span class="token-comment"># Download ARM64 version</span>
-curl -LO https://github.com/panbooks/mynadb/releases/latest/download/mynadb-linux-arm64.tar.gz
-
-<span class="token-comment"># Extract and install</span>
-tar -xzf mynadb-linux-arm64.tar.gz
-sudo mv mynadb /usr/local/bin/</code></pre>
-        </div>
-      </div>
+      <h2 id="binary">Binary release status</h2>
+      <p>As of 2026-11-09, GitHub Release v0.0.1 has no binary assets. Build from source below; no x86_64 or ARM64 download archive has been validated in this review.</p>
 
       <h2 id="source">Build from Source</h2>
 
       <p>Building from source gives you the latest features and allows customization.</p>
 
       <h3>Prerequisites</h3>
+      <p>In addition to Rust, install a C/C++ compiler, pkg-config, OpenSSL development files, and the Protocol Buffers compiler protoc. Native dependencies may also require CMake on some platforms.</p>
 
       <div class="code-block">
         <div class="code-header">
@@ -262,7 +213,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 source $HOME/.cargo/env
 
 <span class="token-comment"># Verify Rust installation</span>
-rustc --version  <span class="token-comment"># Should be 1.75+</span></code></pre>
+rustc --version  <span class="token-comment"># Record your toolchain; this review uses 1.92.0</span></code></pre>
         </div>
       </div>
 
@@ -284,7 +235,7 @@ git clone https://github.com/panbooks/mynadb.git
 cd mynadb
 
 <span class="token-comment"># Build release binary</span>
-cargo build --release
+cargo build --release --locked
 
 <span class="token-comment"># Binary is now at target/release/mynadb</span>
 ./target/release/mynadb --version
@@ -296,7 +247,7 @@ sudo cp target/release/mynadb /usr/local/bin/</code></pre>
 
       <h3>Build Script</h3>
 
-      <p>Use the provided build script to create a distributable archive:</p>
+      <p>The following packaging script requires separate output validation; it does not establish that a downloadable release archive exists:</p>
 
       <div class="code-block">
         <div class="code-header">
@@ -316,147 +267,8 @@ sudo cp target/release/mynadb /usr/local/bin/</code></pre>
         </div>
       </div>
 
-      <h2 id="docker">Docker</h2>
-
-      <p>Run MynaDB in a Docker container for easy deployment and isolation.</p>
-
-      <h3>Pull Official Image</h3>
-
-      <div class="code-block">
-        <div class="code-header">
-          <div class="dots">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-          </div>
-          <span class="lang">bash</span>
-          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-        </div>
-        <div class="code-content">
-          <pre><code><span class="token-comment"># Pull the latest image</span>
-docker pull ghcr.io/mynadb/mynadb:latest
-
-<span class="token-comment"># Run with default settings</span>
-docker run -d \
-  --name mynadb \
-  -p 7000:7000 \
-  -p 7001:7001 \
-  -v stats-data:/data \
-  ghcr.io/mynadb/mynadb:latest</code></pre>
-        </div>
-      </div>
-
-      <h3>Docker Compose</h3>
-
-      <p>For production deployments, use Docker Compose:</p>
-
-      <div class="code-block">
-        <div class="code-header">
-          <div class="dots">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-          </div>
-          <span class="lang">yaml</span>
-          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-        </div>
-        <div class="code-content">
-          <pre><code><span class="token-comment"># docker-compose.yml</span>
-version: '3.8'
-
-services:
-  mynadb:
-    image: ghcr.io/mynadb/mynadb:latest
-    container_name: mynadb
-    restart: unless-stopped
-    ports:
-      - "7000:7000"   <span class="token-comment"># HTTP API</span>
-      - "7001:7001"   <span class="token-comment"># Arrow Flight</span>
-    volumes:
-      - ./data:/data
-      - ./config.toml:/etc/mynadb/config.toml:ro
-    environment:
-      - RUST_LOG=info
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:7000/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3</code></pre>
-        </div>
-      </div>
-
-      <div class="code-block">
-        <div class="code-header">
-          <div class="dots">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-          </div>
-          <span class="lang">bash</span>
-          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-        </div>
-        <div class="code-content">
-          <pre><code><span class="token-comment"># Start with Docker Compose</span>
-docker-compose up -d
-
-<span class="token-comment"># View logs</span>
-docker-compose logs -f mynadb
-
-<span class="token-comment"># Stop</span>
-docker-compose down</code></pre>
-        </div>
-      </div>
-
-      <h3>Build Docker Image Locally</h3>
-
-      <div class="code-block">
-        <div class="code-header">
-          <div class="dots">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-          </div>
-          <span class="lang">dockerfile</span>
-          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-        </div>
-        <div class="code-content">
-          <pre><code><span class="token-comment"># Dockerfile</span>
-FROM rust:1.75-slim as builder
-
-WORKDIR /app
-COPY . .
-RUN cargo build --release
-
-FROM debian:bookworm-slim
-RUN apt-get update && apt-get install -y ca-certificates && rm -rf /var/lib/apt/lists/*
-
-COPY --from=builder /app/target/release/mynadb /usr/local/bin/
-
-EXPOSE 7000 7001
-VOLUME ["/data"]
-
-CMD ["mynadb"]</code></pre>
-        </div>
-      </div>
-
-      <div class="code-block">
-        <div class="code-header">
-          <div class="dots">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-          </div>
-          <span class="lang">bash</span>
-          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-        </div>
-        <div class="code-content">
-          <pre><code><span class="token-comment"># Build the image</span>
-docker build -t mynadb:local .
-
-<span class="token-comment"># Run locally built image</span>
-docker run -d -p 7000:7000 -p 7001:7001 mynadb:local</code></pre>
-        </div>
-      </div>
+      <h2 id="docker">Docker validation status</h2>
+      <p>Container builds and image publication have not been validated in this review, so no unverified official image pull command is provided. The repository <a href="https://github.com/panbooks/mynadb/blob/main/deploy/docker/Dockerfile">Dockerfile</a> is available for further testing; it is not a certified production deployment.</p>
 
       <h2 id="systemd">Systemd Service</h2>
 
