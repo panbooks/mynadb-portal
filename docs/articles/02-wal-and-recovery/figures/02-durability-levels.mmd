@@ -1,0 +1,7 @@
+flowchart TB
+  B[BufWriter user-space buffer] -->|flush| O[Operating-system cache]
+  O -->|file sync| D[Persistent storage]
+  A[Async mode: acknowledge before sync]
+  S[Per-write sync: acknowledge after sync]
+  G[Group commit: share sync, then acknowledge together]
+  N[File creation also requires directory durability]

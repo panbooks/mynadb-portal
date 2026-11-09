@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+<title id="title">05 / 从已提交边界之后重放</title><desc id="desc">启动时先恢复内部状态，再开放写入；恢复的数据不重复追加 WAL。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#718698"/></marker></defs>
+<rect width="100%" height="100%" fill="white"/>
+<text x="40" y="60" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="500" fill="#18364a">05 / 从已提交边界之后重放</text>
+<text x="40" y="96" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#536a7b">启动时先恢复内部状态，再开放写入；恢复的数据不重复追加 WAL。</text>
+<polyline points="40,116 1160,116" fill="none" stroke="#718698" stroke-width="2"/>
+<text x="40" y="876" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从零实现系列 02 · WAL 与单机恢复设计</text>
+<rect x="40" y="160" width="330" height="110" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="109.2" y="206.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">读取有效 MANIFEST</text>
+<text x="131.5" y="239.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">加载已提交文件</text>
+<rect x="435" y="160" width="330" height="110" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="510.8" y="206.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">校验所需 WAL 分段</text>
+<text x="516.0" y="239.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">检查顺序与完整性</text>
+<rect x="830" y="160" width="330" height="110" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
+<text x="930.8" y="206.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">比较每条 LSN</text>
+<text x="926.0" y="239.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">与 checkpoint</text>
+<polyline points="370,215 435,215" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="765,215 830,215" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="40" y="400" width="480" height="115" rx="13" fill="#f3f5f8" stroke="#bdcbd5" stroke-width="2"/>
+<text x="180.0" y="448.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="500" fill="#18364a">LSN ≤ checkpoint</text>
+<text x="188.0" y="483.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="500" fill="#18364a">已提交，跳过重放</text>
+<rect x="680" y="400" width="480" height="115" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
+<text x="825.0" y="448.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="500" fill="#18364a">LSN &gt; checkpoint</text>
+<text x="787.8" y="483.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="500" fill="#18364a">apply_recovered → 内存</text>
+<polyline points="995,270 995,325 280,325 280,400" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="995,325 995,400" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="330" y="630" width="540" height="110" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="450.5" y="676.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="500" fill="#18364a">恢复下一序号与日志写入状态</text>
+<text x="447.0" y="711.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="500" fill="#18364a">保留未提交 WAL，再开放请求</text>
+<polyline points="280,515 280,685 330,685" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="920,515 920,685 870,685" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="40" y="790" width="1120" height="55" rx="13" fill="#fff4e8" stroke="#e1a76a" stroke-width="2"/>
+<text x="279.8" y="825.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">重放进内存并不等于已提交：再次崩溃时，原 WAL 仍需能用于恢复。</text>
+</svg>

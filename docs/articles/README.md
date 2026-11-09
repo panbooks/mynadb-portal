@@ -7,7 +7,7 @@
 | 篇次 | 参考版本 / 里程碑 | 选题 | 状态 |
 | --- | --- | --- | --- |
 | 1 | `v0.0.0` / M1 | [从 HTTP 到 Parquet，打通写入与 SQL 查询](01-from-http-to-parquet/article.md) | 首稿及配图已准备 |
-| 2 | `v0.1.0` / M2 | 写入成功之后：WAL、恢复与单机运行保障 | 待写 |
+| 2 | `v0.1.0` / M2 | [写入成功之后，如何用 WAL 找回数据](02-wal-and-recovery/article.md) | 首稿及配图已准备 |
 | 3 | `v0.2.0` / M3 | 主从复制：故障检测与切换设计 | 待写 |
 | 4 | `v0.3.0` / M4 | 对象存储：重构存储接口、写入与缓存 | 待写 |
 | 5 | `v0.4.0` / M5 | 让新写入立即可查：Memtable、TableProvider 与查询优化 | 待写 |
@@ -26,4 +26,11 @@
 - `01-from-http-to-parquet/figures/`：PNG 上传版、SVG 矢量版和 Mermaid 源文件。
 - [编辑与发布说明](01-from-http-to-parquet/editor-notes.md)：标题、摘要、内容定位与发布准备。
 
-未修改站点导航，未推送、部署或向外部社区发帖。
+## 第二篇交付
+
+- [正文 Markdown](02-wal-and-recovery/article.md)：写入确认、同步策略、日志格式、刷盘边界与启动恢复。
+- [图文预览](02-wal-and-recovery/preview.html)：包含六张配图，与第一篇采用统一样式。
+- `02-wal-and-recovery/figures/`：PNG 上传版、SVG 矢量版与 Mermaid 源文件。
+- [编辑与发布说明](02-wal-and-recovery/editor-notes.md)：标题、摘要、设计范围和发布准备。
+
+代码仓库的提交、推送与社区发表分别记录；草稿准备完成不代表已向社区投稿。

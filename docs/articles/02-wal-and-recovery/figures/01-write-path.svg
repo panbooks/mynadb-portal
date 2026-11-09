@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="780" viewBox="0 0 1200 780" role="img" aria-labelledby="title desc">
+<title id="title">01 / 用 WAL 接管尚未刷出的写入</title><desc id="desc">同步确认路径：先记录日志，再更新内存；Parquet 仍然按批次生成。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#718698"/></marker></defs>
+<rect width="100%" height="100%" fill="white"/>
+<text x="40" y="60" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="500" fill="#18364a">01 / 用 WAL 接管尚未刷出的写入</text>
+<text x="40" y="96" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#536a7b">同步确认路径：先记录日志，再更新内存；Parquet 仍然按批次生成。</text>
+<polyline points="40,116 1160,116" fill="none" stroke="#718698" stroke-width="2"/>
+<text x="40" y="756" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从零实现系列 02 · WAL 与单机恢复设计</text>
+<rect x="40" y="160" width="250" height="110" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="91.5" y="206.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">校验与容量检查</text>
+<text x="102.0" y="239.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">解析完整批次</text>
+<rect x="330" y="160" width="250" height="110" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
+<text x="410.0" y="206.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">追加 WAL</text>
+<text x="390.8" y="239.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">分配递增 LSN</text>
+<rect x="620" y="160" width="250" height="110" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
+<text x="692.5" y="206.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">按策略同步</text>
+<text x="671.5" y="239.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">等待日志持久化</text>
+<rect x="910" y="160" width="250" height="110" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="961.0" y="206.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">更新 Memtable</text>
+<text x="993.0" y="239.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">确认写入</text>
+<polyline points="290,215 330,215" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="580,215 620,215" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="870,215 910,215" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="1035,270 1035,460" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1055" y="368" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="18" font-weight="500" fill="#536a7b">冻结批次</text>
+<rect x="910" y="460" width="250" height="110" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
+<text x="986.8" y="506.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">批量 flush</text>
+<text x="971.5" y="539.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">生成 Parquet</text>
+<rect x="620" y="460" width="250" height="110" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="703.0" y="506.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">提交清单</text>
+<text x="657.2" y="539.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">文件 + checkpoint</text>
+<rect x="330" y="460" width="250" height="110" rx="13" fill="#f3f5f8" stroke="#bdcbd5" stroke-width="2"/>
+<text x="381.5" y="506.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">回收已提交日志</text>
+<text x="381.5" y="539.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">保留未提交记录</text>
+<polyline points="910,515 870,515" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="620,515 580,515" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="40" y="620" width="1120" height="75" rx="13" fill="#f3f5f8" stroke="#bdcbd5" stroke-width="2"/>
+<text x="296.8" y="666.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="500" fill="#18364a">WAL 保存近期写入以便恢复；Parquet 保存批次以便查询。</text>
+</svg>

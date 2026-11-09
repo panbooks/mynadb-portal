@@ -1,0 +1,7 @@
+flowchart TB
+  O[Seal old WAL at LSN 200] --> F[Freeze matching memtable prefix]
+  F --> N[Continue writes from 201 in new WAL and memtable]
+  F --> P[Write and sync candidate Parquet files]
+  P --> C[Durably publish MANIFEST: active files and checkpoint 200]
+  C --> G[Reclaim sealed WAL segments whose max LSN is at most 200]
+  N --> K[Keep records after the boundary protected]

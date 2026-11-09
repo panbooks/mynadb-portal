@@ -1,0 +1,5 @@
+flowchart TB
+  A[WAL synced, response not sent] --> AR[Replay complete WAL records]
+  B[Parquet written, MANIFEST not published] --> BR[Ignore candidates; use old manifest and replay WAL]
+  C[MANIFEST published, old WAL not deleted] --> CR[Skip records through committed checkpoint]
+  D[Recovery applied to memory, another crash] --> DR[Replay again from retained WAL]

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="740" viewBox="0 0 1200 740" role="img" aria-labelledby="title desc">
+<title id="title">03 / 让每条日志都有边界和校验</title><desc id="desc">记录完整数据与接收时确定的时间戳，使重放得到同一条指标。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#718698"/></marker></defs>
+<rect width="100%" height="100%" fill="white"/>
+<text x="40" y="60" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="500" fill="#18364a">03 / 让每条日志都有边界和校验</text>
+<text x="40" y="96" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#536a7b">记录完整数据与接收时确定的时间戳，使重放得到同一条指标。</text>
+<polyline points="40,116 1160,116" fill="none" stroke="#718698" stroke-width="2"/>
+<text x="40" y="716" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从零实现系列 02 · WAL 与单机恢复设计</text>
+<rect x="40" y="170" width="150" height="110" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="85.5" y="216.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="500" fill="#18364a">length</text>
+<text x="77.0" y="247.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="500" fill="#18364a">记录长度</text>
+<rect x="210" y="170" width="130" height="110" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="241.2" y="216.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="500" fill="#18364a">version</text>
+<text x="237.0" y="247.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="500" fill="#18364a">格式版本</text>
+<rect x="360" y="170" width="130" height="110" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="407.0" y="216.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="500" fill="#18364a">LSN</text>
+<text x="387.0" y="247.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="500" fill="#18364a">日志序号</text>
+<rect x="510" y="170" width="170" height="110" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="552.8" y="216.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="500" fill="#18364a">database</text>
+<text x="557.0" y="247.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="500" fill="#18364a">数据归属</text>
+<rect x="700" y="170" width="270" height="110" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="798.2" y="216.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="500" fill="#18364a">payload</text>
+<text x="760.2" y="247.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="500" fill="#18364a">完整批次 / 表信息</text>
+<rect x="990" y="170" width="170" height="110" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="1028.5" y="216.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="500" fill="#18364a">checksum</text>
+<text x="1027.5" y="247.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="500" fill="#18364a">完整性校验</text>
+<rect x="40" y="385" width="330" height="120" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
+<text x="132.2" y="436.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">记录 101：完整</text>
+<text x="131.5" y="469.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">长度与校验通过</text>
+<rect x="435" y="385" width="330" height="120" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
+<text x="527.2" y="436.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">记录 102：完整</text>
+<text x="526.5" y="469.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">长度与校验通过</text>
+<rect x="830" y="385" width="330" height="120" rx="13" fill="#fff4e8" stroke="#e1a76a" stroke-width="2"/>
+<text x="901.2" y="436.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">记录 103：写到一半</text>
+<text x="900.5" y="469.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">最后活跃分段的尾部</text>
+<rect x="40" y="575" width="1120" height="85" rx="13" fill="#f3f5f8" stroke="#bdcbd5" stroke-width="2"/>
+<text x="421.5" y="608.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">先校验长度上限，再读取并验证记录。</text>
+<text x="264.0" y="641.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">可识别的不完整尾部可截断；中间损坏、缺段或序号异常应停止并报告。</text>
+</svg>

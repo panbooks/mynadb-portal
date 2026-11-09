@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="830" viewBox="0 0 1200 830" role="img" aria-labelledby="title desc">
+<title id="title">06 / 崩溃发生在哪一步，就读哪份可靠状态</title><desc id="desc">判断依据是最后持久化的提交清单，而不是目录里有没有新文件。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#718698"/></marker></defs>
+<rect width="100%" height="100%" fill="white"/>
+<text x="40" y="60" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="500" fill="#18364a">06 / 崩溃发生在哪一步，就读哪份可靠状态</text>
+<text x="40" y="96" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#536a7b">判断依据是最后持久化的提交清单，而不是目录里有没有新文件。</text>
+<polyline points="40,116 1160,116" fill="none" stroke="#718698" stroke-width="2"/>
+<text x="40" y="806" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从零实现系列 02 · WAL 与单机恢复设计</text>
+<rect x="40" y="160" width="530" height="215" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="159.5" y="241.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">① 日志同步后，响应尚未返回</text>
+<text x="222.2" y="275.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">完整 WAL 可重放</text>
+<text x="184.0" y="309.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">没有响应不代表没有写入</text>
+<rect x="630" y="160" width="530" height="215" rx="13" fill="#fff4e8" stroke="#e1a76a" stroke-width="2"/>
+<text x="748.8" y="241.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">② Parquet 写完，清单未发布</text>
+<text x="796.0" y="275.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">候选文件不参与查询</text>
+<text x="781.5" y="309.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">使用旧清单 + WAL 恢复</text>
+<rect x="40" y="465" width="530" height="215" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
+<text x="164.8" y="546.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">③ 清单已发布，旧 WAL 还在</text>
+<text x="197.2" y="580.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">新 checkpoint 已生效</text>
+<text x="173.0" y="614.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">跳过已提交记录，避免重复</text>
+<rect x="630" y="465" width="530" height="215" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="760.5" y="546.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">④ 重放到内存后，再次退出</text>
+<text x="812.2" y="580.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">原 WAL 尚未回收</text>
+<text x="785.0" y="614.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">下次启动仍可重新恢复</text>
+<text x="40" y="766" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#536a7b">故障验证要核对内容、行数和重复情况；进程终止测试不能替代断电验证。</text>
+</svg>

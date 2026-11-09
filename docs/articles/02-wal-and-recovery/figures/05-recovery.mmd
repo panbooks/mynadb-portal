@@ -1,0 +1,8 @@
+flowchart TB
+  M[Load committed MANIFEST and active files] --> W[Read and validate required WAL segments]
+  W --> C{LSN above checkpoint?}
+  C -->|no| S[Skip committed record]
+  C -->|yes| A[Apply recovered record directly to memtable]
+  S --> R[Restore next LSN and log writer; open service]
+  A --> R
+  R --> K[Keep replayed WAL until a new flush commit]

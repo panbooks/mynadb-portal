@@ -1,0 +1,38 @@
+[
+  {
+    "name": "01-write-path",
+    "title": "01 / 用 WAL 接管尚未刷出的写入",
+    "width": 2400,
+    "height": 1560
+  },
+  {
+    "name": "02-durability-levels",
+    "title": "02 / 数据在哪一层，决定确认了什么",
+    "width": 2400,
+    "height": 1600
+  },
+  {
+    "name": "03-record-format",
+    "title": "03 / 让每条日志都有边界和校验",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "04-flush-checkpoint",
+    "title": "04 / 同一个边界切开日志和内存",
+    "width": 2400,
+    "height": 1800
+  },
+  {
+    "name": "05-recovery",
+    "title": "05 / 从已提交边界之后重放",
+    "width": 2400,
+    "height": 1800
+  },
+  {
+    "name": "06-crash-windows",
+    "title": "06 / 崩溃发生在哪一步，就读哪份可靠状态",
+    "width": 2400,
+    "height": 1660
+  }
+]

@@ -1,0 +1,6 @@
+flowchart TB
+  L[length] --> V[version] --> S[LSN] --> D[database] --> P[payload] --> C[checksum]
+  A[Complete record 101] --> B[Complete record 102]
+  B --> T[Incomplete tail 103 in final active segment]
+  T --> R[Stop at verified boundary; truncate before appending]
+  E[Interior corruption, missing segment or invalid sequence: report and stop]

@@ -1,0 +1,7 @@
+flowchart TB
+  V[Validate input and reserve capacity] --> W[Append WAL and assign LSN]
+  W --> S[Sync according to acknowledgement policy]
+  S --> M[Apply to memtable and acknowledge]
+  M --> F[Freeze batch and write Parquet]
+  F --> C[Commit active files and checkpoint]
+  C --> G[Reclaim fully committed sealed WAL segments]
