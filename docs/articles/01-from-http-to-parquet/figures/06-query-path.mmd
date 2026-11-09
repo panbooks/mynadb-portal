@@ -1,0 +1,13 @@
+sequenceDiagram
+  participant H as HTTP
+  participant Q as QueryEngine
+  participant D as DataFusion
+  participant F as Filesystem
+  H->>Q: SQL and database context
+  Q->>F: Discover catalogs, tables, date partitions
+  Q->>D: Register Parquet ListingTable
+  Q->>D: ctx.sql(sql)
+  D->>F: Scan persisted Parquet
+  F-->>D: File data
+  D-->>Q: collect RecordBatches
+  Q-->>H: JSON result

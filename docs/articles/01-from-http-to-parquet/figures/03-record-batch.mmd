@@ -1,0 +1,6 @@
+flowchart LR
+  A[Rows: timestamps / tags / numeric fields] --> B[Collect column names]
+  B --> C[Build equal-length Arrow arrays]
+  C --> D[Schema + arrays]
+  D --> E[RecordBatch]
+  N[Collect column names across the entire batch]

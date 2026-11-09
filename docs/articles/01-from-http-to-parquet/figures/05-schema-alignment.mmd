@@ -1,0 +1,8 @@
+flowchart TB
+  A[Batch A: timestamp / measurement / host] --> M[Merge schemas by column name]
+  B[Batch B: timestamp / measurement / host / region] --> M
+  M --> C[Align A: region is NULL]
+  M --> D[Align B: preserve region]
+  M -->|type conflict| E[Error]
+  C --> W[ArrowWriter write and close]
+  D --> W

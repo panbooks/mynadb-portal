@@ -1,0 +1,6 @@
+flowchart TB
+  A[L0 files] --> B[Read batches and align schemas]
+  B --> C[Write next-level file]
+  C --> W[Switch active file set]
+  W --> D[Reclaim old input files]
+  W --> Q[Queries read active files only]

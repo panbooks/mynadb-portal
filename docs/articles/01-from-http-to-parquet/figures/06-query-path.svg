@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+<title id="title">06 / SQL 查询的调用顺序</title><desc id="desc">表发现与注册由数据库完成；SQL 规划执行交给 DataFusion。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#718698"/></marker></defs>
+<rect width="100%" height="100%" fill="white"/>
+<text x="40" y="60" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="500" fill="#18364a">06 / SQL 查询的调用顺序</text>
+<text x="40" y="96" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#536a7b">表发现与注册由数据库完成；SQL 规划执行交给 DataFusion。</text>
+<polyline points="40,116 1160,116" fill="none" stroke="#718698" stroke-width="2"/>
+<text x="40" y="876" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从零实现系列 01 · 单机基础设计</text>
+<rect x="40" y="150" width="250" height="70" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="111.5" y="193.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">HTTP 查询</text>
+<polyline points="165,230 165,805" fill="none" stroke="#718698" stroke-width="2" stroke-dasharray="9 9"/>
+<rect x="330" y="150" width="250" height="70" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="387.5" y="193.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">QueryEngine</text>
+<polyline points="455,230 455,805" fill="none" stroke="#718698" stroke-width="2" stroke-dasharray="9 9"/>
+<rect x="620" y="150" width="250" height="70" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="685.5" y="193.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">DataFusion</text>
+<polyline points="745,230 745,805" fill="none" stroke="#718698" stroke-width="2" stroke-dasharray="9 9"/>
+<rect x="910" y="150" width="250" height="70" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="991.0" y="193.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">文件系统</text>
+<polyline points="1035,230 1035,805" fill="none" stroke="#718698" stroke-width="2" stroke-dasharray="9 9"/>
+<polyline points="165,285 455,285" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="175" y="268" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="500" fill="#536a7b">1. SQL + 数据库上下文</text>
+<polyline points="455,355 1035,355" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="465" y="338" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="500" fill="#536a7b">2. 发现 schema / table / date 目录</text>
+<polyline points="455,425 745,425" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="465" y="408" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="500" fill="#536a7b">3. 注册 Parquet ListingTable</text>
+<polyline points="455,495 745,495" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="465" y="478" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="500" fill="#536a7b">4. ctx.sql(sql)</text>
+<polyline points="745,565 1035,565" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="755" y="548" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="500" fill="#536a7b">5. 扫描已落盘 Parquet</text>
+<polyline points="1035,635 745,635" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="755" y="618" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="500" fill="#536a7b">6. 文件数据</text>
+<polyline points="745,705 455,705" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="465" y="688" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="500" fill="#536a7b">7. collect() → RecordBatch</text>
+<polyline points="455,775 165,775" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="175" y="758" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="500" fill="#536a7b">8. 转为 JSON 返回</text>
+</svg>

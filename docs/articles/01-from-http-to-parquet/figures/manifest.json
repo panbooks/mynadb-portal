@@ -1,0 +1,50 @@
+[
+  {
+    "name": "01-architecture",
+    "title": "01 / 第一阶段：单机读写闭环",
+    "width": 2400,
+    "height": 1560
+  },
+  {
+    "name": "02-data-model",
+    "title": "02 / 一行协议如何映射到一张表",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "03-record-batch",
+    "title": "03 / 从行数据转换为 Arrow 列数组",
+    "width": 2400,
+    "height": 1340
+  },
+  {
+    "name": "04-buffer-flush",
+    "title": "05 / 缓存、确认与刷盘触发",
+    "width": 2400,
+    "height": 1700
+  },
+  {
+    "name": "05-schema-alignment",
+    "title": "04 / 多个批次怎样写进一个 Parquet 文件",
+    "width": 2400,
+    "height": 1560
+  },
+  {
+    "name": "06-query-path",
+    "title": "06 / SQL 查询的调用顺序",
+    "width": 2400,
+    "height": 1800
+  },
+  {
+    "name": "07-compaction",
+    "title": "07 / Compaction：合并小文件，管理有效文件集合",
+    "width": 2400,
+    "height": 1520
+  },
+  {
+    "name": "08-ack-durability",
+    "title": "08 / 写入确认、查询可见性与恢复是三个问题",
+    "width": 2400,
+    "height": 1480
+  }
+]

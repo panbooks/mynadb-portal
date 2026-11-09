@@ -1,0 +1,9 @@
+flowchart TB
+  A[Points to RecordBatch] --> B{Estimated cache capacity available?}
+  B -->|yes| C[Append batch and update counter]
+  B -->|no| R[HTTP 503]
+  C --> ACK[HTTP 200: added to cache]
+  T[Timer] --> F[DataCache flush]
+  N[80 percent Notify] --> F
+  M[POST /flush] --> F
+  F --> P[ParquetWriter]

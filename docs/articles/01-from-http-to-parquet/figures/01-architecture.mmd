@@ -1,0 +1,9 @@
+flowchart TB
+  W[HTTP write] --> P[Parser / Point]
+  P --> C[DataCache / RecordBatch]
+  C --> F[Flush / ParquetWriter]
+  F --> D[(Partitioned Parquet files)]
+  Q[HTTP / Flight / MySQL query] --> E[QueryEngine / discovery]
+  E --> DF[DataFusion]
+  DF -->|read| D
+  N[First implement queries over persisted files]

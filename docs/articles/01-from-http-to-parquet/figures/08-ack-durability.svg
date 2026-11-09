@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="740" viewBox="0 0 1200 740" role="img" aria-labelledby="title desc">
+<title id="title">08 / 写入确认、查询可见性与恢复是三个问题</title><desc id="desc">先约定响应含义；基础版确认数据进入内存，后续用 WAL 补充恢复路径。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#718698"/></marker></defs>
+<rect width="100%" height="100%" fill="white"/>
+<text x="40" y="60" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="500" fill="#18364a">08 / 写入确认、查询可见性与恢复是三个问题</text>
+<text x="40" y="96" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#536a7b">先约定响应含义；基础版确认数据进入内存，后续用 WAL 补充恢复路径。</text>
+<polyline points="40,116 1160,116" fill="none" stroke="#718698" stroke-width="2"/>
+<text x="40" y="716" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从零实现系列 01 · 单机基础设计</text>
+<rect x="40" y="165" width="235" height="120" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="94.5" y="216.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">进入内存缓存</text>
+<text x="69.2" y="249.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">暂存 RecordBatch</text>
+<rect x="335" y="165" width="235" height="120" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="381.5" y="216.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">返回 HTTP 200</text>
+<text x="410.5" y="249.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">确认接收</text>
+<rect x="630" y="165" width="235" height="120" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
+<text x="669.8" y="216.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">显式 / 后台 flush</text>
+<text x="684.0" y="249.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">生成 Parquet</text>
+<rect x="925" y="165" width="235" height="120" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
+<text x="979.5" y="216.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">表发现后查询</text>
+<text x="958.5" y="249.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">读取文件中的记录</text>
+<polyline points="275,225 335,225" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="570,225 630,225" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="865,225 925,225" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="40" y="395" width="530" height="170" rx="13" fill="#fff4e8" stroke="#e1a76a" stroke-width="2"/>
+<text x="185.0" y="453.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="500" fill="#18364a">flush 前退出 / 写入失败</text>
+<text x="201.5" y="488.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="500" fill="#18364a">未落盘数据可能丢失</text>
+<text x="140.5" y="523.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="500" fill="#18364a">WAL 为未刷盘数据提供恢复路径</text>
+<rect x="630" y="395" width="530" height="170" rx="13" fill="#f3f5f8" stroke="#bdcbd5" stroke-width="2"/>
+<text x="782.0" y="453.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="500" fill="#18364a">显式 flush 后重新启动</text>
+<text x="791.5" y="488.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="500" fill="#18364a">检查文件与查询结果</text>
+<text x="757.0" y="523.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="500" fill="#18364a">单独验证持久化数据的读取</text>
+<text x="40" y="648" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="500" fill="#536a7b">下一步：在确认写入之前追加 WAL，并在启动时重放未完成的记录。</text>
+</svg>

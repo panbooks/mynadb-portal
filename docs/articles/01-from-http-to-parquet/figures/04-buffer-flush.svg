@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="850" viewBox="0 0 1200 850" role="img" aria-labelledby="title desc">
+<title id="title">05 / 缓存、确认与刷盘触发</title><desc id="desc">200 表示写入缓存；三种触发方式最终调用同一个 flush。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#718698"/></marker></defs>
+<rect width="100%" height="100%" fill="white"/>
+<text x="40" y="60" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="500" fill="#18364a">05 / 缓存、确认与刷盘触发</text>
+<text x="40" y="96" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#536a7b">200 表示写入缓存；三种触发方式最终调用同一个 flush。</text>
+<polyline points="40,116 1160,116" fill="none" stroke="#718698" stroke-width="2"/>
+<text x="40" y="826" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从零实现系列 01 · 单机基础设计</text>
+<rect x="40" y="160" width="245" height="100" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="112.2" y="201.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">Point 批次</text>
+<text x="74.2" y="234.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">转为 RecordBatch</text>
+<rect x="365" y="160" width="245" height="100" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="424.5" y="201.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">检查估算容量</text>
+<text x="414.0" y="234.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">是否还有空间？</text>
+<rect x="710" y="160" width="450" height="100" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
+<text x="764.5" y="201.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">加入分区对应的 Vec&lt;RecordBatch&gt;</text>
+<text x="851.0" y="234.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">更新数组内存计数</text>
+<polyline points="285,210 365,210" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="610,210 710,210" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="640" y="193" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="18" font-weight="500" fill="#536a7b">是</text>
+<polyline points="487,260 487,320" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="365" y="320" width="245" height="85" rx="13" fill="#fff4e8" stroke="#e1a76a" stroke-width="2"/>
+<text x="392.0" y="369.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="500" fill="#18364a">容量不足 → HTTP 503</text>
+<polyline points="935,260 935,320" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="710" y="320" width="450" height="85" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="774.8" y="370.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">HTTP 200：Data added to cache</text>
+<rect x="40" y="490" width="330" height="95" rx="13" fill="#f3f5f8" stroke="#bdcbd5" stroke-width="2"/>
+<text x="152.5" y="528.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">周期定时器</text>
+<text x="107.5" y="561.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">flush_interval_secs</text>
+<rect x="435" y="490" width="330" height="95" rx="13" fill="#f3f5f8" stroke="#bdcbd5" stroke-width="2"/>
+<text x="534.0" y="528.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">达到缓存 80%</text>
+<text x="545.8" y="561.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">Notify 通知</text>
+<rect x="830" y="490" width="330" height="95" rx="13" fill="#f3f5f8" stroke="#bdcbd5" stroke-width="2"/>
+<text x="953.0" y="528.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">显式调用</text>
+<text x="936.0" y="561.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">POST /flush</text>
+<rect x="350" y="665" width="500" height="85" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
+<text x="411.5" y="716.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="500" fill="#18364a">DataCache::flush → ParquetWriter</text>
+<polyline points="205,585 205,707 350,707" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="600,585 600,665" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="995,585 995,707 850,707" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+</svg>

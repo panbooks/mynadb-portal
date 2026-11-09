@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="780" viewBox="0 0 1200 780" role="img" aria-labelledby="title desc">
+<title id="title">04 / 多个批次怎样写进一个 Parquet 文件</title><desc id="desc">先合并列集合，再按列名对齐；缺列补 NULL，类型冲突按规则处理。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#718698"/></marker></defs>
+<rect width="100%" height="100%" fill="white"/>
+<text x="40" y="60" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="500" fill="#18364a">04 / 多个批次怎样写进一个 Parquet 文件</text>
+<text x="40" y="96" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#536a7b">先合并列集合，再按列名对齐；缺列补 NULL，类型冲突按规则处理。</text>
+<polyline points="40,116 1160,116" fill="none" stroke="#718698" stroke-width="2"/>
+<text x="40" y="756" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从零实现系列 01 · 单机基础设计</text>
+<rect x="40" y="160" width="500" height="120" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="248.2" y="211.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="500" fill="#18364a">Batch A</text>
+<text x="110.5" y="246.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="500" fill="#18364a">timestamp / measurement / host</text>
+<rect x="660" y="160" width="500" height="120" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="871.5" y="211.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">Batch B</text>
+<text x="704.5" y="244.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">timestamp / measurement / host / region</text>
+<rect x="300" y="355" width="600" height="110" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
+<text x="496.0" y="401.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="500" fill="#18364a">按列名合并 Schema</text>
+<text x="457.0" y="436.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="500" fill="#18364a">同名列类型冲突 → 返回错误</text>
+<polyline points="290,280 290,410 300,410" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="910,280 910,410 900,410" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="40" y="540" width="500" height="110" rx="13" fill="#f3f5f8" stroke="#bdcbd5" stroke-width="2"/>
+<text x="174.2" y="586.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">对齐 A：region = NULL</text>
+<text x="158.0" y="620.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">已有列按目标字段顺序重排</text>
+<rect x="660" y="540" width="500" height="110" rx="13" fill="#f3f5f8" stroke="#bdcbd5" stroke-width="2"/>
+<text x="809.0" y="586.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">对齐 B：保留 region</text>
+<text x="778.0" y="620.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">已有列按目标字段顺序重排</text>
+<polyline points="450,465 450,500 290,500 290,540" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="750,465 750,500 910,500 910,540" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="40" y="711" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#536a7b">随后由 ArrowWriter 顺序写入各批次，并 close 完成文件写出。</text>
+</svg>

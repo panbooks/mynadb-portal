@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="780" viewBox="0 0 1200 780" role="img" aria-labelledby="title desc">
+<title id="title">01 / 第一阶段：单机读写闭环</title><desc id="desc">写入先缓冲再落盘；第一版先实现文件数据的 SQL 查询。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#718698"/></marker></defs>
+<rect width="100%" height="100%" fill="white"/>
+<text x="40" y="60" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="500" fill="#18364a">01 / 第一阶段：单机读写闭环</text>
+<text x="40" y="96" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#536a7b">写入先缓冲再落盘；第一版先实现文件数据的 SQL 查询。</text>
+<polyline points="40,116 1160,116" fill="none" stroke="#718698" stroke-width="2"/>
+<text x="40" y="756" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从零实现系列 01 · 单机基础设计</text>
+<rect x="40" y="155" width="250" height="100" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="114.2" y="196.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">HTTP 写入</text>
+<text x="114.5" y="229.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">/write/:db</text>
+<rect x="330" y="155" width="250" height="100" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="399.5" y="196.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">Line parser</text>
+<text x="388.0" y="229.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">Point / 表映射</text>
+<rect x="620" y="155" width="250" height="100" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
+<text x="690.8" y="196.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">DataCache</text>
+<text x="650.2" y="229.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">Vec&lt;RecordBatch&gt;</text>
+<rect x="910" y="155" width="250" height="100" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
+<text x="968.0" y="196.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">Flush / Writer</text>
+<text x="976.8" y="229.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">生成 L0 文件</text>
+<polyline points="290,205 330,205" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="580,205 620,205" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="870,205 910,205" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="1035,255 1035,480" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="1055" y="369" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="500" fill="#536a7b">落盘</text>
+<rect x="40" y="480" width="250" height="110" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="100.0" y="526.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">HTTP / Flight</text>
+<text x="86.0" y="559.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">MySQL 查询入口</text>
+<rect x="330" y="480" width="250" height="110" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="390.2" y="526.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">QueryEngine</text>
+<text x="392.0" y="559.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">发现与注册表</text>
+<rect x="620" y="480" width="250" height="110" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="688.0" y="526.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">DataFusion</text>
+<text x="670.0" y="559.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">SQL 规划与执行</text>
+<rect x="910" y="480" width="250" height="110" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
+<text x="971.5" y="526.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">Parquet 文件</text>
+<text x="972.0" y="559.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">日期分区目录</text>
+<polyline points="290,535 330,535" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="580,535 620,535" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="870,535 910,535" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="330" y="320" width="540" height="75" rx="13" fill="#f3f5f8" stroke="#bdcbd5" stroke-width="2"/>
+<text x="500.0" y="348.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">第一版先完成文件查询</text>
+<text x="500.0" y="380.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">写缓存查询在后续接入</text>
+<text x="40" y="675" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#536a7b">写入、内存批次、文件存储和 SQL 执行各自负责一个清晰的环节。</text>
+</svg>

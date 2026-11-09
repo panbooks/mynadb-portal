@@ -1,0 +1,170 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MynaDB 从零实现系列 01</title><style>
+:root{color-scheme:light}body{margin:0;background:#f3f6fa;color:#233749;font:17px/1.95 system-ui,-apple-system,"Microsoft YaHei",sans-serif}main{max-width:1000px;margin:36px auto;padding:48px 54px;background:white;border:1px solid #e1e8ef;border-radius:16px}h1{font-size:34px;line-height:1.5;letter-spacing:-.6px}h2{font-size:25px;margin-top:48px;padding-top:12px;border-top:1px solid #e2e9ef}a{color:#096d8f}p{margin:20px 0}img{display:block;width:100%;height:auto;margin:28px 0;border:1px solid #e3eaf0;border-radius:10px}pre{padding:22px;background:#112b3c;color:#e2edf5;overflow:auto;border-radius:10px;font:14px/1.8 ui-monospace,monospace}code{font-family:ui-monospace,monospace;font-size:.9em}p code,td code,li code{background:#eef3f8;padding:2px 5px;border-radius:4px}table{border-collapse:collapse;width:100%;font-size:15px;margin:24px 0}td,th{border:1px solid #dce5ed;padding:12px;text-align:left}th{background:#edf5f9}li{margin:8px 0}strong{color:#123c52}.draft{font-size:14px;color:#617a8d;border-bottom:1px solid #e0e8ef;padding-bottom:15px}@media(max-width:700px){main{margin:0;padding:24px 18px;border:0;border-radius:0}h1{font-size:27px}table{display:block;overflow:auto}pre{padding:15px}}
+</style><main><p class="draft">社区文章草稿 · 单机基础设计 · 本地预览，尚未对外发表</p><h1 id="rustarrow-parquet-sql">从零实现一个时序数据库（一）：用 Rust、Arrow 和 Parquet 打通写入与 SQL 查询</h1>
+<p>从一条监控指标开始：</p>
+<pre><code class="language-text">cpu,service=web,host=server01 usage=23.5 1766793600000000000
+</code></pre>
+<p>我们希望通过 HTTP 写入它，再用 SQL 查询：</p>
+<pre><code class="language-sql">SELECT host, AVG(usage)
+FROM demo.web.cpu
+GROUP BY host
+</code></pre>
+<p>要做到这一点，第一版需要解决四件事：<strong>解析指标、组织内存数据、写成文件、把文件交给 SQL 引擎。</strong></p>
+<p>本文围绕 MynaDB 的单机基础设计展开，按实现顺序介绍这条链路。代码和接口用于解释设计，省略错误处理等细节，不作为某个历史标签的完整复现脚本。</p>
+<h2 id="1">1. 把第一版拆成四个模块</h2>
+<p>先让数据走完一个闭环：</p>
+<p><img alt="图 1：单机版的写入与查询架构" src="figures/01-architecture.png" /></p>
+<p>各模块的职责如下：</p>
+<table>
+<thead>
+<tr>
+<th>模块</th>
+<th>职责</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HTTP 接口</td>
+<td>接收写入请求和 SQL，返回处理结果</td>
+</tr>
+<tr>
+<td>Parser 与 DataCache</td>
+<td>解析指标，按表和日期组织内存批次</td>
+</tr>
+<tr>
+<td>ParquetWriter</td>
+<td>将批次写入日期分区目录</td>
+</tr>
+<tr>
+<td>QueryEngine</td>
+<td>注册表，调用 DataFusion 执行 SQL</td>
+</tr>
+</tbody>
+</table>
+<p>Rust 的 Tokio/Axum 负责服务接入；Arrow 表达内存中的列式数据；Parquet 保存文件；DataFusion 提供 SQL 规划和执行。</p>
+<p>第一版先查询已经落盘的数据。查询内存中尚未刷出的记录，需要再把写缓存接入查询引擎，这留到查询优化篇展开。</p>
+<h2 id="2">2. 定义数据模型：一条指标属于哪张表</h2>
+<p>Line protocol 把数据分成四部分：</p>
+<pre><code class="language-text">cpu,service=web,host=server01 usage=23.5 1766793600000000000
+│   └──────── tags ────────┘ └─ field ─┘ └── timestamp ──┘
+└── measurement
+</code></pre>
+<p>measurement 表示指标名称；tags 表示主机、业务等维度；fields 保存采样值；timestamp 表示采样时间。</p>
+<p>设计一个能容纳这些信息的内部结构：</p>
+<pre><code class="language-rust">struct Point {
+    measurement: String,
+    tags: HashMap&lt;String, String&gt;,
+    fields: HashMap&lt;String, FieldValue&gt;,
+    timestamp: i64,
+}
+
+enum FieldValue {
+    Float(f64),
+    Integer(i64),
+    Boolean(bool),
+    String(String),
+}
+</code></pre>
+<p>接下来约定数据和 SQL 表名之间的关系：</p>
+<p><img alt="图 2：协议数据、逻辑表与物理目录的映射" src="figures/02-data-model.png" /></p>
+<p>例如，向 <code>/write/demo</code> 写入上面的指标：URL 中的 <code>demo</code> 作为 catalog，约定从 <code>service=web</code> 提取 schema，measurement <code>cpu</code> 对应 table，得到 <code>demo.web.cpu</code>。没有 service 时可以使用默认 schema。</p>
+<p>同一条记录中的 <code>host</code> 保存为字符串列，<code>usage</code> 保存为浮点列，时间戳保存为时间列。<strong>表名映射应由明确规则决定，字段值则必须贯穿解析、缓存、落盘和查询。</strong></p>
+<h2 id="3-http">3. 接收 HTTP 写入，按表和日期分组</h2>
+<p>写入入口可以设计为：</p>
+<pre><code class="language-text">POST /write/demo
+</code></pre>
+<p>处理过程保持简单：</p>
+<pre><code class="language-text">读取请求体 → 解析为 Point → 按表和日期分组 → 转为批次 → 加入缓存
+</code></pre>
+<p>缓存键同时包含逻辑表和日期：</p>
+<pre><code class="language-rust">struct PartitionKey {
+    catalog: String,
+    schema: String,
+    table: String,
+    date: i32,
+}
+
+// 每个分区积累多个列式批次
+HashMap&lt;PartitionKey, Vec&lt;RecordBatch&gt;&gt;
+</code></pre>
+<p>同一请求可能包含多个指标、多个日期，所以要逐条计算分区键，再把相同键的数据放到一起。日期从采样时间按统一时区计算，例如统一采用 UTC。</p>
+<p>这样，每个批次都属于一张表的一个日期分区，后续写文件时不需要重新猜测数据归属。</p>
+<h2 id="4-arrow">4. 用 Arrow 连接写入和查询</h2>
+<p>HTTP 按行接收数据，而分析查询往往只读取其中几列。Arrow 的 <code>RecordBatch</code> 可以把一批行转换为列数组：</p>
+<p><img alt="图 3：将指标转换为 Arrow RecordBatch" src="figures/03-record-batch.png" /></p>
+<p>例如，两条 CPU 指标会形成几组等长数组：</p>
+<pre><code class="language-text">host:  [server01, server02]
+usage: [23.5, 42.0]
+</code></pre>
+<p>再用 schema 描述列名和类型：</p>
+<pre><code class="language-rust">let schema = Arc::new(Schema::new(vec![
+    Field::new(&quot;timestamp&quot;, DataType::Timestamp(TimeUnit::Nanosecond, None), false),
+    Field::new(&quot;host&quot;, DataType::Utf8, true),
+    Field::new(&quot;usage&quot;, DataType::Float64, true),
+]));
+
+let batch = RecordBatch::try_new(schema, arrays)?;
+</code></pre>
+<p>这是简化的字段集合。实际转换时，要先收集整个批次的 tags 和 fields，再按 schema 顺序构建数组，保证所有列的行数一致。</p>
+<p>对于不同批次之间的列变化，可以采用下面的规则：</p>
+<p><img alt="图 4：按列名对齐 schema，缺少的列补 NULL" src="figures/05-schema-alignment.png" /></p>
+<p>缺少某一列时补 NULL；已有列按目标 schema 的顺序排列；同名列出现不同类型时，按明确的类型策略处理。第一版可以先拒绝类型冲突，让行为更容易理解。</p>
+<p>Arrow 在这里承担了一个重要作用：<strong>写缓存、文件写入和查询结果可以围绕同一种批次结构组织，减少各模块之间的数据转换。</strong></p>
+<h2 id="5-parquet">5. 先缓冲，再批量写 Parquet</h2>
+<p>如果每次写入请求都生成一个文件，小请求会很快变成大量小文件。因此，先将 RecordBatch 放进缓存，积累到一定程度再执行 flush。</p>
+<p><img alt="图 5：缓存容量控制与 flush 触发" src="figures/04-buffer-flush.png" /></p>
+<p>可以提供三种触发方式：</p>
+<ul>
+<li>周期触发，例如每隔一段时间刷出缓存。</li>
+<li>容量触发，例如达到缓存预算的 80% 时发出通知。</li>
+<li>手动触发，例如 <code>POST /flush</code>，便于调试和验证。</li>
+</ul>
+<p>如果缓存已满，就拒绝或限流新写入，让上游能够重试。缓存预算还应为解析、刷盘和查询预留空间，不能直接等同于进程的全部可用内存。</p>
+<p>flush 后的目录结构如下：</p>
+<pre><code class="language-text">data/
+└── demo/
+    └── web/
+        └── cpu/
+            ├── date=2025-12-27/
+            │   ├── L0_001.parquet
+            │   └── L0_002.parquet
+            └── date=2025-12-28/
+                └── L0_003.parquet
+</code></pre>
+<p>这里的文件名只是示意。日期目录用于组织分区，L0 表示刚刷出的原始文件。</p>
+<p>写文件的核心步骤是：</p>
+<pre><code class="language-rust">let mut writer = ArrowWriter::try_new(file, batch.schema(), None)?;
+writer.write(&amp;batch)?;
+writer.close()?;
+</code></pre>
+<p>如果同一文件包含多个 batch，就在关闭 writer 前逐批写入，并确保 schema 一致。某次写入失败时，待刷批次应保留或重新入队，不能直接视为已经持久化。</p>
+<h2 id="6-parquet-sql">6. 把 Parquet 目录注册成 SQL 表</h2>
+<p>有了文件，还需要让查询引擎知道 <code>demo.web.cpu</code> 对应哪个目录。</p>
+<p>QueryEngine 负责发现 catalog、schema 和 table，并将 Parquet 表注册到 DataFusion。对于日期分区目录，还要告诉表提供者 <code>date</code> 是分区列。</p>
+<p><img alt="图 6：表发现、注册与 SQL 执行" src="figures/06-query-path.png" /></p>
+<p>注册后，执行查询的核心调用很短：</p>
+<pre><code class="language-rust">let df = ctx.sql(sql).await?;
+let batches = df.collect().await?;
+</code></pre>
+<p>DataFusion 返回 RecordBatch，HTTP 层再将其转换成 JSON。以后增加 Arrow Flight、MySQL 等查询入口时，可以继续复用 QueryEngine。</p>
+<p>例如，下面的查询读取已经刷出的指标：</p>
+<pre><code class="language-sql">SELECT host, AVG(usage) AS avg_usage
+FROM demo.web.cpu
+WHERE date = '2025-12-27'
+GROUP BY host
+</code></pre>
+<p>显式使用日期分区条件，便于检查分区选择行为。后续再考虑如何从时间范围自动推导分区，以及如何减少文件扫描。</p>
+<p>要验证第一版是否正确，可以用一组很小的数据检查：写入两条已知指标，显式 flush，核对查询结果；再重启进程，用相同目录重复查询。这比单独检查 HTTP 状态或文件是否存在更有意义。</p>
+<h2 id="7-compaction">7. 用 Compaction 控制文件数量</h2>
+<p>持续写入会不断产生 L0 文件。Compaction 将多个小文件合并成较大的文件，减少后续读取时需要处理的文件数量。</p>
+<p><img alt="图 7：将多个小文件合并为下一层文件" src="figures/07-compaction.png" /></p>
+<p>基本流程是：读取输入文件、对齐 schema、写入新文件，再切换有效文件集合并回收旧文件。</p>
+<p>这里需要维护一个不变量：<strong>同一批记录不能因为新旧文件同时存在而被重复读取。</strong> 文件可见性的切换和旧文件回收应分开设计；具体的清单机制放到后续文章展开。</p>
+<p>第一版也需要限制合并并发和每次处理的数据量，避免后台任务挤占前台写入与查询资源。</p>
+<h2 id="8">8. 最后约定“写入成功”的含义</h2>
+<p>为了尽快跑通基础链路，本文采用“数据进入内存后确认接收”的设计。于是，接收成功、生成文件和查询可见是不同的时刻：</p>
+<p><img alt="图 8：写入确认与落盘之间的关系" src="figures/08-ack-durability.png" /></p>
+<p>在尚未引入 WAL 时，未刷出的内存数据存在进程退出后丢失的风险。显式 flush 后重启再查，可以检查文件能否重新读取；崩溃恢复还需要另一套保证。</p>
+<p>这就自然引出了第二篇：<strong>在确认写入之前记录 WAL，并在启动时重放日志，让尚未刷出的数据也有恢复路径。</strong></p>
+<p>到这里，第一版的核心结构已经清楚：用 Point 表达指标，用 RecordBatch 组织批次，用缓存衔接小写入和文件写出，用 Parquet 保存数据，再由 DataFusion 执行 SQL。后续的持久性、查询优化和集群能力，都可以围绕这条链路逐步补充。</p>
+<p>项目源码：<a href="https://github.com/panbooks/mynadb">panbooks/mynadb</a> · <a href="https://panbooks.github.io/mynadb-portal/zh/index.html">中文文档</a>。</p></main></html>

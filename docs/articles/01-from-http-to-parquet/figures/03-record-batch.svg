@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="670" viewBox="0 0 1200 670" role="img" aria-labelledby="title desc">
+<title id="title">03 / 从行数据转换为 Arrow 列数组</title><desc id="desc">按列收集时间戳、标签和指标值；所有列数组必须具有相同的行数。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#718698"/></marker></defs>
+<rect width="100%" height="100%" fill="white"/>
+<text x="40" y="60" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="500" fill="#18364a">03 / 从行数据转换为 Arrow 列数组</text>
+<text x="40" y="96" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#536a7b">按列收集时间戳、标签和指标值；所有列数组必须具有相同的行数。</text>
+<polyline points="40,116 1160,116" fill="none" stroke="#718698" stroke-width="2"/>
+<text x="40" y="646" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从零实现系列 01 · 单机基础设计</text>
+<rect x="40" y="170" width="475" height="225" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="128.8" y="256.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">行 1：t0 / server01 / cn / 23.5</text>
+<text x="128.8" y="290.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">行 2：t1 / server02 / cn / 42.0</text>
+<text x="158.0" y="324.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">HTTP 中连续到达的指标</text>
+<polyline points="515,280 655,280" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="543" y="245" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#536a7b">列式转换</text>
+<rect x="655" y="150" width="505" height="300" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
+<text x="810.8" y="223.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">timestamp  [t0, t1]</text>
+<text x="776.8" y="257.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">measurement  [cpu, cpu]</text>
+<text x="775.2" y="291.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">host  [server01, server02]</text>
+<text x="830.0" y="325.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">region  [cn, cn]</text>
+<text x="814.0" y="359.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">usage  [23.5, 42.0]</text>
+<text x="717.5" y="393.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">Schema + 等长 Arrays = RecordBatch</text>
+<rect x="40" y="500" width="1120" height="88" rx="13" fill="#f3f5f8" stroke="#bdcbd5" stroke-width="2"/>
+<text x="390.0" y="535.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">先收集整批数据的列集合，再逐列构造数组。</text>
+<text x="368.2" y="568.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">缺少的值补 NULL；列顺序与 Schema 保持一致。</text>
+</svg>

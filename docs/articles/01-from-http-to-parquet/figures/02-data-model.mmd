@@ -1,0 +1,9 @@
+flowchart TB
+  A[POST /write/demo + line protocol] --> B[catalog: demo]
+  A --> C[schema: web from service tag]
+  A --> D[table: cpu from measurement]
+  B --> T[demo.web.cpu]
+  C --> T
+  D --> T
+  T --> F[data/demo/web/cpu/date=YYYY-MM-DD/]
+  A --> X[Preserve timestamp, tags, and numeric fields]

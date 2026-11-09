@@ -1,0 +1,7 @@
+flowchart LR
+  C[In-memory cache] --> A[HTTP 200]
+  A --> F[Explicit or background flush]
+  F --> P[Parquet files]
+  P --> Q[Discover table and query]
+  C -.-> R[Exit before flush: loss risk without WAL]
+  P -.-> N[Normal restart check is not power-loss recovery validation]
