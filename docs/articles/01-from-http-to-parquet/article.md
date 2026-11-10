@@ -1,4 +1,4 @@
-# 从零实现一个时序数据库（一）：用 Rust、Arrow 和 Parquet 打通写入与 SQL 查询
+# 从0到1实现一个分布式时序数据库（一）：用 Rust、Arrow 和 Parquet 打通写入与 SQL 查询
 
 从一条监控指标开始：
 

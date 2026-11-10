@@ -5,7 +5,7 @@
 <text x="40" y="60" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="500" fill="#18364a">04 / 同一个边界切开日志和内存</text>
 <text x="40" y="96" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#536a7b">先串行 flush：所有边界内分区提交成功，才能推进 checkpoint。</text>
 <polyline points="40,116 1160,116" fill="none" stroke="#718698" stroke-width="2"/>
-<text x="40" y="876" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从零实现系列 02 · WAL 与单机恢复设计</text>
+<text x="40" y="876" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从0到1实现一个分布式时序数据库 02 · WAL 与单机恢复设计</text>
 <rect x="40" y="160" width="330" height="115" rx="13" fill="#f3f5f8" stroke="#bdcbd5" stroke-width="2"/>
 <text x="141.5" y="208.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="500" fill="#18364a">旧 WAL 封口</text>
 <text x="126.5" y="243.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="500" fill="#18364a">最后 LSN = 200</text>

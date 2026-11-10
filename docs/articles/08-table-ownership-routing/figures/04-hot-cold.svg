@@ -5,9 +5,9 @@
 <text x="40" y="60" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="500" fill="#18364a">04 / 查询需要同时考虑内存和文件</text>
 <text x="40" y="96" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#536a7b">近期数据可能仍在内存，文件可通过存储前缀发现。</text>
 <polyline points="40,116 1160,116" fill="none" stroke="#718698" stroke-width="2"/>
-<text x="40" y="716" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从零实现系列 08 · 表所有权与分区路由</text>
+<text x="40" y="716" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从0到1实现一个分布式时序数据库 08 · 表所有权与分区路由</text>
 <rect x="40" y="170" width="330" height="135" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
-<text x="152.4" y="228.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">候选 owner</text>
+<text x="152.2" y="228.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">候选 owner</text>
 <text x="135.0" y="260.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">可能含内存数据</text>
 <rect x="435" y="170" width="330" height="135" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
 <text x="560.0" y="228.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">查询路由</text>

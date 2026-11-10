@@ -5,7 +5,7 @@
 <text x="40" y="60" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="500" fill="#18364a">04 / 多个批次怎样写进一个 Parquet 文件</text>
 <text x="40" y="96" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#536a7b">先合并列集合，再按列名对齐；缺列补 NULL，类型冲突按规则处理。</text>
 <polyline points="40,116 1160,116" fill="none" stroke="#718698" stroke-width="2"/>
-<text x="40" y="756" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从零实现系列 01 · 单机基础设计</text>
+<text x="40" y="756" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从0到1实现一个分布式时序数据库 01 · 单机基础设计</text>
 <rect x="40" y="160" width="500" height="120" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
 <text x="248.2" y="211.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="500" fill="#18364a">Batch A</text>
 <text x="110.5" y="246.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="500" fill="#18364a">timestamp / measurement / host</text>

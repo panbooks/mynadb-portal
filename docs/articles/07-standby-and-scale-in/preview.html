@@ -1,6 +1,6 @@
-<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MynaDB 从零实现系列 07：备用节点与安全缩容</title><style>
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>从0到1实现一个分布式时序数据库（七）：不提升 Standby 的恢复与安全缩容</title><style>
 :root{color-scheme:light}body{margin:0;background:#f3f6fa;color:#233749;font:17px/1.95 system-ui,-apple-system,"Microsoft YaHei",sans-serif}main{max-width:1000px;margin:36px auto;padding:48px 54px;background:white;border:1px solid #e1e8ef;border-radius:16px}h1{font-size:34px;line-height:1.5;letter-spacing:-.6px}h2{font-size:25px;margin-top:48px;padding-top:12px;border-top:1px solid #e2e9ef}a{color:#096d8f}p{margin:20px 0}img{display:block;width:100%;height:auto;margin:28px 0;border:1px solid #e3eaf0;border-radius:10px}pre{padding:22px;background:#112b3c;color:#e2edf5;overflow:auto;border-radius:10px;font:14px/1.8 ui-monospace,monospace}code{font-family:ui-monospace,monospace;font-size:.9em}p code,td code,li code{background:#eef3f8;padding:2px 5px;border-radius:4px}table{border-collapse:collapse;width:100%;font-size:15px;margin:24px 0}td,th{border:1px solid #dce5ed;padding:12px;text-align:left}th{background:#edf5f9}li{margin:8px 0}strong{color:#123c52}.draft{font-size:14px;color:#617a8d;border-bottom:1px solid #e0e8ef;padding-bottom:15px}@media(max-width:700px){main{margin:0;padding:24px 18px;border:0;border-radius:0}h1{font-size:27px}table{display:block;overflow:auto}pre{padding:15px}}
-</style><main><p class="draft">社区文章草稿 · 备用节点与安全缩容 · 本地预览，尚未对外发表</p><h1 id="standby">从零实现一个时序数据库（七）：不提升 Standby 的恢复与安全缩容</h1>
+</style><main><p class="draft">社区文章草稿 · 备用节点与安全缩容 · 本地预览，尚未对外发表</p><h1 id="01-standby">从0到1实现一个分布式时序数据库（七）：不提升 Standby 的恢复与安全缩容</h1>
 <p><a href="../06-distributed-cluster/article.md">上一篇</a>将系统拆成 Router、Data 和 Meta。节点运行时，写入会进入 Primary 的内存和存储路径，也可能复制到 Standby；但当一台节点突然退出，或者运维主动减少节点时，数据与请求该如何交接？</p>
 <p>这一篇以 <code>v0.6.0</code> / M7 为线索，讨论<strong>不将 Standby 提升为 Primary</strong>的恢复设计，以及节点退役和缩容中的边界。流程图用于解释设计；具体历史实现仍有占位和限制，不代表已经验证无损恢复。</p>
 <h2 id="1">1. 两种情况：突然故障与计划退役</h2>
@@ -70,6 +70,7 @@
 <p>一种可验证的操作设计应记录阶段和任务身份；每次重试先检查已有结果，再根据条件决定继续、停止或人工介入。对外报告应区分“请求已提交”“操作仍在执行”“验证完成”和“失败”，不能把事件已经发送当成远端工作已经完成。</p>
 <p>如果涉及旧节点隔离，租约、任期或 fencing 必须在实际写入路径上被验证；仅修改路由缓存或节点状态，并不能阻止仍可访问存储的旧进程写入。这些是系统设计要求，而非本文对该版本实现作出的保证。</p>
 <h2 id="6">6. 如何验证恢复与缩容？</h2>
+<p><img alt="图 6：恢复与缩容需要覆盖的故障场景" src="figures/06-recovery-tests.png" /></p>
 <table>
 <thead>
 <tr>

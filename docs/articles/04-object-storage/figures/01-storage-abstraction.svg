@@ -5,19 +5,19 @@
 <text x="40" y="60" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="500" fill="#18364a">01 / 用统一接口连接不同存储后端</text>
 <text x="40" y="96" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#536a7b">接口统一访问方式，但各后端的故障与并发语义仍需分别验证。</text>
 <polyline points="40,116 1160,116" fill="none" stroke="#718698" stroke-width="2"/>
-<text x="40" y="736" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从零实现系列 04 · 对象存储与查询</text>
+<text x="40" y="736" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从0到1实现一个分布式时序数据库 04 · 对象存储与查询</text>
 <rect x="360" y="155" width="480" height="95" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
-<text x="428.8" y="211.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="500" fill="#18364a">写入、查询、WAL、Compaction</text>
+<text x="428.5" y="211.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="500" fill="#18364a">写入、查询、WAL、Compaction</text>
 <rect x="360" y="330" width="480" height="105" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
-<text x="445.3" y="373.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">Storage：put / get / list / delete</text>
+<text x="443.5" y="373.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">Storage：put / get / list / delete</text>
 <text x="505.5" y="406.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">路径前缀与后端配置</text>
 <polyline points="600,250 600,330" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
 <rect x="40" y="540" width="460" height="105" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
 <text x="204.0" y="583.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">本地文件系统</text>
 <text x="215.0" y="617.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">文件与目录</text>
 <rect x="700" y="540" width="460" height="105" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
-<text x="852.3" y="583.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">S3 兼容对象存储</text>
-<text x="811.1" y="616.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">bucket + key + endpoint</text>
+<text x="852.2" y="583.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">S3 兼容对象存储</text>
+<text x="810.8" y="616.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">bucket + key + endpoint</text>
 <polyline points="490,435 270,540" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
 <polyline points="710,435 930,540" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
 </svg>

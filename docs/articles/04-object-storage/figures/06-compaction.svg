@@ -5,10 +5,10 @@
 <text x="40" y="60" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="500" fill="#18364a">06 / 合并文件还要切换有效集合</text>
 <text x="40" y="96" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#536a7b">图示为安全设计检查项，不代表历史标签已实现事务性合并。</text>
 <polyline points="40,116 1160,116" fill="none" stroke="#718698" stroke-width="2"/>
-<text x="40" y="776" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从零实现系列 04 · 对象存储与查询</text>
+<text x="40" y="776" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从0到1实现一个分布式时序数据库 04 · 对象存储与查询</text>
 <rect x="40" y="175" width="300" height="120" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
 <text x="135.0" y="226.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">旧文件集合</text>
-<text x="114.8" y="260.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">小文件 A / B / C</text>
+<text x="115.0" y="260.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">小文件 A / B / C</text>
 <rect x="450" y="175" width="300" height="120" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
 <text x="545.0" y="226.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">生成并验证</text>
 <text x="534.8" y="260.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">新候选文件 D</text>

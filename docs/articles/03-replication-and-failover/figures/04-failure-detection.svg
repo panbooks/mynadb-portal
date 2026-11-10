@@ -5,7 +5,7 @@
 <text x="40" y="60" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="500" fill="#18364a">04 / 心跳超时不是故障证明</text>
 <text x="40" y="96" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#536a7b">没有收到心跳可能是宕机，也可能是网络分区、暂停或过载。</text>
 <polyline points="40,116 1160,116" fill="none" stroke="#718698" stroke-width="2"/>
-<text x="40" y="776" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从零实现系列 03 · 主从复制与故障切换</text>
+<text x="40" y="776" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从0到1实现一个分布式时序数据库 03 · 主从复制与故障切换</text>
 <rect x="40" y="160" width="340" height="120" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
 <text x="165.8" y="211.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="500" fill="#18364a">主节点 A</text>
 <text x="141.0" y="246.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="500" fill="#18364a">可能仍在服务</text>
@@ -15,10 +15,10 @@
 <polyline points="380,220 820,220" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)" stroke-dasharray="9 9"/>
 <text x="500" y="193" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#536a7b">网络分区 / 延迟</text>
 <rect x="40" y="430" width="340" height="120" rx="13" fill="#fff4e8" stroke="#e1a76a" stroke-width="2"/>
-<text x="138.1" y="481.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">客户端仍可写 A</text>
+<text x="138.2" y="481.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">客户端仍可写 A</text>
 <text x="147.0" y="514.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">旧主未必停止</text>
 <rect x="820" y="430" width="340" height="120" rx="13" fill="#fff4e8" stroke="#e1a76a" stroke-width="2"/>
-<text x="907.1" y="481.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">B 若自行接收写入</text>
+<text x="907.2" y="481.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">B 若自行接收写入</text>
 <text x="906.0" y="514.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">可能出现第二个主</text>
 <polyline points="210,280 210,430" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
 <polyline points="990,280 990,430" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>

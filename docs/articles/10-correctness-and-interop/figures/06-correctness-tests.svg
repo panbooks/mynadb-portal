@@ -5,15 +5,15 @@
 <text x="40" y="60" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="500" fill="#18364a">06 / 从错误案例到可复现验证</text>
 <text x="40" y="96" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#536a7b">用稳定输入和可信结果检查查询与恢复。</text>
 <polyline points="40,116 1160,116" fill="none" stroke="#718698" stroke-width="2"/>
-<text x="40" y="716" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从零实现系列 10 · 正确性与互操作</text>
+<text x="40" y="716" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从0到1实现一个分布式时序数据库 10 · 正确性与互操作</text>
 <rect x="40" y="170" width="330" height="135" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
-<text x="117.3" y="228.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">合并 / 异构 schema</text>
+<text x="117.0" y="228.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">合并 / 异构 schema</text>
 <text x="155.0" y="260.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">遗漏与重复</text>
 <rect x="435" y="170" width="330" height="135" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
-<text x="521.6" y="228.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">分布式聚合 / 缓存</text>
+<text x="521.5" y="228.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">分布式聚合 / 缓存</text>
 <text x="530.0" y="260.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">全局结果与失效</text>
 <rect x="830" y="170" width="330" height="135" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
-<text x="925.9" y="228.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">OTLP / Iceberg</text>
+<text x="925.2" y="228.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">OTLP / Iceberg</text>
 <text x="925.0" y="260.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">真实客户端兼容</text>
 <polyline points="370,237 435,237" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
 <polyline points="765,237 830,237" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>

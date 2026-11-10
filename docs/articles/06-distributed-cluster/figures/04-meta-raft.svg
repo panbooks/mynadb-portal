@@ -5,12 +5,12 @@
 <text x="40" y="60" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="500" fill="#18364a">06 / Meta 使用 Raft 协调控制面</text>
 <text x="40" y="96" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#536a7b">Raft 复制元数据状态变更，不自动复制所有指标数据。</text>
 <polyline points="40,116 1160,116" fill="none" stroke="#718698" stroke-width="2"/>
-<text x="40" y="716" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从零实现系列 06 · 分布式集群</text>
+<text x="40" y="716" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从0到1实现一个分布式时序数据库 06 · 分布式集群</text>
 <rect x="40" y="170" width="330" height="135" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
 <text x="155.0" y="228.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">元数据请求</text>
-<text x="142.5" y="260.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">发送至 leader</text>
+<text x="142.2" y="260.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">发送至 leader</text>
 <rect x="435" y="170" width="330" height="135" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
-<text x="548.1" y="228.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">Raft 多数派</text>
+<text x="548.0" y="228.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">Raft 多数派</text>
 <text x="530.0" y="260.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">复制并提交日志</text>
 <rect x="830" y="170" width="330" height="135" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
 <text x="965.0" y="228.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">状态机</text>

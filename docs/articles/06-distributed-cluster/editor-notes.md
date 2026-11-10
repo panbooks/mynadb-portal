@@ -2,7 +2,7 @@
 
 ## 发布文案
 
-- 通用标题：从零实现一个时序数据库（六）：从单机走向 Router、Data、Meta 与 Raft
+- 通用标题：从0到1实现一个分布式时序数据库（六）：从单机走向 Router、Data、Meta 与 Raft
 - 知乎备选：时序数据库如何从单机走向集群？
 - 掘金备选：手写时序数据库 06：路由、Arrow Flight 与 Raft 元数据
 - 摘要：介绍集群角色、写入路由、查询 fan-out、Raft 元数据与故障边界。
@@ -23,3 +23,11 @@
 - `build_assets.py`：使用 Pillow、Markdown 和 `MYNADB_ARTICLE_FONT` 指定的中文字体生成图文。
 
 发表前检查图片、链接和平台规则；本文尚未对外发表。
+
+## 复制发布与摘要
+
+- [粘贴发布版](article.publish.md)：图片及文章链接使用 GitHub Pages 完整 HTTPS 地址。
+- [100 字以内摘要](summary.md)：可直接复制到社区摘要栏。
+- 重新运行 `build_assets.py` 会同步生成发布版；整系列可运行 `../publish_support.py` 统一导出。
+
+复制全文后先检查平台预览。外链图片能否自动解析或转存，取决于目标编辑器；公网直链不等于知乎已自动上传图片。

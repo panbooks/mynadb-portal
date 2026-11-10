@@ -2,7 +2,7 @@
 
 ## 发布文案
 
-- 通用标题：从零实现一个时序数据库（一）：用 Rust、Arrow 和 Parquet 打通写入与 SQL 查询
+- 通用标题：从0到1实现一个分布式时序数据库（一）：用 Rust、Arrow 和 Parquet 打通写入与 SQL 查询
 - 知乎备选：用 Rust 从零写一个时序数据库，第一版该怎么设计？
 - 掘金备选：手写时序数据库 01：HTTP → Arrow → Parquet → SQL
 - 摘要：从一条 CPU 指标出发，拆解数据模型、Arrow 批次、缓存刷盘、Parquet 分区文件和 DataFusion 查询，理解单机时序数据库第一版的核心设计。
@@ -23,3 +23,11 @@
 ## 本地生成
 
 修改正文或图源后，运行 `python3 build_assets.py` 重新生成配图和 `preview.html`。脚本依赖 Pillow、Markdown 和中文字体；通过 `MYNADB_ARTICLE_FONT` 指定字体文件。
+
+## 复制发布与摘要
+
+- [粘贴发布版](article.publish.md)：图片及文章链接使用 GitHub Pages 完整 HTTPS 地址。
+- [100 字以内摘要](summary.md)：可直接复制到社区摘要栏。
+- 重新运行 `build_assets.py` 会同步生成发布版；整系列可运行 `../publish_support.py` 统一导出。
+
+复制全文后先检查平台预览。外链图片能否自动解析或转存，取决于目标编辑器；公网直链不等于知乎已自动上传图片。

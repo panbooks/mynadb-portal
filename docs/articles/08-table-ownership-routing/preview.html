@@ -1,6 +1,6 @@
-<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MynaDB 从零实现系列 08：表所有权与分区路由</title><style>
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>从0到1实现一个分布式时序数据库（八）：表所有权、Hive 分区与查询路由</title><style>
 :root{color-scheme:light}body{margin:0;background:#f3f6fa;color:#233749;font:17px/1.95 system-ui,-apple-system,"Microsoft YaHei",sans-serif}main{max-width:1000px;margin:36px auto;padding:48px 54px;background:white;border:1px solid #e1e8ef;border-radius:16px}h1{font-size:34px;line-height:1.5;letter-spacing:-.6px}h2{font-size:25px;margin-top:48px;padding-top:12px;border-top:1px solid #e2e9ef}a{color:#096d8f}p{margin:20px 0}img{display:block;width:100%;height:auto;margin:28px 0;border:1px solid #e3eaf0;border-radius:10px}pre{padding:22px;background:#112b3c;color:#e2edf5;overflow:auto;border-radius:10px;font:14px/1.8 ui-monospace,monospace}code{font-family:ui-monospace,monospace;font-size:.9em}p code,td code,li code{background:#eef3f8;padding:2px 5px;border-radius:4px}table{border-collapse:collapse;width:100%;font-size:15px;margin:24px 0}td,th{border:1px solid #dce5ed;padding:12px;text-align:left}th{background:#edf5f9}li{margin:8px 0}strong{color:#123c52}.draft{font-size:14px;color:#617a8d;border-bottom:1px solid #e0e8ef;padding-bottom:15px}@media(max-width:700px){main{margin:0;padding:24px 18px;border:0;border-radius:0}h1{font-size:27px}table{display:block;overflow:auto}pre{padding:15px}}
-</style><main><p class="draft">社区文章草稿 · 表所有权与分区路由 · 本地预览，尚未对外发表</p><h1 id="hive">从零实现一个时序数据库（八）：表所有权、Hive 分区与查询路由</h1>
+</style><main><p class="draft">社区文章草稿 · 表所有权与分区路由 · 本地预览，尚未对外发表</p><h1 id="01hive">从0到1实现一个分布式时序数据库（八）：表所有权、Hive 分区与查询路由</h1>
 <p><a href="../07-standby-and-scale-in/article.md">上一篇</a>讨论了节点恢复和缩容。接下来要解决一个更细的问题：<strong>当同一张表的数据分散在多个节点、多个日期和许多 Parquet 文件中，一次写入或查询应该找谁？</strong></p>
 <p>这一篇以 <code>v0.7.0</code> / M8 为线索，说明表级所有权、Hive 风格的物理路径、分区发现和缓存亲和。它们属于不同层次，不能把物理路径里的节点名直接当作当前唯一写入所有者。</p>
 <h2 id="1">1. 表所有权与物理分区是两本不同的账</h2>
@@ -46,6 +46,7 @@ Meta：  表 → owner 列表及其状态 / TTL
 <p>它们有时相同，但不能永久等同。回退时执行节点可能不同于分区标识；SQL 重写或扫描约束必须保留原分区范围，避免重复读取其他分区。</p>
 <p>多个节点执行的结果还要正确汇总；如果读取的文件可能被 compaction、保留策略或迁移改变，缓存发现结果的失效、刷新和并发读取语义也需要验证。仅根据“Parquet 文件写出后不修改”并不能推断文件集合永远不变。</p>
 <h2 id="6">6. 用查询结果而不是路由日志验证</h2>
+<p><img alt="图 6：路由与缓存需要核对的查询场景" src="figures/06-routing-tests.png" /></p>
 <table>
 <thead>
 <tr>

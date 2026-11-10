@@ -5,19 +5,19 @@
 <text x="40" y="60" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="500" fill="#18364a">05 / 查询中的缓存与数据裁剪</text>
 <text x="40" y="96" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#536a7b">不同缓存解决不同问题：必须同时定义更新与失效边界。</text>
 <polyline points="40,116 1160,116" fill="none" stroke="#718698" stroke-width="2"/>
-<text x="40" y="756" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从零实现系列 04 · 对象存储与查询</text>
+<text x="40" y="756" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从0到1实现一个分布式时序数据库 04 · 对象存储与查询</text>
 <rect x="40" y="160" width="260" height="110" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
 <text x="126.5" y="206.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">SQL 查询</text>
 <text x="107.0" y="239.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">时间和列条件</text>
 <rect x="365" y="160" width="260" height="110" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
-<text x="433.7" y="206.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">表 / 文件发现</text>
+<text x="434.0" y="206.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">表 / 文件发现</text>
 <text x="442.5" y="239.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">元数据缓存</text>
 <rect x="690" y="160" width="220" height="110" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
 <text x="779.0" y="206.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">裁剪</text>
-<text x="759.7" y="239.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">时间 / 列</text>
+<text x="760.0" y="239.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">时间 / 列</text>
 <rect x="975" y="160" width="185" height="110" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
 <text x="1046.5" y="206.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">读取</text>
-<text x="1028.0" y="239.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">Parquet</text>
+<text x="1027.2" y="239.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">Parquet</text>
 <polyline points="300,215 365,215" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
 <polyline points="625,215 690,215" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
 <polyline points="910,215 975,215" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
@@ -28,5 +28,5 @@
 <text x="774.0" y="481.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">历史版本查询已持久化文件</text>
 <text x="784.5" y="514.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">内存数据不保证立即可查</text>
 <rect x="40" y="630" width="1120" height="70" rx="13" fill="#f3f5f8" stroke="#bdcbd5" stroke-width="2"/>
-<text x="368.9" y="672.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">TTL 限制缓存年龄，不能单独保证写后立即可见。</text>
+<text x="369.0" y="672.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">TTL 限制缓存年龄，不能单独保证写后立即可见。</text>
 </svg>

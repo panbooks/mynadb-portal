@@ -5,15 +5,15 @@
 <text x="40" y="60" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="500" fill="#18364a">02 / 控制台操作如何到达节点</text>
 <text x="40" y="96" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#536a7b">界面需要区分空数据、部分结果和请求失败。</text>
 <polyline points="40,116 1160,116" fill="none" stroke="#718698" stroke-width="2"/>
-<text x="40" y="716" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从零实现系列 09 · 运维、接入与分析</text>
+<text x="40" y="716" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从0到1实现一个分布式时序数据库 09 · 运维、接入与分析</text>
 <rect x="40" y="170" width="330" height="135" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
 <text x="165.0" y="228.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">管理界面</text>
-<text x="136.6" y="260.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">查询 / 存储浏览</text>
+<text x="136.5" y="260.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">查询 / 存储浏览</text>
 <rect x="435" y="170" width="330" height="135" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
 <text x="560.0" y="228.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">管理后端</text>
-<text x="551.6" y="260.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">权限 / 转发</text>
+<text x="551.5" y="260.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">权限 / 转发</text>
 <rect x="830" y="170" width="330" height="135" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
-<text x="941.4" y="228.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">Meta / Data</text>
+<text x="940.2" y="228.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">Meta / Data</text>
 <text x="945.0" y="260.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">状态与结果</text>
 <polyline points="370,237 435,237" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
 <polyline points="765,237 830,237" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>

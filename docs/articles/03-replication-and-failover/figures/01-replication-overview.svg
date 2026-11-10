@@ -5,12 +5,12 @@
 <text x="40" y="60" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="500" fill="#18364a">01 / 从单机恢复走向跨节点复制</text>
 <text x="40" y="96" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#536a7b">主节点接收写入，从节点接收记录；副本状态与写入权限需要分别管理。</text>
 <polyline points="40,116 1160,116" fill="none" stroke="#718698" stroke-width="2"/>
-<text x="40" y="736" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从零实现系列 03 · 主从复制与故障切换</text>
+<text x="40" y="736" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从0到1实现一个分布式时序数据库 03 · 主从复制与故障切换</text>
 <rect x="40" y="160" width="240" height="110" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
 <text x="127.0" y="206.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">客户端</text>
 <text x="116.0" y="240.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">写入请求</text>
 <rect x="390" y="160" width="330" height="110" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
-<text x="512.7" y="206.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">主节点 A</text>
+<text x="512.8" y="206.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">主节点 A</text>
 <text x="499.0" y="240.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">WAL + 内存</text>
 <rect x="830" y="160" width="330" height="110" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
 <text x="952.2" y="206.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">从节点 B</text>
@@ -19,7 +19,7 @@
 <polyline points="720,215 830,215" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
 <text x="735" y="188" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="18" font-weight="500" fill="#536a7b">复制记录</text>
 <rect x="390" y="390" width="330" height="100" rx="13" fill="#f3f5f8" stroke="#bdcbd5" stroke-width="2"/>
-<text x="513.6" y="431.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">Parquet</text>
+<text x="512.8" y="431.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">Parquet</text>
 <text x="500.0" y="465.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">批量持久化</text>
 <rect x="830" y="390" width="330" height="100" rx="13" fill="#f3f5f8" stroke="#bdcbd5" stroke-width="2"/>
 <text x="940.0" y="431.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">从节点存储</text>

@@ -1,4 +1,4 @@
-# 从零实现一个时序数据库（二）：写入成功之后，如何用 WAL 找回数据
+# 从0到1实现一个分布式时序数据库（二）：写入成功之后，如何用 WAL 找回数据
 
 [上一篇](https://panbooks.github.io/mynadb-portal/docs/articles/01-from-http-to-parquet/preview.html)把数据从 HTTP 接口送进内存，再批量写成 Parquet。这条链路能写、能查，但还有一个问题：**请求已经返回成功，进程却在 flush 前退出，这批指标怎么办？**
 

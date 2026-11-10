@@ -5,7 +5,7 @@
 <text x="40" y="60" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="500" fill="#18364a">07 / Compaction：合并小文件，管理有效文件集合</text>
 <text x="40" y="96" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#536a7b">读出批次、写入大文件，再切换可见文件集合并回收旧文件。</text>
 <polyline points="40,116 1160,116" fill="none" stroke="#718698" stroke-width="2"/>
-<text x="40" y="736" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从零实现系列 01 · 单机基础设计</text>
+<text x="40" y="736" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从0到1实现一个分布式时序数据库 01 · 单机基础设计</text>
 <rect x="40" y="160" width="300" height="160" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
 <text x="113.2" y="213.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="500" fill="#18364a">L0_a.parquet</text>
 <text x="112.8" y="249.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="500" fill="#18364a">L0_b.parquet</text>

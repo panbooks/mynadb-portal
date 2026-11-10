@@ -5,9 +5,9 @@
 <text x="40" y="60" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="500" fill="#18364a">04 / 上传候选对象不等于提交整批</text>
 <text x="40" y="96" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#536a7b">下图是可讨论的提交方案，不代表 v0.3.0 已实现事务性清单。</text>
 <polyline points="40,116 1160,116" fill="none" stroke="#718698" stroke-width="2"/>
-<text x="40" y="796" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从零实现系列 04 · 对象存储与查询</text>
+<text x="40" y="796" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从0到1实现一个分布式时序数据库 04 · 对象存储与查询</text>
 <rect x="40" y="160" width="250" height="115" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
-<text x="106.2" y="208.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">生成唯一 key</text>
+<text x="105.8" y="208.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">生成唯一 key</text>
 <text x="105.0" y="240.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">上传候选文件</text>
 <rect x="330" y="160" width="250" height="115" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
 <text x="395.0" y="208.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">验证所有对象</text>
