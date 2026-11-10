@@ -1,11 +1,47 @@
-<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>从0到1实现一个分布式时序数据库（七）：不提升 Standby 的恢复与安全缩容</title><style>
-:root{color-scheme:light}body{margin:0;background:#f3f6fa;color:#233749;font:17px/1.95 system-ui,-apple-system,"Microsoft YaHei",sans-serif}main{max-width:1000px;margin:36px auto;padding:48px 54px;background:white;border:1px solid #e1e8ef;border-radius:16px}h1{font-size:34px;line-height:1.5;letter-spacing:-.6px}h2{font-size:25px;margin-top:48px;padding-top:12px;border-top:1px solid #e2e9ef}a{color:#096d8f}p{margin:20px 0}img{display:block;width:100%;height:auto;margin:28px 0;border:1px solid #e3eaf0;border-radius:10px}pre{padding:22px;background:#112b3c;color:#e2edf5;overflow:auto;border-radius:10px;font:14px/1.8 ui-monospace,monospace}code{font-family:ui-monospace,monospace;font-size:.9em}p code,td code,li code{background:#eef3f8;padding:2px 5px;border-radius:4px}table{border-collapse:collapse;width:100%;font-size:15px;margin:24px 0}td,th{border:1px solid #dce5ed;padding:12px;text-align:left}th{background:#edf5f9}li{margin:8px 0}strong{color:#123c52}.draft{font-size:14px;color:#617a8d;border-bottom:1px solid #e0e8ef;padding-bottom:15px}@media(max-width:700px){main{margin:0;padding:24px 18px;border:0;border-radius:0}h1{font-size:27px}table{display:block;overflow:auto}pre{padding:15px}}
-</style><main><p class="draft">社区文章草稿 · 备用节点与安全缩容 · 本地预览，尚未对外发表</p><h1 id="01-standby">从0到1实现一个分布式时序数据库（七）：不提升 Standby 的恢复与安全缩容</h1>
-<p><a href="../06-distributed-cluster/article.md">上一篇</a>将系统拆成 Router、Data 和 Meta。节点运行时，写入会进入 Primary 的内存和存储路径，也可能复制到 Standby；但当一台节点突然退出，或者运维主动减少节点时，数据与请求该如何交接？</p>
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>从0到1实现一个分布式时序数据库（七）：不提升 Standby 的恢复与安全缩容 · MynaDB 技术专栏</title><meta name="description" content="围绕不提升 Standby 的恢复设计，拆解复制进度、Flush Checkpoint、数据排空和节点退役，理解故障恢复与安全缩容的关键约束。">
+<link rel="canonical" href="https://panbooks.github.io/mynadb-portal/docs/articles/07-standby-and-scale-in/preview.html"><meta property="og:title" content="从0到1实现一个分布式时序数据库（七）：不提升 Standby 的恢复与安全缩容 · MynaDB 技术专栏"><meta property="og:description" content="围绕不提升 Standby 的恢复设计，拆解复制进度、Flush Checkpoint、数据排空和节点退役，理解故障恢复与安全缩容的关键约束。"><meta property="og:type" content="article"><meta property="og:image" content="https://panbooks.github.io/mynadb-portal/docs/articles/07-standby-and-scale-in/figures/01-failure-retirement.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="stylesheet" href="../../../css/style.css"><link rel="stylesheet" href="../../../css/articles.css">
+<script src="../../../js/articles.js" defer></script></head>
+<body class="engineering-site"><a class="skip-link" href="#main-content">跳到正文</a>
+<nav class="navbar" aria-label="主导航"><div class="container">
+<a href="../../../zh/index.html" class="navbar-brand"><img src="../../../images/logo-icon.svg" alt="" class="logo-img" width="40" height="40">MynaDB</a>
+<ul class="navbar-nav" id="primary-navigation">
+<li><a href="../../../zh/docs/index.html">文档</a></li>
+<li><a href="../../../zh/docs/quickstart.html">快速开始</a></li>
+<li><a href="../../../zh/docs/architecture.html">架构</a></li>
+<li><a href="../index.html" class="active" aria-current="page">技术专栏</a></li>
+<li><a href="../../../zh/docs/api.html">API 参考</a></li>
+<li><a href="../../../zh/docs/examples.html">示例</a></li>
+</ul>
+<div class="navbar-actions"><a class="engineering-language" href="../../../index.html" lang="en">English site</a><a class="btn btn-secondary engineering-github" href="https://github.com/panbooks/mynadb" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+<button class="mobile-menu-btn" type="button" aria-label="打开导航" aria-controls="primary-navigation" aria-expanded="false">☰</button>
+</div></nav><div class="reader-layout">
+<aside class="series-sidebar" aria-label="系列目录"><a class="sidebar-home" href="../index.html">← 技术专栏</a><p class="sidebar-eyebrow">从单机到分布式</p><h2>从0到1实现一个分布式时序数据库</h2><p class="sidebar-progress">第 07 篇 / 共 10 篇</p><ol class="series-chapters"><li><a href="../01-from-http-to-parquet/preview.html"><span class="chapter-number">01</span><span>用 Rust、Arrow 和 Parquet 打通写入与 SQL 查询</span></a></li><li><a href="../02-wal-and-recovery/preview.html"><span class="chapter-number">02</span><span>写入成功之后，如何用 WAL 找回数据</span></a></li><li><a href="../03-replication-and-failover/preview.html"><span class="chapter-number">03</span><span>主从复制、故障检测与切换</span></a></li><li><a href="../04-object-storage/preview.html"><span class="chapter-number">04</span><span>从本地文件走向对象存储</span></a></li><li><a href="../05-memtable-query/preview.html"><span class="chapter-number">05</span><span>让新写入立即可查</span></a></li><li><a href="../06-distributed-cluster/preview.html"><span class="chapter-number">06</span><span>从单机走向 Router、Data、Meta 与 Raft</span></a></li><li><a href="preview.html" class="is-current" aria-current="page"><span class="chapter-number">07</span><span>不提升 Standby 的恢复与安全缩容</span></a></li><li><a href="../08-table-ownership-routing/preview.html"><span class="chapter-number">08</span><span>表所有权、Hive 分区与查询路由</span></a></li><li><a href="../09-operations-and-integrations/preview.html"><span class="chapter-number">09</span><span>运维控制台、协议接入与时序分析</span></a></li><li><a href="../10-correctness-and-interop/preview.html"><span class="chapter-number">10</span><span>正确性补课、OTLP 与 Iceberg 初版</span></a></li></ol></aside>
+<main class="article-main" id="main-content"><header class="article-header">
+<div class="article-breadcrumb"><a href="../index.html">技术专栏</a><span aria-hidden="true">/</span><span>分布式架构</span></div>
+<p class="article-meta">第 07 篇 <span>·</span> 约 7 分钟 <span>·</span> 6 张图解</p>
+<h1><span class="article-series-name">从0到1实现一个分布式时序数据库（七）：</span>不提升 Standby 的恢复与安全缩容</h1><p class="article-summary">围绕不提升 Standby 的恢复设计，拆解复制进度、Flush Checkpoint、数据排空和节点退役，理解故障恢复与安全缩容的关键约束。</p>
+<details class="mobile-chapter-menu"><summary>系列目录 · 当前第 07 篇</summary><ol class="series-chapters"><li><a href="../01-from-http-to-parquet/preview.html"><span class="chapter-number">01</span><span>用 Rust、Arrow 和 Parquet 打通写入与 SQL 查询</span></a></li><li><a href="../02-wal-and-recovery/preview.html"><span class="chapter-number">02</span><span>写入成功之后，如何用 WAL 找回数据</span></a></li><li><a href="../03-replication-and-failover/preview.html"><span class="chapter-number">03</span><span>主从复制、故障检测与切换</span></a></li><li><a href="../04-object-storage/preview.html"><span class="chapter-number">04</span><span>从本地文件走向对象存储</span></a></li><li><a href="../05-memtable-query/preview.html"><span class="chapter-number">05</span><span>让新写入立即可查</span></a></li><li><a href="../06-distributed-cluster/preview.html"><span class="chapter-number">06</span><span>从单机走向 Router、Data、Meta 与 Raft</span></a></li><li><a href="preview.html" class="is-current" aria-current="page"><span class="chapter-number">07</span><span>不提升 Standby 的恢复与安全缩容</span></a></li><li><a href="../08-table-ownership-routing/preview.html"><span class="chapter-number">08</span><span>表所有权、Hive 分区与查询路由</span></a></li><li><a href="../09-operations-and-integrations/preview.html"><span class="chapter-number">09</span><span>运维控制台、协议接入与时序分析</span></a></li><li><a href="../10-correctness-and-interop/preview.html"><span class="chapter-number">10</span><span>正确性补课、OTLP 与 Iceberg 初版</span></a></li></ol></details>
+<details class="mobile-page-toc"><summary>本篇目录</summary><div class="toc">
+<ul>
+<li><a href="#1">1. 两种情况：突然故障与计划退役</a></li>
+<li><a href="#2-standby">2. 不提升 Standby：保留角色，重新分配工作</a></li>
+<li><a href="#3-flush-checkpoint">3. Flush checkpoint：备用缓存何时可以清理？</a></li>
+<li><a href="#4">4. 计划缩容：先迁移，再退役</a></li>
+<li><a href="#5">5. 出错时先保护状态，再决定是否继续</a></li>
+<li><a href="#6">6. 如何验证恢复与缩容？</a></li>
+<li><a href="#7">7. 回看这一阶段</a></li>
+</ul>
+</div>
+</details></header>
+<article class="article-body"><p><a href="../06-distributed-cluster/preview.html">上一篇</a>将系统拆成 Router、Data 和 Meta。节点运行时，写入会进入 Primary 的内存和存储路径，也可能复制到 Standby；但当一台节点突然退出，或者运维主动减少节点时，数据与请求该如何交接？</p>
 <p>这一篇以 <code>v0.6.0</code> / M7 为线索，讨论<strong>不将 Standby 提升为 Primary</strong>的恢复设计，以及节点退役和缩容中的边界。流程图用于解释设计；具体历史实现仍有占位和限制，不代表已经验证无损恢复。</p>
 <h2 id="1">1. 两种情况：突然故障与计划退役</h2>
 <p>计划退役可以提前停止接收新任务、等待在途请求和处理内存数据；故障则可能发生在任意时刻，系统只能根据最后可靠保存的信息恢复。</p>
-<p><img alt="图 1：故障恢复与计划退役" src="figures/01-failure-retirement.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 1：故障恢复与计划退役" src="figures/01-failure-retirement.png" /></p>
 <table>
 <thead>
 <tr>
@@ -35,7 +71,7 @@
 <p>心跳或租约过期仍只是协调系统中的状态依据；要防止旧节点恢复后继续接受不该接受的写入，还需要完整的授权和隔离机制。</p>
 <h2 id="2-standby">2. 不提升 Standby：保留角色，重新分配工作</h2>
 <p>早期常见的思路是把备用节点提升为新主。M7 的设计转向另一条路径：Primary 故障后，协调器找到为其保存复制数据的 Standby，触发相关数据 flush，再将分区分配给其他仍可用的 Primary。Standby 本身不因此改变为 Primary。</p>
-<p><img alt="图 2：不提升 Standby 的恢复思路" src="figures/02-no-promotion.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 2：不提升 Standby 的恢复思路" src="figures/02-no-promotion.png" /></p>
 <pre><code class="language-text">Primary A 故障 → 找到 Standby S → 触发 S 处理 A 的复制数据
                                   ↓
                         分区重新分配给其他 Primary
@@ -44,7 +80,7 @@
 <p><strong>历史实现的重要限制：</strong> <code>v0.6.0</code> 的恢复管理器发出 Standby flush 命令后，完成等待处仍是短暂等待并假定完成，源码标有后续实现状态跟踪的 TODO。因此不能说该标签已经严格确认了 flush 完成，更不能据此承诺无损切换。</p>
 <h2 id="3-flush-checkpoint">3. Flush checkpoint：备用缓存何时可以清理？</h2>
 <p>Standby 接收复制批次后，如果 Primary 已经将对应数据可靠写入持久化存储，备用缓存就不需要无限增长。一个思路是由 Primary 在成功 flush 后发送 checkpoint，告诉 Standby 某个连续序号范围已经完成。</p>
-<p><img alt="图 3：复制进度与 flush checkpoint" src="figures/03-flush-checkpoint.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 3：复制进度与 flush checkpoint" src="figures/03-flush-checkpoint.png" /></p>
 <p>例如：</p>
 <pre><code class="language-text">已复制：101 102 103 104 105
 确认已 flush 的连续边界：103
@@ -54,7 +90,7 @@
 <p>图中的“连续提交边界”是安全设计要求，不能直接推断历史标签已覆盖所有竞争和失败窗口。异步复制下，Primary 确认给客户端但尚未到达 Standby 的数据，也不能靠备用缓存凭空恢复。</p>
 <h2 id="4">4. 计划缩容：先迁移，再退役</h2>
 <p>缩容不应等同于直接停止一个进程。一个需要验证的流程是：检查目标和剩余容量，迁移或重新分配职责，让退役节点拒绝新的写入，处理已有内存数据和在途查询，最后完成注销与关闭。</p>
-<p><img alt="图 4：计划缩容的三个阶段" src="figures/04-scale-in.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 4：计划缩容的三个阶段" src="figures/04-scale-in.png" /></p>
 <p><code>v0.6.0</code> 的缩容执行器描述了三个阶段：<strong>迁移分区 → 退役已清空的 Primary → 退役不再需要的 Standby</strong>。执行前和执行过程中还需要检查备用节点等安全条件。节点侧代码包含退役标志、内存数据和在途查询数量的检查。</p>
 <p>在这个过程中必须区分“开始退役”和“安全完成”：</p>
 <ul>
@@ -66,11 +102,11 @@
 <p>这些是检查流程闭环所需的问题，不是对历史代码所有路径的正确性认证。超时不应被自动解释为数据已经安全迁移。</p>
 <h2 id="5">5. 出错时先保护状态，再决定是否继续</h2>
 <p>恢复和缩容不是一串永远成功的步骤。对象存储写入失败、Standby 失联、Meta 状态变化或进程重启，都可能让任务停在中间。</p>
-<p><img alt="图 5：中断、重试与安全检查" src="figures/05-failure-handling.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 5：中断、重试与安全检查" src="figures/05-failure-handling.png" /></p>
 <p>一种可验证的操作设计应记录阶段和任务身份；每次重试先检查已有结果，再根据条件决定继续、停止或人工介入。对外报告应区分“请求已提交”“操作仍在执行”“验证完成”和“失败”，不能把事件已经发送当成远端工作已经完成。</p>
 <p>如果涉及旧节点隔离，租约、任期或 fencing 必须在实际写入路径上被验证；仅修改路由缓存或节点状态，并不能阻止仍可访问存储的旧进程写入。这些是系统设计要求，而非本文对该版本实现作出的保证。</p>
 <h2 id="6">6. 如何验证恢复与缩容？</h2>
-<p><img alt="图 6：恢复与缩容需要覆盖的故障场景" src="figures/06-recovery-tests.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 6：恢复与缩容需要覆盖的故障场景" src="figures/06-recovery-tests.png" /></p>
 <table>
 <thead>
 <tr>
@@ -109,4 +145,19 @@
 <h2 id="7">7. 回看这一阶段</h2>
 <p>M7 将重点从“能否组建集群”转向“节点消失或退役时如何继续”：Standby 保留复制数据、恢复协调器重新分配工作、缩容流程尝试有序排空。<strong>不提升 Standby 并不会自动带来无损或安全切换</strong>；这些承诺仍取决于复制确认、flush 完成、授权隔离与故障验证。</p>
 <p>下一篇进入 <code>v0.7.0</code>：当表和物理分区分布在不同节点上，如何分别维护表所有权与查询路由。</p>
-<p>项目源码：<a href="https://github.com/panbooks/mynadb">panbooks/mynadb</a> · <a href="https://github.com/panbooks/mynadb/tree/v0.6.0">v0.6.0 源码</a> · <a href="https://panbooks.github.io/mynadb-portal/zh/index.html">中文文档</a>。</p></main></html>
+<p>项目源码：<a href="https://github.com/panbooks/mynadb">panbooks/mynadb</a> · <a href="https://github.com/panbooks/mynadb/tree/v0.6.0">v0.6.0 源码</a> · <a href="https://panbooks.github.io/mynadb-portal/zh/index.html">中文文档</a>。</p></article>
+<nav class="chapter-pager" aria-label="篇章导航"><a class="chapter-pager-link" href="../06-distributed-cluster/preview.html"><span>← 上一篇 · 第 06 篇</span><strong>从单机走向 Router、Data、Meta 与 Raft</strong></a><a class="chapter-pager-link" href="../08-table-ownership-routing/preview.html"><span>下一篇 → · 第 08 篇</span><strong>表所有权、Hive 分区与查询路由</strong></a></nav>
+<section class="article-resources" aria-labelledby="resources-title"><h2 id="resources-title">保存与分享</h2><p>下载带公网图片链接的 Markdown，或复制摘要，方便保存和社区分享。</p><div class="article-resource-actions"><button class="btn btn-primary" type="button" data-copy-file="article.publish.md">复制发布版 Markdown</button><button class="btn btn-secondary" type="button" data-copy-file="summary.md">复制摘要</button><a class="text-link" href="article.publish.md" download>下载 Markdown ↓</a></div></section>
+</main><aside class="page-toc" aria-label="本篇目录"><h2>本篇目录</h2><div class="toc">
+<ul>
+<li><a href="#1">1. 两种情况：突然故障与计划退役</a></li>
+<li><a href="#2-standby">2. 不提升 Standby：保留角色，重新分配工作</a></li>
+<li><a href="#3-flush-checkpoint">3. Flush checkpoint：备用缓存何时可以清理？</a></li>
+<li><a href="#4">4. 计划缩容：先迁移，再退役</a></li>
+<li><a href="#5">5. 出错时先保护状态，再决定是否继续</a></li>
+<li><a href="#6">6. 如何验证恢复与缩容？</a></li>
+<li><a href="#7">7. 回看这一阶段</a></li>
+</ul>
+</div>
+<a class="toc-back" href="#main-content">回到顶部 ↑</a></aside></div>
+<dialog class="image-dialog" aria-label="架构图大图"><div class="image-dialog-toolbar"><span>架构图</span><a class="image-original" target="_blank" rel="noopener noreferrer">打开原图 ↗</a><button type="button" class="image-dialog-close" aria-label="关闭大图">关闭 ×</button></div><img alt=""><p class="image-dialog-caption"></p></dialog><footer class="engineering-footer"><div><a href="../index.html">MynaDB 技术专栏</a><span>用清晰的设计理解数据系统。</span></div><a href="https://github.com/panbooks/mynadb-portal" target="_blank" rel="noopener noreferrer">在 GitHub 查看文档 ↗</a></footer><p class="sr-only" id="reader-status" role="status" aria-live="polite"></p></body></html>

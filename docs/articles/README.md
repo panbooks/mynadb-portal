@@ -2,6 +2,8 @@
 
 面向 Rust、数据库和可观测性系统开发者。围绕十个开发里程碑，从单机读写逐步走向复制、共享存储、分布式协调、路由与运维。
 
+[在线技术专栏](https://panbooks.github.io/mynadb-portal/docs/articles/index.html) · [本地栏目首页](index.html)
+
 ## 全系列发布材料
 
 每篇均包含正文、PNG/SVG/Mermaid 配图、图文预览、粘贴发布版 Markdown 和 100 字以内摘要。
@@ -33,6 +35,7 @@
 
 - 编辑 `article.md` 和 `summary.md`，摘要保持单段且不超过 100 个字符。
 - 在本目录执行 `python3 publish_support.py`，统一更新十篇发布版和摘要汇总；此步骤只依赖 Python 标准库。
-- 修改配图后运行对应目录的 `build_assets.py`，重新生成图片、预览与发布版。绘图依赖 Pillow、Markdown 和中文字体，通过 `MYNADB_ARTICLE_FONT` 指定字体路径。
+- 编辑正文或摘要后执行 `python3 site_support.py`，更新栏目首页、篇章导航和十篇正式阅读页；此步骤需要 Python Markdown 包。
+- 修改配图后运行对应目录的 `build_assets.py`，重新生成图片、阅读页、栏目首页与发布版。绘图依赖 Pillow、Markdown 和中文字体，通过 `MYNADB_ARTICLE_FONT` 指定字体路径。
 
 代码仓库的提交、推送与社区发表分别记录；材料准备完成不代表已经向社区投稿。

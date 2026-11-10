@@ -1,11 +1,47 @@
-<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>从0到1实现一个分布式时序数据库（五）：让新写入立即可查</title><style>
-:root{color-scheme:light}body{margin:0;background:#f3f6fa;color:#233749;font:17px/1.95 system-ui,-apple-system,"Microsoft YaHei",sans-serif}main{max-width:1000px;margin:36px auto;padding:48px 54px;background:white;border:1px solid #e1e8ef;border-radius:16px}h1{font-size:34px;line-height:1.5;letter-spacing:-.6px}h2{font-size:25px;margin-top:48px;padding-top:12px;border-top:1px solid #e2e9ef}a{color:#096d8f}p{margin:20px 0}img{display:block;width:100%;height:auto;margin:28px 0;border:1px solid #e3eaf0;border-radius:10px}pre{padding:22px;background:#112b3c;color:#e2edf5;overflow:auto;border-radius:10px;font:14px/1.8 ui-monospace,monospace}code{font-family:ui-monospace,monospace;font-size:.9em}p code,td code,li code{background:#eef3f8;padding:2px 5px;border-radius:4px}table{border-collapse:collapse;width:100%;font-size:15px;margin:24px 0}td,th{border:1px solid #dce5ed;padding:12px;text-align:left}th{background:#edf5f9}li{margin:8px 0}strong{color:#123c52}.draft{font-size:14px;color:#617a8d;border-bottom:1px solid #e0e8ef;padding-bottom:15px}@media(max-width:700px){main{margin:0;padding:24px 18px;border:0;border-radius:0}h1{font-size:27px}table{display:block;overflow:auto}pre{padding:15px}}
-</style><main><p class="draft">社区文章草稿 · Memtable 与查询 · 本地预览，尚未对外发表</p><h1 id="01">从0到1实现一个分布式时序数据库（五）：让新写入立即可查</h1>
-<p><a href="../04-object-storage/article.md">上一篇</a>把数据从内存批量写入 Parquet。如果查询只读取已持久化文件，一条刚写入的数据就要等到 flush 后才可见。对监控系统而言，这段等待可能让用户误以为最新指标没有到达。</p>
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>从0到1实现一个分布式时序数据库（五）：让新写入立即可查 · MynaDB 技术专栏</title><meta name="description" content="通过 Memtable 与 TableProvider，让 SQL 同时读取内存和 Parquet；结合快照、Schema 对齐、数据裁剪与缓存失效，保证新数据及时可见。">
+<link rel="canonical" href="https://panbooks.github.io/mynadb-portal/docs/articles/05-memtable-query/preview.html"><meta property="og:title" content="从0到1实现一个分布式时序数据库（五）：让新写入立即可查 · MynaDB 技术专栏"><meta property="og:description" content="通过 Memtable 与 TableProvider，让 SQL 同时读取内存和 Parquet；结合快照、Schema 对齐、数据裁剪与缓存失效，保证新数据及时可见。"><meta property="og:type" content="article"><meta property="og:image" content="https://panbooks.github.io/mynadb-portal/docs/articles/05-memtable-query/figures/01-two-sources.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="stylesheet" href="../../../css/style.css"><link rel="stylesheet" href="../../../css/articles.css">
+<script src="../../../js/articles.js" defer></script></head>
+<body class="engineering-site"><a class="skip-link" href="#main-content">跳到正文</a>
+<nav class="navbar" aria-label="主导航"><div class="container">
+<a href="../../../zh/index.html" class="navbar-brand"><img src="../../../images/logo-icon.svg" alt="" class="logo-img" width="40" height="40">MynaDB</a>
+<ul class="navbar-nav" id="primary-navigation">
+<li><a href="../../../zh/docs/index.html">文档</a></li>
+<li><a href="../../../zh/docs/quickstart.html">快速开始</a></li>
+<li><a href="../../../zh/docs/architecture.html">架构</a></li>
+<li><a href="../index.html" class="active" aria-current="page">技术专栏</a></li>
+<li><a href="../../../zh/docs/api.html">API 参考</a></li>
+<li><a href="../../../zh/docs/examples.html">示例</a></li>
+</ul>
+<div class="navbar-actions"><a class="engineering-language" href="../../../index.html" lang="en">English site</a><a class="btn btn-secondary engineering-github" href="https://github.com/panbooks/mynadb" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+<button class="mobile-menu-btn" type="button" aria-label="打开导航" aria-controls="primary-navigation" aria-expanded="false">☰</button>
+</div></nav><div class="reader-layout">
+<aside class="series-sidebar" aria-label="系列目录"><a class="sidebar-home" href="../index.html">← 技术专栏</a><p class="sidebar-eyebrow">从单机到分布式</p><h2>从0到1实现一个分布式时序数据库</h2><p class="sidebar-progress">第 05 篇 / 共 10 篇</p><ol class="series-chapters"><li><a href="../01-from-http-to-parquet/preview.html"><span class="chapter-number">01</span><span>用 Rust、Arrow 和 Parquet 打通写入与 SQL 查询</span></a></li><li><a href="../02-wal-and-recovery/preview.html"><span class="chapter-number">02</span><span>写入成功之后，如何用 WAL 找回数据</span></a></li><li><a href="../03-replication-and-failover/preview.html"><span class="chapter-number">03</span><span>主从复制、故障检测与切换</span></a></li><li><a href="../04-object-storage/preview.html"><span class="chapter-number">04</span><span>从本地文件走向对象存储</span></a></li><li><a href="preview.html" class="is-current" aria-current="page"><span class="chapter-number">05</span><span>让新写入立即可查</span></a></li><li><a href="../06-distributed-cluster/preview.html"><span class="chapter-number">06</span><span>从单机走向 Router、Data、Meta 与 Raft</span></a></li><li><a href="../07-standby-and-scale-in/preview.html"><span class="chapter-number">07</span><span>不提升 Standby 的恢复与安全缩容</span></a></li><li><a href="../08-table-ownership-routing/preview.html"><span class="chapter-number">08</span><span>表所有权、Hive 分区与查询路由</span></a></li><li><a href="../09-operations-and-integrations/preview.html"><span class="chapter-number">09</span><span>运维控制台、协议接入与时序分析</span></a></li><li><a href="../10-correctness-and-interop/preview.html"><span class="chapter-number">10</span><span>正确性补课、OTLP 与 Iceberg 初版</span></a></li></ol></aside>
+<main class="article-main" id="main-content"><header class="article-header">
+<div class="article-breadcrumb"><a href="../index.html">技术专栏</a><span aria-hidden="true">/</span><span>单机基础</span></div>
+<p class="article-meta">第 05 篇 <span>·</span> 约 6 分钟 <span>·</span> 6 张图解</p>
+<h1><span class="article-series-name">从0到1实现一个分布式时序数据库（五）：</span>让新写入立即可查</h1><p class="article-summary">通过 Memtable 与 TableProvider，让 SQL 同时读取内存和 Parquet；结合快照、Schema 对齐、数据裁剪与缓存失效，保证新数据及时可见。</p>
+<details class="mobile-chapter-menu"><summary>系列目录 · 当前第 05 篇</summary><ol class="series-chapters"><li><a href="../01-from-http-to-parquet/preview.html"><span class="chapter-number">01</span><span>用 Rust、Arrow 和 Parquet 打通写入与 SQL 查询</span></a></li><li><a href="../02-wal-and-recovery/preview.html"><span class="chapter-number">02</span><span>写入成功之后，如何用 WAL 找回数据</span></a></li><li><a href="../03-replication-and-failover/preview.html"><span class="chapter-number">03</span><span>主从复制、故障检测与切换</span></a></li><li><a href="../04-object-storage/preview.html"><span class="chapter-number">04</span><span>从本地文件走向对象存储</span></a></li><li><a href="preview.html" class="is-current" aria-current="page"><span class="chapter-number">05</span><span>让新写入立即可查</span></a></li><li><a href="../06-distributed-cluster/preview.html"><span class="chapter-number">06</span><span>从单机走向 Router、Data、Meta 与 Raft</span></a></li><li><a href="../07-standby-and-scale-in/preview.html"><span class="chapter-number">07</span><span>不提升 Standby 的恢复与安全缩容</span></a></li><li><a href="../08-table-ownership-routing/preview.html"><span class="chapter-number">08</span><span>表所有权、Hive 分区与查询路由</span></a></li><li><a href="../09-operations-and-integrations/preview.html"><span class="chapter-number">09</span><span>运维控制台、协议接入与时序分析</span></a></li><li><a href="../10-correctness-and-interop/preview.html"><span class="chapter-number">10</span><span>正确性补课、OTLP 与 Iceberg 初版</span></a></li></ol></details>
+<details class="mobile-page-toc"><summary>本篇目录</summary><div class="toc">
+<ul>
+<li><a href="#1">1. 两份数据，一张逻辑表</a></li>
+<li><a href="#2-tableprovider-datafusion">2. TableProvider 如何连接 DataFusion？</a></li>
+<li><a href="#3-flush">3. Flush 正在发生时，怎样避免漏读和重复？</a></li>
+<li><a href="#4-schema">4. Schema 合并：同一列真的相同吗？</a></li>
+<li><a href="#5">5. 少读一些：过滤、投影和时间分桶</a></li>
+<li><a href="#6">6. 缓存加速，失效决定正确性</a></li>
+<li><a href="#7">7. 回看这一阶段</a></li>
+</ul>
+</div>
+</details></header>
+<article class="article-body"><p><a href="../04-object-storage/preview.html">上一篇</a>把数据从内存批量写入 Parquet。如果查询只读取已持久化文件，一条刚写入的数据就要等到 flush 后才可见。对监控系统而言，这段等待可能让用户误以为最新指标没有到达。</p>
 <p>这一篇以 <code>v0.4.0</code> / M5 为线索，讨论如何让 DataFusion 同时读取内存与 Parquet，以及这样做带来的 schema、并发和缓存问题。涉及快照与提交的部分是设计检查项，不表示该历史版本已经提供相应的完整一致性保证。</p>
 <h2 id="1">1. 两份数据，一张逻辑表</h2>
 <p>最近写入的点先进入内存；较早的数据已经保存在 Parquet。用户不应该为了查询一张表，分别写两次 SQL 再自己拼接结果。</p>
-<p><img alt="图 1：一张表的两个数据来源" src="figures/01-two-sources.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 1：一张表的两个数据来源" src="figures/01-two-sources.png" /></p>
 <pre><code class="language-text">新写入 → 内存 RecordBatch ─┐
                           ├→ 统一的表 → DataFusion SQL
 已 flush → Parquet 文件 ───┘
@@ -13,7 +49,7 @@
 <p><code>v0.4.0</code> 引入了内存数据的查询路径，并提供 Memtable、Parquet 和 Union 相关 TableProvider，使查询能够组合新写入与文件数据。<strong>可查询不等于已持久化</strong>：内存可见性与 WAL、同步策略以及崩溃恢复承诺是不同问题。</p>
 <h2 id="2-tableprovider-datafusion">2. TableProvider 如何连接 DataFusion？</h2>
 <p>DataFusion 在执行 SQL 时需要知道表的 schema，以及如何扫描表中的数据。TableProvider 是数据源与查询引擎之间的接口：引擎提出需要的列、过滤条件和执行计划，具体 provider 负责连接对应数据源。</p>
-<p><img alt="图 2：从 SQL 到两个扫描计划" src="figures/02-providers.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 2：从 SQL 到两个扫描计划" src="figures/02-providers.png" /></p>
 <p>在这一阶段：</p>
 <ul>
 <li><code>MemtableProvider</code> 从写入缓存读取尚未 flush 的 RecordBatch。</li>
@@ -26,7 +62,7 @@
 <pre><code class="language-text">内存中有 A  →  写出 A.parquet  →  发布文件  →  移除内存 A
 </code></pre>
 <p>如果查询在错误的时间分别读取内存和文件，可能<strong>两边都没看到 A</strong>，也可能<strong>两边都看到 A</strong>。简单地把两个数据源做 union，并不能单独证明切换期间结果正确。</p>
-<p><img alt="图 3：内存与文件的可见性边界" src="figures/03-flush-visibility.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 3：内存与文件的可见性边界" src="figures/03-flush-visibility.png" /></p>
 <p>一种设计思路是让查询持有一致的数据版本：同一版本中，批次 A 要么由内存负责，要么由已提交文件负责。发布新版本前完成文件写入；旧查询仍持有旧版本所需的数据，直到它们结束。错误重试、缓存失效与文件回收也需要遵循同一边界。</p>
 <p>这是<strong>设计目标与验证清单</strong>，不是说 <code>v0.4.0</code> 已经实现事务性快照或无重复保证。第二篇讨论的 WAL checkpoint 也属于教学设计；不能假定它与该标签的 flush 实现完全一致。</p>
 <h2 id="4-schema">4. Schema 合并：同一列真的相同吗？</h2>
@@ -35,7 +71,7 @@
 文件：time, host, usage
 </code></pre>
 <p>查询 <code>temperature</code> 时，旧文件缺少该列，需要按统一 schema 补空值。还要处理列顺序不同和同名字段类型冲突；不能仅按位置假定两个来源的第 3 列相同。</p>
-<p><img alt="图 4：按列名对齐，而不是按位置拼接" src="figures/04-schema-alignment.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 4：按列名对齐，而不是按位置拼接" src="figures/04-schema-alignment.png" /></p>
 <p><code>v0.4.0</code> 的 union provider 包含合并 schema 的代码；历史实现中相同字段名使用第一侧的定义。<strong>这不是对任意异构 schema 和类型转换都正确的保证</strong>。投影下推时也需要把统一 schema 中的列映射到每个输入各自的位置。对缺列、重排、类型冲突和过滤器分别编写结果校验测试，比仅验证“不报错”更有价值。</p>
 <h2 id="5">5. 少读一些：过滤、投影和时间分桶</h2>
 <p>时序查询常只关心某个时间范围和少量列：</p>
@@ -45,12 +81,12 @@ WHERE time &gt;= TIMESTAMP '2026-01-01 00:00:00'
   AND time &lt; TIMESTAMP '2026-01-02 00:00:00'
 GROUP BY host;
 </code></pre>
-<p><img alt="图 5：查询计划尽早缩小数据范围" src="figures/05-pruning.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 5：查询计划尽早缩小数据范围" src="figures/05-pruning.png" /></p>
 <p>可以利用时间分区和 Parquet 统计信息跳过不相关的数据，投影只需要的列，再执行过滤与聚合。过滤下推有精确和非精确的区别：当下层只能粗略筛选时，上层仍要重新应用过滤条件，确保结果正确。统计信息缺失或不能安全判断时，应保守读取。</p>
 <p>该里程碑还加入时间分桶、填充以及 <code>first()</code> / <code>last()</code> 等时序分析相关能力。它们的具体语法、空桶行为和边界应按实现及测试确认；这里不把早期时间分组转换等同于后来加入的完整 InfluxQL 解析器。</p>
 <h2 id="6">6. 缓存加速，失效决定正确性</h2>
 <p>查询结果、表元数据和热点分区可以缓存，但新写入、flush、compaction 或 schema 变化都可能让旧缓存不再适用。</p>
-<p><img alt="图 6：数据变化后，哪些缓存需要更新？" src="figures/06-cache-invalidation.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 6：数据变化后，哪些缓存需要更新？" src="figures/06-cache-invalidation.png" /></p>
 <p>除了 TTL，更稳妥的设计需要明确：按什么粒度标记受影响的表或分区、如何关联数据版本，以及并发查询在失效后完成时能否重新放回过期结果。历史代码包含表级缓存失效入口，但它的存在不等于所有并发窗口均已验证；热点分区缓存后来还经历了正确性修复。</p>
 <table>
 <thead>
@@ -86,4 +122,19 @@ GROUP BY host;
 <h2 id="7">7. 回看这一阶段</h2>
 <p>Memtable 和 Parquet 的组合让一张逻辑表覆盖新旧数据；TableProvider 把数据源接到 DataFusion；缓存与裁剪减少重复工作。真正困难的部分在于<strong>何时可见、两边如何对齐、数据切换时如何避免遗漏与重复</strong>。</p>
 <p>这一阶段仍以单机为主。下一篇将进入 <code>v0.5.0</code>：当多个节点共同处理写入和查询时，Router、Data、Meta 与 Raft 分别负责什么。</p>
-<p>项目源码：<a href="https://github.com/panbooks/mynadb">panbooks/mynadb</a> · <a href="https://github.com/panbooks/mynadb/tree/v0.4.0">v0.4.0 源码</a> · <a href="https://panbooks.github.io/mynadb-portal/zh/index.html">中文文档</a>。</p></main></html>
+<p>项目源码：<a href="https://github.com/panbooks/mynadb">panbooks/mynadb</a> · <a href="https://github.com/panbooks/mynadb/tree/v0.4.0">v0.4.0 源码</a> · <a href="https://panbooks.github.io/mynadb-portal/zh/index.html">中文文档</a>。</p></article>
+<nav class="chapter-pager" aria-label="篇章导航"><a class="chapter-pager-link" href="../04-object-storage/preview.html"><span>← 上一篇 · 第 04 篇</span><strong>从本地文件走向对象存储</strong></a><a class="chapter-pager-link" href="../06-distributed-cluster/preview.html"><span>下一篇 → · 第 06 篇</span><strong>从单机走向 Router、Data、Meta 与 Raft</strong></a></nav>
+<section class="article-resources" aria-labelledby="resources-title"><h2 id="resources-title">保存与分享</h2><p>下载带公网图片链接的 Markdown，或复制摘要，方便保存和社区分享。</p><div class="article-resource-actions"><button class="btn btn-primary" type="button" data-copy-file="article.publish.md">复制发布版 Markdown</button><button class="btn btn-secondary" type="button" data-copy-file="summary.md">复制摘要</button><a class="text-link" href="article.publish.md" download>下载 Markdown ↓</a></div></section>
+</main><aside class="page-toc" aria-label="本篇目录"><h2>本篇目录</h2><div class="toc">
+<ul>
+<li><a href="#1">1. 两份数据，一张逻辑表</a></li>
+<li><a href="#2-tableprovider-datafusion">2. TableProvider 如何连接 DataFusion？</a></li>
+<li><a href="#3-flush">3. Flush 正在发生时，怎样避免漏读和重复？</a></li>
+<li><a href="#4-schema">4. Schema 合并：同一列真的相同吗？</a></li>
+<li><a href="#5">5. 少读一些：过滤、投影和时间分桶</a></li>
+<li><a href="#6">6. 缓存加速，失效决定正确性</a></li>
+<li><a href="#7">7. 回看这一阶段</a></li>
+</ul>
+</div>
+<a class="toc-back" href="#main-content">回到顶部 ↑</a></aside></div>
+<dialog class="image-dialog" aria-label="架构图大图"><div class="image-dialog-toolbar"><span>架构图</span><a class="image-original" target="_blank" rel="noopener noreferrer">打开原图 ↗</a><button type="button" class="image-dialog-close" aria-label="关闭大图">关闭 ×</button></div><img alt=""><p class="image-dialog-caption"></p></dialog><footer class="engineering-footer"><div><a href="../index.html">MynaDB 技术专栏</a><span>用清晰的设计理解数据系统。</span></div><a href="https://github.com/panbooks/mynadb-portal" target="_blank" rel="noopener noreferrer">在 GitHub 查看文档 ↗</a></footer><p class="sr-only" id="reader-status" role="status" aria-live="polite"></p></body></html>

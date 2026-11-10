@@ -1742,3 +1742,42 @@ tr:hover td {
     animation: none !important;
   }
 }
+
+/* Engineering entry points shared by the English and Chinese portal. */
+.nav-language-note { font-size: 9px; color: #6d8a99; padding-left: 3px; }
+.navbar-nav { gap: 24px; }
+.series-promo { background: #f3f9fc; border-top: 1px solid #e1ebf0; border-bottom: 1px solid #e1ebf0; }
+.series-promo-card { display: flex; align-items: center; justify-content: space-between; gap: 48px; }
+.series-promo-card > div { max-width: 780px; }
+.series-promo-eyebrow { color: #087da5; font-size: 12px; font-weight: 700; letter-spacing: .07em; margin-bottom: 14px; }
+.series-promo-card h2 { font-size: 30px; line-height: 1.5; margin-bottom: 16px; }
+.series-promo-card > div > p:not(.series-promo-eyebrow) { color: #5c7485; line-height: 1.9; }
+.series-promo-actions { display: flex; flex-wrap: wrap; gap: 20px; align-items: center; margin-top: 24px; }
+.series-promo-start { font-size: 13px; font-weight: 600; }
+.series-promo-stat { font-size: 13px; color: #3b7189; line-height: 2; border-left: 1px solid #ccdde6; padding-left: 32px; max-width: 220px; }
+@media(max-width:1180px) {
+  .navbar .container { gap: 20px; }
+  .navbar-nav { display: none; }
+  .mobile-menu-btn { display: block; flex-shrink: 0; }
+  .navbar-nav.mobile-open { display: flex; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; background: white; border-bottom: 1px solid #dce7ed; box-shadow: 0 8px 20px #19394c10; padding: 16px 32px 24px; gap: 0; }
+  .navbar-nav.mobile-open a { display: block; padding: 12px 0; }
+}
+@media(max-width:768px) {
+  .series-promo-card { display: block; }
+  .series-promo-card h2 { font-size: 25px; }
+  .series-promo-stat { margin-top: 24px; max-width: none; padding: 15px 0 0; border-left: 0; border-top: 1px solid #ccdde6; }
+}
+@media(max-width:520px) {
+  .navbar .container { gap: 12px; }
+  .navbar-brand { font-size: 1.2rem; gap: 8px; }
+  .navbar-brand .logo-img { width: 32px; height: 32px; }
+  .navbar-actions { margin-left: auto; gap: 8px; }
+  .navbar-actions .btn { display: none; }
+}
+/* Draw menu controls without depending on a symbol font. */
+.mobile-menu-btn { position: relative; width: 32px; height: 32px; font-size: 0 !important; }
+.mobile-menu-btn::before, .mobile-menu-btn::after { content: ''; position: absolute; left: 6px; top: 15px; width: 20px; height: 2px; background: currentColor; }
+.mobile-menu-btn::before { box-shadow: 0 -6px currentColor, 0 6px currentColor; }
+.mobile-menu-btn::after { display: none; }
+.mobile-menu-btn[aria-expanded="true"]::before { box-shadow: none; transform: rotate(45deg); }
+.mobile-menu-btn[aria-expanded="true"]::after { display: block; transform: rotate(-45deg); }

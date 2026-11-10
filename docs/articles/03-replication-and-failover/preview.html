@@ -1,16 +1,52 @@
-<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>从0到1实现一个分布式时序数据库（三）：主从复制、故障检测与切换</title><style>
-:root{color-scheme:light}body{margin:0;background:#f3f6fa;color:#233749;font:17px/1.95 system-ui,-apple-system,"Microsoft YaHei",sans-serif}main{max-width:1000px;margin:36px auto;padding:48px 54px;background:white;border:1px solid #e1e8ef;border-radius:16px}h1{font-size:34px;line-height:1.5;letter-spacing:-.6px}h2{font-size:25px;margin-top:48px;padding-top:12px;border-top:1px solid #e2e9ef}a{color:#096d8f}p{margin:20px 0}img{display:block;width:100%;height:auto;margin:28px 0;border:1px solid #e3eaf0;border-radius:10px}pre{padding:22px;background:#112b3c;color:#e2edf5;overflow:auto;border-radius:10px;font:14px/1.8 ui-monospace,monospace}code{font-family:ui-monospace,monospace;font-size:.9em}p code,td code,li code{background:#eef3f8;padding:2px 5px;border-radius:4px}table{border-collapse:collapse;width:100%;font-size:15px;margin:24px 0}td,th{border:1px solid #dce5ed;padding:12px;text-align:left}th{background:#edf5f9}li{margin:8px 0}strong{color:#123c52}.draft{font-size:14px;color:#617a8d;border-bottom:1px solid #e0e8ef;padding-bottom:15px}@media(max-width:700px){main{margin:0;padding:24px 18px;border:0;border-radius:0}h1{font-size:27px}table{display:block;overflow:auto}pre{padding:15px}}
-</style><main><p class="draft">社区文章草稿 · 主从复制与故障切换 · 本地预览，尚未对外发表</p><h1 id="01">从0到1实现一个分布式时序数据库（三）：主从复制、故障检测与切换</h1>
-<p><a href="../02-wal-and-recovery/article.md">上一篇</a>讨论了单机如何用 WAL 找回尚未刷出的写入。但如果故障的不只是进程，而是整台机器和它的磁盘，保存在本机的日志也可能暂时不可用。<strong>如何让另一台机器接过服务，又怎样避免两台机器同时接受写入？</strong></p>
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>从0到1实现一个分布式时序数据库（三）：主从复制、故障检测与切换 · MynaDB 技术专栏</title><meta name="description" content="从单机 WAL 走向主从复制，梳理复制确认、断线追赶、心跳检测、脑裂与安全切换，理解备用节点接管服务所需的数据和授权边界。">
+<link rel="canonical" href="https://panbooks.github.io/mynadb-portal/docs/articles/03-replication-and-failover/preview.html"><meta property="og:title" content="从0到1实现一个分布式时序数据库（三）：主从复制、故障检测与切换 · MynaDB 技术专栏"><meta property="og:description" content="从单机 WAL 走向主从复制，梳理复制确认、断线追赶、心跳检测、脑裂与安全切换，理解备用节点接管服务所需的数据和授权边界。"><meta property="og:type" content="article"><meta property="og:image" content="https://panbooks.github.io/mynadb-portal/docs/articles/03-replication-and-failover/figures/01-replication-overview.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="stylesheet" href="../../../css/style.css"><link rel="stylesheet" href="../../../css/articles.css">
+<script src="../../../js/articles.js" defer></script></head>
+<body class="engineering-site"><a class="skip-link" href="#main-content">跳到正文</a>
+<nav class="navbar" aria-label="主导航"><div class="container">
+<a href="../../../zh/index.html" class="navbar-brand"><img src="../../../images/logo-icon.svg" alt="" class="logo-img" width="40" height="40">MynaDB</a>
+<ul class="navbar-nav" id="primary-navigation">
+<li><a href="../../../zh/docs/index.html">文档</a></li>
+<li><a href="../../../zh/docs/quickstart.html">快速开始</a></li>
+<li><a href="../../../zh/docs/architecture.html">架构</a></li>
+<li><a href="../index.html" class="active" aria-current="page">技术专栏</a></li>
+<li><a href="../../../zh/docs/api.html">API 参考</a></li>
+<li><a href="../../../zh/docs/examples.html">示例</a></li>
+</ul>
+<div class="navbar-actions"><a class="engineering-language" href="../../../index.html" lang="en">English site</a><a class="btn btn-secondary engineering-github" href="https://github.com/panbooks/mynadb" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+<button class="mobile-menu-btn" type="button" aria-label="打开导航" aria-controls="primary-navigation" aria-expanded="false">☰</button>
+</div></nav><div class="reader-layout">
+<aside class="series-sidebar" aria-label="系列目录"><a class="sidebar-home" href="../index.html">← 技术专栏</a><p class="sidebar-eyebrow">从单机到分布式</p><h2>从0到1实现一个分布式时序数据库</h2><p class="sidebar-progress">第 03 篇 / 共 10 篇</p><ol class="series-chapters"><li><a href="../01-from-http-to-parquet/preview.html"><span class="chapter-number">01</span><span>用 Rust、Arrow 和 Parquet 打通写入与 SQL 查询</span></a></li><li><a href="../02-wal-and-recovery/preview.html"><span class="chapter-number">02</span><span>写入成功之后，如何用 WAL 找回数据</span></a></li><li><a href="preview.html" class="is-current" aria-current="page"><span class="chapter-number">03</span><span>主从复制、故障检测与切换</span></a></li><li><a href="../04-object-storage/preview.html"><span class="chapter-number">04</span><span>从本地文件走向对象存储</span></a></li><li><a href="../05-memtable-query/preview.html"><span class="chapter-number">05</span><span>让新写入立即可查</span></a></li><li><a href="../06-distributed-cluster/preview.html"><span class="chapter-number">06</span><span>从单机走向 Router、Data、Meta 与 Raft</span></a></li><li><a href="../07-standby-and-scale-in/preview.html"><span class="chapter-number">07</span><span>不提升 Standby 的恢复与安全缩容</span></a></li><li><a href="../08-table-ownership-routing/preview.html"><span class="chapter-number">08</span><span>表所有权、Hive 分区与查询路由</span></a></li><li><a href="../09-operations-and-integrations/preview.html"><span class="chapter-number">09</span><span>运维控制台、协议接入与时序分析</span></a></li><li><a href="../10-correctness-and-interop/preview.html"><span class="chapter-number">10</span><span>正确性补课、OTLP 与 Iceberg 初版</span></a></li></ol></aside>
+<main class="article-main" id="main-content"><header class="article-header">
+<div class="article-breadcrumb"><a href="../index.html">技术专栏</a><span aria-hidden="true">/</span><span>单机基础</span></div>
+<p class="article-meta">第 03 篇 <span>·</span> 约 8 分钟 <span>·</span> 6 张图解</p>
+<h1><span class="article-series-name">从0到1实现一个分布式时序数据库（三）：</span>主从复制、故障检测与切换</h1><p class="article-summary">从单机 WAL 走向主从复制，梳理复制确认、断线追赶、心跳检测、脑裂与安全切换，理解备用节点接管服务所需的数据和授权边界。</p>
+<details class="mobile-chapter-menu"><summary>系列目录 · 当前第 03 篇</summary><ol class="series-chapters"><li><a href="../01-from-http-to-parquet/preview.html"><span class="chapter-number">01</span><span>用 Rust、Arrow 和 Parquet 打通写入与 SQL 查询</span></a></li><li><a href="../02-wal-and-recovery/preview.html"><span class="chapter-number">02</span><span>写入成功之后，如何用 WAL 找回数据</span></a></li><li><a href="preview.html" class="is-current" aria-current="page"><span class="chapter-number">03</span><span>主从复制、故障检测与切换</span></a></li><li><a href="../04-object-storage/preview.html"><span class="chapter-number">04</span><span>从本地文件走向对象存储</span></a></li><li><a href="../05-memtable-query/preview.html"><span class="chapter-number">05</span><span>让新写入立即可查</span></a></li><li><a href="../06-distributed-cluster/preview.html"><span class="chapter-number">06</span><span>从单机走向 Router、Data、Meta 与 Raft</span></a></li><li><a href="../07-standby-and-scale-in/preview.html"><span class="chapter-number">07</span><span>不提升 Standby 的恢复与安全缩容</span></a></li><li><a href="../08-table-ownership-routing/preview.html"><span class="chapter-number">08</span><span>表所有权、Hive 分区与查询路由</span></a></li><li><a href="../09-operations-and-integrations/preview.html"><span class="chapter-number">09</span><span>运维控制台、协议接入与时序分析</span></a></li><li><a href="../10-correctness-and-interop/preview.html"><span class="chapter-number">10</span><span>正确性补课、OTLP 与 Iceberg 初版</span></a></li></ol></details>
+<details class="mobile-page-toc"><summary>本篇目录</summary><div class="toc">
+<ul>
+<li><a href="#1">1. 一份数据，两台机器</a></li>
+<li><a href="#2">2. 一条写入，应该确认到哪一步？</a></li>
+<li><a href="#3">3. 从发送到追赶：序号能解决什么？</a></li>
+<li><a href="#4">4. 心跳超时：发现的是怀疑，不是事实</a></li>
+<li><a href="#5">5. 安全切换需要哪些额外约束？</a></li>
+<li><a href="#6">6. 切换之后：读、写与故障窗口</a></li>
+<li><a href="#7">7. 回看这一阶段</a></li>
+</ul>
+</div>
+</details></header>
+<article class="article-body"><p><a href="../02-wal-and-recovery/preview.html">上一篇</a>讨论了单机如何用 WAL 找回尚未刷出的写入。但如果故障的不只是进程，而是整台机器和它的磁盘，保存在本机的日志也可能暂时不可用。<strong>如何让另一台机器接过服务，又怎样避免两台机器同时接受写入？</strong></p>
 <p>这一篇以 <code>v0.2.0</code> / M3 的早期主从高可用探索为线索，讨论复制、心跳、切换和脑裂。为讲清安全边界，文中部分流程是设计示意，并非声称该历史版本已经完整实现。该版本中的旧 HA 子系统后来在 <code>v0.3.0</code> 被移除；它不是后续 Router / Data / Meta 集群的实现。</p>
 <h2 id="1">1. 一份数据，两台机器</h2>
 <p>单机 WAL 解决的是“本机恢复时从哪里重放”；复制要进一步解决“另一台机器能接收到什么”。最直观的布局是一台主节点负责接收写入，一台从节点接收复制记录，并在本地保存和应用。</p>
-<p><img alt="图 1：从单机 WAL 扩展到主从复制" src="figures/01-replication-overview.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 1：从单机 WAL 扩展到主从复制" src="figures/01-replication-overview.png" /></p>
 <p>两份副本能降低单机故障造成的不可用，但<strong>有第二份副本不代表每条已确认写入都已经复制，更不自动保证切换安全</strong>。具体保障由确认策略、故障检测和写入权限共同决定。</p>
 <p><code>v0.2.0</code> 的历史源码中，<code>ReplicatedWalEntry</code> 包含序号、时间戳、数据库、负载和 CRC32 校验；发送端和接收端使用 TCP 传递消息。它建立了理解复制的起点，但字段存在并不意味着恢复、补发和持久化已经形成完整保证。</p>
 <h2 id="2">2. 一条写入，应该确认到哪一步？</h2>
 <p>把复制链路拆开，可以看到多个不同的进度：主节点已接收、本地日志已同步、从节点已接收、从节点已同步、从节点已应用。这些不是同一件事。</p>
-<p><img alt="图 2：复制确认的不同边界" src="figures/02-ack-boundaries.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 2：复制确认的不同边界" src="figures/02-ack-boundaries.png" /></p>
 <table>
 <thead>
 <tr>
@@ -41,13 +77,13 @@
 <p>历史实现的具体边界需要特别注意：接收端校验后，<strong>先把记录放入处理队列，然后发送成功 ACK</strong>；这不能证明从节点已经写入或同步本地 WAL。发送端虽然定义了等待 ACK 的方法，但该版本的 <code>replicate_write</code> 调用的是排队发送路径。因此不能把这个历史版本描述为“已确认写入至少持久化在两台机器”。</p>
 <h2 id="3">3. 从发送到追赶：序号能解决什么？</h2>
 <p>复制记录通常需要一个在某个主节点任期内有序的标识。主节点发送记录，从节点按顺序接收和应用；断线重连时，从节点报告自己的连续进度，主节点再决定从哪里补发。</p>
-<p><img alt="图 3：断线后从连续进度追赶" src="figures/03-catch-up.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 3：断线后从连续进度追赶" src="figures/03-catch-up.png" /></p>
 <p>例如，主节点已经产生 <code>101–105</code>，从节点只连续持久化到 <code>102</code>。重连后应从 <code>103</code> 补齐；如果主节点已经回收所需历史记录，就需要先安装包含明确边界的快照，再接续后续日志。快照和增量衔接必须保证不漏记录；收到重复记录时需要确定的去重或幂等规则。</p>
 <p>一个序号本身不够：还要规定序号属于哪个任期、如何持久化、是否存在缺口，以及主节点切换后如何比较。若以 <code>104</code> 已到达就宣称 <code>103</code> 一定完成，可能掩盖缺口。</p>
 <p>在 <code>v0.2.0</code> 中，握手消息携带 <code>last_sequence</code>，但发送端并未据此实现历史记录补发；Parquet 文件通知处理也标有 TODO。它适合作为复制协议原型来阅读，不能据此假设断线重连后一定能自动补齐数据。</p>
 <h2 id="4">4. 心跳超时：发现的是怀疑，不是事实</h2>
 <p>心跳提供活性信号。主节点定期发送心跳，从节点记录最近收到的时间。如果超过超时阈值，可以进入“疑似故障”状态，并根据策略决定下一步。</p>
-<p><img alt="图 4：心跳检测与切换授权是两件事" src="figures/04-failure-detection.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 4：心跳检测与切换授权是两件事" src="figures/04-failure-detection.png" /></p>
 <p>但网络中断、机器暂停、过载和真正宕机，都可能表现为“没有收到心跳”。例如：</p>
 <pre><code class="language-text">主节点 A 仍在运行  ── 网络分区 ──  从节点 B 收不到 A 的心跳
        │                                      │
@@ -57,7 +93,7 @@
 <p><code>v0.2.0</code> 的故障检测器使用心跳超时和连续失败阈值通知故障事件；历史代码中的 <code>MasterDown</code> 是节点本地判断，不能理解为多数派已经确认旧主失去写入权。</p>
 <h2 id="5">5. 安全切换需要哪些额外约束？</h2>
 <p>如果要把原型发展成安全的自动切换协议，至少需要明确：谁有权选主、候选节点是否拥有足够新的数据、旧主如何被阻止继续写入，以及客户端如何找到新主。</p>
-<p><img alt="图 5：从怀疑故障到允许新主写入" src="figures/05-safe-failover.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 5：从怀疑故障到允许新主写入" src="figures/05-safe-failover.png" /></p>
 <p>下面是<strong>设计检查清单</strong>，不是对 <code>v0.2.0</code> 行为的描述：</p>
 <ol>
 <li><strong>获得授权</strong>：使用明确的协调机制，例如经过完整设计和验证的共识协议或外部协调服务；避免多个节点分别宣布自己是主。</li>
@@ -70,7 +106,7 @@
 <p>历史源码的 <code>Promoter::promote</code> 明确将应用待处理记录、关闭旧连接、更新配置等列为未来工作，目前主要切换内存中的角色和状态。它不是上述安全切换协议，也不能证明零停机或网络分区安全。</p>
 <h2 id="6">6. 切换之后：读、写与故障窗口</h2>
 <p>切换流程不仅改变节点角色，还影响客户端和观察到的数据。</p>
-<p><img alt="图 6：几种故障窗口与需要验证的问题" src="figures/06-failure-windows.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 6：几种故障窗口与需要验证的问题" src="figures/06-failure-windows.png" /></p>
 <table>
 <thead>
 <tr>
@@ -117,4 +153,19 @@
 <li>自动切换需要把数据进度、选主、fencing 和客户端路由连起来，不能只修改角色标志。</li>
 </ul>
 <p><code>v0.2.0</code> 是一次早期主从复制和高可用的探索，后续 <code>v0.3.0</code> 移除了这套子系统并转向对象存储抽象。下一篇将从这个转折出发，讨论如何把本地文件访问与对象存储接口分开。</p>
-<p>项目源码：<a href="https://github.com/panbooks/mynadb">panbooks/mynadb</a> · <a href="https://github.com/panbooks/mynadb/tree/v0.2.0">v0.2.0 源码</a> · <a href="https://panbooks.github.io/mynadb-portal/zh/index.html">中文文档</a>。</p></main></html>
+<p>项目源码：<a href="https://github.com/panbooks/mynadb">panbooks/mynadb</a> · <a href="https://github.com/panbooks/mynadb/tree/v0.2.0">v0.2.0 源码</a> · <a href="https://panbooks.github.io/mynadb-portal/zh/index.html">中文文档</a>。</p></article>
+<nav class="chapter-pager" aria-label="篇章导航"><a class="chapter-pager-link" href="../02-wal-and-recovery/preview.html"><span>← 上一篇 · 第 02 篇</span><strong>写入成功之后，如何用 WAL 找回数据</strong></a><a class="chapter-pager-link" href="../04-object-storage/preview.html"><span>下一篇 → · 第 04 篇</span><strong>从本地文件走向对象存储</strong></a></nav>
+<section class="article-resources" aria-labelledby="resources-title"><h2 id="resources-title">保存与分享</h2><p>下载带公网图片链接的 Markdown，或复制摘要，方便保存和社区分享。</p><div class="article-resource-actions"><button class="btn btn-primary" type="button" data-copy-file="article.publish.md">复制发布版 Markdown</button><button class="btn btn-secondary" type="button" data-copy-file="summary.md">复制摘要</button><a class="text-link" href="article.publish.md" download>下载 Markdown ↓</a></div></section>
+</main><aside class="page-toc" aria-label="本篇目录"><h2>本篇目录</h2><div class="toc">
+<ul>
+<li><a href="#1">1. 一份数据，两台机器</a></li>
+<li><a href="#2">2. 一条写入，应该确认到哪一步？</a></li>
+<li><a href="#3">3. 从发送到追赶：序号能解决什么？</a></li>
+<li><a href="#4">4. 心跳超时：发现的是怀疑，不是事实</a></li>
+<li><a href="#5">5. 安全切换需要哪些额外约束？</a></li>
+<li><a href="#6">6. 切换之后：读、写与故障窗口</a></li>
+<li><a href="#7">7. 回看这一阶段</a></li>
+</ul>
+</div>
+<a class="toc-back" href="#main-content">回到顶部 ↑</a></aside></div>
+<dialog class="image-dialog" aria-label="架构图大图"><div class="image-dialog-toolbar"><span>架构图</span><a class="image-original" target="_blank" rel="noopener noreferrer">打开原图 ↗</a><button type="button" class="image-dialog-close" aria-label="关闭大图">关闭 ×</button></div><img alt=""><p class="image-dialog-caption"></p></dialog><footer class="engineering-footer"><div><a href="../index.html">MynaDB 技术专栏</a><span>用清晰的设计理解数据系统。</span></div><a href="https://github.com/panbooks/mynadb-portal" target="_blank" rel="noopener noreferrer">在 GitHub 查看文档 ↗</a></footer><p class="sr-only" id="reader-status" role="status" aria-live="polite"></p></body></html>

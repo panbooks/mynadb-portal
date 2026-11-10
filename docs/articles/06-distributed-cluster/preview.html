@@ -1,11 +1,47 @@
-<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>从0到1实现一个分布式时序数据库（六）：从单机走向 Router、Data、Meta 与 Raft</title><style>
-:root{color-scheme:light}body{margin:0;background:#f3f6fa;color:#233749;font:17px/1.95 system-ui,-apple-system,"Microsoft YaHei",sans-serif}main{max-width:1000px;margin:36px auto;padding:48px 54px;background:white;border:1px solid #e1e8ef;border-radius:16px}h1{font-size:34px;line-height:1.5;letter-spacing:-.6px}h2{font-size:25px;margin-top:48px;padding-top:12px;border-top:1px solid #e2e9ef}a{color:#096d8f}p{margin:20px 0}img{display:block;width:100%;height:auto;margin:28px 0;border:1px solid #e3eaf0;border-radius:10px}pre{padding:22px;background:#112b3c;color:#e2edf5;overflow:auto;border-radius:10px;font:14px/1.8 ui-monospace,monospace}code{font-family:ui-monospace,monospace;font-size:.9em}p code,td code,li code{background:#eef3f8;padding:2px 5px;border-radius:4px}table{border-collapse:collapse;width:100%;font-size:15px;margin:24px 0}td,th{border:1px solid #dce5ed;padding:12px;text-align:left}th{background:#edf5f9}li{margin:8px 0}strong{color:#123c52}.draft{font-size:14px;color:#617a8d;border-bottom:1px solid #e0e8ef;padding-bottom:15px}@media(max-width:700px){main{margin:0;padding:24px 18px;border:0;border-radius:0}h1{font-size:27px}table{display:block;overflow:auto}pre{padding:15px}}
-</style><main><p class="draft">社区文章草稿 · 分布式集群 · 本地预览，尚未对外发表</p><h1 id="01-routerdatameta-raft">从0到1实现一个分布式时序数据库（六）：从单机走向 Router、Data、Meta 与 Raft</h1>
-<p><a href="../05-memtable-query/article.md">上一篇</a>让单机查询同时看到内存与 Parquet。如果写入、查询和存储工作需要分布在多台机器上，系统必须回答新的问题：<strong>请求发给谁？哪些数据在哪些节点？节点失联后谁来更新路由？</strong></p>
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>从0到1实现一个分布式时序数据库（六）：从单机走向 Router、Data、Meta 与 Raft · MynaDB 技术专栏</title><meta name="description" content="将单机拆分为 Router、Data 与 Meta，梳理 Arrow Flight 写入、分布式查询与 Raft 元数据协调，理解分布式时序数据库的核心架构。">
+<link rel="canonical" href="https://panbooks.github.io/mynadb-portal/docs/articles/06-distributed-cluster/preview.html"><meta property="og:title" content="从0到1实现一个分布式时序数据库（六）：从单机走向 Router、Data、Meta 与 Raft · MynaDB 技术专栏"><meta property="og:description" content="将单机拆分为 Router、Data 与 Meta，梳理 Arrow Flight 写入、分布式查询与 Raft 元数据协调，理解分布式时序数据库的核心架构。"><meta property="og:type" content="article"><meta property="og:image" content="https://panbooks.github.io/mynadb-portal/docs/articles/06-distributed-cluster/figures/01-cluster-roles.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="stylesheet" href="../../../css/style.css"><link rel="stylesheet" href="../../../css/articles.css">
+<script src="../../../js/articles.js" defer></script></head>
+<body class="engineering-site"><a class="skip-link" href="#main-content">跳到正文</a>
+<nav class="navbar" aria-label="主导航"><div class="container">
+<a href="../../../zh/index.html" class="navbar-brand"><img src="../../../images/logo-icon.svg" alt="" class="logo-img" width="40" height="40">MynaDB</a>
+<ul class="navbar-nav" id="primary-navigation">
+<li><a href="../../../zh/docs/index.html">文档</a></li>
+<li><a href="../../../zh/docs/quickstart.html">快速开始</a></li>
+<li><a href="../../../zh/docs/architecture.html">架构</a></li>
+<li><a href="../index.html" class="active" aria-current="page">技术专栏</a></li>
+<li><a href="../../../zh/docs/api.html">API 参考</a></li>
+<li><a href="../../../zh/docs/examples.html">示例</a></li>
+</ul>
+<div class="navbar-actions"><a class="engineering-language" href="../../../index.html" lang="en">English site</a><a class="btn btn-secondary engineering-github" href="https://github.com/panbooks/mynadb" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+<button class="mobile-menu-btn" type="button" aria-label="打开导航" aria-controls="primary-navigation" aria-expanded="false">☰</button>
+</div></nav><div class="reader-layout">
+<aside class="series-sidebar" aria-label="系列目录"><a class="sidebar-home" href="../index.html">← 技术专栏</a><p class="sidebar-eyebrow">从单机到分布式</p><h2>从0到1实现一个分布式时序数据库</h2><p class="sidebar-progress">第 06 篇 / 共 10 篇</p><ol class="series-chapters"><li><a href="../01-from-http-to-parquet/preview.html"><span class="chapter-number">01</span><span>用 Rust、Arrow 和 Parquet 打通写入与 SQL 查询</span></a></li><li><a href="../02-wal-and-recovery/preview.html"><span class="chapter-number">02</span><span>写入成功之后，如何用 WAL 找回数据</span></a></li><li><a href="../03-replication-and-failover/preview.html"><span class="chapter-number">03</span><span>主从复制、故障检测与切换</span></a></li><li><a href="../04-object-storage/preview.html"><span class="chapter-number">04</span><span>从本地文件走向对象存储</span></a></li><li><a href="../05-memtable-query/preview.html"><span class="chapter-number">05</span><span>让新写入立即可查</span></a></li><li><a href="preview.html" class="is-current" aria-current="page"><span class="chapter-number">06</span><span>从单机走向 Router、Data、Meta 与 Raft</span></a></li><li><a href="../07-standby-and-scale-in/preview.html"><span class="chapter-number">07</span><span>不提升 Standby 的恢复与安全缩容</span></a></li><li><a href="../08-table-ownership-routing/preview.html"><span class="chapter-number">08</span><span>表所有权、Hive 分区与查询路由</span></a></li><li><a href="../09-operations-and-integrations/preview.html"><span class="chapter-number">09</span><span>运维控制台、协议接入与时序分析</span></a></li><li><a href="../10-correctness-and-interop/preview.html"><span class="chapter-number">10</span><span>正确性补课、OTLP 与 Iceberg 初版</span></a></li></ol></aside>
+<main class="article-main" id="main-content"><header class="article-header">
+<div class="article-breadcrumb"><a href="../index.html">技术专栏</a><span aria-hidden="true">/</span><span>分布式架构</span></div>
+<p class="article-meta">第 06 篇 <span>·</span> 约 7 分钟 <span>·</span> 6 张图解</p>
+<h1><span class="article-series-name">从0到1实现一个分布式时序数据库（六）：</span>从单机走向 Router、Data、Meta 与 Raft</h1><p class="article-summary">将单机拆分为 Router、Data 与 Meta，梳理 Arrow Flight 写入、分布式查询与 Raft 元数据协调，理解分布式时序数据库的核心架构。</p>
+<details class="mobile-chapter-menu"><summary>系列目录 · 当前第 06 篇</summary><ol class="series-chapters"><li><a href="../01-from-http-to-parquet/preview.html"><span class="chapter-number">01</span><span>用 Rust、Arrow 和 Parquet 打通写入与 SQL 查询</span></a></li><li><a href="../02-wal-and-recovery/preview.html"><span class="chapter-number">02</span><span>写入成功之后，如何用 WAL 找回数据</span></a></li><li><a href="../03-replication-and-failover/preview.html"><span class="chapter-number">03</span><span>主从复制、故障检测与切换</span></a></li><li><a href="../04-object-storage/preview.html"><span class="chapter-number">04</span><span>从本地文件走向对象存储</span></a></li><li><a href="../05-memtable-query/preview.html"><span class="chapter-number">05</span><span>让新写入立即可查</span></a></li><li><a href="preview.html" class="is-current" aria-current="page"><span class="chapter-number">06</span><span>从单机走向 Router、Data、Meta 与 Raft</span></a></li><li><a href="../07-standby-and-scale-in/preview.html"><span class="chapter-number">07</span><span>不提升 Standby 的恢复与安全缩容</span></a></li><li><a href="../08-table-ownership-routing/preview.html"><span class="chapter-number">08</span><span>表所有权、Hive 分区与查询路由</span></a></li><li><a href="../09-operations-and-integrations/preview.html"><span class="chapter-number">09</span><span>运维控制台、协议接入与时序分析</span></a></li><li><a href="../10-correctness-and-interop/preview.html"><span class="chapter-number">10</span><span>正确性补课、OTLP 与 Iceberg 初版</span></a></li></ol></details>
+<details class="mobile-page-toc"><summary>本篇目录</summary><div class="toc">
+<ul>
+<li><a href="#1">1. 把单机职责拆开</a></li>
+<li><a href="#2-data">2. 写入怎样到达 Data 节点？</a></li>
+<li><a href="#3-fan-out">3. 查询为什么需要 fan-out 和汇总？</a></li>
+<li><a href="#4-meta-raft">4. Meta 与 Raft：协调的是元数据</a></li>
+<li><a href="#5">5. 路由缓存与失效：控制面变化如何到达数据面？</a></li>
+<li><a href="#6">6. 数据副本、共享存储与故障恢复</a></li>
+<li><a href="#7">7. 回看这一阶段</a></li>
+</ul>
+</div>
+</details></header>
+<article class="article-body"><p><a href="../05-memtable-query/preview.html">上一篇</a>让单机查询同时看到内存与 Parquet。如果写入、查询和存储工作需要分布在多台机器上，系统必须回答新的问题：<strong>请求发给谁？哪些数据在哪些节点？节点失联后谁来更新路由？</strong></p>
 <p>这一篇以 <code>v0.5.0</code> / M6 为线索，介绍 Router、Data 和 Meta 的分工、Arrow Flight 数据传输以及 Raft 元数据协调。图中的失败处理部分是设计检查项，不代表该历史版本已经证明零停机或无数据丢失。</p>
 <h2 id="1">1. 把单机职责拆开</h2>
 <p>单机模式将协议、缓存、存储和查询放在同一进程。集群模式把入口、执行和协调拆分成不同角色：</p>
-<p><img alt="图 1：Router、Data 与 Meta 的职责" src="figures/01-cluster-roles.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 1：Router、Data 与 Meta 的职责" src="figures/01-cluster-roles.png" /></p>
 <table>
 <thead>
 <tr>
@@ -35,7 +71,7 @@
 <p><code>v0.5.0</code> 的阶段性架构使用共享存储和节点相关的存储前缀；后续版本又调整了所有权和布局。不能据此假定不同阶段之间可以直接迁移数据。</p>
 <h2 id="2-data">2. 写入怎样到达 Data 节点？</h2>
 <p>客户端发送 line protocol 后，Router 解析数据、按分区归组、转换为 Arrow RecordBatch，再通过 Arrow Flight 将批次发送到目标 Data 节点。</p>
-<p><img alt="图 2：从客户端到 Data 节点的写入路径" src="figures/02-write-routing.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 2：从客户端到 Data 节点的写入路径" src="figures/02-write-routing.png" /></p>
 <pre><code class="language-text">客户端 → Router：解析 / 分区 → 路由信息
                          ↓
                  Flight RecordBatch → Data 节点
@@ -46,17 +82,17 @@
 <p>Arrow Flight 用于节点之间传输 Arrow 数据，但传输完成不自动等于已持久化或已经满足副本确认策略。写入成功的承诺取决于具体路径、配置和测试。</p>
 <h2 id="3-fan-out">3. 查询为什么需要 fan-out 和汇总？</h2>
 <p>一条 SQL 可能涉及多个节点上的数据。Router 可以根据可用的元数据和时间范围选择目标节点，向它们并行发起查询，再汇总结果。</p>
-<p><img alt="图 3：并行查询与结果汇总" src="figures/03-query-fanout.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 3：并行查询与结果汇总" src="figures/03-query-fanout.png" /></p>
 <p>对简单扫描，可以组合多路结果；对聚合、排序、限制条数和 join，则不能一概把各节点最终结果直接拼接。例如 <code>AVG</code> 需要正确合并每个节点的 <code>SUM</code> 和 <code>COUNT</code>，而不是对节点平均值再次求平均。SQL 在哪些部分下推、哪些部分在 Router 汇总，必须与实际实现的支持范围一致。</p>
 <p>还要处理节点失败：返回错误、重试或返回部分结果是不同的 API 契约。不能静默漏掉一个节点后仍把结果当成完整结果。历史阶段存在文件归属和节点亲和的查询路由路径；不应将此理解为所有 SQL 和故障组合都已经验证。</p>
 <h2 id="4-meta-raft">4. Meta 与 Raft：协调的是元数据</h2>
 <p>如果 Router 只保留一份本地路由表，重启或节点变化后就可能失去信息。Meta 服务保存和管理集群所需的元数据；多个 Meta 节点通过 Raft 协调状态。</p>
-<p><img alt="图 4：元数据命令与 Raft 多数派" src="figures/04-meta-raft.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 4：元数据命令与 Raft 多数派" src="figures/04-meta-raft.png" /></p>
 <p>在 Raft 的常见模型中，客户端将状态变更交给 leader，日志复制到多数派后提交，再由状态机应用；读写细节仍以具体实现和配置为准。<code>v0.5.0</code> 集成 OpenRaft，使用 sled 相关存储组件和元数据状态机。元数据复制的对象是<strong>控制面状态</strong>，不是自动把每一条时序指标数据复制到所有 Meta 节点。</p>
 <p>该开发阶段曾经过 etcd 方案，但它在 <code>v0.5.0</code> 标签端点前被移除；本文讨论该标签的内置 Meta 路径。Raft 本身也不能保证所有外部写入、路由缓存和数据副本已经协调正确，这些需要系统级协议与验证。</p>
 <h2 id="5">5. 路由缓存与失效：控制面变化如何到达数据面？</h2>
 <p>Router 通常会缓存路由和节点信息，避免每个请求都访问 Meta。但节点状态或分区归属发生变化时，旧缓存可能把请求发往错误节点。</p>
-<p><img alt="图 5：元数据变化与路由刷新" src="figures/05-routing-cache.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 5：元数据变化与路由刷新" src="figures/05-routing-cache.png" /></p>
 <p>需要明确：</p>
 <ol>
 <li>元数据如何版本化，Router 如何获得更新或重新拉取。</li>
@@ -68,7 +104,7 @@
 <p>任期、租约或 fencing token 只有在实际写入路径中被正确验证时才有意义。<code>v0.5.0</code> 包含早期 fencing、副本和 standby 相关机制，但这些设计在后续里程碑继续调整；不能仅凭组件存在就宣称脑裂安全。</p>
 <h2 id="6">6. 数据副本、共享存储与故障恢复</h2>
 <p>共享对象存储可以让多个节点访问持久化文件，但尚在节点内存或本地 WAL 中的最新写入是否存在其他副本，需要另行讨论。对象存储可用也不能替代 Meta 选主、Data 角色管理和客户端路由。</p>
-<p><img alt="图 6：不同故障影响不同层次" src="figures/06-failure-scenarios.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 6：不同故障影响不同层次" src="figures/06-failure-scenarios.png" /></p>
 <table>
 <thead>
 <tr>
@@ -107,4 +143,19 @@
 <h2 id="7">7. 回看这一阶段</h2>
 <p><code>v0.5.0</code> 将入口、数据执行和元数据协调拆成 Router、Data、Meta，并使用 Arrow Flight 与 Raft 相关组件建立集群基础。与 <code>v0.2.0</code> 已移除的主从原型不同，这是一条新的架构路线。</p>
 <p>部署和协议仍有边界：例如该标签的 Router 模式明确没有实现 MySQL 服务；早期 standby、fencing 和缩容机制也在后续调整。下一篇将继续讨论节点恢复、standby 策略和安全缩容。</p>
-<p>项目源码：<a href="https://github.com/panbooks/mynadb">panbooks/mynadb</a> · <a href="https://github.com/panbooks/mynadb/tree/v0.5.0">v0.5.0 源码</a> · <a href="https://panbooks.github.io/mynadb-portal/zh/index.html">中文文档</a>。</p></main></html>
+<p>项目源码：<a href="https://github.com/panbooks/mynadb">panbooks/mynadb</a> · <a href="https://github.com/panbooks/mynadb/tree/v0.5.0">v0.5.0 源码</a> · <a href="https://panbooks.github.io/mynadb-portal/zh/index.html">中文文档</a>。</p></article>
+<nav class="chapter-pager" aria-label="篇章导航"><a class="chapter-pager-link" href="../05-memtable-query/preview.html"><span>← 上一篇 · 第 05 篇</span><strong>让新写入立即可查</strong></a><a class="chapter-pager-link" href="../07-standby-and-scale-in/preview.html"><span>下一篇 → · 第 07 篇</span><strong>不提升 Standby 的恢复与安全缩容</strong></a></nav>
+<section class="article-resources" aria-labelledby="resources-title"><h2 id="resources-title">保存与分享</h2><p>下载带公网图片链接的 Markdown，或复制摘要，方便保存和社区分享。</p><div class="article-resource-actions"><button class="btn btn-primary" type="button" data-copy-file="article.publish.md">复制发布版 Markdown</button><button class="btn btn-secondary" type="button" data-copy-file="summary.md">复制摘要</button><a class="text-link" href="article.publish.md" download>下载 Markdown ↓</a></div></section>
+</main><aside class="page-toc" aria-label="本篇目录"><h2>本篇目录</h2><div class="toc">
+<ul>
+<li><a href="#1">1. 把单机职责拆开</a></li>
+<li><a href="#2-data">2. 写入怎样到达 Data 节点？</a></li>
+<li><a href="#3-fan-out">3. 查询为什么需要 fan-out 和汇总？</a></li>
+<li><a href="#4-meta-raft">4. Meta 与 Raft：协调的是元数据</a></li>
+<li><a href="#5">5. 路由缓存与失效：控制面变化如何到达数据面？</a></li>
+<li><a href="#6">6. 数据副本、共享存储与故障恢复</a></li>
+<li><a href="#7">7. 回看这一阶段</a></li>
+</ul>
+</div>
+<a class="toc-back" href="#main-content">回到顶部 ↑</a></aside></div>
+<dialog class="image-dialog" aria-label="架构图大图"><div class="image-dialog-toolbar"><span>架构图</span><a class="image-original" target="_blank" rel="noopener noreferrer">打开原图 ↗</a><button type="button" class="image-dialog-close" aria-label="关闭大图">关闭 ×</button></div><img alt=""><p class="image-dialog-caption"></p></dialog><footer class="engineering-footer"><div><a href="../index.html">MynaDB 技术专栏</a><span>用清晰的设计理解数据系统。</span></div><a href="https://github.com/panbooks/mynadb-portal" target="_blank" rel="noopener noreferrer">在 GitHub 查看文档 ↗</a></footer><p class="sr-only" id="reader-status" role="status" aria-live="polite"></p></body></html>

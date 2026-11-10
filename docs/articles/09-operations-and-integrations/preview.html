@@ -1,11 +1,48 @@
-<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>从0到1实现一个分布式时序数据库（九）：运维控制台、协议接入与时序分析</title><style>
-:root{color-scheme:light}body{margin:0;background:#f3f6fa;color:#233749;font:17px/1.95 system-ui,-apple-system,"Microsoft YaHei",sans-serif}main{max-width:1000px;margin:36px auto;padding:48px 54px;background:white;border:1px solid #e1e8ef;border-radius:16px}h1{font-size:34px;line-height:1.5;letter-spacing:-.6px}h2{font-size:25px;margin-top:48px;padding-top:12px;border-top:1px solid #e2e9ef}a{color:#096d8f}p{margin:20px 0}img{display:block;width:100%;height:auto;margin:28px 0;border:1px solid #e3eaf0;border-radius:10px}pre{padding:22px;background:#112b3c;color:#e2edf5;overflow:auto;border-radius:10px;font:14px/1.8 ui-monospace,monospace}code{font-family:ui-monospace,monospace;font-size:.9em}p code,td code,li code{background:#eef3f8;padding:2px 5px;border-radius:4px}table{border-collapse:collapse;width:100%;font-size:15px;margin:24px 0}td,th{border:1px solid #dce5ed;padding:12px;text-align:left}th{background:#edf5f9}li{margin:8px 0}strong{color:#123c52}.draft{font-size:14px;color:#617a8d;border-bottom:1px solid #e0e8ef;padding-bottom:15px}@media(max-width:700px){main{margin:0;padding:24px 18px;border:0;border-radius:0}h1{font-size:27px}table{display:block;overflow:auto}pre{padding:15px}}
-</style><main><p class="draft">社区文章草稿 · 运维、接入与分析 · 本地预览，尚未对外发表</p><h1 id="01">从0到1实现一个分布式时序数据库（九）：运维控制台、协议接入与时序分析</h1>
-<p><a href="../08-table-ownership-routing/article.md">上一篇</a>讨论了集群如何定位表和物理分区。但数据库能保存并查询数据以后，使用者还需要回答另一组问题：<strong>集群是否健康？现有采集工具怎样接入？谁有权限访问？历史数据怎样分析？</strong></p>
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>从0到1实现一个分布式时序数据库（九）：运维控制台、协议接入与时序分析 · MynaDB 技术专栏</title><meta name="description" content="围绕运维控制台、协议接入、RBAC、TLS、流式查询与时序分析，讲解数据库如何连接采集器、分析工具和管理员，并划清能力边界。">
+<link rel="canonical" href="https://panbooks.github.io/mynadb-portal/docs/articles/09-operations-and-integrations/preview.html"><meta property="og:title" content="从0到1实现一个分布式时序数据库（九）：运维控制台、协议接入与时序分析 · MynaDB 技术专栏"><meta property="og:description" content="围绕运维控制台、协议接入、RBAC、TLS、流式查询与时序分析，讲解数据库如何连接采集器、分析工具和管理员，并划清能力边界。"><meta property="og:type" content="article"><meta property="og:image" content="https://panbooks.github.io/mynadb-portal/docs/articles/09-operations-and-integrations/figures/01-ecosystem.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="stylesheet" href="../../../css/style.css"><link rel="stylesheet" href="../../../css/articles.css">
+<script src="../../../js/articles.js" defer></script></head>
+<body class="engineering-site"><a class="skip-link" href="#main-content">跳到正文</a>
+<nav class="navbar" aria-label="主导航"><div class="container">
+<a href="../../../zh/index.html" class="navbar-brand"><img src="../../../images/logo-icon.svg" alt="" class="logo-img" width="40" height="40">MynaDB</a>
+<ul class="navbar-nav" id="primary-navigation">
+<li><a href="../../../zh/docs/index.html">文档</a></li>
+<li><a href="../../../zh/docs/quickstart.html">快速开始</a></li>
+<li><a href="../../../zh/docs/architecture.html">架构</a></li>
+<li><a href="../index.html" class="active" aria-current="page">技术专栏</a></li>
+<li><a href="../../../zh/docs/api.html">API 参考</a></li>
+<li><a href="../../../zh/docs/examples.html">示例</a></li>
+</ul>
+<div class="navbar-actions"><a class="engineering-language" href="../../../index.html" lang="en">English site</a><a class="btn btn-secondary engineering-github" href="https://github.com/panbooks/mynadb" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+<button class="mobile-menu-btn" type="button" aria-label="打开导航" aria-controls="primary-navigation" aria-expanded="false">☰</button>
+</div></nav><div class="reader-layout">
+<aside class="series-sidebar" aria-label="系列目录"><a class="sidebar-home" href="../index.html">← 技术专栏</a><p class="sidebar-eyebrow">从单机到分布式</p><h2>从0到1实现一个分布式时序数据库</h2><p class="sidebar-progress">第 09 篇 / 共 10 篇</p><ol class="series-chapters"><li><a href="../01-from-http-to-parquet/preview.html"><span class="chapter-number">01</span><span>用 Rust、Arrow 和 Parquet 打通写入与 SQL 查询</span></a></li><li><a href="../02-wal-and-recovery/preview.html"><span class="chapter-number">02</span><span>写入成功之后，如何用 WAL 找回数据</span></a></li><li><a href="../03-replication-and-failover/preview.html"><span class="chapter-number">03</span><span>主从复制、故障检测与切换</span></a></li><li><a href="../04-object-storage/preview.html"><span class="chapter-number">04</span><span>从本地文件走向对象存储</span></a></li><li><a href="../05-memtable-query/preview.html"><span class="chapter-number">05</span><span>让新写入立即可查</span></a></li><li><a href="../06-distributed-cluster/preview.html"><span class="chapter-number">06</span><span>从单机走向 Router、Data、Meta 与 Raft</span></a></li><li><a href="../07-standby-and-scale-in/preview.html"><span class="chapter-number">07</span><span>不提升 Standby 的恢复与安全缩容</span></a></li><li><a href="../08-table-ownership-routing/preview.html"><span class="chapter-number">08</span><span>表所有权、Hive 分区与查询路由</span></a></li><li><a href="preview.html" class="is-current" aria-current="page"><span class="chapter-number">09</span><span>运维控制台、协议接入与时序分析</span></a></li><li><a href="../10-correctness-and-interop/preview.html"><span class="chapter-number">10</span><span>正确性补课、OTLP 与 Iceberg 初版</span></a></li></ol></aside>
+<main class="article-main" id="main-content"><header class="article-header">
+<div class="article-breadcrumb"><a href="../index.html">技术专栏</a><span aria-hidden="true">/</span><span>运维与正确性</span></div>
+<p class="article-meta">第 09 篇 <span>·</span> 约 7 分钟 <span>·</span> 6 张图解</p>
+<h1><span class="article-series-name">从0到1实现一个分布式时序数据库（九）：</span>运维控制台、协议接入与时序分析</h1><p class="article-summary">围绕运维控制台、协议接入、RBAC、TLS、流式查询与时序分析，讲解数据库如何连接采集器、分析工具和管理员，并划清能力边界。</p>
+<details class="mobile-chapter-menu"><summary>系列目录 · 当前第 09 篇</summary><ol class="series-chapters"><li><a href="../01-from-http-to-parquet/preview.html"><span class="chapter-number">01</span><span>用 Rust、Arrow 和 Parquet 打通写入与 SQL 查询</span></a></li><li><a href="../02-wal-and-recovery/preview.html"><span class="chapter-number">02</span><span>写入成功之后，如何用 WAL 找回数据</span></a></li><li><a href="../03-replication-and-failover/preview.html"><span class="chapter-number">03</span><span>主从复制、故障检测与切换</span></a></li><li><a href="../04-object-storage/preview.html"><span class="chapter-number">04</span><span>从本地文件走向对象存储</span></a></li><li><a href="../05-memtable-query/preview.html"><span class="chapter-number">05</span><span>让新写入立即可查</span></a></li><li><a href="../06-distributed-cluster/preview.html"><span class="chapter-number">06</span><span>从单机走向 Router、Data、Meta 与 Raft</span></a></li><li><a href="../07-standby-and-scale-in/preview.html"><span class="chapter-number">07</span><span>不提升 Standby 的恢复与安全缩容</span></a></li><li><a href="../08-table-ownership-routing/preview.html"><span class="chapter-number">08</span><span>表所有权、Hive 分区与查询路由</span></a></li><li><a href="preview.html" class="is-current" aria-current="page"><span class="chapter-number">09</span><span>运维控制台、协议接入与时序分析</span></a></li><li><a href="../10-correctness-and-interop/preview.html"><span class="chapter-number">10</span><span>正确性补课、OTLP 与 Iceberg 初版</span></a></li></ol></details>
+<details class="mobile-page-toc"><summary>本篇目录</summary><div class="toc">
+<ul>
+<li><a href="#1">1. 从数据库内核走向使用入口</a></li>
+<li><a href="#2">2. 控制台不仅是“多一个页面”</a></li>
+<li><a href="#3">3. 协议接入：先理解数据模型，再谈兼容</a></li>
+<li><a href="#4-tls">4. 认证、授权、TLS 和审计各管什么？</a></li>
+<li><a href="#5">5. 流式查询：推送更新不一定是增量计算</a></li>
+<li><a href="#6">6. 时序分析与降采样的边界</a></li>
+<li><a href="#7">7. 接入和运维如何验证？</a></li>
+<li><a href="#8">8. 回看这一阶段</a></li>
+</ul>
+</div>
+</details></header>
+<article class="article-body"><p><a href="../08-table-ownership-routing/preview.html">上一篇</a>讨论了集群如何定位表和物理分区。但数据库能保存并查询数据以后，使用者还需要回答另一组问题：<strong>集群是否健康？现有采集工具怎样接入？谁有权限访问？历史数据怎样分析？</strong></p>
 <p>这一篇以 <code>v0.8.0</code> / M9 为线索，梳理管理界面、协议、安全和分析能力。接口或模块的存在不等于所有客户端、部署角色和工作负载都已经兼容；下文会分别说明边界。</p>
 <h2 id="1">1. 从数据库内核走向使用入口</h2>
 <p>M9 阶段增加了 React 管理界面，并扩展协议、安全与分析相关功能。它们围绕同一个数据路径服务不同用户：采集器写入，查询客户端读取，管理员观察和管理节点。</p>
-<p><img alt="图 1：围绕数据库内核的使用入口" src="figures/01-ecosystem.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 1：围绕数据库内核的使用入口" src="figures/01-ecosystem.png" /></p>
 <table>
 <thead>
 <tr>
@@ -40,12 +77,12 @@
 <p>这些功能的可用性需要逐一检查配置、部署角色和实际版本。特别是 <code>v0.8.0</code> 的 Router 模式中 MySQL 服务仍未实现；单机支持某个接口不能自动推广到集群入口。</p>
 <h2 id="2">2. 控制台不仅是“多一个页面”</h2>
 <p>控制台把分散的信息组织起来：查询、存储浏览、节点状态、指标和事件。对排查问题的人来说，重要的不只是能否显示数据，还包括<strong>显示的是哪个节点、哪个时间点、请求失败时是否明确提示</strong>。</p>
-<p><img alt="图 2：从控制台操作到节点结果" src="figures/02-console.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 2：从控制台操作到节点结果" src="figures/02-console.png" /></p>
 <p>例如查看一张表：管理界面请求后端，后端可能需要查询 Meta 或转发到 Data 节点，最后将结果返回页面。若节点不可达，应区分“没有数据”和“未能获取数据”；如果只有部分节点返回，也不能无提示地展示为完整集群结果。</p>
 <p>控制台还提供 SQL 查询和存储浏览。它们需要与权限、输入限制、错误提示和审计配合；能够浏览某个对象并不代表用户有权修改或删除它。React 前端需要单独构建，历史版本的前端与后续版本不可直接互换。</p>
 <h2 id="3">3. 协议接入：先理解数据模型，再谈兼容</h2>
 <p>以 Prometheus remote write 为例：采集器发送指标名、标签、值和时间戳，接收端需要将它们映射到数据库的数据模型。</p>
-<p><img alt="图 3：遥测数据从协议到内部模型" src="figures/03-protocol-mapping.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 3：遥测数据从协议到内部模型" src="figures/03-protocol-mapping.png" /></p>
 <pre><code class="language-text">指标名 → measurement / 表
 labels → tags
 value  → 数值字段
@@ -55,7 +92,7 @@ time   → 时间列，按协议处理单位
 <p><code>v0.8.0</code> 引入 Prometheus remote read/write 处理与 InfluxQL 解析/转换路径，也提供 Grafana 数据源插件源码。插件源码存在并不意味着已经签名、发布到插件目录或通过所有 Grafana 版本验证；Grafana、采集器和服务器应按具体版本做端到端测试。<strong>OTLP 原生接入是在下一里程碑引入的，不属于 <code>v0.8.0</code>。</strong></p>
 <h2 id="4-tls">4. 认证、授权、TLS 和审计各管什么？</h2>
 <p>数据库暴露更多入口后，需要将安全职责拆开：</p>
-<p><img alt="图 4：一个请求经过的安全边界" src="figures/04-security.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 4：一个请求经过的安全边界" src="figures/04-security.png" /></p>
 <ol>
 <li><strong>TLS</strong> 保护传输通道；证书配置和客户端验证需根据部署方式检查。</li>
 <li><strong>认证</strong> 判断请求者身份。</li>
@@ -66,12 +103,12 @@ time   → 时间列，按协议处理单位
 <p>安全示例还应检查默认用户、密码存放、日志敏感信息和失败处理。权限被拒绝时应返回清晰错误，不能把错误转换成空结果。</p>
 <h2 id="5">5. 流式查询：推送更新不一定是增量计算</h2>
 <p>轮询是客户端定时发起 SQL；流式订阅则让客户端通过 WebSocket 或 SSE 保持连接，由服务端推送初始结果和后续更新。</p>
-<p><img alt="图 5：写入触发查询结果更新" src="figures/05-streaming.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 5：写入触发查询结果更新" src="figures/05-streaming.png" /></p>
 <p><code>v0.8.0</code> 的流式查询管理器围绕订阅 SQL、关联表的写入通知和重新执行查询组织更新。<strong>重新执行查询并推送结果，与只计算并推送变化的增量计算不同。</strong> 订阅数量多、写入频繁或查询耗时时，需要关注合并通知、背压、慢客户端、资源上限和断线恢复。</p>
 <p>还应确认订阅建立时的身份与权限如何在后续执行中保持，以及连接断开或权限变化时如何处理。以上是设计与测试检查项，不代表所有场景已由该标签验证。</p>
 <h2 id="6">6. 时序分析与降采样的边界</h2>
 <p>时序数据常见需求包括时间分桶、聚合、历史数据降采样、地理分析和预测。M9 包含降采样作业与分层表、压缩策略、地理函数和预测相关代码；这些组件各有不同的成熟度。</p>
-<p><img alt="图 6：原始数据、降采样与查询" src="figures/06-analytics.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 6：原始数据、降采样与查询" src="figures/06-analytics.png" /></p>
 <p>例如，原始秒级数据可以按策略生成较粗粒度的聚合表，以减少长期历史查询的数据量。但需要规定桶边界、空桶、迟到数据、聚合正确性与覆盖时间范围。</p>
 <p><code>v0.8.0</code> 的自动降采样查询改写器会记录计划使用的 tier，但返回的是<strong>未修改的查询计划</strong>。不能承诺原表 SQL 会自动切换到降采样表；需要显式查询已生成的 tier 表，并验证作业结果。独立的 continuous aggregate 刷新执行器同样仍是占位。地理函数不等于完整 PostGIS 兼容，预测模型的存在也不等于预测准确。</p>
 <h2 id="7">7. 接入和运维如何验证？</h2>
@@ -113,4 +150,20 @@ time   → 时间列，按协议处理单位
 <h2 id="8">8. 回看这一阶段</h2>
 <p>M9 扩展了“如何使用数据库”：控制台让状态可观察，协议适配连接已有工具，安全机制划定访问边界，分析能力帮助处理时序数据。每一个入口都需要独立的配置、错误语义和真实客户端验证。</p>
 <p>下一篇将讨论 <code>v0.9.0</code> 的正确性修复、OTLP 接入与 Iceberg 初版，以及后续补丁如何继续修复实际查询和界面问题。</p>
-<p>项目源码：<a href="https://github.com/panbooks/mynadb">panbooks/mynadb</a> · <a href="https://github.com/panbooks/mynadb/tree/v0.8.0">v0.8.0 源码</a> · <a href="https://panbooks.github.io/mynadb-portal/zh/index.html">中文文档</a>。</p></main></html>
+<p>项目源码：<a href="https://github.com/panbooks/mynadb">panbooks/mynadb</a> · <a href="https://github.com/panbooks/mynadb/tree/v0.8.0">v0.8.0 源码</a> · <a href="https://panbooks.github.io/mynadb-portal/zh/index.html">中文文档</a>。</p></article>
+<nav class="chapter-pager" aria-label="篇章导航"><a class="chapter-pager-link" href="../08-table-ownership-routing/preview.html"><span>← 上一篇 · 第 08 篇</span><strong>表所有权、Hive 分区与查询路由</strong></a><a class="chapter-pager-link" href="../10-correctness-and-interop/preview.html"><span>下一篇 → · 第 10 篇</span><strong>正确性补课、OTLP 与 Iceberg 初版</strong></a></nav>
+<section class="article-resources" aria-labelledby="resources-title"><h2 id="resources-title">保存与分享</h2><p>下载带公网图片链接的 Markdown，或复制摘要，方便保存和社区分享。</p><div class="article-resource-actions"><button class="btn btn-primary" type="button" data-copy-file="article.publish.md">复制发布版 Markdown</button><button class="btn btn-secondary" type="button" data-copy-file="summary.md">复制摘要</button><a class="text-link" href="article.publish.md" download>下载 Markdown ↓</a></div></section>
+</main><aside class="page-toc" aria-label="本篇目录"><h2>本篇目录</h2><div class="toc">
+<ul>
+<li><a href="#1">1. 从数据库内核走向使用入口</a></li>
+<li><a href="#2">2. 控制台不仅是“多一个页面”</a></li>
+<li><a href="#3">3. 协议接入：先理解数据模型，再谈兼容</a></li>
+<li><a href="#4-tls">4. 认证、授权、TLS 和审计各管什么？</a></li>
+<li><a href="#5">5. 流式查询：推送更新不一定是增量计算</a></li>
+<li><a href="#6">6. 时序分析与降采样的边界</a></li>
+<li><a href="#7">7. 接入和运维如何验证？</a></li>
+<li><a href="#8">8. 回看这一阶段</a></li>
+</ul>
+</div>
+<a class="toc-back" href="#main-content">回到顶部 ↑</a></aside></div>
+<dialog class="image-dialog" aria-label="架构图大图"><div class="image-dialog-toolbar"><span>架构图</span><a class="image-original" target="_blank" rel="noopener noreferrer">打开原图 ↗</a><button type="button" class="image-dialog-close" aria-label="关闭大图">关闭 ×</button></div><img alt=""><p class="image-dialog-caption"></p></dialog><footer class="engineering-footer"><div><a href="../index.html">MynaDB 技术专栏</a><span>用清晰的设计理解数据系统。</span></div><a href="https://github.com/panbooks/mynadb-portal" target="_blank" rel="noopener noreferrer">在 GitHub 查看文档 ↗</a></footer><p class="sr-only" id="reader-status" role="status" aria-live="polite"></p></body></html>

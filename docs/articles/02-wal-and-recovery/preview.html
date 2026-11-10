@@ -1,12 +1,47 @@
-<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>从0到1实现一个分布式时序数据库（二）：写入成功之后，如何用 WAL 找回数据</title><style>
-:root{color-scheme:light}body{margin:0;background:#f3f6fa;color:#233749;font:17px/1.95 system-ui,-apple-system,"Microsoft YaHei",sans-serif}main{max-width:1000px;margin:36px auto;padding:48px 54px;background:white;border:1px solid #e1e8ef;border-radius:16px}h1{font-size:34px;line-height:1.5;letter-spacing:-.6px}h2{font-size:25px;margin-top:48px;padding-top:12px;border-top:1px solid #e2e9ef}a{color:#096d8f}p{margin:20px 0}img{display:block;width:100%;height:auto;margin:28px 0;border:1px solid #e3eaf0;border-radius:10px}pre{padding:22px;background:#112b3c;color:#e2edf5;overflow:auto;border-radius:10px;font:14px/1.8 ui-monospace,monospace}code{font-family:ui-monospace,monospace;font-size:.9em}p code,td code,li code{background:#eef3f8;padding:2px 5px;border-radius:4px}table{border-collapse:collapse;width:100%;font-size:15px;margin:24px 0}td,th{border:1px solid #dce5ed;padding:12px;text-align:left}th{background:#edf5f9}li{margin:8px 0}strong{color:#123c52}.draft{font-size:14px;color:#617a8d;border-bottom:1px solid #e0e8ef;padding-bottom:15px}@media(max-width:700px){main{margin:0;padding:24px 18px;border:0;border-radius:0}h1{font-size:27px}table{display:block;overflow:auto}pre{padding:15px}}
-</style><main><p class="draft">社区文章草稿 · WAL 与单机恢复设计 · 本地预览，尚未对外发表</p><h1 id="01-wal">从0到1实现一个分布式时序数据库（二）：写入成功之后，如何用 WAL 找回数据</h1>
-<p><a href="../01-from-http-to-parquet/article.md">上一篇</a>把数据从 HTTP 接口送进内存，再批量写成 Parquet。这条链路能写、能查，但还有一个问题：<strong>请求已经返回成功，进程却在 flush 前退出，这批指标怎么办？</strong></p>
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>从0到1实现一个分布式时序数据库（二）：写入成功之后，如何用 WAL 找回数据 · MynaDB 技术专栏</title><meta name="description" content="从内存写入到故障恢复，拆解 WAL 的日志同步、分组提交、刷盘边界、Checkpoint 与启动重放，讲清“写入成功”背后的持久性保证。">
+<link rel="canonical" href="https://panbooks.github.io/mynadb-portal/docs/articles/02-wal-and-recovery/preview.html"><meta property="og:title" content="从0到1实现一个分布式时序数据库（二）：写入成功之后，如何用 WAL 找回数据 · MynaDB 技术专栏"><meta property="og:description" content="从内存写入到故障恢复，拆解 WAL 的日志同步、分组提交、刷盘边界、Checkpoint 与启动重放，讲清“写入成功”背后的持久性保证。"><meta property="og:type" content="article"><meta property="og:image" content="https://panbooks.github.io/mynadb-portal/docs/articles/02-wal-and-recovery/figures/01-write-path.png">
+<link rel="icon" type="image/svg+xml" href="../../../images/favicon.svg">
+<link rel="stylesheet" href="../../../css/style.css"><link rel="stylesheet" href="../../../css/articles.css">
+<script src="../../../js/articles.js" defer></script></head>
+<body class="engineering-site"><a class="skip-link" href="#main-content">跳到正文</a>
+<nav class="navbar" aria-label="主导航"><div class="container">
+<a href="../../../zh/index.html" class="navbar-brand"><img src="../../../images/logo-icon.svg" alt="" class="logo-img" width="40" height="40">MynaDB</a>
+<ul class="navbar-nav" id="primary-navigation">
+<li><a href="../../../zh/docs/index.html">文档</a></li>
+<li><a href="../../../zh/docs/quickstart.html">快速开始</a></li>
+<li><a href="../../../zh/docs/architecture.html">架构</a></li>
+<li><a href="../index.html" class="active" aria-current="page">技术专栏</a></li>
+<li><a href="../../../zh/docs/api.html">API 参考</a></li>
+<li><a href="../../../zh/docs/examples.html">示例</a></li>
+</ul>
+<div class="navbar-actions"><a class="engineering-language" href="../../../index.html" lang="en">English site</a><a class="btn btn-secondary engineering-github" href="https://github.com/panbooks/mynadb" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
+<button class="mobile-menu-btn" type="button" aria-label="打开导航" aria-controls="primary-navigation" aria-expanded="false">☰</button>
+</div></nav><div class="reader-layout">
+<aside class="series-sidebar" aria-label="系列目录"><a class="sidebar-home" href="../index.html">← 技术专栏</a><p class="sidebar-eyebrow">从单机到分布式</p><h2>从0到1实现一个分布式时序数据库</h2><p class="sidebar-progress">第 02 篇 / 共 10 篇</p><ol class="series-chapters"><li><a href="../01-from-http-to-parquet/preview.html"><span class="chapter-number">01</span><span>用 Rust、Arrow 和 Parquet 打通写入与 SQL 查询</span></a></li><li><a href="preview.html" class="is-current" aria-current="page"><span class="chapter-number">02</span><span>写入成功之后，如何用 WAL 找回数据</span></a></li><li><a href="../03-replication-and-failover/preview.html"><span class="chapter-number">03</span><span>主从复制、故障检测与切换</span></a></li><li><a href="../04-object-storage/preview.html"><span class="chapter-number">04</span><span>从本地文件走向对象存储</span></a></li><li><a href="../05-memtable-query/preview.html"><span class="chapter-number">05</span><span>让新写入立即可查</span></a></li><li><a href="../06-distributed-cluster/preview.html"><span class="chapter-number">06</span><span>从单机走向 Router、Data、Meta 与 Raft</span></a></li><li><a href="../07-standby-and-scale-in/preview.html"><span class="chapter-number">07</span><span>不提升 Standby 的恢复与安全缩容</span></a></li><li><a href="../08-table-ownership-routing/preview.html"><span class="chapter-number">08</span><span>表所有权、Hive 分区与查询路由</span></a></li><li><a href="../09-operations-and-integrations/preview.html"><span class="chapter-number">09</span><span>运维控制台、协议接入与时序分析</span></a></li><li><a href="../10-correctness-and-interop/preview.html"><span class="chapter-number">10</span><span>正确性补课、OTLP 与 Iceberg 初版</span></a></li></ol></aside>
+<main class="article-main" id="main-content"><header class="article-header">
+<div class="article-breadcrumb"><a href="../index.html">技术专栏</a><span aria-hidden="true">/</span><span>单机基础</span></div>
+<p class="article-meta">第 02 篇 <span>·</span> 约 8 分钟 <span>·</span> 6 张图解</p>
+<h1><span class="article-series-name">从0到1实现一个分布式时序数据库（二）：</span>写入成功之后，如何用 WAL 找回数据</h1><p class="article-summary">从内存写入到故障恢复，拆解 WAL 的日志同步、分组提交、刷盘边界、Checkpoint 与启动重放，讲清“写入成功”背后的持久性保证。</p>
+<details class="mobile-chapter-menu"><summary>系列目录 · 当前第 02 篇</summary><ol class="series-chapters"><li><a href="../01-from-http-to-parquet/preview.html"><span class="chapter-number">01</span><span>用 Rust、Arrow 和 Parquet 打通写入与 SQL 查询</span></a></li><li><a href="preview.html" class="is-current" aria-current="page"><span class="chapter-number">02</span><span>写入成功之后，如何用 WAL 找回数据</span></a></li><li><a href="../03-replication-and-failover/preview.html"><span class="chapter-number">03</span><span>主从复制、故障检测与切换</span></a></li><li><a href="../04-object-storage/preview.html"><span class="chapter-number">04</span><span>从本地文件走向对象存储</span></a></li><li><a href="../05-memtable-query/preview.html"><span class="chapter-number">05</span><span>让新写入立即可查</span></a></li><li><a href="../06-distributed-cluster/preview.html"><span class="chapter-number">06</span><span>从单机走向 Router、Data、Meta 与 Raft</span></a></li><li><a href="../07-standby-and-scale-in/preview.html"><span class="chapter-number">07</span><span>不提升 Standby 的恢复与安全缩容</span></a></li><li><a href="../08-table-ownership-routing/preview.html"><span class="chapter-number">08</span><span>表所有权、Hive 分区与查询路由</span></a></li><li><a href="../09-operations-and-integrations/preview.html"><span class="chapter-number">09</span><span>运维控制台、协议接入与时序分析</span></a></li><li><a href="../10-correctness-and-interop/preview.html"><span class="chapter-number">10</span><span>正确性补课、OTLP 与 Iceberg 初版</span></a></li></ol></details>
+<details class="mobile-page-toc"><summary>本篇目录</summary><div class="toc">
+<ul>
+<li><a href="#1">1. 在内存之前，先记一份日志</a></li>
+<li><a href="#2">2. 分清“写入日志”和“日志已持久化”</a></li>
+<li><a href="#3">3. 让日志能被逐条读取，也能发现损坏</a></li>
+<li><a href="#4">4. 刷出一批数据，再推进恢复边界</a></li>
+<li><a href="#5-checkpoint">5. 重启时，从 checkpoint 之后继续</a></li>
+<li><a href="#6">6. 用故障位置检查设计是否闭合</a></li>
+</ul>
+</div>
+</details></header>
+<article class="article-body"><p><a href="../01-from-http-to-parquet/preview.html">上一篇</a>把数据从 HTTP 接口送进内存，再批量写成 Parquet。这条链路能写、能查，但还有一个问题：<strong>请求已经返回成功，进程却在 flush 前退出，这批指标怎么办？</strong></p>
 <p>解决办法是给写入增加一份可重放的记录：WAL，Write-Ahead Log，预写日志。</p>
 <p>这一篇围绕单机持久化设计，依次讲清写入确认、日志格式、刷盘边界和启动恢复。代码与接口均为精简设计示意，不要求逐标签复现。</p>
 <h2 id="1">1. 在内存之前，先记一份日志</h2>
 <p>WAL 与 Parquet 分工不同：WAL 记录近期写入，便于顺序追加和恢复；Parquet 汇集批次，服务于后续的列式查询。</p>
-<p><img alt="图 1：引入 WAL 后的写入路径" src="figures/01-write-path.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 1：引入 WAL 后的写入路径" src="figures/01-write-path.png" /></p>
 <p>写入顺序变为：</p>
 <pre><code class="language-text">校验输入与容量 → 追加 WAL → 按策略同步日志 → 更新内存 → 确认写入
 </code></pre>
@@ -23,7 +58,7 @@ acknowledge(lsn);
 <p>这里的关键是：<strong>日志失败就不能返回成功；日志已接管、但内存更新失败的数据，仍需通过恢复或重试处理。</strong> 如果客户端没有收到响应，也不能直接认定写入一定没发生；客户端重试去重需要另行约定幂等键。</p>
 <h2 id="2">2. 分清“写入日志”和“日志已持久化”</h2>
 <p>调用文件写入方法，不代表数据已经到达持久化介质。使用 <code>BufWriter&lt;File&gt;</code> 时，至少要分清下面几个位置：</p>
-<p><img alt="图 2：缓冲、操作系统缓存与同步确认" src="figures/02-durability-levels.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 2：缓冲、操作系统缓存与同步确认" src="figures/02-durability-levels.png" /></p>
 <p><code>BufWriter::flush()</code> 将用户态缓冲交给底层 writer；要请求文件同步，还需要调用 <code>File::sync_all()</code>。关闭文件不能代替显式处理同步错误。这两层职责可分别参考 Rust 的 <a href="https://doc.rust-lang.org/std/io/struct.BufWriter.html">BufWriter 文档</a>和 <a href="https://doc.rust-lang.org/std/fs/struct.File.html#method.sync_all">File::sync_all 文档</a>。</p>
 <pre><code class="language-rust">writer.write_all(&amp;encoded_record)?;
 writer.flush()?;                 // 清空 BufWriter 的缓冲
@@ -60,7 +95,7 @@ writer.get_ref().sync_all()?;    // 请求同步文件数据及元数据
 <p>文件同步也不是全部：创建日志分段时，还需按目标文件系统的语义持久化目录项。整个承诺建立在操作系统、文件系统和设备正确实现同步语义的前提上。</p>
 <h2 id="3">3. 让日志能被逐条读取，也能发现损坏</h2>
 <p>日志需要包含足够的信息，才能在重启后重建同一批数据。</p>
-<p><img alt="图 3：日志记录的逻辑格式与不完整尾部" src="figures/03-record-format.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 3：日志记录的逻辑格式与不完整尾部" src="figures/03-record-format.png" /></p>
 <p>可以先设计一种简单格式：</p>
 <pre><code class="language-text">[length][version][LSN][database][payload][checksum]
 </code></pre>
@@ -75,7 +110,7 @@ writer.get_ref().sync_all()?;    // 请求同步文件数据及元数据
 <h2 id="4">4. 刷出一批数据，再推进恢复边界</h2>
 <p>写入持续发生，flush 也在后台运行。直接“刷完内存，再删除所有旧日志”很危险：旧日志可能混入了尚未刷出的新记录。</p>
 <p>先让 WAL 与内存批次拥有同一个切换边界：</p>
-<p><img alt="图 4：以 LSN 为边界切分写入、提交文件与回收日志" src="figures/04-flush-checkpoint.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 4：以 LSN 为边界切分写入、提交文件与回收日志" src="figures/04-flush-checkpoint.png" /></p>
 <p>例如，在写入协调器中完成一次短暂切换：</p>
 <pre><code class="language-text">旧 WAL 封口：最后一条 LSN = 200
 旧内存批次冻结：包含尚未提交且 LSN ≤ 200 的记录
@@ -93,7 +128,7 @@ writer.get_ref().sync_all()?;    // 请求同步文件数据及元数据
 <p>一旦清单持久化成功，就可以回收<strong>已经封口、且最大 LSN 不超过 checkpoint</strong> 的 WAL 分段。仍包含边界后记录的分段要保留；不能只根据文件年龄删除。清单中的 checkpoint 也不能随着日志删除而清空，它仍是下次恢复的依据。</p>
 <h2 id="5-checkpoint">5. 重启时，从 checkpoint 之后继续</h2>
 <p>有了明确的提交边界，恢复流程可以保持直观：</p>
-<p><img alt="图 5：启动恢复流程" src="figures/05-recovery.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 5：启动恢复流程" src="figures/05-recovery.png" /></p>
 <pre><code class="language-text">读取有效清单 → 加载已提交文件
 → 按顺序校验必要 WAL 分段
 → 跳过 LSN ≤ checkpoint 的记录
@@ -116,7 +151,7 @@ for record in read_and_validate_wal()? {
 <p>清单尚未引用的候选 Parquet 文件属于未提交产物。恢复时不读取它们，由清理任务回收。因此，“文件写完但清单没发布”的崩溃不会让查询同时读到文件数据和重放数据。</p>
 <h2 id="6">6. 用故障位置检查设计是否闭合</h2>
 <p>正常停止时，可以先停止接收新写入，等待在途写入完成，再同步 WAL、处理待提交数据。异常退出时则必须依靠已经持久化的状态恢复。</p>
-<p><img alt="图 6：不同崩溃位置对应的恢复依据" src="figures/06-crash-windows.png" /></p>
+<p><img loading="lazy" decoding="async" alt="图 6：不同崩溃位置对应的恢复依据" src="figures/06-crash-windows.png" /></p>
 <p>可以从下表安排最小故障验证：</p>
 <table>
 <thead>
@@ -151,4 +186,18 @@ for record in read_and_validate_wal()? {
 <p>为每条测试数据设置稳定标识，分别核对记录内容、数量、重复情况和重启后的序号。再覆盖磁盘满、同步失败和提交清单失败，检查错误是否传播，以及必要日志是否仍被保留。日志磁盘不足时应产生背压或拒绝新写入，不能删除未提交日志来腾空间。</p>
 <p>这些是验证设计的场景，不是本文已经执行的测试结果。<code>kill -9</code> 可以模拟进程被强制终止，但不能替代操作系统崩溃、断电和存储设备故障验证。</p>
 <p>这一阶段给单机数据库补上了恢复路径：<strong>WAL 接管未提交写入，Parquet 保存批次，checkpoint 记录已完成的连续前缀，提交清单统一文件可见性。</strong> 下一篇再讨论复制：当故障范围从一个进程扩大到一台机器时，怎样把写入交给另一个节点。</p>
-<p>项目源码：<a href="https://github.com/panbooks/mynadb">panbooks/mynadb</a> · <a href="https://panbooks.github.io/mynadb-portal/zh/index.html">中文文档</a>。</p></main></html>
+<p>项目源码：<a href="https://github.com/panbooks/mynadb">panbooks/mynadb</a> · <a href="https://panbooks.github.io/mynadb-portal/zh/index.html">中文文档</a>。</p></article>
+<nav class="chapter-pager" aria-label="篇章导航"><a class="chapter-pager-link" href="../01-from-http-to-parquet/preview.html"><span>← 上一篇 · 第 01 篇</span><strong>用 Rust、Arrow 和 Parquet 打通写入与 SQL 查询</strong></a><a class="chapter-pager-link" href="../03-replication-and-failover/preview.html"><span>下一篇 → · 第 03 篇</span><strong>主从复制、故障检测与切换</strong></a></nav>
+<section class="article-resources" aria-labelledby="resources-title"><h2 id="resources-title">保存与分享</h2><p>下载带公网图片链接的 Markdown，或复制摘要，方便保存和社区分享。</p><div class="article-resource-actions"><button class="btn btn-primary" type="button" data-copy-file="article.publish.md">复制发布版 Markdown</button><button class="btn btn-secondary" type="button" data-copy-file="summary.md">复制摘要</button><a class="text-link" href="article.publish.md" download>下载 Markdown ↓</a></div></section>
+</main><aside class="page-toc" aria-label="本篇目录"><h2>本篇目录</h2><div class="toc">
+<ul>
+<li><a href="#1">1. 在内存之前，先记一份日志</a></li>
+<li><a href="#2">2. 分清“写入日志”和“日志已持久化”</a></li>
+<li><a href="#3">3. 让日志能被逐条读取，也能发现损坏</a></li>
+<li><a href="#4">4. 刷出一批数据，再推进恢复边界</a></li>
+<li><a href="#5-checkpoint">5. 重启时，从 checkpoint 之后继续</a></li>
+<li><a href="#6">6. 用故障位置检查设计是否闭合</a></li>
+</ul>
+</div>
+<a class="toc-back" href="#main-content">回到顶部 ↑</a></aside></div>
+<dialog class="image-dialog" aria-label="架构图大图"><div class="image-dialog-toolbar"><span>架构图</span><a class="image-original" target="_blank" rel="noopener noreferrer">打开原图 ↗</a><button type="button" class="image-dialog-close" aria-label="关闭大图">关闭 ×</button></div><img alt=""><p class="image-dialog-caption"></p></dialog><footer class="engineering-footer"><div><a href="../index.html">MynaDB 技术专栏</a><span>用清晰的设计理解数据系统。</span></div><a href="https://github.com/panbooks/mynadb-portal" target="_blank" rel="noopener noreferrer">在 GitHub 查看文档 ↗</a></footer><p class="sr-only" id="reader-status" role="status" aria-live="polite"></p></body></html>

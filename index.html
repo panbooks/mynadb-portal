@@ -27,10 +27,11 @@
         MynaDB
       </a>
 
-      <ul class="navbar-nav">
+      <ul class="navbar-nav" id="site-navigation">
         <li><a href="docs/index.html">Documentation</a></li>
         <li><a href="docs/quickstart.html">Quick Start</a></li>
         <li><a href="docs/architecture.html">Architecture</a></li>
+        <li><a href="docs/articles/index.html">Engineering <span class="nav-language-note" lang="zh-CN">中文</span></a></li>
         <li><a href="docs/api.html">API Reference</a></li>
         <li><a href="docs/examples.html">Examples</a></li>
       </ul>
@@ -45,7 +46,7 @@
         <a href="docs/quickstart.html" class="btn btn-primary">Get Started</a>
       </div>
 
-      <button class="mobile-menu-btn" aria-label="Toggle menu">&#9776;</button>
+      <button class="mobile-menu-btn" aria-label="Toggle menu" type="button" aria-controls="site-navigation" aria-expanded="false">&#9776;</button>
     </div>
   </nav>
 
@@ -609,6 +610,9 @@ memory,host=server01 used=16.5,total=32.0
       </div>
     </div>
   </section>
+
+  <!-- Engineering series -->
+  <section class="section series-promo"><div class="container"><div class="series-promo-card"><div><p class="series-promo-eyebrow">ENGINEERING · ILLUSTRATED SERIES</p><h2>Build a distributed time-series database, from 0 to 1</h2><p>Ten illustrated chapters in Chinese, from Rust, Arrow and Parquet to WAL, replication, Raft and partition-aware routing.</p><div class="series-promo-actions"><a class="btn btn-primary" href="docs/articles/index.html">Read the series · 中文 →</a><a href="docs/articles/01-from-http-to-parquet/preview.html" class="series-promo-start">Start with chapter 1</a></div></div><p class="series-promo-stat">10 chapters · 62 architecture diagrams</p></div></div></section>
 
   <!-- Documentation Cards -->
   <section class="section">

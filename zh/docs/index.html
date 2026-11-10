@@ -18,10 +18,11 @@
         <img src="../../images/logo-icon.svg" alt="MynaDB" class="logo-img">
         MynaDB
       </a>
-      <ul class="navbar-nav">
+      <ul class="navbar-nav" id="site-navigation">
         <li><a href="index.html" class="active">文档</a></li>
         <li><a href="quickstart.html">快速开始</a></li>
         <li><a href="architecture.html">架构</a></li>
+        <li><a href="../../docs/articles/index.html">技术专栏</a></li>
         <li><a href="api.html">API 参考</a></li>
         <li><a href="examples.html">示例</a></li>
       </ul>
@@ -33,6 +34,7 @@
           <span class="btn-icon">&#9733;</span> GitHub
         </a>
       </div>
+      <button class="mobile-menu-btn" type="button" aria-label="打开导航" aria-controls="site-navigation" aria-expanded="false">&#9776;</button>
     </div>
   </nav>
 
@@ -112,6 +114,7 @@
       <div class="sidebar-section">
         <h4>资源</h4>
         <ul class="sidebar-nav">
+          <li><a href="../../docs/articles/index.html">技术专栏</a></li>
           <li><a href="guides.html">指南</a></li>
           <li><a href="examples.html">示例</a></li>
           <li><a href="testing.html">测试</a></li>
@@ -129,6 +132,8 @@
         <strong>倾听您机器的声音。</strong>欢迎来到 MynaDB 文档。
         您的基础设施在不断发出信号 &mdash; MynaDB 为您倾听。这是一款使用 Rust、Apache DataFusion 和 Parquet 构建的高性能时序数据库，专为现代基础设施监控和分析而设计。
       </p>
+
+      <div class="callout callout-info"><div class="callout-title">想了解数据库怎样实现？</div><p>阅读十篇系列图解，从单机读写走向分布式协调与运维。 <a href="../../docs/articles/index.html">技术专栏 →</a></p></div>
 
       <div class="callout callout-info">
         <div class="callout-title">&#128161; 初次使用 MynaDB？</div>
