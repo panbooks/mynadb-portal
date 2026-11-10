@@ -29,6 +29,7 @@
 ## 第二篇交付
 
 - [正文 Markdown](02-wal-and-recovery/article.md)：写入确认、同步策略、日志格式、刷盘边界与启动恢复。
+- [粘贴发布版 Markdown](02-wal-and-recovery/article.publish.md)：图片使用 GitHub Pages 完整地址，可整篇复制，无需逐张替换本地图片路径。
 - [图文预览](02-wal-and-recovery/preview.html)：包含六张配图，与第一篇采用统一样式。
 - `02-wal-and-recovery/figures/`：PNG 上传版、SVG 矢量版与 Mermaid 源文件。
 - [编辑与发布说明](02-wal-and-recovery/editor-notes.md)：标题、摘要、设计范围和发布准备。

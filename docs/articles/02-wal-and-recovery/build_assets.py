@@ -6,6 +6,8 @@ No network requests are made. Diagram positions are shared by PNG and SVG.
 from pathlib import Path
 import os, math, html, json
 from functools import lru_cache
+import re
+from urllib.parse import urljoin
 from PIL import Image, ImageDraw, ImageFont
 import markdown
 
@@ -192,4 +194,12 @@ page='''<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="view
 :root{color-scheme:light}body{margin:0;background:#f3f6fa;color:#233749;font:17px/1.95 system-ui,-apple-system,"Microsoft YaHei",sans-serif}main{max-width:1000px;margin:36px auto;padding:48px 54px;background:white;border:1px solid #e1e8ef;border-radius:16px}h1{font-size:34px;line-height:1.5;letter-spacing:-.6px}h2{font-size:25px;margin-top:48px;padding-top:12px;border-top:1px solid #e2e9ef}a{color:#096d8f}p{margin:20px 0}img{display:block;width:100%;height:auto;margin:28px 0;border:1px solid #e3eaf0;border-radius:10px}pre{padding:22px;background:#112b3c;color:#e2edf5;overflow:auto;border-radius:10px;font:14px/1.8 ui-monospace,monospace}code{font-family:ui-monospace,monospace;font-size:.9em}p code,td code,li code{background:#eef3f8;padding:2px 5px;border-radius:4px}table{border-collapse:collapse;width:100%;font-size:15px;margin:24px 0}td,th{border:1px solid #dce5ed;padding:12px;text-align:left}th{background:#edf5f9}li{margin:8px 0}strong{color:#123c52}.draft{font-size:14px;color:#617a8d;border-bottom:1px solid #e0e8ef;padding-bottom:15px}@media(max-width:700px){main{margin:0;padding:24px 18px;border:0;border-radius:0}h1{font-size:27px}table{display:block;overflow:auto}pre{padding:15px}}
 </style><main><p class="draft">社区文章草稿 · WAL 与单机恢复设计 · 本地预览，尚未对外发表</p>'''+body+'</main></html>'
 (ROOT/'preview.html').write_text(page)
-print('Generated',len(figs),'PNG/SVG/Mermaid figures and preview.html')
+public_base='https://panbooks.github.io/mynadb-portal/docs/articles/02-wal-and-recovery/'
+def public_link(match):
+    target=match.group(2)
+    if target=='../01-from-http-to-parquet/article.md':
+        target='../01-from-http-to-parquet/preview.html'
+    return match.group(1)+urljoin(public_base,target)+match.group(3)
+publish_text=re.sub(r'(!?\[[^\]]*\]\()([^\s)]+)(\))',public_link,(ROOT/'article.md').read_text())
+(ROOT/'article.publish.md').write_text(publish_text)
+print('Generated',len(figs),'PNG/SVG/Mermaid figures, preview.html and article.publish.md')
