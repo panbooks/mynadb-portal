@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+<title id="title">03 / 从连续进度恢复复制</title><desc id="desc">有序进度用于发现缺口；缺失的历史已回收时，需要快照和增量衔接。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#718698"/></marker></defs>
+<rect width="100%" height="100%" fill="white"/>
+<text x="40" y="60" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="500" fill="#18364a">03 / 从连续进度恢复复制</text>
+<text x="40" y="96" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#536a7b">有序进度用于发现缺口；缺失的历史已回收时，需要快照和增量衔接。</text>
+<polyline points="40,116 1160,116" fill="none" stroke="#718698" stroke-width="2"/>
+<text x="40" y="736" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从零实现系列 03 · 主从复制与故障切换</text>
+<rect x="40" y="160" width="1120" height="95" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="366.0" y="216.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="500" fill="#18364a">主节点记录：101 → 102 → 103 → 104 → 105</text>
+<rect x="40" y="330" width="500" height="120" rx="13" fill="#f3f5f8" stroke="#bdcbd5" stroke-width="2"/>
+<text x="169.7" y="381.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">从节点连续持久化到 102</text>
+<text x="191.0" y="415.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">连接中断，报告进度</text>
+<rect x="660" y="330" width="500" height="120" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
+<text x="842.0" y="381.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">补发 103–105</text>
+<text x="778.0" y="415.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="500" fill="#18364a">按顺序校验、持久化与应用</text>
+<polyline points="540,390 660,390" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="40" y="570" width="1120" height="100" rx="13" fill="#fff4e8" stroke="#e1a76a" stroke-width="2"/>
+<text x="328.0" y="611.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">缺失日志已回收 → 安装有明确边界的快照 → 接续后续日志</text>
+<text x="358.5" y="644.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">序号应关联任期；需要处理重复、缺口与数据分叉。</text>
+</svg>

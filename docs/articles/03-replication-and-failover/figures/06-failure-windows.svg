@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="820" viewBox="0 0 1200 820" role="img" aria-labelledby="title desc">
+<title id="title">06 / 用故障窗口检验复制承诺</title><desc id="desc">测试需核对已确认写入、缺失、重复、顺序，以及谁有权继续写入。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#718698"/></marker></defs>
+<rect width="100%" height="100%" fill="white"/>
+<text x="40" y="60" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="500" fill="#18364a">06 / 用故障窗口检验复制承诺</text>
+<text x="40" y="96" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#536a7b">测试需核对已确认写入、缺失、重复、顺序，以及谁有权继续写入。</text>
+<polyline points="40,116 1160,116" fill="none" stroke="#718698" stroke-width="2"/>
+<text x="40" y="796" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从零实现系列 03 · 主从复制与故障切换</text>
+<rect x="40" y="155" width="530" height="210" rx="13" fill="#fff4e8" stroke="#e1a76a" stroke-width="2"/>
+<text x="208.1" y="234.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">① 主节点确认后失效</text>
+<text x="221.0" y="267.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">远端可能还未接收</text>
+<text x="210.5" y="300.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">检查允许的数据损失</text>
+<rect x="630" y="155" width="530" height="210" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="787.6" y="234.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">② 远端已收到但未同步</text>
+<text x="786.2" y="267.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">入队 ACK 不等于持久化</text>
+<text x="800.5" y="300.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">中断远端并核对恢复</text>
+<rect x="40" y="455" width="530" height="210" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="187.1" y="534.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">③ 响应丢失后客户端重试</text>
+<text x="221.0" y="567.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">超时不代表未提交</text>
+<text x="231.5" y="600.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">核对重复与幂等</text>
+<rect x="630" y="455" width="530" height="210" rx="13" fill="#fff4e8" stroke="#e1a76a" stroke-width="2"/>
+<text x="787.6" y="534.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">④ 网络分区或旧主回归</text>
+<text x="803.1" y="567.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">检查授权和 fencing</text>
+<text x="800.5" y="600.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">防止两个有效写入者</text>
+<text x="40" y="766" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#536a7b">这些是建议的测试场景，不是已经执行的测试结果。</text>
+</svg>

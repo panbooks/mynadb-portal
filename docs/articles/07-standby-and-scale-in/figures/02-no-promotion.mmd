@@ -1,0 +1,4 @@
+flowchart LR
+  A[Primary 故障] --> B[Standby]
+  B --> C[其他 Primary]
+  N[发送 flush 命令不等于已经确认远端持久化完成。]

@@ -8,14 +8,14 @@
 | --- | --- | --- | --- |
 | 1 | `v0.0.0` / M1 | [从 HTTP 到 Parquet，打通写入与 SQL 查询](01-from-http-to-parquet/article.md) | 首稿及配图已准备 |
 | 2 | `v0.1.0` / M2 | [写入成功之后，如何用 WAL 找回数据](02-wal-and-recovery/article.md) | 首稿及配图已准备 |
-| 3 | `v0.2.0` / M3 | 主从复制：故障检测与切换设计 | 待写 |
-| 4 | `v0.3.0` / M4 | 对象存储：重构存储接口、写入与缓存 | 待写 |
-| 5 | `v0.4.0` / M5 | 让新写入立即可查：Memtable、TableProvider 与查询优化 | 待写 |
-| 6 | `v0.5.0` / M6 | 从单机走向集群：Router、Data、Meta 与 Raft | 待写 |
-| 7 | `v0.6.0` / M7 | 不提升 Standby 的恢复方案与安全缩容 | 待写 |
-| 8 | `v0.7.0` / M8 | 表所有权、Hive 分区和查询路由怎样配合 | 待写 |
-| 9 | `v0.8.0` / M9 | 运维控制台、协议接入与时序分析能力 | 待写 |
-| 10 | `v0.9.0` / M10，补充 `.1/.2` | 正确性补课：合并清单、异构 schema、OTLP 与 Iceberg 初版 | 待写 |
+| 3 | `v0.2.0` / M3 | [主从复制：故障检测与切换设计](03-replication-and-failover/article.md) | 首稿及配图已准备 |
+| 4 | `v0.3.0` / M4 | [对象存储：重构存储接口、写入与缓存](04-object-storage/article.md) | 首稿及配图已准备 |
+| 5 | `v0.4.0` / M5 | [让新写入立即可查：Memtable、TableProvider 与查询优化](05-memtable-query/article.md) | 首稿及配图已准备 |
+| 6 | `v0.5.0` / M6 | [从单机走向集群：Router、Data、Meta 与 Raft](06-distributed-cluster/article.md) | 首稿及配图已准备 |
+| 7 | `v0.6.0` / M7 | [不提升 Standby 的恢复方案与安全缩容](07-standby-and-scale-in/article.md) | 首稿及配图已准备 |
+| 8 | `v0.7.0` / M8 | [表所有权、Hive 分区和查询路由怎样配合](08-table-ownership-routing/article.md) | 首稿及配图已准备 |
+| 9 | `v0.8.0` / M9 | [运维控制台、协议接入与时序分析能力](09-operations-and-integrations/article.md) | 首稿及配图已准备 |
+| 10 | `v0.9.0` / M10，补充 `.1/.2` | [正确性补课：合并清单、异构 schema、OTLP 与 Iceberg 初版](10-correctness-and-interop/article.md) | 首稿及配图已准备 |
 
 篇次参考开发里程碑，正文优先讲清设计，不要求逐标签复现。篇次不等同于发布时间承诺。
 
@@ -32,5 +32,49 @@
 - [图文预览](02-wal-and-recovery/preview.html)：包含六张配图，与第一篇采用统一样式。
 - `02-wal-and-recovery/figures/`：PNG 上传版、SVG 矢量版与 Mermaid 源文件。
 - [编辑与发布说明](02-wal-and-recovery/editor-notes.md)：标题、摘要、设计范围和发布准备。
+
+## 第三篇交付
+
+- [正文 Markdown](03-replication-and-failover/article.md)：复制确认、断线追赶、心跳、脑裂与切换边界。
+- [图文预览](03-replication-and-failover/preview.html)：包含六张配图，与前两篇采用统一样式。
+- `03-replication-and-failover/figures/`：PNG 上传版、SVG 矢量版与 Mermaid 源文件。
+- [编辑与发布说明](03-replication-and-failover/editor-notes.md)：历史代码依据、设计范围和发布准备。
+
+## 第四篇交付
+
+- [正文 Markdown](04-object-storage/article.md)：存储抽象、Parquet 写入、WAL、查询缓存和合并文件的边界。
+- [图文预览](04-object-storage/preview.html)：包含六张配图，与前文采用统一样式。
+- `04-object-storage/figures/`：PNG 上传版、SVG 矢量版与 Mermaid 源文件。
+- [编辑与发布说明](04-object-storage/editor-notes.md)：历史代码依据、设计范围和发布准备。
+
+## 第五篇交付
+
+- [正文 Markdown](05-memtable-query/article.md) · [图文预览](05-memtable-query/preview.html) · [编辑说明](05-memtable-query/editor-notes.md)。
+- `05-memtable-query/figures/`：六张 PNG、SVG 和 Mermaid 配图。
+
+## 第六篇交付
+
+- [正文 Markdown](06-distributed-cluster/article.md) · [图文预览](06-distributed-cluster/preview.html) · [编辑说明](06-distributed-cluster/editor-notes.md)。
+- `06-distributed-cluster/figures/`：六张 PNG、SVG 和 Mermaid 配图。
+
+## 第七篇交付
+
+- [正文 Markdown](07-standby-and-scale-in/article.md) · [图文预览](07-standby-and-scale-in/preview.html) · [编辑说明](07-standby-and-scale-in/editor-notes.md)。
+- `07-standby-and-scale-in/figures/`：六张 PNG、SVG 和 Mermaid 配图。
+
+## 第八篇交付
+
+- [正文 Markdown](08-table-ownership-routing/article.md) · [图文预览](08-table-ownership-routing/preview.html) · [编辑说明](08-table-ownership-routing/editor-notes.md)。
+- `08-table-ownership-routing/figures/`：六张 PNG、SVG 和 Mermaid 配图。
+
+## 第九篇交付
+
+- [正文 Markdown](09-operations-and-integrations/article.md) · [图文预览](09-operations-and-integrations/preview.html) · [编辑说明](09-operations-and-integrations/editor-notes.md)。
+- `09-operations-and-integrations/figures/`：六张 PNG、SVG 和 Mermaid 配图。
+
+## 第十篇交付
+
+- [正文 Markdown](10-correctness-and-interop/article.md) · [图文预览](10-correctness-and-interop/preview.html) · [编辑说明](10-correctness-and-interop/editor-notes.md)。
+- `10-correctness-and-interop/figures/`：六张 PNG、SVG 和 Mermaid 配图。
 
 代码仓库的提交、推送与社区发表分别记录；草稿准备完成不代表已向社区投稿。

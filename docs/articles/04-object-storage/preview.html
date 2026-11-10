@@ -1,0 +1,160 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MynaDB 从零实现系列 04：对象存储与查询</title><style>
+:root{color-scheme:light}body{margin:0;background:#f3f6fa;color:#233749;font:17px/1.95 system-ui,-apple-system,"Microsoft YaHei",sans-serif}main{max-width:1000px;margin:36px auto;padding:48px 54px;background:white;border:1px solid #e1e8ef;border-radius:16px}h1{font-size:34px;line-height:1.5;letter-spacing:-.6px}h2{font-size:25px;margin-top:48px;padding-top:12px;border-top:1px solid #e2e9ef}a{color:#096d8f}p{margin:20px 0}img{display:block;width:100%;height:auto;margin:28px 0;border:1px solid #e3eaf0;border-radius:10px}pre{padding:22px;background:#112b3c;color:#e2edf5;overflow:auto;border-radius:10px;font:14px/1.8 ui-monospace,monospace}code{font-family:ui-monospace,monospace;font-size:.9em}p code,td code,li code{background:#eef3f8;padding:2px 5px;border-radius:4px}table{border-collapse:collapse;width:100%;font-size:15px;margin:24px 0}td,th{border:1px solid #dce5ed;padding:12px;text-align:left}th{background:#edf5f9}li{margin:8px 0}strong{color:#123c52}.draft{font-size:14px;color:#617a8d;border-bottom:1px solid #e0e8ef;padding-bottom:15px}@media(max-width:700px){main{margin:0;padding:24px 18px;border:0;border-radius:0}h1{font-size:27px}table{display:block;overflow:auto}pre{padding:15px}}
+</style><main><p class="draft">社区文章草稿 · 对象存储与查询 · 本地预览，尚未对外发表</p><h1 id="_1">从零实现一个时序数据库（四）：从本地文件走向对象存储</h1>
+<p><a href="../03-replication-and-failover/article.md">上一篇</a>讨论了复制和故障切换。另一个方向是把数据文件放到独立的存储服务：计算节点不再把某个本地目录视为唯一的数据来源。但把路径从 <code>/data/...</code> 改成 <code>s3://...</code>，并不会自动解决持久化、缓存一致性和并发写入。</p>
+<p>这一篇以 <code>v0.3.0</code> / M4 为线索，讲解存储接口、Parquet 写入、对象存储上的 WAL 和查询缓存。文中明确标出的提交协议与测试清单是设计讨论，并非历史版本已实现的保证。</p>
+<h2 id="1">1. 为什么需要存储抽象？</h2>
+<p>最初，写入 Parquet 的代码可以直接操作本地文件。引入对象存储后，业务层仍然需要写入、读取、列举和删除数据，但底层的地址、认证和访问语义发生了变化。</p>
+<p><img alt="图 1：把数据库逻辑与存储后端分开" src="figures/01-storage-abstraction.png" /></p>
+<p><code>v0.3.0</code> 的 <code>Storage</code> 封装了 <code>put</code>、<code>get</code>、<code>list</code>、<code>delete</code> 等操作，通过配置选择本地文件系统或 S3 兼容后端。其 S3 构造路径支持配置 bucket、region、凭据和自定义 endpoint，用于对接 S3、MinIO 等服务。</p>
+<p>统一接口降低了业务代码对具体后端的依赖，但<strong>同一组方法名不代表不同后端具备相同的故障、原子性和并发语义</strong>。每一种兼容服务仍需独立验证。</p>
+<table>
+<thead>
+<tr>
+<th>关注点</th>
+<th>本地文件系统</th>
+<th>对象存储</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>地址</td>
+<td>路径及目录</td>
+<td>bucket、对象 key 和可选前缀</td>
+</tr>
+<tr>
+<td>写入方式</td>
+<td>可以使用文件追加及文件系统 API</td>
+<td>通常以对象上传或覆盖为单位</td>
+</tr>
+<tr>
+<td>目录</td>
+<td>文件系统目录与目录项</td>
+<td>通常使用 key 前缀模拟层级</td>
+</tr>
+<tr>
+<td>故障</td>
+<td>进程、文件系统或设备异常</td>
+<td>还包括网络、认证、限流和远端服务异常</td>
+</tr>
+<tr>
+<td>并发</td>
+<td>依赖具体文件系统和锁机制</td>
+<td>依赖服务支持的条件写入、版本或外部协调</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-parquet">2. 一批指标如何变成 Parquet 对象？</h2>
+<p>写入入口接收 line protocol，解析出 measurement、tags、fields 和时间戳；缓存按数据归属组织 Arrow RecordBatch，达到周期或容量条件后，将批次交给 Parquet 写入器。</p>
+<p><img alt="图 2：从指标到 Parquet 对象" src="figures/02-write-path.png" /></p>
+<pre><code class="language-text">写入请求 → 解析并构建 Arrow 批次 → 内存缓存
+         → flush → 编码 Parquet → Storage::put → 存储后端
+</code></pre>
+<p><code>v0.3.0</code> 引入了分片写入缓存，字段值也以浮点数、整数、字符串和布尔类型进入 Arrow 批次；flush 前的数据可按时间排序。缓存分片可以减少不同写入之间对同一把锁的竞争，但它不自动保证所有写入在故障后都能恢复。</p>
+<p>flush 成功还要回答：哪些文件属于同一次提交？部分文件写入成功、部分失败时如何处理？历史版本的实现与后文的设计讨论需要分开看。不能仅凭某个对象已经存在，就断定整批数据已经完整提交。</p>
+<h2 id="3-wal">3. WAL 遇到不能追加的对象怎么办？</h2>
+<p>单机 WAL 常被理解成向文件末尾追加记录。对象存储接口通常不是这种模型：要设计如何将日志分段、上传以及恢复，不能把本地 <code>append + fsync</code> 原样等同于远端 <code>put</code>。</p>
+<p><img alt="图 3：对象存储上的日志分段" src="figures/03-wal-segments.png" /></p>
+<p><code>v0.3.0</code> 的 WAL 在内存中缓冲分段，定期或按设置触发持久化；代码中的持久化操作会把当前分段的<strong>完整缓冲</strong>写到对应对象，而不是对对象执行追加。启用 <code>sync_on_write</code> 时，写入路径会等待该持久化调用；关闭时则存在后台持久化的时间窗口。</p>
+<p>这并不意味着可以仅凭配置名推断所有故障下的数据保证：要看存储接口返回的含义、具体后端、错误传播和崩溃恢复过程。对于本地后端，也不能把通用 <code>put</code> 成功直接等同于已经验证了文件和目录的断电持久化语义。</p>
+<p>完整缓冲反复覆盖还可能带来写入放大，具体成本需要实测。另一种可研究的方案是不可变分段与小型提交元数据，但它要求额外处理分段编号、未完成上传、重试、回收和并发协调；这里不把它描述为历史版本的现成功能。</p>
+<h2 id="4">4. 如何知道哪些文件有效？</h2>
+<p>假设一次 flush 需要生成三个对象：</p>
+<pre><code class="language-text">part-1.parquet：成功
+part-2.parquet：成功
+part-3.parquet：失败
+</code></pre>
+<p>此时如果查询只根据目录或前缀列出的对象读取，可能看到不完整的一批数据；如果重试，又可能遇到重复文件。<strong>上传对象和提交一批数据是两个不同的边界。</strong></p>
+<p><img alt="图 4：候选文件与可见提交" src="figures/04-commit-boundary.png" /></p>
+<p>一种可讨论的设计是：先为每次写入使用唯一对象 key，上传并验证全部候选对象，然后通过支持条件更新的元数据服务或对象存储操作发布新版本的清单。查询和恢复只读取已提交清单中的文件。多个写入者更新清单时，还需要版本检查、冲突重试和明确的所有权规则。</p>
+<p>伪代码只展示意图：</p>
+<pre><code class="language-text">files = upload_and_validate(batch, unique_keys)
+manifest = build_next_manifest(previous_version, files, checkpoint)
+compare_and_publish(manifest, expected_version=previous_version)
+</code></pre>
+<p>如果对象上传成功但发布失败，候选对象暂不可见，之后可以根据安全的回收规则清理；如果发布成功但客户端没有收到响应，需要按提交 ID 判断重试结果。<strong>条件发布、对象可见性、校验和、权限和回收时机均依赖实际后端及协议，必须分别验证。</strong></p>
+<p>这是为解释提交边界给出的方案，并非宣称 <code>v0.3.0</code> 已实现事务性 manifest 或跨对象原子提交。第二篇讨论的本地文件同步与原子替换也不能直接移植为对象存储保证。</p>
+<h2 id="5">5. 查询为什么需要缓存？</h2>
+<p>一次 SQL 查询可能需要发现表、列举对象、读取 Parquet 元数据和数据列，再执行过滤与聚合。远端请求带来额外的往返和服务成本，因此可以考虑多层缓存与裁剪。</p>
+<p><img alt="图 5：查询中的缓存与数据裁剪" src="figures/05-query-cache.png" /></p>
+<p><code>v0.3.0</code> 增加了表和 Parquet 元数据缓存、查询结果缓存，以及时间范围裁剪、列投影和并行读取等优化路径。这些机制解决的问题不同：</p>
+<table>
+<thead>
+<tr>
+<th>层次</th>
+<th>缓存或优化的对象</th>
+<th>需要注意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>元数据缓存</td>
+<td>表、文件和 Parquet 元数据</td>
+<td>新文件、删除和 schema 变化后何时更新</td>
+</tr>
+<tr>
+<td>查询结果缓存</td>
+<td>SQL 的结果批次</td>
+<td>写入、flush 或 compaction 后如何失效</td>
+</tr>
+<tr>
+<td>时间与列裁剪</td>
+<td>只读取可能相关的数据</td>
+<td>依赖统计信息与查询条件是否可用于裁剪</td>
+</tr>
+</tbody>
+</table>
+<p>缓存命中可以减少重复工作，但 TTL 只能限制缓存年龄，<strong>不能单独保证写后立即读到最新数据</strong>。应规定数据版本、失效事件和失败处理，并测试旧结果不会在并发更新后重新覆盖新状态。</p>
+<p>另一个历史边界是：<code>v0.3.0</code> 的查询仍以已持久化文件为基础；新写入在内存中时，不应假设一定能立即通过 SQL 查询。将内存数据整合进查询路径是下一阶段的主题。</p>
+<h2 id="6-compaction">6. Compaction：减少小文件，也要管理可见性</h2>
+<p>频繁 flush 会产生大量小文件。Compaction 将多份数据合并为较大的 Parquet 文件，可以减少文件数量，并为后续读取提供更合适的布局。<code>v0.3.0</code> 的相关路径使用按时间排序的数据和有序流合并。</p>
+<p><img alt="图 6：合并前后如何切换文件集合" src="figures/06-compaction.png" /></p>
+<p>安全的文件集合切换需要考虑：</p>
+<ol>
+<li>读取旧文件并生成新候选文件。</li>
+<li>校验新文件覆盖了预期输入。</li>
+<li>以一致的方式发布新文件集合，避免查询同时计入新旧文件或漏读。</li>
+<li>等待仍在使用旧版本的查询结束，再按规则回收旧文件。</li>
+<li>失败时保留足够信息重试，清理未提交对象。</li>
+</ol>
+<p>这是一份<strong>设计检查清单</strong>，不是对该历史标签已有事务性 compaction 的断言。清单的版本管理、读者生命周期与垃圾回收需要配套设计。</p>
+<h2 id="7">7. 用失败场景检查实现</h2>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>建议验证</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>对象上传失败或超时</td>
+<td>错误能否传回；重试是否会产生重复或遗漏</td>
+</tr>
+<tr>
+<td>部分 Parquet 对象写入成功</td>
+<td>查询能否识别完整的有效文件集合</td>
+</tr>
+<tr>
+<td>WAL 持久化失败</td>
+<td>写入确认是否符合配置和实际持久化边界</td>
+</tr>
+<tr>
+<td>缓存失效失败或并发写入</td>
+<td>是否返回旧结果，版本如何推进</td>
+</tr>
+<tr>
+<td>Compaction 中途退出</td>
+<td>旧文件是否仍可读，新旧文件是否重复计数</td>
+</tr>
+<tr>
+<td>对象存储认证、限流或网络中断</td>
+<td>是否有可观察的错误、重试与背压</td>
+</tr>
+</tbody>
+</table>
+<p>测试需要验证具体后端的行为，并核对记录内容、数量和重复情况。进程终止测试不等于断电或远端服务故障测试；这里列出的是建议场景，不是已经执行的结果。</p>
+<h2 id="8">8. 回看这一阶段</h2>
+<p><code>v0.3.0</code> 将存储访问抽象出来，使本地和 S3 兼容后端可以共享部分数据库逻辑，也调整了写入缓存、WAL、Parquet 和查询优化路径。旧的主从 HA 子系统在这一阶段被移除；对象存储本身并不等于多节点协调或高可用。</p>
+<p>这一阶段留下的下一道题是：<strong>数据已经写进内存，但尚未生成 Parquet，SQL 如何马上看到它？</strong> 下一篇将讨论 Memtable 与 TableProvider 如何把新数据带入查询路径。</p>
+<p>项目源码：<a href="https://github.com/panbooks/mynadb">panbooks/mynadb</a> · <a href="https://github.com/panbooks/mynadb/tree/v0.3.0">v0.3.0 源码</a> · <a href="https://panbooks.github.io/mynadb-portal/zh/index.html">中文文档</a>。</p></main></html>

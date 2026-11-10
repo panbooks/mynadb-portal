@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="740" viewBox="0 0 1200 740" role="img" aria-labelledby="title desc">
+<title id="title">05 / flush 期间如何避免漏读和重复</title><desc id="desc">示意设计：查询应读取相互一致的内存与文件版本。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#718698"/></marker></defs>
+<rect width="100%" height="100%" fill="white"/>
+<text x="40" y="60" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="500" fill="#18364a">05 / flush 期间如何避免漏读和重复</text>
+<text x="40" y="96" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#536a7b">示意设计：查询应读取相互一致的内存与文件版本。</text>
+<polyline points="40,116 1160,116" fill="none" stroke="#718698" stroke-width="2"/>
+<text x="40" y="716" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从零实现系列 05 · Memtable 与查询</text>
+<rect x="40" y="170" width="330" height="135" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="175.0" y="228.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">版本一</text>
+<text x="136.5" y="260.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">内存持有批次 A</text>
+<rect x="435" y="170" width="330" height="135" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
+<text x="530.0" y="228.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">写入并发布文件</text>
+<text x="540.0" y="260.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">切换可见版本</text>
+<rect x="830" y="170" width="330" height="135" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="965.0" y="228.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">版本二</text>
+<text x="926.5" y="260.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">文件持有批次 A</text>
+<polyline points="370,237 435,237" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="765,237 830,237" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="40" y="470" width="1120" height="115" rx="13" fill="#f3f5f8" stroke="#bdcbd5" stroke-width="2"/>
+<text x="369.0" y="535.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">这是设计目标；不是对历史版本事务快照的承诺。</text>
+</svg>

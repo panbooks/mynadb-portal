@@ -1,0 +1,4 @@
+flowchart LR
+  A[迁移分区] --> B[退役 Primary]
+  B --> C[处理 Standby]
+  N[超时或事件已发送，不等于迁移和持久化已经完成。]

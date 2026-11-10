@@ -1,0 +1,4 @@
+flowchart LR
+  A[旧文件 A / B / C] --> B[输出文件 D]
+  B --> C[Compaction 清单]
+  N[历史清单读取失败退回空集合；故障窗口仍需验证。]

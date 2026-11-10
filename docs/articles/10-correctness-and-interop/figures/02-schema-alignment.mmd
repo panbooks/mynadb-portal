@@ -1,0 +1,4 @@
+flowchart LR
+  A[内存批次] --> B[统一 schema]
+  C[Parquet] --> B
+  N[缺列补 null；类型冲突和空投影需要分别测试。]

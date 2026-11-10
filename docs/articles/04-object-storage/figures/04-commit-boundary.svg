@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="820" viewBox="0 0 1200 820" role="img" aria-labelledby="title desc">
+<title id="title">04 / 上传候选对象不等于提交整批</title><desc id="desc">下图是可讨论的提交方案，不代表 v0.3.0 已实现事务性清单。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#718698"/></marker></defs>
+<rect width="100%" height="100%" fill="white"/>
+<text x="40" y="60" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="500" fill="#18364a">04 / 上传候选对象不等于提交整批</text>
+<text x="40" y="96" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#536a7b">下图是可讨论的提交方案，不代表 v0.3.0 已实现事务性清单。</text>
+<polyline points="40,116 1160,116" fill="none" stroke="#718698" stroke-width="2"/>
+<text x="40" y="796" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从零实现系列 04 · 对象存储与查询</text>
+<rect x="40" y="160" width="250" height="115" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="106.2" y="208.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">生成唯一 key</text>
+<text x="105.0" y="240.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">上传候选文件</text>
+<rect x="330" y="160" width="250" height="115" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="395.0" y="208.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">验证所有对象</text>
+<text x="395.0" y="240.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">记录候选集合</text>
+<rect x="620" y="160" width="250" height="115" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
+<text x="685.0" y="208.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">条件发布清单</text>
+<text x="685.0" y="240.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">检查前一版本</text>
+<rect x="910" y="160" width="250" height="115" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
+<text x="995.0" y="208.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">查询读取</text>
+<text x="985.0" y="240.5" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">已提交清单</text>
+<polyline points="290,218 330,218" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="580,218 620,218" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="870,218 910,218" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="40" y="430" width="520" height="130" rx="13" fill="#fff4e8" stroke="#e1a76a" stroke-width="2"/>
+<text x="230.0" y="470.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">上传或发布失败</text>
+<text x="200.0" y="502.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">候选对象不应直接可见</text>
+<text x="220.0" y="534.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">安全回收需要规则</text>
+<rect x="640" y="430" width="520" height="130" rx="13" fill="#f3f5f8" stroke="#bdcbd5" stroke-width="2"/>
+<text x="810.0" y="470.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">发布成功但响应丢失</text>
+<text x="810.0" y="502.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">用提交标识判断重试</text>
+<text x="830.0" y="534.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">避免重复或遗漏</text>
+<rect x="40" y="650" width="1120" height="70" rx="13" fill="#f3f5f8" stroke="#bdcbd5" stroke-width="2"/>
+<text x="330.0" y="692.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">多写入者冲突、条件更新与对象可见性依赖实际协议和后端。</text>
+</svg>

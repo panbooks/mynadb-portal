@@ -1,0 +1,4 @@
+flowchart LR
+  A[写入请求] --> B[表 owner 列表]
+  B --> C[多个节点]
+  N[TTL 清理不单独等于写入隔离或 fencing。]

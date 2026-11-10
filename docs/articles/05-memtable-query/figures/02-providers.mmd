@@ -1,0 +1,4 @@
+flowchart LR
+  A[SQL] --> B[Union Provider]
+  B --> C[Memtable / Parquet]
+  N[合并结果需要正确处理 schema、过滤与重复。]

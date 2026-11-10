@@ -1,0 +1,38 @@
+[
+  {
+    "name": "01-replication-overview",
+    "title": "01 / 从单机恢复走向跨节点复制",
+    "width": 2400,
+    "height": 1520
+  },
+  {
+    "name": "02-ack-boundaries",
+    "title": "02 / 一条写入经过哪些确认边界",
+    "width": 2400,
+    "height": 1520
+  },
+  {
+    "name": "03-catch-up",
+    "title": "03 / 从连续进度恢复复制",
+    "width": 2400,
+    "height": 1520
+  },
+  {
+    "name": "04-failure-detection",
+    "title": "04 / 心跳超时不是故障证明",
+    "width": 2400,
+    "height": 1600
+  },
+  {
+    "name": "05-safe-failover",
+    "title": "05 / 从怀疑故障到安全开放写入",
+    "width": 2400,
+    "height": 1640
+  },
+  {
+    "name": "06-failure-windows",
+    "title": "06 / 用故障窗口检验复制承诺",
+    "width": 2400,
+    "height": 1640
+  }
+]

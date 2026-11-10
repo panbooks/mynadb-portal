@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+<title id="title">02 / 一条写入经过哪些确认边界</title><desc id="desc">接收、持久化和应用是不同事件；返回成功意味着什么由策略决定。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#718698"/></marker></defs>
+<rect width="100%" height="100%" fill="white"/>
+<text x="40" y="60" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="30" font-weight="500" fill="#18364a">02 / 一条写入经过哪些确认边界</text>
+<text x="40" y="96" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="17" font-weight="500" fill="#536a7b">接收、持久化和应用是不同事件；返回成功意味着什么由策略决定。</text>
+<polyline points="40,116 1160,116" fill="none" stroke="#718698" stroke-width="2"/>
+<text x="40" y="736" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="15" font-weight="500" fill="#536a7b">MynaDB · 从零实现系列 03 · 主从复制与故障切换</text>
+<rect x="40" y="170" width="240" height="120" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="110.0" y="221.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">主节点接收</text>
+<text x="120.0" y="253.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">校验请求</text>
+<rect x="320" y="170" width="240" height="120" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
+<text x="390.0" y="221.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">主节点同步</text>
+<text x="397.0" y="253.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">本地 WAL</text>
+<rect x="600" y="170" width="240" height="120" rx="13" fill="#edf5ff" stroke="#80acd8" stroke-width="2"/>
+<text x="670.0" y="221.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">从节点接收</text>
+<text x="660.0" y="253.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">进入处理队列</text>
+<rect x="880" y="170" width="240" height="120" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
+<text x="950.0" y="221.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">从节点同步</text>
+<text x="960.0" y="253.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">应用数据</text>
+<polyline points="280,230 320,230" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="560,230 600,230" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<polyline points="840,230 880,230" fill="none" stroke="#718698" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="40" y="420" width="350" height="120" rx="13" fill="#fff4e8" stroke="#e1a76a" stroke-width="2"/>
+<text x="175.0" y="455.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">异步复制</text>
+<text x="125.0" y="487.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">本地确认后继续复制</text>
+<text x="125.0" y="519.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">可能丢失未复制写入</text>
+<rect x="425" y="420" width="350" height="120" rx="13" fill="#e9f7f3" stroke="#75b6a7" stroke-width="2"/>
+<text x="540.0" y="455.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">等待远端同步</text>
+<text x="500.0" y="487.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">按约定的远端边界确认</text>
+<text x="513.4" y="519.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">等待网络与远端 I/O</text>
+<rect x="810" y="420" width="350" height="120" rx="13" fill="#f3f5f8" stroke="#bdcbd5" stroke-width="2"/>
+<text x="913.6" y="455.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">历史接收端 ACK</text>
+<text x="875.0" y="487.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">记录进入处理队列后发送</text>
+<text x="915.0" y="519.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="500" fill="#18364a">不证明已持久化</text>
+<rect x="40" y="620" width="1120" height="65" rx="13" fill="#f3f5f8" stroke="#bdcbd5" stroke-width="2"/>
+<text x="348.0" y="660.0" font-family="Noto Sans SC, Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="500" fill="#18364a">客户端超时不等于未提交；重试需要幂等或去重约定。</text>
+</svg>

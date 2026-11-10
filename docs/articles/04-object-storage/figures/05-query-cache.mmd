@@ -1,0 +1,5 @@
+flowchart LR
+ A[SQL] --> B[表和文件元数据]
+ B --> C[时间与列裁剪]
+ C --> D[读取 Parquet]
+ D --> E[查询结果缓存]

@@ -1,0 +1,38 @@
+[
+  {
+    "name": "01-failure-retirement",
+    "title": "01 / 突然故障与计划退役",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "02-no-promotion",
+    "title": "02 / 不提升 Standby 的恢复思路",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "03-flush-checkpoint",
+    "title": "03 / 复制进度与 flush checkpoint",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "04-scale-in",
+    "title": "04 / 计划缩容的三个阶段",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "05-failure-handling",
+    "title": "05 / 操作中断后如何继续",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "06-recovery-tests",
+    "title": "06 / 用故障窗口验证承诺",
+    "width": 2400,
+    "height": 1480
+  }
+]

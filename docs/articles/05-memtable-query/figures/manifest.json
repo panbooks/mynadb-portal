@@ -1,0 +1,38 @@
+[
+  {
+    "name": "01-two-sources",
+    "title": "05 / 一张逻辑表的两个数据来源",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "02-providers",
+    "title": "05 / 从 SQL 到两个扫描计划",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "03-flush-visibility",
+    "title": "05 / flush 期间如何避免漏读和重复",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "04-schema-alignment",
+    "title": "05 / 按列名对齐，而不是按位置拼接",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "05-pruning",
+    "title": "05 / 尽早缩小需要读取的数据",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "06-cache-invalidation",
+    "title": "05 / 数据变化后如何处理缓存",
+    "width": 2400,
+    "height": 1480
+  }
+]

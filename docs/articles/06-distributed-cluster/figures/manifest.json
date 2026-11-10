@@ -1,0 +1,38 @@
+[
+  {
+    "name": "01-cluster-roles",
+    "title": "06 / 从单机拆分到多个角色",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "02-write-routing",
+    "title": "06 / 写入如何到达 Data 节点",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "03-query-fanout",
+    "title": "06 / 分布式查询与结果汇总",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "04-meta-raft",
+    "title": "06 / Meta 使用 Raft 协调控制面",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "05-routing-cache",
+    "title": "06 / 元数据变化后如何刷新路由",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "06-failure-scenarios",
+    "title": "06 / 不同故障影响不同层次",
+    "width": 2400,
+    "height": 1480
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "name": "01-two-levels",
+    "title": "01 / 表所有权与物理文件是两层信息",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "02-table-owners",
+    "title": "02 / 一张表可能有多个 owner",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "03-hive-layout",
+    "title": "03 / 按日期和节点组织物理文件",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "04-hot-cold",
+    "title": "04 / 查询需要同时考虑内存和文件",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "05-affinity-fallback",
+    "title": "05 / 本地亲和与节点不可用时回退",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "06-routing-tests",
+    "title": "06 / 通过结果验证路由",
+    "width": 2400,
+    "height": 1480
+  }
+]

@@ -1,0 +1,5 @@
+flowchart LR
+ A[Line protocol] --> B[Arrow 批次和分片缓存]
+ B --> C[flush 编码 Parquet]
+ C --> D[Storage put]
+ D --> E[本地或对象存储]

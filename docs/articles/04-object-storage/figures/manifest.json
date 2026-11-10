@@ -1,0 +1,38 @@
+[
+  {
+    "name": "01-storage-abstraction",
+    "title": "01 / 用统一接口连接不同存储后端",
+    "width": 2400,
+    "height": 1520
+  },
+  {
+    "name": "02-write-path",
+    "title": "02 / 一批指标如何变成 Parquet 对象",
+    "width": 2400,
+    "height": 1520
+  },
+  {
+    "name": "03-wal-segments",
+    "title": "03 / WAL 与对象存储的写入方式",
+    "width": 2400,
+    "height": 1560
+  },
+  {
+    "name": "04-commit-boundary",
+    "title": "04 / 上传候选对象不等于提交整批",
+    "width": 2400,
+    "height": 1640
+  },
+  {
+    "name": "05-query-cache",
+    "title": "05 / 查询中的缓存与数据裁剪",
+    "width": 2400,
+    "height": 1560
+  },
+  {
+    "name": "06-compaction",
+    "title": "06 / 合并文件还要切换有效集合",
+    "width": 2400,
+    "height": 1600
+  }
+]

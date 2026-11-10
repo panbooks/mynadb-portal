@@ -1,0 +1,38 @@
+[
+  {
+    "name": "01-compaction-overlap",
+    "title": "01 / 合并输出与旧文件重叠",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "02-schema-alignment",
+    "title": "02 / 按字段名对齐异构数据",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "03-distributed-aggregation",
+    "title": "03 / 局部结果到全局结果",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "04-otlp",
+    "title": "04 / OTLP 消息如何进入写入路径",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "05-iceberg",
+    "title": "05 / Iceberg 初版与 Parquet 文件",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "06-correctness-tests",
+    "title": "06 / 从错误案例到可复现验证",
+    "width": 2400,
+    "height": 1480
+  }
+]

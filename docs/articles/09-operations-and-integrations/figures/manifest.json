@@ -1,0 +1,38 @@
+[
+  {
+    "name": "01-ecosystem",
+    "title": "01 / 围绕数据库内核的使用入口",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "02-console",
+    "title": "02 / 控制台操作如何到达节点",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "03-protocol-mapping",
+    "title": "03 / 协议数据到内部模型",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "04-security",
+    "title": "04 / 请求经过哪些安全边界",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "05-streaming",
+    "title": "05 / 写入触发查询结果更新",
+    "width": 2400,
+    "height": 1480
+  },
+  {
+    "name": "06-analytics",
+    "title": "06 / 原始数据与降采样",
+    "width": 2400,
+    "height": 1480
+  }
+]
