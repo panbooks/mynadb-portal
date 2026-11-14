@@ -4,7 +4,7 @@
 
 ## 从0到1实现一个分布式时序数据库（一）：用 Rust、Arrow 和 Parquet 打通写入与 SQL 查询
 
-从一条指标出发，用 Rust、Arrow、Parquet 和 DataFusion 串起解析、内存批次、刷盘与 SQL 查询，理解分布式时序数据库的单机基础。
+从四条 CPU 指标开始，逐步设计数据模型、时间分区、Arrow 批次、缓存与 Parquet 存储，接入 SQL 查询，并用读写、重启和故障实验，学会搭建最小可用的时序数据库。
 
 [粘贴发布版](01-from-http-to-parquet/article.publish.md) · [图文预览](01-from-http-to-parquet/preview.html)
 
