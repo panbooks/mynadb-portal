@@ -50,6 +50,14 @@ website/
     └── troubleshooting.html # Troubleshooting guide
 ```
 
+## Analytics
+
+All HTML pages load the shared Baidu Tongji snippet in `js/analytics.js` once,
+using a relative script URL with `defer` in the document head. Keep this include
+when adding pages; article generation already includes it. The tracking ID is
+maintained only in that file. Reports are available in the Baidu Tongji dashboard.
+Local previews also load the tracker; use dashboard filters to exclude test traffic.
+
 ## Running Locally
 
 ### Option 1: Python HTTP Server

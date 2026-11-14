@@ -77,7 +77,9 @@ def page_html(page, title, description, content, kind='website', image=None):
 <link rel="canonical" href="{canonical}"><meta property="og:title" content="{escape(title, quote=True)}"><meta property="og:description" content="{escape(description, quote=True)}"><meta property="og:type" content="{kind}">{image_tag}
 <link rel="icon" type="image/svg+xml" href="{relative(page, 'images/favicon.svg')}">
 <link rel="stylesheet" href="{relative(page, 'css/style.css')}"><link rel="stylesheet" href="{relative(page, 'css/articles.css')}">
-<script src="{relative(page, 'js/articles.js')}" defer></script></head>
+<script src="{relative(page, 'js/articles.js')}" defer></script>
+<script src="{relative(page, 'js/analytics.js')}" defer></script>
+</head>
 <body class="engineering-site">{nav(page)}{content}{footer(page)}<p class="sr-only" id="reader-status" role="status" aria-live="polite"></p></body></html>'''
 
 
